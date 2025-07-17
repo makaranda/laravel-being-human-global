@@ -62,26 +62,37 @@
                     <div class="animation-preloader">
                         <div class="spinner"></div>
                         <div class="txt-loading">
-                            <span data-text-preloader="w" class="letters-loading">
-                                w
+                            <span data-text-preloader="B" class="letters-loading">
+                                B
                             </span>
                             <span data-text-preloader="e" class="letters-loading">
                                 e
                             </span>
-                            <span data-text-preloader="l" class="letters-loading">
-                                l
+                            <span data-text-preloader="i" class="letters-loading">
+                                i
                             </span>
-                            <span data-text-preloader="d" class="letters-loading">
-                                d
+                            <span data-text-preloader="n" class="letters-loading">
+                                n
                             </span>
-                            <span data-text-preloader="l" class="letters-loading">
-                                l
+                            <span data-text-preloader="g" class="letters-loading">
+                                g
                             </span>
-                            <span data-text-preloader="f" class="letters-loading">
-                                f
+                        </div>
+                        <div class="txt-loading">
+                            <span data-text-preloader="H" class="letters-loading">
+                                H
                             </span>
-                            <span data-text-preloader="e" class="letters-loading">
-                                e
+                            <span data-text-preloader="u" class="letters-loading">
+                                u
+                            </span>
+                            <span data-text-preloader="m" class="letters-loading">
+                                m
+                            </span>
+                            <span data-text-preloader="a" class="letters-loading">
+                                a
+                            </span>
+                            <span data-text-preloader="n" class="letters-loading">
+                                n
                             </span>
                         </div>
                     </div>  
@@ -204,7 +215,7 @@
                 </div>
 
                 <div class="btn-box">
-                    <a href="{{ route('frontend.ticket') }}">Book your ticket</a>
+                    <a href="{{ route('frontend.ticket') }}">Donate</a>
                 </div>
             </div>
         </div>

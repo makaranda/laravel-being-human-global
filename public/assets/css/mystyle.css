@@ -106,3 +106,26 @@
 .text-center {
     text-align: center !important;
 }
+
+.info-section {
+    background: #012420;
+    .inner-container {
+        background: transparent;
+    }
+    .bg-layer {
+        position: absolute;
+        left: 260px;
+        top: 0px;
+        width: calc(100% - 260px);
+        height: 100%;
+        background: #012420;
+    }
+}    
+
+.main-menu {
+    .navigation {
+         li {
+            padding: 38px 0px 38px 0px;
+        }
+    }
+}    

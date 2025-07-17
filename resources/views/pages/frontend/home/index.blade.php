@@ -31,14 +31,14 @@
     <div class="auto-container">
         <div class="inner-container">
             <div class="row clearfix">
-                <div class="col-lg-4 col-md-6 col-sm-12 single-column">
+                <div class="col-lg-12 col-md-12 col-sm-12 single-column">
                     <div class="single-item">
                         <div class="icon-box"><i class="flaticon-ticket"></i></div>
-                        <h5><a href="index.html">Buy Tickets</a></h5>
-                        <p>Lorem ium dolor sit ameted pisicing elit sed do ut.</p>
+                        {{-- <h5><a href="index.html">Buy Tickets</a></h5> --}}
+                        <p>Being Human Global is a Sri Lanka-based international conservation foundation dedicated to protecting wildlife and their natural habitats as vital components of a sustainable and thriving future. We champion a unique vision of community-driven conservation, emphasizing solutions that empower people — not by sacrificing wildlife and ecosystems, but by valuing and preserving them.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 single-column">
+                {{-- <div class="col-lg-4 col-md-6 col-sm-12 single-column">
                     <div class="single-item">
                         <div class="icon-box"><i class="flaticon-calendar"></i></div>
                         <h5><a href="index.html">new events</a></h5>
@@ -51,7 +51,7 @@
                         <h5><a href="index.html">zoo map</a></h5>
                         <p>Lorem ium dolor sit ameted pisicing elit sed do ut.</p>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@
                 <div class="content_block_one">
                     <div class="content-box">
                         <div class="sec-title">
-                            <h2>welcome to best weldlfe zoo</h2>
+                            <h2>welcome to Being Human Global</h2>
                         </div>
                         <div class="text">
                             <h4>Help us to protect wildlife around the world.</h4>
@@ -88,7 +88,7 @@
                             </ul>
                         </div>
                         <div class="btn-box">
-                            <a href="about.html" class="theme-btn btn-one">discover more</a>
+                            <a href="{{route('frontend.about') }}" class="theme-btn btn-one">discover more</a>
                         </div>
                     </div>
                 </div>
@@ -109,13 +109,13 @@
             <div class="col-lg-8 col-md-12 col-sm-12 inner-column">
                 <div class="inner-box">
                     <div class="sec-title">
-                        <h2>Why You should choose our zoo visit?</h2>
+                        <h2>Why You should choose our Foundation?</h2>
                     </div>
                     <div class="row clearfix">
                         <div class="col-lg-6 col-md-6 col-sm-12 text-column">
                             <div class="text">
                                 <p>There are many variations of passages of but the majority have alteration in some form by injected humour or which don't look even slightly believe.</p>
-                                <figure class="signature"><img src="{{ asset('public/assets/frontend/images/icons/signature-1.png')}}" alt=""></figure>
+                                {{-- <figure class="signature"><img src="{{ asset('public/assets/frontend/images/icons/signature-1.png')}}" alt=""></figure> --}}
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 text-column">
@@ -134,11 +134,11 @@
                 <div class="content-box">
                     <div class="content-inner">
                         <div class="shape" style="background-image: url({{ asset('public/assets/frontend/images/shape/shape-2.png')}});"></div>
-                        <figure class="image-layer  wow zoomIn animated" data-wow-delay="00ms" data-wow-duration="1500ms"><img src="{{ asset('public/assets/frontend/images/resource/lion-1.png')}}" alt=""></figure>
-                        <h3>Family Membership</h3>
-                        <h5>Yearly Package</h5>
-                        <h2>$128.00</h2>
-                        <a href="index.html" class="theme-btn">buy now</a>
+                        <figure class="image-layer  wow zoomIn animated" data-wow-delay="00ms" data-wow-duration="1500ms"><img src="{{ asset('public/assets/frontend/images/resource/home-membership.png')}}" alt=""></figure>
+                        <h3>Quick Donation</h3>
+                        <h5>Monthly Package</h5>
+                        <h2>$50.00</h2>
+                        <a href="index.html" class="theme-btn">Donate Now</a>
                     </div>
                 </div>
             </div>
@@ -152,7 +152,7 @@
 <section class="gallery-section">
     <div class="auto-container">
         <div class="sec-title centred">
-            <h2>amazing Animals <br />in our zoo</h2>
+            <h2>amazing Animals <br />in the World</h2>
         </div>
     </div>
     <div class="outer-container">
@@ -174,10 +174,10 @@
                 <div class="inner-box">
                     <figure class="image-box"><img src="{{ asset('public/assets/frontend/images/gallery/gallery-2.jpg')}}" alt=""></figure>
                     <div class="content-box">
-                        <h3><a href="wolf.html">wolf</a></h3>
+                        <h3><a href="wolf.html">Fox</a></h3>
                     </div>
                     <div class="overlay-content">
-                        <h3><a href="wolf.html">wolf</a></h3>
+                        <h3><a href="wolf.html">Fox</a></h3>
                         <p>There are many type of <br />variations pass not available</p>
                         <div class="link"><a href="wolf.html"><i class="flaticon-right-arrow"></i></a></div>
                     </div>
@@ -200,10 +200,10 @@
                 <div class="inner-box">
                     <figure class="image-box"><img src="{{ asset('public/assets/frontend/images/gallery/gallery-4.jpg')}}" alt=""></figure>
                     <div class="content-box">
-                        <h3><a href="girrafe.html">girrafe</a></h3>
+                        <h3><a href="girrafe.html">leopard</a></h3>
                     </div>
                     <div class="overlay-content">
-                        <h3><a href="girrafe.html">girrafe</a></h3>
+                        <h3><a href="girrafe.html">leopard</a></h3>
                         <p>There are many type of <br />variations pass not available</p>
                         <div class="link"><a href="girrafe.html"><i class="flaticon-right-arrow"></i></a></div>
                     </div>

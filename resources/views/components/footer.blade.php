@@ -1,123 +1,98 @@
-</main>
-<!-- ===============>> footer start here <<================= -->
+<!-- main-footer -->
+<section class="main-footer">
+    <div class="footer-top">
+        <div class="pattern-layer" style="background-image: url({{ asset('assets/images/shape/shape-4.png') }});"></div>
+        <div class="auto-container">
+            <div class="row clearfix">
+                <!-- Logo & Social -->
+                <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
+                    <div class="footer-widget logo-widget">
+                        <figure class="footer-logo">
+                            <a href="{{ route('home.index') }}">
+                                <img src="{{ asset('public/assets/frontend/img/'.$settings['footer_logo']) }}" alt="{{ $settings['website_name'] }}">
+                            </a>
+                        </figure>
+                        <ul class="footer-social clearfix">
+                            <li><a href="{{ $settings['social_twitter'] }}"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="{{ $settings['social_facebook'] }}"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="{{ $settings['social_pinterest'] }}"><i class="fab fa-pinterest-p"></i></a></li>
+                            <li><a href="{{ $settings['social_instagram'] }}"><i class="fab fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
 
- <footer>
-        <div class="footer-wrapper gray-bg">
-            <div class="footer-area footer-padding">
-             <!--? Subscribe Area Start -->
-             <section class="subscribe-area">
-                <div class="container">
-                    <div class="row justify-content-between subscribe-padding">
-                        <div class="col-xxl-3 col-xl-3 col-lg-4">
-                            <div class="subscribe-caption">
-                                <h3>Subscribe Newsletter</h3>
-                                <p>Subscribe newsletter to get 5% on all products.</p>
-                            </div>
-                        </div>
-                        <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-9">
-                            <div class="subscribe-caption">
-                                <form action="#">
-                                    <input type="text" placeholder="Enter your email">
-                                    <button class="subscribe-btn">Subscribe</button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-xxl-2 col-xl-2 col-lg-4">
-                            <!-- social -->
-                            <div class="footer-social">
-                                <a href="{{ $settings['social_facebook'] }}"><i class="fab fa-facebook"></i></a>
-                                <a href="{{ $settings['social_instagram'] }}"><i class="fab fa-instagram"></i></a>
-                                <a href="{{ $settings['social_youtube'] }}"><i class="fab fa-youtube"></i></a>
-                            </div>
+                <!-- Links -->
+                <div class="col-lg-2 col-md-6 col-sm-12 footer-column">
+                    <div class="footer-widget links-widget">
+                        <div class="widget-title"><h5>Links</h5></div>
+                        <div class="widget-content">
+                            <ul class="links-list clearfix">
+                                <li><a href="{{ route('home.index') }}">About Us</a></li>
+                                <li><a href="{{ route('home.index') }}">Book Tickets</a></li>
+                                <li><a href="{{ route('home.index') }}">Meet the Animals</a></li>
+                                <li><a href="{{ route('home.index') }}">Our Gallery</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- Subscribe Area End -->
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-8">
-                        <div class="single-footer-caption mb-50">
-                            <div class="single-footer-caption mb-20">
-                                <!-- logo -->
-                                <div class="footer-logo mb-35">
-                                    <a href="{{ route('home.index') }}">
-                                        <img src="{{ url('public/assets/frontend/img/'.$settings['main_logo']) }}" alt="{{ $settings['website_name'] }}"></a>
-                                    <p class="text-white pt-10">{{ $settings['footer_content'] }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @if ($main_categories->count())
-                        @foreach ($main_categories as $category)
-                            @if($category->is_top == 1)
-                                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                                    <div class="single-footer-caption mb-50">
-                                        <div class="footer-tittle">
-                                                <h4>{{ $category->name }}</h4>
-                                                @if ($category->subCategories->count())
-                                                    <ul>
-                                                        @foreach ($category->subCategories as $subcategory)
-                                                            <li class="{{ request()->routeIs('frontend.product.subcategory') && request()->route('cat_sub_slug') == $subcategory->slug ? 'active' : '' }}">
-                                                                <a href="{{ route('frontend.product.subcategory', ['cat_slug' => $category->slug, 'cat_sub_slug' => $subcategory->slug]) }}">
-                                                                    {{ $subcategory->name }}
-                                                                </a>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
-                    @endif
-                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Quick Links</h4>
-                                <ul>
-                                    <li><a href="#">Support</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#">Contact Us</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
-        <!-- footer-bottom area -->
-        <div class="footer-bottom-area">
-            <div class="container">
-                <div class="footer-border">
-                    <div class="row">
-                        <div class="col-xl-12 ">
-                            <div class="footer-copy-right text-center">
-                                <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
-                            </div>
+                <!-- Contact Info -->
+                <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                    <div class="footer-widget contact-widget">
+                        <div class="widget-title"><h5>Contact</h5></div>
+                        <div class="widget-content">
+                            <ul class="info clearfix">
+                                <li><i class="flaticon-telephone"></i><a href="tel:{{ $settings['contact_number'] }}">{{ $settings['contact_number'] }}</a></li>
+                                <li><i class="flaticon-email"></i><a href="mailto:{{ $settings['email_address'] }}">{{ $settings['email_address'] }}</a></li>
+                                <li><i class="flaticon-pin"></i>{{ $settings['address'] }}</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+
+                <!-- Gallery -->
+                <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                    <div class="footer-widget gallery-widget">
+                        <div class="widget-title"><h5>Gallery</h5></div>
+                        <div class="widget-content">
+                            <ul class="image-list clearfix">
+                                @foreach (['footer-1.jpg', 'footer-2.jpg', 'footer-3.jpg'] as $image)
+                                    <li>
+                                        <figure class="image">
+                                            <img src="{{ asset('assets/images/resource/'.$image) }}" alt="">
+                                            <a href="{{ asset('assets/images/resource/'.$image) }}" class="lightbox-image" data-fancybox="gallery">
+                                                <i class="flaticon-plus-symbol"></i>
+                                            </a>
+                                        </figure>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- .row -->
+        </div> <!-- .auto-container -->
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom centred">
+        <div class="auto-container">
+            <div class="copyright">
+                <p>&copy; Copyright {{ now()->year }} by 
+                    <a href="{{ route('home.index') }}">{{ $settings['website_name'] ?? 'YourWebsite' }}</a>
+                </p>
             </div>
         </div>
     </div>
-</footer>
-<!-- ===============>> footer end here <<================= -->
+</section>
+<!-- main-footer end -->
 
-<!-- Scroll Up -->
-<div id="back-top" >
-    <a class="wrapper" title="Go to Top" href="#">
-        <div class="arrows-container">
-            <div class="arrow arrow-one">
-            </div>
-            <div class="arrow arrow-two">
-            </div>
-        </div>
-    </a>
-</div>
+<!-- scroll to top -->
+<button class="scroll-top scroll-to-target" data-target="html">
+    <i class="fal fa-long-arrow-up"></i>
+</button>
+
 
 <div class="modal fade" id="viewProductModel" tabindex="-1" aria-labelledby="viewProductModelLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
