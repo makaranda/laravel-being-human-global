@@ -1,7 +1,7 @@
 <!-- main-footer -->
 <section class="main-footer">
     <div class="footer-top">
-        <div class="pattern-layer" style="background-image: url({{ asset('assets/images/shape/shape-4.png') }});"></div>
+        <div class="pattern-layer" style="background-image: url({{ asset('public/assets/frontend/images/shape/shape-4.png') }});"></div>
         <div class="auto-container">
             <div class="row clearfix">
                 <!-- Logo & Social -->
@@ -59,8 +59,8 @@
                                 @foreach (['footer-1.jpg', 'footer-2.jpg', 'footer-3.jpg'] as $image)
                                     <li>
                                         <figure class="image">
-                                            <img src="{{ asset('assets/images/resource/'.$image) }}" alt="">
-                                            <a href="{{ asset('assets/images/resource/'.$image) }}" class="lightbox-image" data-fancybox="gallery">
+                                            <img src="{{ asset('public/assets/frontend/images/resource/'.$image) }}" alt="">
+                                            <a href="{{ asset('public/assets/frontend/images/resource/'.$image) }}" class="lightbox-image" data-fancybox="gallery">
                                                 <i class="flaticon-plus-symbol"></i>
                                             </a>
                                         </figure>

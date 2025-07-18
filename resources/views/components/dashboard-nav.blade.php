@@ -90,7 +90,7 @@
                   </a>
               </li>
 
-              <li class="nav-item {{ request()->routeIs('admin.mainslider', 'admin.editmainslider', 'admin.settings','admin.mainslider','admin.createmainslider','admin.editmainslider') ? 'menu-open' : '' }}">
+              <li class="nav-item {{ request()->routeIs('admin.mainslider','admin.homepage', 'admin.editmainslider', 'admin.settings','admin.mainslider','admin.createmainslider','admin.editmainslider') ? 'menu-open' : '' }}">
                   <a href="#" class="nav-link">
                       <i class="nav-icon bi bi-gear"></i>
                       <p>
@@ -99,6 +99,12 @@
                       </p>
                   </a>
                   <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="{{ route('admin.homepage') }}" class="nav-link {{ request()->routeIs('admin.homepage') ? 'active' : '' }}">
+                              <i class="nav-icon bi bi-circle"></i>
+                              <p>Home Page</p>
+                          </a>
+                      </li>
                       <li class="nav-item">
                           <a href="{{ route('admin.mainslider') }}" class="nav-link {{ request()->routeIs('admin.mainslider', 'admin.editmainslider') ? 'active' : '' }}">
                               <i class="nav-icon bi bi-circle"></i>

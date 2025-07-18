@@ -19,6 +19,7 @@ use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\ProductGalleryController;
 use App\Http\Controllers\admin\ProgrammesController;
+use App\Http\Controllers\admin\HomePageController;
 use App\Http\Controllers\admin\StudyAbroadController;
 use App\Http\Controllers\admin\UniversitiesController;
 use App\Http\Controllers\admin\AccordingsController;
@@ -336,6 +337,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/edit/{id}', [ContactController::class, 'edit'])->name('admin.editcontact');
             Route::put('/update/{id}', [ContactController::class, 'update'])->name('admin.updatecontact');
             Route::delete('/delete/{id}', [ContactController::class, 'delete'])->name('admin.deletecontact');
+        });
+
+        Route::prefix('home-page')->group(function () {
+            Route::get('/', [HomePageController::class, 'index'])->name('admin.homepage');
+            Route::get('/create', [HomePageController::class, 'create'])->name('admin.createhomepage');
+            Route::post('/store', [HomePageController::class, 'store'])->name('admin.storehomepage');
+            Route::get('/edit/{id}', [HomePageController::class, 'edit'])->name('admin.edithomepage');
+            Route::put('/update/{id}', [HomePageController::class, 'update'])->name('admin.updatehomepage');
+            Route::delete('/delete/{id}', [HomePageController::class, 'delete'])->name('admin.deletehomepage');
         });
         // Main Slider routes
         Route::prefix('main-slider')->group(function () {

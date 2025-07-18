@@ -175,6 +175,8 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        $('.section_area ul').addClass('list-style-one clearfix');
+
         $('#forget_password_form').on('click', function (e) {
             e.preventDefault();
 
