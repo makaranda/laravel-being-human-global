@@ -71,7 +71,9 @@ if ($page_seo) {
         @yield('content')
 
         @include('components.footer')
+
         @include('libraries.frontend.scripts')
+        
         @stack('scripts')
     </div>
   </body>
