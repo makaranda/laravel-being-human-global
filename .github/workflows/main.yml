@@ -1,4 +1,4 @@
-name: FTP Deploy
+name: FTP Being Human Global Deploy
 
 on:
   push:
