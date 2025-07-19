@@ -57,24 +57,37 @@ class HomeController extends Controller
     {
         VisitorHelper::updateVisitorCount();
 
-        $main_slider = MainSlider::where('status',1)->get(); // Assuming there's only one main slider
-        $music_tracks = MusicTrack::where('status', 1)->where('type','audio')->orderBy('order', 'asc')->orderBy('created_at', 'desc')->take(7)->get();
-        $banner_music_tracks = MusicTrack::where('status', 1)->where('type','audio')->where('order',0)->first();
-        $music_beats = MusicTrack::where('status', 1)->where('type','beat')->orderBy('order', 'asc')->orderBy('created_at', 'desc')->take(7)->get();
-        $video_tracks = MusicTrack::where('status', 1)->where('type','video')->orderBy('order', 'asc')->orderBy('created_at', 'desc')->take(8)->get();
-        $about_info = Page::where('slug','LIKE', 'about-us')->where('status', 1)->first(); // Assuming a single about section
+        $main_slider = MainSlider::where('status', 1)->get(); // Assuming there's only one main slider
+        $music_tracks = MusicTrack::where('status', 1)->where('type', 'audio')->orderBy('order', 'asc')->orderBy('created_at', 'desc')->take(7)->get();
+        $banner_music_tracks = MusicTrack::where('status', 1)->where('type', 'audio')->where('order', 0)->first();
+        $music_beats = MusicTrack::where('status', 1)->where('type', 'beat')->orderBy('order', 'asc')->orderBy('created_at', 'desc')->take(7)->get();
+        $video_tracks = MusicTrack::where('status', 1)->where('type', 'video')->orderBy('order', 'asc')->orderBy('created_at', 'desc')->take(8)->get();
+        $about_info = Page::where('slug', 'LIKE', 'about-us')->where('status', 1)->first(); // Assuming a single about section
         $gallery_home = GalleryHome::where('status', 1)->get();
-        $according_home = According::where('status', 1)->where('type', 'home')->orderBy('order','asc')->get();
-        $partners_home = Partner::where('status', 1)->orderBy('order','asc')->get();
-        $home_sec_video = Page::where('status',1)->where('id',34)->first();
+        $according_home = According::where('status', 1)->where('type', 'home')->orderBy('order', 'asc')->get();
+        $partners_home = Partner::where('status', 1)->orderBy('order', 'asc')->get();
+        $home_sec_video = Page::where('status', 1)->where('id', 34)->first();
         $random_products = Product::where('status', 1)->inRandomOrder()->take(6)->get();
         $random_blogs = Blog::where('status', 1)->inRandomOrder()->take(3)->get();
+
+        $page = Page::where('status', 1)
+            ->where('slug', 'like', '%home%')
+            ->first();
+        $sections = $page->attributes;
+        //$sections = json_decode($page->attributes, true);
+        $section1 = collect($sections)->firstWhere('name', 'section1');
+        $section2 = collect($sections)->firstWhere('name', 'section2');
+        $section3 = collect($sections)->firstWhere('name', 'section3');
+        $section4 = collect($sections)->firstWhere('name', 'section4');
+        $section5 = collect($sections)->firstWhere('name', 'section5');
+        $section6 = collect($sections)->firstWhere('name', 'section6');
+        //dd($sections);
         //$admin = Auth::guard('admin')->user();
         //dd($admin);
         // if (!empty($admin->role) && $admin->role > 0) {
         //     return redirect()->route('admin.dashboard');
         // } else {
-            return view('pages.frontend.home.index',compact('gallery_home','home_sec_video','music_tracks','banner_music_tracks','video_tracks','music_beats','about_info','main_slider','according_home','partners_home','random_products','random_blogs'));
+        return view('pages.frontend.home.index', compact('gallery_home', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6'));
         //}
     }
 
@@ -88,62 +101,61 @@ class HomeController extends Controller
     {
         VisitorHelper::updateVisitorCount();
 
-        $page_contact = Page::where('slug','Like', 'contact-us')->first();
-        return view('pages.frontend.contact.index',compact('page_contact')); // Make sure this view exists
+        $page_contact = Page::where('slug', 'Like', 'contact-us')->first();
+        return view('pages.frontend.contact.index', compact('page_contact')); // Make sure this view exists
     }
 
     public function aboutUs()
     {
         VisitorHelper::updateVisitorCount();
-        $about_info = Page::where('slug','Like', 'about-us')->first();
+        $about_info = Page::where('slug', 'Like', 'about-us')->first();
 
-        return view('pages.frontend.about.index',compact('about_info')); // Make sure this view exists
+        return view('pages.frontend.about.index', compact('about_info')); // Make sure this view exists
     }
 
     public function enroll()
     {
         VisitorHelper::updateVisitorCount();
-        $enroll = Page::where('slug','Like', 'enroll')->first();
-        $application_form = Link::where('status',1)->where('type','application')->get();
+        $enroll = Page::where('slug', 'Like', 'enroll')->first();
+        $application_form = Link::where('status', 1)->where('type', 'application')->get();
         $settings = Setting::first();
 
-        return view('pages.frontend.enroll.index',compact('enroll','application_form','settings')); // Make sure this view exists
+        return view('pages.frontend.enroll.index', compact('enroll', 'application_form', 'settings')); // Make sure this view exists
     }
 
     public function payOnline()
     {
         VisitorHelper::updateVisitorCount();
-        $payonline = Page::where('slug','Like', 'pay-online')->first();
-        $application_form = Link::where('status',1)->where('type','application')->get();
+        $payonline = Page::where('slug', 'Like', 'pay-online')->first();
+        $application_form = Link::where('status', 1)->where('type', 'application')->get();
         $settings = Setting::first();
 
-        return view('pages.frontend.payonline.index',compact('payonline','application_form','settings')); // Make sure this view exists
+        return view('pages.frontend.payonline.index', compact('payonline', 'application_form', 'settings')); // Make sure this view exists
     }
 
     public function studyAbroadUniversities($slug)
     {
         VisitorHelper::updateVisitorCount();
 
-        $pages = Page::where('status',1)->get();
-        $study_abroad = Page::where('status', 1)->where('type','study_abroad')->where('slug','like','%'.$slug.'%')->first();
-        if($study_abroad && $study_abroad->attributes){
+        $pages = Page::where('status', 1)->get();
+        $study_abroad = Page::where('status', 1)->where('type', 'study_abroad')->where('slug', 'like', '%' . $slug . '%')->first();
+        if ($study_abroad && $study_abroad->attributes) {
             $attributes = $study_abroad->attributes;
-        }
-        else {
+        } else {
             $attributes = [];
         }
         $country_id = $attributes['country'];
-        $country = Country::where('id', $country_id)->where('status',1)->first();
+        $country = Country::where('id', $country_id)->where('status', 1)->first();
         $settings = Setting::first();
-        $universities = University::where('status',1)->where('page_id',$study_abroad->id)->get();
-        $university_links = Link::where('status',1)->where('page_id',$study_abroad->id)->where('type','study_abroad')->get();
+        $universities = University::where('status', 1)->where('page_id', $study_abroad->id)->get();
+        $university_links = Link::where('status', 1)->where('page_id', $study_abroad->id)->where('type', 'study_abroad')->get();
 
 
         //dd($study_abroad);
-        if( !$study_abroad) {
+        if (!$study_abroad) {
             abort(404, 'Study Abroad page not found');
         }
-        return view('pages.frontend.study_abroad.single',compact('pages','study_abroad','universities','settings','country','university_links')); // Make sure this view exists
+        return view('pages.frontend.study_abroad.single', compact('pages', 'study_abroad', 'universities', 'settings', 'country', 'university_links')); // Make sure this view exists
         //{{ route('frontend.programmes.show', $item['slug']) }}
     }
 
@@ -154,49 +166,49 @@ class HomeController extends Controller
         $settings = Setting::first();
         $program_categories = ProgramCategory::where('status', 1)->get();
         // dd($program_categories);
-        return view('pages.frontend.programmes.index',compact('programmes','program_categories','settings')); // Make sure this view exists
+        return view('pages.frontend.programmes.index', compact('programmes', 'program_categories', 'settings')); // Make sure this view exists
     }
 
     public function programmeCategories($slug)
     {
         VisitorHelper::updateVisitorCount();
 
-        $programme = Programme::where('status',1)->get();
+        $programme = Programme::where('status', 1)->get();
         //$program_category = ProgramCategory::where('status', 1)->where('slug','like','%'.$slug.'%')->first();
         //$category_id = $program_category['id'] ?? 0;
         //dd($program_category->name);
         //$program_sub_categories = ProgramSubCategory::where('category_id',$category_id)->where('status', 1)->get();
-        $program_sub_categories = ProgramSubCategory::where('slug','like','%'.$slug.'%')->where('status', 1)->first();
-        $program_category = ProgramCategory::where('status', 1)->where('id',$program_sub_categories->category_id)->first();
+        $program_sub_categories = ProgramSubCategory::where('slug', 'like', '%' . $slug . '%')->where('status', 1)->first();
+        $program_category = ProgramCategory::where('status', 1)->where('id', $program_sub_categories->category_id)->first();
         //dd($program_sub_categories);
         $category_id = $program_category['id'] ?? 0;
         //dd($program_sub_categories);
         $settings = Setting::first();
 
         $program_sub_category_items = ProgramSubCategoryItem::where('status', 1)->get();
-        return view('pages.frontend.programmes.subcategories',compact('programme','program_sub_categories','program_sub_category_items','program_category','settings')); // Make sure this view exists
+        return view('pages.frontend.programmes.subcategories', compact('programme', 'program_sub_categories', 'program_sub_category_items', 'program_category', 'settings')); // Make sure this view exists
         //{{ route('frontend.programmes.show', $item['slug']) }}
     }
 
-    public function programmeSubCategories($slug,$sub_slug)
+    public function programmeSubCategories($slug, $sub_slug)
     {
         VisitorHelper::updateVisitorCount();
         //dd($slug,$sub_slug);
-        $program_sub_category = ProgramSubCategory::where('slug',$slug)->where('status', 1)->first();
-        $program_sub_category_item = ProgramSubCategoryItem::where('slug',$sub_slug)->where('status', 1)->first();
+        $program_sub_category = ProgramSubCategory::where('slug', $slug)->where('status', 1)->first();
+        $program_sub_category_item = ProgramSubCategoryItem::where('slug', $sub_slug)->where('status', 1)->first();
         $settings = Setting::first();
         //dd($program_sub_category_item->id,$program_sub_category->category_id);
         //dd($program_sub_category_item->name);
-        if(isset($program_sub_category->category_id) && $program_sub_category->category_id == 2){
-            $programme = Programme::where('status',1)->where('slug','LIKE','%'.$sub_slug.'%')->where('parent','!=',0)->first();
-            $accordings = According::where('page_id',$programme->id)->where('status', 1)->where('type', 'programme')->orderBy('order','asc')->get();
+        if (isset($program_sub_category->category_id) && $program_sub_category->category_id == 2) {
+            $programme = Programme::where('status', 1)->where('slug', 'LIKE', '%' . $sub_slug . '%')->where('parent', '!=', 0)->first();
+            $accordings = According::where('page_id', $programme->id)->where('status', 1)->where('type', 'programme')->orderBy('order', 'asc')->get();
             //dd($programme);
-            return view('pages.frontend.programmes.programmedetails2',compact('settings','programme','accordings'));
-        }else{
+            return view('pages.frontend.programmes.programmedetails2', compact('settings', 'programme', 'accordings'));
+        } else {
             //dd($program_sub_category->category_id,$program_sub_category_item->id);
-            $programmes = Programme::where('status',1)->where('category',$program_sub_category->category_id)->where('slug','NOT LIKE','%'.$sub_slug.'%')->where('sub_category',$program_sub_category_item->id)->where('parent','!=',0)->get();
-            $programme_content = Programme::where('status',1)->where('category',$program_sub_category->category_id)->where('sub_category',$program_sub_category_item->id)->where('parent',0)->first();
-            return view('pages.frontend.programmes.subcategoryitem',compact('programmes','program_sub_category','program_sub_category_item','settings','programme_content'));
+            $programmes = Programme::where('status', 1)->where('category', $program_sub_category->category_id)->where('slug', 'NOT LIKE', '%' . $sub_slug . '%')->where('sub_category', $program_sub_category_item->id)->where('parent', '!=', 0)->get();
+            $programme_content = Programme::where('status', 1)->where('category', $program_sub_category->category_id)->where('sub_category', $program_sub_category_item->id)->where('parent', 0)->first();
+            return view('pages.frontend.programmes.subcategoryitem', compact('programmes', 'program_sub_category', 'program_sub_category_item', 'settings', 'programme_content'));
         }
 
         //exit();
@@ -206,14 +218,14 @@ class HomeController extends Controller
 
     }
 
-    public function programmeItem($slug,$sub_slug,$sub_sub_slug)
+    public function programmeItem($slug, $sub_slug, $sub_sub_slug)
     {
         VisitorHelper::updateVisitorCount();
         //echo $slug,$sub_slug,$sub_sub_slug;
         $programme = Programme::where('slug', $sub_sub_slug)->where('status', 1)->firstOrFail();
         $settings = Setting::first();
         //dd($programme);
-        return view('pages.frontend.programmes.programmedetails',compact('programme','settings')); // Make sure this view exists
+        return view('pages.frontend.programmes.programmedetails', compact('programme', 'settings')); // Make sure this view exists
     }
 
     public function gallery()
@@ -225,18 +237,18 @@ class HomeController extends Controller
     public function musicTracks()
     {
         VisitorHelper::updateVisitorCount();
-        $music_tracks = MusicTrack::where('status', 1)->where('type','audio')->orderBy('order', 'asc')->get();
-        $music_beats = MusicTrack::where('status', 1)->where('type','beat')->orderBy('order', 'asc')->get();
+        $music_tracks = MusicTrack::where('status', 1)->where('type', 'audio')->orderBy('order', 'asc')->get();
+        $music_beats = MusicTrack::where('status', 1)->where('type', 'beat')->orderBy('order', 'asc')->get();
 
-        return view('pages.frontend.musictracks.index',compact('music_tracks','music_beats')); // Make sure this view exists
+        return view('pages.frontend.musictracks.index', compact('music_tracks', 'music_beats')); // Make sure this view exists
     }
 
     public function musicVideos()
     {
         VisitorHelper::updateVisitorCount();
-        $video_tracks = MusicTrack::where('status', 1)->where('type','video')->orderBy('order', 'asc')->get();
+        $video_tracks = MusicTrack::where('status', 1)->where('type', 'video')->orderBy('order', 'asc')->get();
 
-        return view('pages.frontend.videotracks.index',compact('video_tracks')); // Make sure this view exists
+        return view('pages.frontend.videotracks.index', compact('video_tracks')); // Make sure this view exists
     }
 
     public function dynamicPage($slug)
@@ -257,7 +269,8 @@ class HomeController extends Controller
         return view('pages.frontend.dynamic.index', compact('page'));
     }
 
-    public function contactSubmit(Request $request){
+    public function contactSubmit(Request $request)
+    {
         $request->validate([
             'g-recaptcha-response' => 'required',
             'name' => 'required|string|max:255',
@@ -291,77 +304,82 @@ class HomeController extends Controller
         ]);
 
         // Send Email to Owner using PHPMailer
-    try {
-        $mail = new PHPMailer(true);
+        try {
+            $mail = new PHPMailer(true);
 
-        // Set up the SMTP connection (adjust SMTP details accordingly)
-        $mail->isSMTP();
-        $mail->Host = 'mail.kingvikingrecords.com'; // For example, use your SMTP host here
-        $mail->SMTPAuth = true;
-        $mail->Username = env('MAIL_USERNAME'); // Set your SMTP username from .env file
-        $mail->Password = env('MAIL_PASSWORD'); // Set your SMTP password from .env file
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587; // Or 465 for SSL
+            // Set up the SMTP connection (adjust SMTP details accordingly)
+            $mail->isSMTP();
+            $mail->Host = 'mail.kingvikingrecords.com'; // For example, use your SMTP host here
+            $mail->SMTPAuth = true;
+            $mail->Username = env('MAIL_USERNAME'); // Set your SMTP username from .env file
+            $mail->Password = env('MAIL_PASSWORD'); // Set your SMTP password from .env file
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587; // Or 465 for SSL
 
-        // Set the sender and recipient details
-        $mail->setFrom($request->email, $request->name); // The sender's email and name
-        //$mail->addAddress(env('MAIL_OWNER')); // Set the recipient email (Owner's email)
-        $mail->addAddress('makarandapathirana@gmail.com'); // Set the recipient email (Owner's email)
+            // Set the sender and recipient details
+            $mail->setFrom($request->email, $request->name); // The sender's email and name
+            //$mail->addAddress(env('MAIL_OWNER')); // Set the recipient email (Owner's email)
+            $mail->addAddress('makarandapathirana@gmail.com'); // Set the recipient email (Owner's email)
 
-        // Set email subject and body content
-        $mail->isHTML(true);
-        $mail->Subject = 'New Contact Form Message: ' . $request->subject;
-        $mail->Body = view('templates.email.contact_message', [
-            'data' => $contactData,
-            'setting' => $setting,
-        ])->render(); // Passing the data to the view
+            // Set email subject and body content
+            $mail->isHTML(true);
+            $mail->Subject = 'New Contact Form Message: ' . $request->subject;
+            $mail->Body = view('templates.email.contact_message', [
+                'data' => $contactData,
+                'setting' => $setting,
+            ])->render(); // Passing the data to the view
 
-        // Send the email
-        $mail->send();
+            // Send the email
+            $mail->send();
 
-    } catch (Exception $e) {
-        // If something goes wrong with the email, log the error
-        Log::error('Email could not be sent. Mailer Error: ' . $mail->ErrorInfo);
-    }
+        } catch (Exception $e) {
+            // If something goes wrong with the email, log the error
+            Log::error('Email could not be sent. Mailer Error: ' . $mail->ErrorInfo);
+        }
 
         return back()->with('success', 'Your message has been sent successfully.');
     }
 
-    public function showCareers(){
-        $career_page = Page::where('slug','Like', 'careers')->first();
+    public function showCareers()
+    {
+        $career_page = Page::where('slug', 'Like', 'careers')->first();
         $settings = Setting::first();
-        $careers = Career::where('status',1)->get();
+        $careers = Career::where('status', 1)->get();
 
-        return view('pages.frontend.careers.index',compact('careers','settings','career_page'));
+        return view('pages.frontend.careers.index', compact('careers', 'settings', 'career_page'));
     }
 
-    public function viewCareer($slug){
-        $career_page = Page::where('slug','Like', 'careers')->first();
+    public function viewCareer($slug)
+    {
+        $career_page = Page::where('slug', 'Like', 'careers')->first();
         $settings = Setting::first();
-        $career = Career::where('status',1)->where('slug','like','%'.$slug.'%')->first();
+        $career = Career::where('status', 1)->where('slug', 'like', '%' . $slug . '%')->first();
 
-        return view('pages.frontend.careers.single',compact('career','settings','career_page'));
+        return view('pages.frontend.careers.single', compact('career', 'settings', 'career_page'));
     }
 
-    public function showEvents(){
-        $galleries = Gallery::where('status',1)->get();
+    public function showEvents()
+    {
+        $galleries = Gallery::where('status', 1)->get();
         $galleries_group = Gallery::where('status', 1)->orderByDesc('year')->get()->unique('year')->values();
-        $events = Page::where('slug','Like', 'events')->first();
+        $events = Page::where('slug', 'Like', 'events')->first();
         $settings = Setting::first();
-        return view('pages.frontend.gallery.index',compact('galleries','settings','events','galleries_group'));
+        return view('pages.frontend.gallery.index', compact('galleries', 'settings', 'events', 'galleries_group'));
         //echo 'Events';
     }
 
-    public function viewEvent($slug){
-        $gallery = Gallery::where('status',1)->where('slug','like','%'.$slug.'%')->first();
-        $gallery_items = GalleryItem::where('status',1)->where('gallery_id',$gallery->id)->get();
-        $events = Page::where('slug','Like', 'events')->first();
+    public function viewEvent($slug)
+    {
+        $gallery = Gallery::where('status', 1)->where('slug', 'like', '%' . $slug . '%')->first();
+        $gallery_items = GalleryItem::where('status', 1)->where('gallery_id', $gallery->id)->get();
+        $events = Page::where('slug', 'Like', 'events')->first();
         $settings = Setting::first();
-        return view('pages.frontend.gallery.single',compact('gallery','settings','events','gallery_items'));
+        return view('pages.frontend.gallery.single', compact('gallery', 'settings', 'events', 'gallery_items'));
     }
 
-    public function showAllProducts(){
-        $products = Product::where('status', 1)->orderBy('order','ASC')->get();
+    public function showAllProducts()
+    {
+        $products = Product::where('status', 1)->orderBy('order', 'ASC')->get();
         $brands = Brand::where('status', 1)->get();
         $categories = Category::where('status', 1)->get();
         $subCategories = SubCategory::where('status', 1)->get();
@@ -400,7 +418,7 @@ class HomeController extends Controller
     public function viewSubCategory($cat_slug, $cat_sub_slug)
     {
         $mainCategory = Category::where('slug', $cat_slug)->where('status', 1)->firstOrFail();
-        $subCategory = SubCategory::where('slug', $cat_sub_slug)->where('category_id',$mainCategory->id)->where('status', 1)->firstOrFail();
+        $subCategory = SubCategory::where('slug', $cat_sub_slug)->where('category_id', $mainCategory->id)->where('status', 1)->firstOrFail();
 
         $products = Product::where('category_id', $mainCategory->id)
             ->where('sub_category', $subCategory->id)
@@ -416,14 +434,14 @@ class HomeController extends Controller
         $sizes = Size::where('status', 1)->get();
         $colors = Color::where('status', 1)->get();
 
-        return view('pages.frontend.products.index', compact('products', 'brands', 'categories', 'subCategories', 'sizes', 'colors', 'mainCategory', 'subCategory','categories'));
+        return view('pages.frontend.products.index', compact('products', 'brands', 'categories', 'subCategories', 'sizes', 'colors', 'mainCategory', 'subCategory', 'categories'));
     }
 
     public function ajaxView($id, $code)
     {
         $product = Product::where('id', $id)
-                        ->where('product_code', $code)
-                        ->first();
+            ->where('product_code', $code)
+            ->first();
 
         if (!$product) {
             return response()->json(['error' => 'Product not found'], 404);
@@ -466,7 +484,7 @@ class HomeController extends Controller
 
         if ($request->filled('price_range')) {
             [$min, $max] = explode('-', $request->price_range);
-            $products->whereBetween('price', [(int)$min, (int)$max]);
+            $products->whereBetween('price', [(int) $min, (int) $max]);
         }
 
         $products = $products->orderBy('order', 'ASC')->get();
@@ -525,7 +543,7 @@ class HomeController extends Controller
         $districts = District::where('status', 1)->get();
         $settings = Setting::first();
 
-        return view('pages.frontend.checkout.index', compact('cart', 'countries', 'settings', 'category', 'products','districts'));
+        return view('pages.frontend.checkout.index', compact('cart', 'countries', 'settings', 'category', 'products', 'districts'));
     }
 
     public function addToCart(Request $request)
@@ -616,9 +634,9 @@ class HomeController extends Controller
     {
         //session()->forget('cart');
         $cart = session()->get('cart', []);
-        if(empty($cart)) {
+        if (empty($cart)) {
             $totalQty = 0;
-        }else {
+        } else {
             $totalQty = collect($cart)->sum('quantity');
         }
 
@@ -669,7 +687,8 @@ class HomeController extends Controller
     public function store(Request $request)
     {
         $cart = session()->get('cart', []);
-        if (empty($cart)) return response()->json(['error' => 'Cart is empty'], 422);
+        if (empty($cart))
+            return response()->json(['error' => 'Cart is empty'], 422);
 
         $subtotal = 0;
         $qty = 0;
@@ -690,7 +709,7 @@ class HomeController extends Controller
             'amount' => $subtotal,
             'qty' => $qty,
             'total' => $total,
-            'payment_method' => ''.strtoupper($request->payment_method).'',
+            'payment_method' => '' . strtoupper($request->payment_method) . '',
             'notes' => $request->different_address ? $request->other_address : '',
             'confirmation' => 1,
             'address' => $request->different_address ? $request->other_address : $request->address,
@@ -731,7 +750,7 @@ class HomeController extends Controller
 
         $district_id = $request->input('district_id') ?? '';
 
-        if( $district_id ) {
+        if ($district_id) {
             $shipping = ShippingCharge::where('district_id', $district_id)->value('charge') ?? 0;
         } else {
             $shipping = 0; // Default shipping if no district selected
@@ -768,9 +787,9 @@ class HomeController extends Controller
     {
         //session()->forget('cart');
         $cart = session()->get('cart', []);
-        if(empty($cart)) {
+        if (empty($cart)) {
             $cart_items = [];
-        }else {
+        } else {
             $cart_items = [];
             foreach ($cart as $id => $item) {
                 $product = Product::find($id);
@@ -794,36 +813,36 @@ class HomeController extends Controller
     public function showArticles()
     {
         $blogs = Blog::where('status', 1)
-                        ->where('blog_type', 'blogs-article')
-                        ->latest()
-                        ->get();
+            ->where('blog_type', 'blogs-article')
+            ->latest()
+            ->get();
 
-        $page_blog = Page::where('slug','Like', 'blogs')->first();
+        $page_blog = Page::where('slug', 'Like', 'blogs')->first();
         $blog_type = 'Blogs & Article';
-        return view('pages.frontend.blogs.index', compact('blogs','blog_type','page_blog'));
+        return view('pages.frontend.blogs.index', compact('blogs', 'blog_type', 'page_blog'));
     }
 
     public function showNews()
     {
         $blogs = Blog::where('status', 1)
-                    ->where('blog_type', 'news-events')
-                    ->latest()
-                    ->get();
+            ->where('blog_type', 'news-events')
+            ->latest()
+            ->get();
 
-        $page_blog = Page::where('slug','Like', 'blogs')->first();
+        $page_blog = Page::where('slug', 'Like', 'blogs')->first();
 
         $blog_type = 'News & Events';
 
-        return view('pages.frontend.blogs.index', compact('blogs','blog_type','page_blog'));
+        return view('pages.frontend.blogs.index', compact('blogs', 'blog_type', 'page_blog'));
     }
 
     public function viewArticle($slug)
     {
         $blog = Blog::with('author') // Eager load author
-        ->where('slug', $slug)
-        ->where('status', 1)
-        ->where('blog_type', 'blogs-article')
-        ->firstOrFail();
+            ->where('slug', $slug)
+            ->where('status', 1)
+            ->where('blog_type', 'blogs-article')
+            ->firstOrFail();
 
         $page_blog = Page::where('slug', 'like', 'blogs')->first();
         $recent_blogs = Blog::where('slug', '!=', $slug)->where('status', 1)->where('blog_type', 'blogs-article')->latest()->take(5)->get();
@@ -844,14 +863,14 @@ class HomeController extends Controller
 
         //dd($blog->id);
 
-        return view('pages.frontend.blogs.single', compact('blog','page_blog','recent_blogs','prev_blog','next_blog'));
+        return view('pages.frontend.blogs.single', compact('blog', 'page_blog', 'recent_blogs', 'prev_blog', 'next_blog'));
     }
 
     public function viewNews($slug)
     {
         $blog = Blog::where('slug', $slug)->where('status', 1)->where('blog_type', 'news-events')->firstOrFail();
-        $page_blog = Page::where('slug','Like', 'blogs')->first();
-        return view('pages.frontend.blogs.single', compact('blog','page_blog'));
+        $page_blog = Page::where('slug', 'Like', 'blogs')->first();
+        return view('pages.frontend.blogs.single', compact('blog', 'page_blog'));
     }
 
 }

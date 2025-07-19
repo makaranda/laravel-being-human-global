@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-    use Notifiable,HasFactory;
+    use Notifiable, HasFactory;
 
     protected $table = 'pages';
     protected $casts = [
