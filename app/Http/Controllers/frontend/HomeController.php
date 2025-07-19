@@ -81,13 +81,14 @@ class HomeController extends Controller
         $section4 = collect($sections)->firstWhere('name', 'section4');
         $section5 = collect($sections)->firstWhere('name', 'section5');
         $section6 = collect($sections)->firstWhere('name', 'section6');
+        $section7 = collect($sections)->firstWhere('name', 'section7');
         //dd($sections);
         //$admin = Auth::guard('admin')->user();
         //dd($admin);
         // if (!empty($admin->role) && $admin->role > 0) {
         //     return redirect()->route('admin.dashboard');
         // } else {
-        return view('pages.frontend.home.index', compact('gallery_home', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6'));
+        return view('pages.frontend.home.index', compact('gallery_home', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6','section7'));
         //}
     }
 

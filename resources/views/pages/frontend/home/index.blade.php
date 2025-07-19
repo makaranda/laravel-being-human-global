@@ -74,9 +74,9 @@
                             </div>
                             <figure class="image"><img
                                     src="{{ asset('public/assets/frontend/images/resource/sri-lankan-lephard.jpg')}}"
-                                    alt=""></figure>
+                                    alt="{{ $settings['website_name'] }}"></figure>
                             <div class="icon-box"><img src="{{ asset('public/assets/frontend/images/icons/icon-1.png')}}"
-                                    alt=""></div>
+                                    alt="{{ $settings['website_name'] }}"></div>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,8 @@
                                 <div class="text">
                                     <div>{!! $section3['data']['sub_discription'] ?? '' !!}</div>
                                     {{-- <figure class="signature"><img
-                                            src="{{ asset('public/assets/frontend/images/icons/signature-1.png')}}" alt="">
+                                            src="{{ asset('public/assets/frontend/images/icons/signature-1.png')}}"
+                                            alt="{{ $settings['website_name'] }}">
                                     </figure> --}}
                                 </div>
                             </div>
@@ -142,7 +143,8 @@
                             </div>
                             <figure class="image-layer  wow zoomIn animated" data-wow-delay="00ms"
                                 data-wow-duration="1500ms"><img
-                                    src="{{ asset('public/assets/frontend/images/resource/home-membership.png')}}" alt="">
+                                    src="{{ asset('public/assets/frontend/images/resource/' . $section3['data']['image'])}}"
+                                    alt="{{ $settings['website_name'] }}">
                             </figure>
                             <h3>Quick Donation</h3>
                             <h5>One time Payment</h5>
@@ -169,7 +171,8 @@
                 <div class="gallery-block-one">
                     <div class="inner-box">
                         <figure class="image-box"><img
-                                src="{{ asset('public/assets/frontend/images/gallery/gallery-1.jpg')}}" alt=""></figure>
+                                src="{{ asset('public/assets/frontend/images/gallery/gallery-1.jpg')}}"
+                                alt="{{ $settings['website_name'] }}"></figure>
                         <div class="content-box">
                             <h3><a href="deer.html">deer</a></h3>
                         </div>
@@ -183,7 +186,8 @@
                 <div class="gallery-block-one">
                     <div class="inner-box">
                         <figure class="image-box"><img
-                                src="{{ asset('public/assets/frontend/images/gallery/gallery-2.jpg')}}" alt=""></figure>
+                                src="{{ asset('public/assets/frontend/images/gallery/gallery-2.jpg')}}"
+                                alt="{{ $settings['website_name'] }}"></figure>
                         <div class="content-box">
                             <h3><a href="wolf.html">Fox</a></h3>
                         </div>
@@ -197,7 +201,8 @@
                 <div class="gallery-block-one">
                     <div class="inner-box">
                         <figure class="image-box"><img
-                                src="{{ asset('public/assets/frontend/images/gallery/gallery-3.jpg')}}" alt=""></figure>
+                                src="{{ asset('public/assets/frontend/images/gallery/gallery-3.jpg')}}"
+                                alt="{{ $settings['website_name'] }}"></figure>
                         <div class="content-box">
                             <h3><a href="elephant.html">elephant</a></h3>
                         </div>
@@ -211,7 +216,8 @@
                 <div class="gallery-block-one">
                     <div class="inner-box">
                         <figure class="image-box"><img
-                                src="{{ asset('public/assets/frontend/images/gallery/gallery-4.jpg')}}" alt=""></figure>
+                                src="{{ asset('public/assets/frontend/images/gallery/gallery-4.jpg')}}"
+                                alt="{{ $settings['website_name'] }}"></figure>
                         <div class="content-box">
                             <h3><a href="girrafe.html">leopard</a></h3>
                         </div>
@@ -225,7 +231,8 @@
                 <div class="gallery-block-one">
                     <div class="inner-box">
                         <figure class="image-box"><img
-                                src="{{ asset('public/assets/frontend/images/gallery/gallery-5.jpg')}}" alt=""></figure>
+                                src="{{ asset('public/assets/frontend/images/gallery/gallery-5.jpg')}}"
+                                alt="{{ $settings['website_name'] }}"></figure>
                         <div class="content-box">
                             <h3><a href="monkey.html">monkey</a></h3>
                         </div>
@@ -251,15 +258,20 @@
         <div class="auto-container">
             {{-- <div class="five-item-carousel owl-carousel owl-theme owl-nav-none owl-dots-none">
                 <figure class="clients-logo"><a href="index.html"><img
-                            src="{{ asset('public/assets/frontend/images/clients/clients-1.png')}}" alt=""></a></figure>
+                            src="{{ asset('public/assets/frontend/images/clients/clients-1.png')}}"
+                            alt="{{ $settings['website_name'] }}"></a></figure>
                 <figure class="clients-logo"><a href="index.html"><img
-                            src="{{ asset('public/assets/frontend/images/clients/clients-2.png')}}" alt=""></a></figure>
+                            src="{{ asset('public/assets/frontend/images/clients/clients-2.png')}}"
+                            alt="{{ $settings['website_name'] }}"></a></figure>
                 <figure class="clients-logo"><a href="index.html"><img
-                            src="{{ asset('public/assets/frontend/images/clients/clients-3.png')}}" alt=""></a></figure>
+                            src="{{ asset('public/assets/frontend/images/clients/clients-3.png')}}"
+                            alt="{{ $settings['website_name'] }}"></a></figure>
                 <figure class="clients-logo"><a href="index.html"><img
-                            src="{{ asset('public/assets/frontend/images/clients/clients-4.png')}}" alt=""></a></figure>
+                            src="{{ asset('public/assets/frontend/images/clients/clients-4.png')}}"
+                            alt="{{ $settings['website_name'] }}"></a></figure>
                 <figure class="clients-logo"><a href="index.html"><img
-                            src="{{ asset('public/assets/frontend/images/clients/clients-5.png')}}" alt=""></a></figure>
+                            src="{{ asset('public/assets/frontend/images/clients/clients-5.png')}}"
+                            alt="{{ $settings['website_name'] }}"></a></figure>
             </div> --}}
         </div>
     </section>
@@ -277,18 +289,15 @@
                                 <h2>Your adventure begins here</h2>
                             </div>
                             <div class="inner-box">
-                                <div class="single-item">
-                                    <div class="icon-box"><i class="flaticon-tick"></i></div>
-                                    <h4>night at the zoo</h4>
-                                    <p>Lorem Ipsum nibh vel velit auctor aliqu. Aenean sollic tudin, lorem is simply man
-                                        made many people recover them free text quis bibendum.</p>
-                                </div>
-                                <div class="single-item">
-                                    <div class="icon-box"><i class="flaticon-tick"></i></div>
-                                    <h4>support wild animals</h4>
-                                    <p>Lorem Ipsum nibh vel velit auctor aliqu. Aenean sollic tudin, lorem is simply man
-                                        made many people recover them free text quis bibendum.</p>
-                                </div>
+                                @if (count($section4['data']['list']))
+                                    @foreach ($section4['data']['list'] as $item)
+                                        <div class="single-item">
+                                            <div class="icon-box"><i class="flaticon-tick"></i></div>
+                                            <h4>{{ $item['title'] }}</h4>
+                                            <p>{{ $item['content'] }}</p>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -297,11 +306,12 @@
                     <div class="image_block_two">
                         <div class="image-box">
                             <div class="video-btn">
-                                <a href="https://www.youtube.com/watch?v=nfP5N9Yc72A&amp;t=28s" class="lightbox-image"
+                                <a href="{{ $section4['data']['attribute']['link'] }}" class="lightbox-image"
                                     data-caption=""><i class="fas fa-play"></i></a>
                             </div>
                             <figure class="image"><img
-                                    src="{{ asset('public/assets/frontend/images/resource/adventure-1.jpg')}}" alt="">
+                                    src="{{ asset('public/assets/frontend/images/resource/' . $section4['data']['image'])}}"
+                                    alt="{{ $settings['website_name'] }}">
                             </figure>
                         </div>
                     </div>
@@ -323,7 +333,8 @@
                     <div class="inner-box">
                         <div class="author-thumb">
                             <figure class="thumb-box"><img
-                                    src="{{ asset('public/assets/frontend/images/resource/testimonial-1.jpg')}}" alt="">
+                                    src="{{ asset('public/assets/frontend/images/resource/testimonial-1.jpg')}}"
+                                    alt="{{ $settings['website_name'] }}">
                             </figure>
                             <div class="quote"><i class="flaticon-quote"></i></div>
                         </div>
@@ -341,7 +352,8 @@
                     <div class="inner-box">
                         <div class="author-thumb">
                             <figure class="thumb-box"><img
-                                    src="{{ asset('public/assets/frontend/images/resource/testimonial-2.jpg')}}" alt="">
+                                    src="{{ asset('public/assets/frontend/images/resource/testimonial-2.jpg')}}"
+                                    alt="{{ $settings['website_name'] }}">
                             </figure>
                             <div class="quote"><i class="flaticon-quote"></i></div>
                         </div>
@@ -359,7 +371,8 @@
                     <div class="inner-box">
                         <div class="author-thumb">
                             <figure class="thumb-box"><img
-                                    src="{{ asset('public/assets/frontend/images/resource/testimonial-3.jpg')}}" alt="">
+                                    src="{{ asset('public/assets/frontend/images/resource/testimonial-3.jpg')}}"
+                                    alt="{{ $settings['website_name'] }}">
                             </figure>
                             <div class="quote"><i class="flaticon-quote"></i></div>
                         </div>
@@ -388,8 +401,8 @@
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-12 col-sm-12 title-column">
                     <div class="sec-title light">
-                        <h2>Check zoo upcoming events</h2>
-                        <a href="index.html" class="theme-btn btn-one">view all</a>
+                        <h2>{{ $section5['data']['topic'] }}</h2>
+                        <a href="{{ $section5['data']['attribute']['link'] }}" class="theme-btn btn-one">view all</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12 inner-column">
@@ -398,7 +411,8 @@
                             <div class="inner-box">
                                 <div class="image-box">
                                     <figure class="image"><img
-                                            src="{{ asset('public/assets/frontend/images/resource/events-1.jpg')}}" alt="">
+                                            src="{{ asset('public/assets/frontend/images/resource/events-1.jpg')}}"
+                                            alt="{{ $settings['website_name'] }}">
                                     </figure>
                                     <div class="post-date">
                                         <h6>16<span>dec</span></h6>
@@ -418,7 +432,8 @@
                             <div class="inner-box">
                                 <div class="image-box">
                                     <figure class="image"><img
-                                            src="{{ asset('public/assets/frontend/images/resource/events-2.jpg')}}" alt="">
+                                            src="{{ asset('public/assets/frontend/images/resource/events-2.jpg')}}"
+                                            alt="{{ $settings['website_name'] }}">
                                     </figure>
                                     <div class="post-date">
                                         <h6>05<span>dec</span></h6>
@@ -450,50 +465,22 @@
         </div>
         <div class="auto-container">
             <div class="row clearfix">
-                <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
-                    <div class="counter-block-one wow slideInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="icon-box"><i class="flaticon-polar-bear"></i></div>
-                            <div class="count-outer count-box">
-                                <span class="count-text" data-speed="1500" data-stop="60">0</span><span>+</span>
+                @if (count($section6['data']['counts']))
+                    @foreach ($section6['data']['counts'] as $countItem)
+                        <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
+                            <div class="counter-block-one wow slideInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                <div class="inner-box">
+                                    <div class="icon-box"><i class="flaticon-polar-bear"></i></div>
+                                    <div class="count-outer count-box">
+                                        <span class="count-text" data-speed="1500"
+                                            data-stop="{{ $countItem['count'] }}">0</span><span>+</span>
+                                    </div>
+                                    <p>{{ $countItem['title'] }}</p>
+                                </div>
                             </div>
-                            <p>Wild Animals</p>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
-                    <div class="counter-block-one wow slideInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="icon-box"><i class="flaticon-whale"></i></div>
-                            <div class="count-outer count-box">
-                                <span class="count-text" data-speed="1500" data-stop="20">0</span><span>+</span>
-                            </div>
-                            <p>Aquatic Animals</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
-                    <div class="counter-block-one wow slideInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="icon-box"><i class="flaticon-bird"></i></div>
-                            <div class="count-outer count-box">
-                                <span class="count-text" data-speed="1500" data-stop="40">0</span><span>+</span>
-                            </div>
-                            <p>Beautiful Birds</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
-                    <div class="counter-block-one wow slideInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="icon-box"><i class="flaticon-smiling-emoticon-square-face"></i></div>
-                            <div class="count-outer count-box">
-                                <span class="count-text" data-speed="1500" data-stop="60">0</span><span>k</span>
-                            </div>
-                            <p>Happy Visitors</p>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </section>
@@ -512,7 +499,8 @@
                         <div class="inner-box">
                             <div class="image-box">
                                 <figure class="image"><a href="blog-details.html"><img
-                                            src="{{ asset('public/assets/frontend/images/news/news-1.jpg')}}" alt=""></a>
+                                            src="{{ asset('public/assets/frontend/images/news/news-1.jpg')}}"
+                                            alt="{{ $settings['website_name'] }}"></a>
                                 </figure>
                                 <div class="post-date">
                                     <h6>16<span>dec</span></h6>
@@ -534,7 +522,8 @@
                         <div class="inner-box">
                             <div class="image-box">
                                 <figure class="image"><a href="blog-details.html"><img
-                                            src="{{ asset('public/assets/frontend/images/news/news-2.jpg')}}" alt=""></a>
+                                            src="{{ asset('public/assets/frontend/images/news/news-2.jpg')}}"
+                                            alt="{{ $settings['website_name'] }}"></a>
                                 </figure>
                                 <div class="post-date">
                                     <h6>15<span>dec</span></h6>
@@ -556,7 +545,8 @@
                         <div class="inner-box">
                             <div class="image-box">
                                 <figure class="image"><a href="blog-details.html"><img
-                                            src="{{ asset('public/assets/frontend/images/news/news-3.jpg')}}" alt=""></a>
+                                            src="{{ asset('public/assets/frontend/images/news/news-3.jpg')}}"
+                                            alt="{{ $settings['website_name'] }}"></a>
                                 </figure>
                                 <div class="post-date">
                                     <h6>14<span>dec</span></h6>
@@ -586,13 +576,14 @@
             <div class="inner-box clearfix">
                 <div class="pattern-layer"
                     style="background-image: url({{ asset('public/assets/frontend/images/shape/shape-3.png')}});"></div>
-                <figure class="image-layer"><img src="{{ asset('public/assets/frontend/images/resource/animals-1.png')}}"
-                        alt=""></figure>
+                <figure class="image-layer"><img
+                        src="{{ asset('public/assets/frontend/images/resource/' . $section7['data']['image'])}}"
+                        alt="{{ $settings['website_name'] }}"></figure>
                 <div class="text pull-left">
-                    <h2>The animals in <br />our parks</h2>
+                    <h2>The animals in <br />Sri Lanka</h2>
                 </div>
                 <div class="btn-box pull-right">
-                    <a href="index.html" class="theme-btn btn-one">discover more</a>
+                    <a href="{{ $section7['data']['attribute']['link'] }}" class="theme-btn btn-one">discover more</a>
                 </div>
             </div>
         </div>
