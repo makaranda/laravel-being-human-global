@@ -1,18 +1,18 @@
 :root {
-  --primary-color: #1d2952;
-  --secondary-color: #eab419;
-  --tertiary-color: #ee3532;
-  --footer-bg-color: #28283F;
-  --navigation-top-bg-color: #28283F;
-  --text-primary-color: #fff;
-  --text-secondary-color: #000;
-  --text-tertiary-color: #1d2952;
-  --text-quaternary-color: #ee3532;
-  --font-size: 16px;
+    --primary-color: #1d2952;
+    --secondary-color: #eab419;
+    --tertiary-color: #ee3532;
+    --footer-bg-color: #28283F;
+    --navigation-top-bg-color: #28283F;
+    --text-primary-color: #fff;
+    --text-secondary-color: #000;
+    --text-tertiary-color: #1d2952;
+    --text-quaternary-color: #ee3532;
+    --font-size: 16px;
 }
 
 
-.justify-items-left{
+.justify-items-left {
     justify-items: left;
 }
 
@@ -31,7 +31,7 @@
 
 .logo {
 
-    img{
+    img {
         width: 200px;
     }
 }
@@ -54,64 +54,72 @@
 }
 
 
-.justify-content-right{
+.justify-content-right {
     justify-content: right;
 }
-.justify-content-center{
+
+.justify-content-center {
     justify-content: center;
 }
-.justify-content-left{
+
+.justify-content-left {
     justify-content: left;
 }
 
 .modal {
     z-index: 9999 !important;
 }
+
 .modal-backdrop {
     z-index: 9998 !important;
 }
 
-.flaot-right{
+.flaot-right {
     float: right !important;
 }
-.flaot-left{
+
+.flaot-left {
     float: left !important;
 }
 
-.scrolled{
+.scrolled {
     top: 0px !important;
 }
 
 .modal.fade .modal-dialog {
-  transition: transform 0.5s ease-out, opacity 0.5s ease-out !important;
-  transform: translate(0, -25%);
-  opacity: 0;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out !important;
+    transform: translate(0, -25%);
+    opacity: 0;
 }
 
 .modal.fade.show .modal-dialog {
-  transform: translate(0, 0);
-  opacity: 1;
+    transform: translate(0, 0);
+    opacity: 1;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 
 .text-left {
     text-align: left !important;
 }
+
 .text-right {
     text-align: right !important;
 }
+
 .text-center {
     text-align: center !important;
 }
 
 .info-section {
     background: #012420;
+
     .inner-container {
         background: transparent;
     }
+
     .bg-layer {
         position: absolute;
         left: 260px;
@@ -120,15 +128,15 @@
         height: 100%;
         background: #012420;
     }
-}    
+}
 
 .main-menu {
     .navigation {
-         li {
+        li {
             padding: 38px 0px 38px 0px;
         }
     }
-}    
+}
 
 .clients-section {
     position: relative;

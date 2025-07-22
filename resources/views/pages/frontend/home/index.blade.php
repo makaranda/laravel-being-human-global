@@ -38,7 +38,7 @@
                         <div class="single-item">
                             <div class="icon-box"><i class="flaticon-ticket"></i></div>
                             {{-- <h5><a href="index.html">Buy Tickets</a></h5> --}}
-                            <p>{{ $section1['data']['discription'] ?? '' }}</p>
+                            <p>{!! $section1['data']['discription'] ?? '' !!}</p>
                         </div>
                     </div>
                     {{-- <div class="col-lg-4 col-md-6 col-sm-12 single-column">
@@ -88,9 +88,9 @@
                             </div>
                             <div class="text">
                                 <h4>Help us to protect wildlife around the world.</h4>
-                                <div>{{ $section2['data']['discription'] ?? '' }}</div>
+                                <div>{!! $section2['data']['discription'] ?? '' !!}</div>
                                 <div>
-                                    {{ $section2['data']['sub_discription'] ?? '' }}
+                                    {!! $section2['data']['sub_discription'] ?? '' !!}
                                 </div>
                             </div>
                             <div class="btn-box">
@@ -470,7 +470,9 @@
                         <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
                             <div class="counter-block-one wow slideInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                                 <div class="inner-box">
-                                    <div class="icon-box"><i class="flaticon-polar-bear"></i></div>
+                                    <div class="icon-box">
+                                        <i class="fa-solid fa-tree-city"></i>
+                                    </div>
                                     <div class="count-outer count-box">
                                         <span class="count-text" data-speed="1500"
                                             data-stop="{{ $countItem['count'] }}">0</span><span>+</span>

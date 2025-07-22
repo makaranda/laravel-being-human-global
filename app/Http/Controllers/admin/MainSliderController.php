@@ -5,49 +5,53 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MainSlider;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
 
 class MainSliderController extends Controller
 {
-   // Show all main slider banners
-   public function index()
-   {
-       //var_dump(session('success'));
-       $sliders = MainSlider::where('status',1)->get();
-       return view('pages.dashboard.main-slider.index', compact('sliders'));
-   }
-
-       public function create()
+    // Show all main slider banners
+    public function index()
     {
-        $sliders = MainSlider::where('status',1)->get();
-        return view('pages.dashboard.main-slider.create', compact('sliders'));
+        //var_dump(session('success'));
+        $sliders = MainSlider::where('status', 1)->get();
+        $settings = Setting::where('status', 1)->first();
+        return view('pages.dashboard.main-slider.index', compact('sliders', 'settings'));
     }
 
-   // Show edit form
-   public function edit($id)
-   {
-       $slider = MainSlider::findOrFail($id);
-       return view('pages.dashboard.main-slider.edit', compact('slider'));
-   }
-
-   // Update main slider
-   public function update(Request $request, $id)
-   {
-    //dd($request->all());
-    if (!$request->isMethod('put')) {
-        return back()->with('error', 'Invalid request method.');
+    public function create()
+    {
+        $sliders = MainSlider::where('status', 1)->get();
+        $settings = Setting::where('status', 1)->first();
+        return view('pages.dashboard.main-slider.create', compact('sliders', 'settings'));
     }
 
-       $request->validate([
+    // Show edit form
+    public function edit($id)
+    {
+        $slider = MainSlider::findOrFail($id);
+        $settings = Setting::where('status', 1)->first();
+        return view('pages.dashboard.main-slider.edit', compact('slider', 'settings'));
+    }
+
+    // Update main slider
+    public function update(Request $request, $id)
+    {
+        //dd($request->all());
+        if (!$request->isMethod('put')) {
+            return back()->with('error', 'Invalid request method.');
+        }
+
+        $request->validate([
             'file_input' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
             'heading' => 'required|string|max:255',
             'description' => 'required',
             'switch_publish' => 'nullable',
-       ]);
+        ]);
 
-       $slider = MainSlider::findOrFail($id);
-       $bannerImgPath = '';
-       if ($request->hasFile('file_input')) {
+        $slider = MainSlider::findOrFail($id);
+        $bannerImgPath = '';
+        if ($request->hasFile('file_input')) {
             $filePath = 'public/assets/frontend/img/sliders/';
             if ($slider->banner) {
                 $existingImagePath = $filePath . $slider->banner;
@@ -59,7 +63,7 @@ class MainSliderController extends Controller
             $file_input = $request->file('file_input');
             $filename = 'banner_img_' . time() . '.' . $file_input->getClientOriginalExtension();
 
-                //dd($request->file_input);
+            //dd($request->file_input);
             // Ensure the file is uploaded
             if ($file_input->move(public_path($filePath), $filename)) {
                 $bannerImgPath = $filename;
@@ -67,7 +71,7 @@ class MainSliderController extends Controller
                 $bannerImgPath = $slider->banner ?? 'guitar-background.jpg';
                 //return redirect()->route('admin.pages')->with('error', 'Sorry, there was an error uploading your file.');
             }
-        }else{
+        } else {
             $bannerImgPath = $slider->banner ?? 'guitar-background.jpg';
         }
 
@@ -79,16 +83,16 @@ class MainSliderController extends Controller
             'switch' => $request->has('switch_publish') ? 1 : 0,
         ]);
 
-       return redirect()->route('admin.mainslider')->with('success', 'Slider updated successfully');
-       //session()->flash('success', 'Slider updated successfully');
-       //return redirect()->route('admin.mainslider');
-       //session()->flash('success', 'Slider updated successfully');
+        return redirect()->route('admin.mainslider')->with('success', 'Slider updated successfully');
+        //session()->flash('success', 'Slider updated successfully');
+        //return redirect()->route('admin.mainslider');
+        //session()->flash('success', 'Slider updated successfully');
 
-       //dd(session()->all());
-       //return back()->with('success', 'Slider updated successfully');
-   }
+        //dd(session()->all());
+        //return back()->with('success', 'Slider updated successfully');
+    }
 
-   // Store main slider
+    // Store main slider
     public function store(Request $request)
     {
         if (!$request->isMethod('post')) {
@@ -125,7 +129,7 @@ class MainSliderController extends Controller
         return redirect()->route('admin.mainslider')->with('success', 'Slider created successfully');
     }
 
-    public function updateOrder(Request $request,$id)
+    public function updateOrder(Request $request, $id)
     {
         //dd($request->all());
         $partner = MainSlider::findOrFail($id);
@@ -137,14 +141,14 @@ class MainSliderController extends Controller
     }
 
 
-   // Delete slider
-   public function delete($id)
-   {
-       $slider = MainSlider::findOrFail($id);
-       if ($slider->banner && $slider->banner !== 'main_banner.jpg') {
-           Storage::delete('public/banners/' . $slider->banner);
-       }
-       $slider->delete();
-       return redirect()->route('admin.mainslider')->with('success', 'Slider deleted successfully');
-   }
+    // Delete slider
+    public function delete($id)
+    {
+        $slider = MainSlider::findOrFail($id);
+        if ($slider->banner && $slider->banner !== 'main_banner.jpg') {
+            Storage::delete('public/banners/' . $slider->banner);
+        }
+        $slider->delete();
+        return redirect()->route('admin.mainslider')->with('success', 'Slider deleted successfully');
+    }
 }
