@@ -55,26 +55,32 @@
                     </div>
 
                     <div class="card mt-3">
-                        <div class="card-header">Slider Image</div>
+                        <div class="card-header">Slider {{ $settings->switch_slider == 1 ? 'Image' : 'Video' }}</div>
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-12 col-md-12 mt-3">
                                     <!-- Display image if it exists -->
                                     @if($slider->banner)
-                                        <img src="{{ asset('public/assets/frontend/img/sliders/' . $slider->banner) }}"
-                                            class="img-fluid" id="image_show" />
-                                        <p class="btn mb-0" id="img_description">Click the image to edit or update</p>
-                                        <button type="button" class="btn btn-link text-danger" name="remove_image"
-                                            id="remove_image">Remove Slider image</button>
+                                        @if($settings->switch_slider == 1)
+                                            <img src="{{ asset('public/assets/frontend/img/sliders/' . $slider->banner) }}"
+                                                class="img-fluid" id="media_preview" />
+                                        @else
+                                            <video id="media_preview" width="300" controls preload="none" muted>
+                                                <source src="{{ asset('public/assets/frontend/img/video/' . $slider->banner) }}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        @endif
+                                        <p class="btn mb-0" id="img_description">Click the {{ $settings->switch_slider == 1 ? 'Image' : 'Video' }} to edit or update</p>
+                                        <button type="button" class="btn btn-link text-danger" id="remove_media">Remove Slider {{ $settings->switch_slider == 1 ? 'Image' : 'Video' }}</button>
                                     @else
-                                        <p>No Slider image uploaded yet.</p>
+                                        <p>No Slider {{ $settings->switch_slider == 1 ? 'Image' : 'Video' }} uploaded yet.</p>
                                     @endif
                                 </div>
 
                                 <div class="col-12 col-md-12 mt-3">
-                                    <input type="file" name="file_input" id="file_input" accept="image/*" class="d-none">
+                                    <input type="file" name="file_input" id="file_input" accept="{{ $settings->switch_slider == 1 ? 'image/*' : 'video/*' }}" class="d-none">
                                     <button type="button" class="btn btn-link" name="feature_image" id="feature_image">Set
-                                        Slider image</button>
+                                        Slider {{ $settings->switch_slider == 1 ? 'Image' : 'Video' }}</button>
                                     @error('feature_image')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
@@ -100,15 +106,20 @@
                         </div>
                     </div>
 
+                    @php
+                        $isImageMode = $slider->switch == 1;
+                    @endphp
+
                     <!-- Slider Type Switch (Image/Video) -->
                     <div class="card">
-                        <div class="card-header">Slider Type</div>
+                        <div class="card-header">Slider Type: {{ $isImageMode ? 'Image' : 'Video' }}</div>
                         <div class="card-body">
                             <label class="custom-switch">
-                                <input type="checkbox" name="switch_slider" id="switch_slider" {{ old('switch_slider', $slider->switch_slider) ? 'checked' : '' }} disabled>
+                                <input type="checkbox" name="switch_slider" id="switch_slider"
+                                    {{ $isImageMode ? 'checked' : '' }} disabled>
                                 <span class="slider round"></span>
                             </label>
-                            {{-- <span class="form-check-label ms-2">Choose Slider Type</span> --}}
+                            <span class="ms-2">{{ $isImageMode ? 'Image Mode' : 'Video Mode' }}</span>
                         </div>
                     </div>
 
@@ -128,41 +139,60 @@
 @endpush
 
 @push('scripts')
+    @if ($settings->switch_slider == 1)
+        <script>
+            CKEDITOR.replace('description');
+        </script>
+    @endif
     <script>
         // CKEDITOR.replace('short_description');
-        CKEDITOR.replace('description');
-
-
+ 
         $(document).ready(function () {
-            // Click on "Set Featured Image"
+            const isImage = {{ $settings->switch_slider == 1 ? 'true' : 'false' }};
+
             $("#feature_image").click(function () {
-                $("#file_input").click(); // Open file input dialog
+                $("#file_input").click();
             });
 
-            // When user selects an image
             $("#file_input").change(function (event) {
-                console.log('updated');
-                let file = event.target.files[0];
-                if (file) {
-                    let reader = new FileReader();
-                    reader.onload = function (e) {
-                        $("#image_show").attr("src", e.target.result).removeClass("d-none");
-                        $("#img_description, #remove_image").removeClass("d-none");
-                        $("#feature_image").addClass("d-none");
-                    };
-                    reader.readAsDataURL(file);
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const mediaPreview = $("#media_preview");
+                const fileURL = URL.createObjectURL(file);
+
+                if (isImage) {
+                    const img = $("<img>", {
+                        src: fileURL,
+                        id: "media_preview",
+                        class: "img-fluid"
+                    });
+                    mediaPreview.replaceWith(img);
+                } else {
+                    const video = $("<video>", {
+                        id: "media_preview",
+                        width: 300,
+                        controls: true
+                    }).append($("<source>", {
+                        src: fileURL,
+                        type: file.type
+                    }));
+                    mediaPreview.replaceWith(video);
                 }
+
+                $("#img_description, #remove_media").removeClass("d-none");
+                $("#feature_image").addClass("d-none");
             });
 
-            // Remove Image
-            $("#remove_image").click(function () {
-                $("#image_show").attr("src", "").addClass("d-none");
-                $("#img_description, #remove_image").addClass("d-none");
+            $("#remove_media").click(function () {
+                const mediaPreview = $("#media_preview");
+                mediaPreview.replaceWith(`<${isImage ? 'img' : 'video'} id="media_preview" class="d-none" ${isImage ? '' : 'controls'}></${isImage ? 'img' : 'video'}>`);
+
+                $("#img_description, #remove_media").addClass("d-none");
                 $("#feature_image").removeClass("d-none");
-                $("#file_input").val(""); // Clear file input
+                $("#file_input").val("");
             });
-
-
         });
+
     </script>
 @endpush
