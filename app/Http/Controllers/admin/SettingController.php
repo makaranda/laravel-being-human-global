@@ -12,7 +12,8 @@ class SettingController extends Controller
     public function edit()
     {
         $setting = Setting::first(); // Assuming there's only one settings row
-        return view('pages.dashboard.settings.edit', compact('setting'));
+        $sections = $setting->attributes;
+        return view('pages.dashboard.settings.edit', compact('setting', 'sections'));
     }
 
     // Update settings
@@ -58,7 +59,7 @@ class SettingController extends Controller
             $file_input = $request->file('file_input');
             $filename = 'main_logo_' . time() . '.' . $file_input->getClientOriginalExtension();
 
-                //dd($request->file_input);
+            //dd($request->file_input);
             // Ensure the file is uploaded
             if ($file_input->move(public_path($filePath), $filename)) {
                 $mainLogoPath = $filename;
@@ -66,7 +67,7 @@ class SettingController extends Controller
                 $mainLogoPath = $setting->main_logo ?? 'king-viking-logo-defoult.jpg';
                 //return redirect()->route('admin.pages')->with('error', 'Sorry, there was an error uploading your file.');
             }
-        }else{
+        } else {
             $mainLogoPath = $setting->main_logo ?? 'king-viking-logo-defoult.jpg';
         }
 
@@ -83,7 +84,7 @@ class SettingController extends Controller
             $file_input = $request->file('file_input2');
             $filename = 'fevicon_logo_' . time() . '.' . $file_input->getClientOriginalExtension();
 
-                //dd($request->file_input);
+            //dd($request->file_input);
             // Ensure the file is uploaded
             if ($file_input->move(public_path($filePath), $filename)) {
                 $faviconLogo = $filename;
@@ -91,7 +92,7 @@ class SettingController extends Controller
                 $faviconLogo = $setting->fevicon_logo ?? 'fevicon_king-viking-logo-defoult.jpg';
                 //return redirect()->route('admin.pages')->with('error', 'Sorry, there was an error uploading your file.');
             }
-        }else{
+        } else {
             $faviconLogo = $setting->fevicon_logo ?? 'fevicon_king-viking-logo-defoult.jpg';
         }
 
@@ -108,7 +109,7 @@ class SettingController extends Controller
             $file_input = $request->file('file_input3');
             $filename = 'page_banner_' . time() . '.' . $file_input->getClientOriginalExtension();
 
-                //dd($request->file_input);
+            //dd($request->file_input);
             // Ensure the file is uploaded
             if ($file_input->move(public_path($filePath), $filename)) {
                 $pageBannerPath = $filename;
@@ -116,7 +117,7 @@ class SettingController extends Controller
                 $pageBannerPath = $setting->page_banner ?? 'page-bg-area-img.jpg';
                 //return redirect()->route('admin.pages')->with('error', 'Sorry, there was an error uploading your file.');
             }
-        }else{
+        } else {
             $pageBannerPath = $setting->page_banner ?? 'page-bg-area-img.jpg';
         }
 
@@ -133,7 +134,7 @@ class SettingController extends Controller
             $file_input = $request->file('file_input4');
             $filename = 'footer_logo_' . time() . '.' . $file_input->getClientOriginalExtension();
 
-                //dd($request->file_input);
+            //dd($request->file_input);
             // Ensure the file is uploaded
             if ($file_input->move(public_path($filePath), $filename)) {
                 $footerLogoPath = $filename;
@@ -141,7 +142,7 @@ class SettingController extends Controller
                 $footerLogoPath = $setting->footer_logo ?? 'iwgc-footer-logo-new.png';
                 //return redirect()->route('admin.pages')->with('error', 'Sorry, there was an error uploading your file.');
             }
-        }else{
+        } else {
             $footerLogoPath = $setting->footer_logo ?? 'iwgc-footer-logo-new.png';
         }
 
@@ -150,7 +151,42 @@ class SettingController extends Controller
         $footerLogo = $setting->footer_logo ?? '';
         $pageBanner = $setting->page_banner ?? '';
 
+        // Prepare attributes JSON
+
+        $textStyles = $request->input('styles', []);
+        $themeStyles = $request->input('themestyles', []);
+
+        // Normalize text styles: ensure all keys (size, color, weight) exist for each tag
+        foreach ($textStyles as $tag => &$style) {
+            $style['size'] = $style['size'] ?? '';
+            $style['color'] = $style['color'] ?? '#000000';
+            $style['weight'] = $style['weight'] ?? '';
+        }
+
+        // Normalize theme styles to have default colors if missing
+        $defaultThemes = [
+            "header_top_bg" => "#f8f9fa",
+            "header_bg" => "#ffffff",
+            "footer_bg" => "#f1f1f1",
+            "footer_bottom_bg" => "#e9ecef"
+        ];
+        foreach ($defaultThemes as $key => $defaultColor) {
+            if (!isset($themeStyles[$key])) {
+                $themeStyles[$key] = $defaultColor;
+            }
+        }
+
+        // Compose the attributes array
+        $attributes = [
+            'text' => $textStyles,
+            'theme' => $themeStyles
+        ];
+
+        // Encode to JSON
+        $attributesJson = json_encode($attributes);
+
         $setting->update([
+            //$dataToUpdate = [
             'website_name' => $request->website_name ?? '',
             'website_title' => $request->website_title ?? '',
             'main_logo' => $mainLogoPath ?? $mainLogo,
@@ -169,8 +205,14 @@ class SettingController extends Controller
             'footer_content' => $request->footer_content ?? '',
             'seo_keywords' => $request->seo_keywords ?? '',
             'seo_description' => $request->seo_description ?? '',
+            'attributes' => $attributesJson,
+            'switch_slider' => $request->has('switch_slider') && $request->switch_slider == 'on' ? 1 : 0,
             'status' => $request->has('switch_publish') && $request->switch_publish == 'on' ? 1 : 0,
         ]);
+
+
+        //dd($dataToUpdate);
+        //dd($request->switch_slider);
 
         return redirect()->route('admin.settings')->with('success', 'Settings updated successfully');
     }

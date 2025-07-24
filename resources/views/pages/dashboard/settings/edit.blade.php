@@ -104,6 +104,42 @@
                         </div>
                     </div>
 
+                    @php
+                        $attributes = is_array($setting->attributes) ? $setting->attributes : json_decode($setting->attributes ?? '[]', true);
+                        $textStyles = $attributes['text'] ?? [];
+                        $themeStyles = $attributes['theme'] ?? [];
+                    @endphp
+
+                    <div class="card mt-3">
+                        <div class="card-header">Text Styles</div>
+                        <div class="card-body">
+                            <div class="row">
+                                @foreach($textStyles as $tag => $styles)
+                                    <div class="col-12 mb-3 border rounded p-2">
+                                        <label><strong>{{ strtoupper($tag) }}</strong></label>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Size</label>
+                                                <input type="text" name="styles[{{ $tag }}][size]" class="form-control"
+                                                    value="{{ $styles['size'] ?? '' }}">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Color</label>
+                                                <input type="color" name="styles[{{ $tag }}][color]" class="form-control"
+                                                    value="{{ $styles['color'] ?? '#000000' }}">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Weight</label>
+                                                <input type="number" name="styles[{{ $tag }}][weight]" class="form-control"
+                                                    value="{{ $styles['weight'] ?? '' }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card mt-3">
                         <div class="card-header">SEO Content</div>
                         <div class="card-body">
@@ -273,6 +309,26 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-3">
+                        <div class="card-header">Theme Styles</div>
+                        <div class="card-body">
+                            <div class="row">
+                                @foreach($themeStyles as $tag => $themestyle)
+                                    <div class="col-12 mb-3 border rounded p-2">
+                                        <label><strong>{{ ucwords(str_replace('_', ' ', str_replace('_bg', '', $tag))) }}</strong></label>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label>Color</label>
+                                                <input type="color" name="themestyles[{{ $tag }}]" class="form-control"
+                                                    value="{{ $themestyle ?? '#ffffff' }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

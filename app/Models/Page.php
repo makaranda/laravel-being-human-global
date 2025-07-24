@@ -35,6 +35,7 @@ class Page extends Model
         'status',
     ];
 
+
     // Relationship: A page has many visitor counts
     public function visitors()
     {

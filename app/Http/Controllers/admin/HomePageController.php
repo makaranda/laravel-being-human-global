@@ -10,30 +10,34 @@ use Illuminate\Support\Facades\Storage;
 class HomePageController extends Controller
 {
     public function index()
-    {   
-        $pages = Page::where('status',1)->get();
-        $page = Page::where('status',1)->where('slug','LIKE','%home%')->first(); // Assuming there's only one settings row
-        return view('pages.dashboard.homepage.edit', compact('pages','page'));
+    {
+        $pages = Page::where('status', 1)->get();
+
+        $page = Page::where('status', 1)->where('slug', 'LIKE', '%home%')->first();
+
+        $sections = $page->attributes; // Already cast as array
+
+        return view('pages.dashboard.homepage.edit', compact('pages', 'sections', 'page'));
     }
 
     // Update settings
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        if (!$request->isMethod('put')) {
-            return back()->with('error', 'Invalid request method.');
-        }
+        // if (!$request->isMethod('put')) {
+        //     return back()->with('error', 'Invalid request method.');
+        // }
         //dd($request);
-        $request->validate([
-            'website_name' => 'nullable|string|max:255',
-            'website_title' => 'required|string|max:255',
-            'contact_number' => 'required|string|max:255',
-            'email_address' => 'required|string|email|max:255',
-            'address' => 'required|string',
-            'google_map' => 'required|string',
-            'footer_content' => 'required|string',
-            'file_input' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'file_input2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        $page = Page::findOrFail($id);
+        $sections = [];
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'seo_keywords' => 'nullable|string',
+            'seo_description' => 'nullable|string',
         ]);
+
+        $sectionsInput = $request->input('sections', []);
+        $oldImages = $request->input('old_sections', []);
 
         $setting = Page::first(); // Assuming only one settings record exists
         if (!$setting) {
@@ -46,133 +50,44 @@ class HomePageController extends Controller
         //     mkdir($uploadPath, 0777, true); // Create the directory if it doesn't exist
         // }
 
-
-        if ($request->hasFile('file_input')) {
-            $filePath = 'public/assets/frontend/img/';
-            if ($setting->main_logo) {
-                $existingImagePath = $filePath . $setting->main_logo;
-                if (file_exists($existingImagePath)) {
-                    unlink($existingImagePath); // Delete the old image
+        foreach ($sectionsInput as $name => &$section) {
+            if ($request->hasFile('file_input')) {
+                $filePath = 'public/assets/frontend/images/resource/';
+                if ($setting->main_logo) {
+                    $existingImagePath = $filePath . $setting->main_logo;
+                    if (file_exists($existingImagePath)) {
+                        unlink($existingImagePath); // Delete the old image
+                    }
                 }
-            }
-            $filePath = 'assets/frontend/img/';
-            $file_input = $request->file('file_input');
-            $filename = 'main_logo_' . time() . '.' . $file_input->getClientOriginalExtension();
+                $filePath = 'assets/frontend/images/resource//';
+                $file_input = $request->file('file_input');
+                $filename = 'home_page_' . time() . '.' . $file_input->getClientOriginalExtension();
 
                 //dd($request->file_input);
-            // Ensure the file is uploaded
-            if ($file_input->move(public_path($filePath), $filename)) {
-                $mainLogoPath = $filename;
-            } else {
-                $mainLogoPath = $setting->main_logo ?? 'king-viking-logo-defoult.jpg';
-                //return redirect()->route('admin.pages')->with('error', 'Sorry, there was an error uploading your file.');
-            }
-        }else{
-            $mainLogoPath = $setting->main_logo ?? 'king-viking-logo-defoult.jpg';
-        }
-
-
-        if ($request->hasFile('file_input2')) {
-            $filePath = 'public/assets/frontend/img/';
-            if ($setting->fevicon_logo) {
-                $existingImagePath = $filePath . $setting->fevicon_logo;
-                if (file_exists($existingImagePath)) {
-                    unlink($existingImagePath); // Delete the old image
+                // Ensure the file is uploaded
+                if ($file_input->move(public_path($filePath), $filename)) {
+                    $section['image'] = $filename;
+                } else {
+                    $section['image'] = $setting->main_logo ?? '';
+                    //return redirect()->route('admin.pages')->with('error', 'Sorry, there was an error uploading your file.');
                 }
-            }
-            $filePath = 'assets/frontend/img/';
-            $file_input = $request->file('file_input2');
-            $filename = 'fevicon_logo_' . time() . '.' . $file_input->getClientOriginalExtension();
-
-                //dd($request->file_input);
-            // Ensure the file is uploaded
-            if ($file_input->move(public_path($filePath), $filename)) {
-                $faviconLogo = $filename;
+            } elseif (isset($oldImages[$name]['image'])) {
+                $section['image'] = $oldImages[$name]['image'];
             } else {
-                $faviconLogo = $setting->fevicon_logo ?? 'fevicon_king-viking-logo-defoult.jpg';
-                //return redirect()->route('admin.pages')->with('error', 'Sorry, there was an error uploading your file.');
+                $section['image'] = '';
             }
-        }else{
-            $faviconLogo = $setting->fevicon_logo ?? 'fevicon_king-viking-logo-defoult.jpg';
         }
 
+        $page->title = $validated['title'];
+        $page->attributes = json_encode(
+            collect($sectionsInput)->map(fn($data, $name) => ['name' => $name, 'data' => $data])->values()
+        );
+        $page->seo_keywords = $validated['seo_keywords'] ?? null;
+        $page->seo_description = $validated['seo_description'] ?? null;
+        //$page->status = $request->has('switch_publish') ? 1 : 0;
 
-        if ($request->hasFile('file_input3')) {
-            $filePath = 'public/assets/frontend/img/banner/';
-            if ($setting->page_banner) {
-                $existingImagePath = $filePath . $setting->page_banner;
-                if (file_exists($existingImagePath)) {
-                    unlink($existingImagePath); // Delete the old image
-                }
-            }
-            $filePath = 'assets/frontend/img/banner/';
-            $file_input = $request->file('file_input3');
-            $filename = 'page_banner_' . time() . '.' . $file_input->getClientOriginalExtension();
+        $page->save();
 
-                //dd($request->file_input);
-            // Ensure the file is uploaded
-            if ($file_input->move(public_path($filePath), $filename)) {
-                $pageBannerPath = $filename;
-            } else {
-                $pageBannerPath = $setting->page_banner ?? 'page-bg-area-img.jpg';
-                //return redirect()->route('admin.pages')->with('error', 'Sorry, there was an error uploading your file.');
-            }
-        }else{
-            $pageBannerPath = $setting->page_banner ?? 'page-bg-area-img.jpg';
-        }
-
-
-        if ($request->hasFile('file_input4')) {
-            $filePath = 'public/assets/frontend/img/';
-            if ($setting->footer_logo) {
-                $existingImagePath = $filePath . $setting->footer_logo;
-                if (file_exists($existingImagePath)) {
-                    unlink($existingImagePath); // Delete the old image
-                }
-            }
-            $filePath = 'assets/frontend/img/';
-            $file_input = $request->file('file_input4');
-            $filename = 'footer_logo_' . time() . '.' . $file_input->getClientOriginalExtension();
-
-                //dd($request->file_input);
-            // Ensure the file is uploaded
-            if ($file_input->move(public_path($filePath), $filename)) {
-                $footerLogoPath = $filename;
-            } else {
-                $footerLogoPath = $setting->footer_logo ?? 'iwgc-footer-logo-new.png';
-                //return redirect()->route('admin.pages')->with('error', 'Sorry, there was an error uploading your file.');
-            }
-        }else{
-            $footerLogoPath = $setting->footer_logo ?? 'iwgc-footer-logo-new.png';
-        }
-
-        $mainLogo = $setting->main_logo ?? '';
-        $feviconLogo = $setting->fevicon_logo ?? '';
-        $footerLogo = $setting->footer_logo ?? '';
-        $pageBanner = $setting->page_banner ?? '';
-
-        $setting->update([
-            'website_name' => $request->website_name ?? '',
-            'website_title' => $request->website_title ?? '',
-            'main_logo' => $mainLogoPath ?? $mainLogo,
-            'footer_logo' => $footerLogoPath ?? $footerLogo,
-            'page_banner' => $pageBannerPath ?? $pageBanner,
-            'fevicon_logo' => $faviconLogo ?? $feviconLogo,
-            'contact_number' => $request->contact_number ?? '',
-            'email_address' => $request->email_address ?? '',
-            'address' => $request->address ?? '',
-            'google_map' => $request->google_map ?? '',
-            'social_facebook' => $request->social_facebook ?? '',
-            'social_linkedin' => $request->social_linkedin ?? '',
-            'social_youtube' => $request->social_youtube ?? '',
-            'social_instagram' => $request->social_instagram ?? '',
-            'special_offer' => $request->special_offer ?? '',
-            'footer_content' => $request->footer_content ?? '',
-            'seo_keywords' => $request->seo_keywords ?? '',
-            'seo_description' => $request->seo_description ?? '',
-            'status' => $request->has('switch_publish') && $request->switch_publish == 'on' ? 1 : 0,
-        ]);
-
-        return redirect()->route('admin.settings')->with('success', 'Settings updated successfully');
+        return redirect()->back()->with('success', 'Homepage updated successfully.');
     }
 }

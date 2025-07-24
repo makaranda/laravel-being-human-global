@@ -4,26 +4,41 @@
 
     <!-- banner-section -->
     <section class="banner-section">
-        <div class="banner-carousel owl-theme owl-carousel owl-dots-none">
-            @foreach ($main_slider as $slider)
-                <div class="slide-item">
-                    <div class="image-layer"
-                        style="background-image:url('{{ asset('public/assets/frontend/img/sliders/' . $slider->banner) }}')">
-                    </div>
-                    <div class="auto-container">
-                        <div class="content-box">
-                            <h3>{{ $slider->icon }}</h3>
-                            <h2>{{ $slider->heading }}</h2>
-                            <div class="btn-box">
-                                <a href="{{ $slider->link ?? route('frontend.home.products') }}"
-                                    class="theme-btn btn-one">Discover More</a>
+        @if ($settings['switch_slider'] == 1)
+            <div class="banner-carousel owl-theme owl-carousel owl-dots-none">
+                @foreach ($main_slider as $slider)
+                    <div class="slide-item">
+                        <div class="image-layer"
+                            style="background-image:url('{{ asset('public/assets/frontend/img/sliders/' . $slider->banner) }}')">
+                        </div>
+                        <div class="auto-container">
+                            <div class="content-box">
+                                <h3>{{ $slider->icon }}</h3>
+                                <h2>{{ $slider->heading }}</h2>
+                                <div class="btn-box">
+                                    <a href="{{ $slider->link ?? route('frontend.home.products') }}"
+                                        class="theme-btn btn-one">Discover More</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
+            </div>
+        @elseif($settings['switch_slider'] == 0)
+            @foreach ($main_slider as $slider)
+                @if($slider->switch == 0)
+                    <div class="item-flex-center vid-thumbnail relative p-0">
+                        <a href="{{ asset('public/assets/frontend/img/video/' . $slider->banner) }}" data-fslightbox>
+                            <video width="100%" autoplay muted playsinline loop class="item-flex-center width-100" id="video-source"
+                                src="{{ asset('public/assets/frontend/img/video/' . $slider->banner) }}">
+                            </video>
+                        </a>
+                    </div>
+                @endif
             @endforeach
-        </div>
+        @endif
     </section>
+
     <!-- banner-section end -->
 
 
@@ -396,7 +411,8 @@
     <section class="events-section sec-pad">
         <div class="bg-layer"></div>
         <div class="bg-image"
-            style="background-image: url({{ asset('public/assets/frontend/images/background/events-bg.jpg')}});"></div>
+            style="background-image: url({{ asset('public/assets/frontend/images/resource/' . $section5['data']['image'])}});">
+        </div>
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-12 col-sm-12 title-column">
@@ -599,7 +615,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <style>
-
+        .plyr__controls {
+            display: none !important;
+        }
     </style>
 @endpush
 @push('scripts')
@@ -641,6 +659,8 @@
                 }
             });
         });
+
+
     </script>
 
 @endpush

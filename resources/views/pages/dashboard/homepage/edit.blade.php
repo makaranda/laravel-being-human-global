@@ -1,247 +1,192 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
-    <form action="{{ route('admin.updatepage', $page->id) }}" id="formSubmit" method="POST" enctype="multipart/form-data">
-        @csrf <!-- CSRF token for security -->
-        @method('POST') <!-- Change from POST to PUT for updating -->
+    <div class="container mt-5">
+        <form action="{{ route('admin.updatehomepage', $page->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('POST')
 
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Page Content</div>
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-12 col-md-12">
-                                <label class="fw-bold">Add Title</label>
-                                <input type="text" class="form-control mt-3" placeholder="Add Title" name="title" id="title" value="{{ old('title', $page->title) }}">
-                                @error('title')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-12 col-md-12 mt-3">
-                                <label class="fw-bold">Short Description</label>
-                                <textarea rows="4" class="form-control mt-3" placeholder="Short Description" name="sub_description" id="sub_description">{{ old('sub_description', $page->sub_description) }}</textarea>
-                                @error('sub_description')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-12 col-md-12 mt-3">
-                                <label class="fw-bold">Description</label>
-                                <textarea rows="4" class="form-control mt-3" placeholder="Description" name="description" id="description">{{ old('description', $page->description) }}</textarea>
-                                @error('description')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+            {{-- General Settings --}}
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Page Information</div>
+                        <div class="card-body">
+                            <label>Title</label>
+                            <input type="text" name="title" class="form-control" value="{{ old('title', $page->title) }}">
                         </div>
                     </div>
                 </div>
-                @if ($page->slug == 'about-us')
-                    <div class="card mt-3">
-                        <div class="card-header">Upload Video</div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">Publish</div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12 mt-3">
+                            <input type="checkbox" name="switch_publish" id="switch_publish" {{ old('switch_publish', $page->status) ? 'checked' : '' }}>
+                            <label for="switch_publish">Publish this page</label>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary w-100">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                    @if(isset($page->video))
-                                        <label class="fw-bold w-100">Current Video</label>
-                                        <video controls class="pt-3" width="100%">
-                                            <source src="{{ url('public/assets/uploads/videos/'.$page->video) }}" type="video/mp4">
-                                            <source src="{{ url('public/assets/uploads/videos/'.$page->video) }}" type="video/webm">
-                                            Your browser does not support the video element.
-                                        </video>
-                                        <p class="text-danger"><span class="fw-bold">Existing File Name:</span> {{ $page->video }}</p>
-                                    @endif
+            {{-- Loop through sections --}}
+            @php
+                $sections = is_array($page->attributes) ? $page->attributes : json_decode($page->attributes ?? '[]', true);
+            @endphp
 
-                                    @error('fileup')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
 
-                                    <div class="center mt-3" id="browse_track_area">
-                                        <label class="fw-bold text-left w-100">Browse Video</label>
-                                        <div class="row mt-3">
-                                            <div class="col-md-12 center">
-                                                <div class="btn-container border">
-                                                    <!-- the three icons: default, ok file (video), error file (invalid) -->
-                                                    <h1 class="imgupload"><i class="fa fa-file-video-o"></i></h1>
-                                                    <h1 class="imgupload ok"><i class="fa fa-check"></i></h1>
-                                                    <h1 class="imgupload stop"><i class="fa fa-times"></i></h1>
+            @foreach($sections as $index => $section)
+                @php
+                    $secName = $section['name'];
+                    $data = $section['data'];
+                @endphp
 
-                                                    <!-- Display selected filename -->
-                                                    <p id="namefile">Only videos allowed! (.mp4, .mpeg, .webm)</p>
-
-                                                    <!-- Custom browse button -->
-                                                    <button type="button" id="btnup" class="btn btn-primary btn-lg">Browse for your Video!</button>
-
-                                                    <!-- Actual file input, hidden but functional -->
-                                                    <input type="file" name="fileup" id="fileup" accept=".mp4,.mpeg,.webm">
-                                                </div>
-                                            </div>
-                                        </div>
+                <div class="card mt-4">
+                    <div class="card-header">Section {{ $loop->iteration }} - {{ $secName }}</div>
+                    <div class="card-body">
+                        @if(!in_array($secName, ['section1', 'section6']))
+                            <div class="mb-3">
+                                <label class="fw-bold">Topic</label>
+                                <input type="text" class="form-control" name="sections[{{ $secName }}][topic]"
+                                    value="{{ old("sections.$secName.topic", $data['topic'] ?? '') }}">
+                            </div>
+                        @endif
+                        @if(!in_array($secName, ['section1', 'section6']))
+                            <div class="mb-3">
+                                <label class="fw-bold">Image</label>
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-md-12 mt-3">
+                                        <!-- Display image if it exists -->
+                                        @if($data['image'])
+                                            <img src="{{ asset('public/assets/frontend/images/resource/' . $data['image']) }}"
+                                                class="img-fluid" id="image_show{{ $secName }}" style="width:300px;" />
+                                            <p class="btn mb-0 w-100 text-left" id="img_description{{ $secName }}">Click the image to
+                                                edit or update</p>
+                                            <button type="button" class="btn btn-link text-danger" name="remove_image{{ $secName }}"
+                                                id="remove_image{{ $secName }}">Remove featured image</button>
+                                        @else
+                                            <p>No featured image uploaded yet.</p>
+                                        @endif
                                     </div>
 
+                                    <div class="col-12 col-md-12 mt-3">
+                                        <input type="file" name="file_input" id="file_input{{ $secName }}" accept="image/*"
+                                            class="d-none">
+                                        <button type="button" class="btn btn-link" name="feature_image{{ $secName }}"
+                                            id="feature_image{{ $secName }}">Set
+                                            featured image</button>
+                                        @error('feature_image')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
+                                <input type="hidden" class="form-control" name="old_sections[{{ $secName }}][image]"
+                                    value="{{ old("old_sections.$secName.image", $data['image'] ?? '') }}">
                             </div>
-                        </div>
-                    </div>
-                @endif
-                <div class="card mt-3">
-                    <div class="card-header">SEO Content</div>
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-12 col-md-12 mt-3">
-                                <label class="fw-bold">SEO Keywords <span class="text-danger">{10-15 highly relevant keywords}</span></label>
-                                <textarea rows="4" class="form-control mt-3" placeholder="SEO Keywords" name="seo_keywords" id="seo_keywords">{{ old('seo_keywords', $page->seo_keywords) }}</textarea>
-                                @error('seo_keywords')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
+                        @endif
+                        @if(!in_array($secName, ['section4', 'section5', 'section6', 'section7']))
+                            <div class="mb-3">
+                                <label class="fw-bold">Description</label>
+                                <textarea class="form-control" rows="4" id="description_{{ $secName }}"
+                                    name="description_{{ $secName }}">{{ old("description_" . $secName, $data['discription'] ?? '') }}</textarea>
                             </div>
+                        @endif
+                        @if(!in_array($secName, ['section1', 'section4', 'section5', 'section6', 'section7']))
+                            <div class="mb-3">
+                                <label class="fw-bold">Sub Description</label>
+                                <textarea class="form-control" rows="4" id="sub_description_{{ $secName }}"
+                                    name="sub_description_{{ $secName }}">{{ old("sections.$secName.sub_discription", $data['sub_discription'] ?? '') }}</textarea>
+                            </div>
+                        @endif
 
-                            <div class="col-12 col-md-12 mt-3">
-                                <label class="fw-bold">SEO Description <span class="text-danger">{150-160 characters}</span></label>
-                                <textarea rows="4" class="form-control mt-3" placeholder="SEO Description" name="seo_description" id="seo_description">{{ old('seo_description', $page->seo_description) }}</textarea>
-                                @error('seo_description')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        @if(isset($data['attribute']))
+                            <div class="row">
+                                @if(!in_array($secName, ['section1', 'section2', 'section4', 'section5', 'section6', 'section7']))
+                                    <div class="col-md-6">
+                                        <label>Price</label>
+                                        <input type="text" class="form-control" name="sections[{{ $secName }}][attribute][price]"
+                                            value="{{ old("sections.$secName.attribute.price", $data['attribute']['price'] ?? '') }}">
+                                    </div>
 
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">Publish</div>
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-12 col-md-12 mt-3">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" name="switch_publish" id="switch_publish" {{ old('switch_publish', $page->status) ? 'checked' : '' }}/>
-                                    <label class="form-check-label" for="switch_publish">Default switch to Publish Page</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="form-control btn btn-primary" type="submit" name="switch_submit" id="switch_submit">Update</button>
-                    </div>
-                </div>
+                                @endif
 
-                <div class="card mt-3">
-                    <div class="card-header">Page Attributes</div>
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-12 col-md-12 mt-3">
-                                <label class="fw-bold">Parent</label>
-                                <select class="form-select mt-3" placeholder="Select Parent" name="parent" id="parent">
-                                    <option value="">None</option>
-                                    @foreach ($pages as $parent)
-                                        <option value="{{ $parent->id }}" {{ old('parent', $page->parent_id) == $parent->id ? 'selected' : '' }}>{{ $parent->title }}</option>
-                                    @endforeach
-                                </select>
-                                @error('parent')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-12 col-md-12 mt-3">
-                                <label class="fw-bold">Order</label>
-                                <input type="number" class="form-control mt-3" max="100" min="0" placeholder="Order" value="{{ old('order', $page->order) }}" name="order" id="order">
-                                @error('order')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mt-3">
-                    <div class="card-header">Feature Image</div>
-                    <div class="card-body">
-                        <div class="row justify-content-center">
-                            <div class="col-12 col-md-12 mt-3">
-                                <!-- Display image if it exists -->
-                                @if($page->feature_image)
-                                    <img src="{{ asset('public/assets/uploads/pages/' . $page->feature_image) }}" class="img-fluid" id="image_show"/>
-                                    <p class="btn mb-0" id="img_description">Click the image to edit or update</p>
-                                    <button type="button" class="btn btn-link text-danger" name="remove_image" id="remove_image">Remove featured image</button>
-                                @else
-                                    <p>No featured image uploaded yet.</p>
+                                @if(!in_array($secName, ['section1', 'section6']))
+                                    <div class="col-md-6">
+                                        <label>Link</label>
+                                        <input type="text" class="form-control" name="sections[{{ $secName }}][attribute][link]"
+                                            value="{{ old("sections.$secName.attribute.link", $data['attribute']['link'] ?? '') }}">
+                                    </div>
                                 @endif
                             </div>
+                        @endif
 
-                            <div class="col-12 col-md-12 mt-3">
-                                <input type="file" name="file_input" id="file_input" accept="image/*" class="d-none">
-                                <button type="button" class="btn btn-link" name="feature_image" id="feature_image">Set featured image</button>
-                                @error('feature_image')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+                        @if(isset($data['list']) && is_array($data['list']) && count($data['list']) > 0)
+                            <label class="mt-3 fw-bold">List Items</label>
+                            @foreach($data['list'] as $i => $item)
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="sections[{{ $secName }}][list][{{ $i }}][title]"
+                                            value="{{ $item['title'] }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="sections[{{ $secName }}][list][{{ $i }}][content]"
+                                            value="{{ $item['content'] }}">
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+
+                        @if(isset($data['counts']) && is_array($data['counts']) && count($data['counts']) > 0)
+                            <label class="mt-3 fw-bold">Count Items</label>
+                            @foreach($data['counts'] as $i => $item)
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="sections[{{ $secName }}][counts][{{ $i }}][title]"
+                                            value="{{ $item['title'] }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" class="form-control"
+                                            name="sections[{{ $secName }}][counts][{{ $i }}][count]" value="{{ $item['count'] }}">
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+
+            {{-- SEO Section --}}
+            <div class="card mt-3">
+                <div class="card-header">SEO Content</div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-12 mt-3">
+                            <label class="fw-bold">SEO Keywords <span class="text-danger">{10-15 highly relevant
+                                    keywords}</span></label>
+                            <textarea rows="4" class="form-control mt-3" placeholder="SEO Keywords" name="seo_keywords"
+                                id="seo_keywords">{{ old('seo_keywords', $page->seo_keywords) }}</textarea>
+                            @error('seo_keywords')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-12 col-md-12 mt-3">
+                            <label class="fw-bold">SEO Description <span class="text-danger">{150-160
+                                    characters}</span></label>
+                            <textarea rows="4" class="form-control mt-3" placeholder="SEO Description"
+                                name="seo_description"
+                                id="seo_description">{{ old('seo_description', $page->seo_description) }}</textarea>
+                            @error('seo_description')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
-                
-                
-              <div class="card mt-3">
-                  <div class="card-header">Banner Image</div>
-                  <div class="card-body">
-                    <div class="row justify-content-center">
-                       <div class="col-12 col-md-12 mt-3">
-                            @if($page->banner_image)
-                                <img src="{{ asset('public/assets/frontend/img/banner/' . $page->banner_image) }}" class="img-fluid" id="image_show3"/>
-                                <p class="btn mb-0" id="img_description3">Click the image to edit or update</p>
-                                <button type="button" class="btn btn-link text-danger" name="remove_image3" id="remove_image3">Remove Banner image</button>
-                            @else
-                                <p>No Banner image uploaded yet.</p>
-                            @endif
-                       </div>
-                       <div class="col-12 col-md-12 mt-0">
-                          <input type="file" name="file_input3" id="file_input3" accept="image/*" class="d-none">
-                          <button type="button" class="btn btn-link" name="banner_image" id="banner_image">Set Banner image</button>
-                          @error('banner_image')
-                            <div class="text-danger">{{ $message }}</div>
-                          @enderror
-                       </div>
-                    </div>
-                  </div>
-               </div>
-               
-                @if ($page->slug == 'about-us')
-                    <div class="card mt-3">
-                        <div class="card-header">Video Thumbnail</div>
-                        <div class="card-body">
-                            <div class="row justify-content-center">
-                                <div class="col-12 col-md-12 mt-3">
-                                    <!-- Display image if it exists -->
-                                    @if($page->video_image)
-                                        <img src="{{ asset('public/assets/frontend/img/about/' . $page->video_image) }}" class="img-fluid" id="image_show2"/>
-                                        <p class="btn mb-0" id="img_description2">Click the image to edit or update</p>
-                                        <button type="button" class="btn btn-link text-danger" name="remove_image2" id="remove_image2">Remove Video image</button>
-                                    @else
-                                        <p>No Video image uploaded yet.</p>
-                                    @endif
-                                </div>
-
-                                <div class="col-12 col-md-12 mt-3">
-                                    <input type="file" name="file_input2" id="file_input2" accept="image/*" class="d-none">
-                                    <button type="button" class="btn btn-link" name="video_image" id="video_image">Set Video image</button>
-                                    @error('video_image')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
             </div>
-        </div>
-    </form>
-</div>
-
-
-
+        </form>
+    </div>
 @endsection
 
 @push('css')
@@ -251,137 +196,47 @@
 @endpush
 
 @push('scripts')
-<script>
-    CKEDITOR.replace('sub_description');
-    CKEDITOR.replace('description');
+    <script>
+        $(document).ready(function () {
+            @foreach($sections as $section)
+                @php $secName = $section['name']; @endphp
+                if ($('#description_{{ $secName }}').length) {
+                    console.log('description_{{ $secName }}');
+                    CKEDITOR.replace('description_{{ $secName }}');
+                }
+                if ($('#sub_description_{{ $secName }}').length) {
+                    CKEDITOR.replace('sub_description_{{ $secName }}');
+                }
+
+                $("#feature_image{{ $secName }}").click(function () {
+                    $("#file_input{{ $secName }}").click(); // Open file input dialog
+                });
+                // When user selects an image
+                $("#file_input{{ $secName }}").change(function (event) {
+                    let file = event.target.files[0];
+                    if (file) {
+                        let reader = new FileReader();
+                        reader.onload = function (e) {
+                            $("#image_show{{ $secName }}").attr("src", e.target.result).removeClass("d-none");
+                            $("#img_description{{ $secName }}, #remove_image{{ $secName }}").removeClass("d-none");
+                            $("#feature_image{{ $secName }}").addClass("d-none");
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
 
 
-    $(document).ready(function () {
-        // Click on "Set Featured Image"
-        $("#feature_image").click(function () {
-            $("#file_input").click(); // Open file input dialog
-        });
+                // Remove Image
+                $("#remove_image{{ $secName }}").click(function () {
+                    $("#image_show{{ $secName }}").attr("src", "").addClass("d-none");
+                    $("#img_description{{ $secName }}, #remove_image{{ $secName }}").addClass("d-none");
+                    $("#feature_image{{ $secName }}").removeClass("d-none");
+                    $("#file_input{{ $secName }}").val(""); // Clear file input
+                });
 
-        $("#video_image").click(function () {
-            $("#file_input2").click(); // Open file input dialog
-        });
+            @endforeach
+                                                                                                                                            });
 
-        $("#banner_image").click(function () {
-            $("#file_input3").click(); // Open file input dialog
-        });
-        
-        // When user selects an image
-        $("#file_input").change(function (event) {
-            let file = event.target.files[0];
-            if (file) {
-                let reader = new FileReader();
-                reader.onload = function (e) {
-                    $("#image_show").attr("src", e.target.result).removeClass("d-none");
-                    $("#img_description, #remove_image").removeClass("d-none");
-                    $("#feature_image").addClass("d-none");
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // When user selects an image
-        $("#file_input2").change(function (event) {
-            let file = event.target.files[0];
-            if (file) {
-                let reader = new FileReader();
-                reader.onload = function (e) {
-                    $("#image_show2").attr("src", e.target.result).removeClass("d-none");
-                    $("#img_description2, #remove_image2").removeClass("d-none");
-                    $("#video_image").addClass("d-none");
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // When user selects an image
-        $("#file_input3").change(function (event) {
-            let file3 = event.target.files[0];
-            if (file3) {
-                let reader3 = new FileReader();
-                reader3.onload = function (e) {
-                    $("#image_show3").attr("src", e.target.result).removeClass("d-none");
-                    $("#img_description3, #remove_image3").removeClass("d-none");
-                    $("#banner_image").addClass("d-none");
-                };
-                reader3.readAsDataURL(file3);
-            }
-        });
-
-        // Remove Image
-        $("#remove_image").click(function () {
-            $("#image_show").attr("src", "").addClass("d-none");
-            $("#img_description, #remove_image").addClass("d-none");
-            $("#feature_image").removeClass("d-none");
-            $("#file_input").val(""); // Clear file input
-        });
-
-        // Remove Image
-        $("#remove_image2").click(function () {
-            $("#image_show2").attr("src", "").addClass("d-none");
-            $("#img_description2, #remove_image2").addClass("d-none");
-            $("#video_image").removeClass("d-none");
-            $("#file_input2").val(""); // Clear file input
-        });
-        
-        // Remove Image
-        $("#remove_image3").click(function () {
-            $("#image_show3").attr("src", "").addClass("d-none");
-            $("#img_description3, #remove_image3").addClass("d-none");
-            $("#banner_image").removeClass("d-none");
-            $("#file_input3").val(""); // Clear file input
-        });
-
-    });
     </script>
-
-<script>
-    $(document).ready(function () {
-        //console.log('File changed');
-        $('#fileup').change(function () {
-            // Get the file extension and check if it's valid
-            console.log('File changed');
-            var res = $('#fileup').val();
-            var arr = res.split("\\");
-            var filename = arr.slice(-1)[0];
-            var fileExtension = filename.split(".");
-            var fileExt = "." + fileExtension.slice(-1)[0];
-            var validExtensions = [".mp4", ".mpeg", ".webm"];
-
-            if (validExtensions.indexOf(fileExt.toLowerCase()) === -1) {
-                // Show error icons and hide submit button if the file is invalid
-                $(".imgupload").hide("slow");
-                $(".imgupload.ok").hide("slow");
-                $(".imgupload.stop").show("slow");
-
-                $('#namefile').css({ "color": "red", "font-weight": 700 });
-                $('#namefile').html("File " + filename + " is not a valid image!");
-
-                $("#submitbtn").hide();
-                $("#fakebtn").show();
-            } else {
-                // Show success icons and enable submit button if the file is valid
-                $(".imgupload").hide("slow");
-                $(".imgupload.stop").hide("slow");
-                $(".imgupload.ok").show("slow");
-
-                $('#namefile').css({ "color": "green", "font-weight": 700 });
-                $('#namefile').html(filename);
-
-                $("#submitbtn").show();
-                $("#fakebtn").hide();
-            }
-        });
-
-        // Trigger file input click on custom button click
-        $('#btnup').click(function () {
-            $('#fileup').click();
-        });
-    });
-
-</script>
+    </>
 @endpush
