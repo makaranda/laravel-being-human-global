@@ -35,6 +35,7 @@ use App\Http\Controllers\admin\HomeSectionPartnersController;
 use App\Http\Controllers\admin\HomeSectionAccordingController;
 use App\Http\Controllers\admin\CKEditorController;
 use App\Http\Controllers\admin\UploadsController;
+use App\Http\Controllers\admin\CssController;
 
 
 use Illuminate\Support\Facades\Artisan;
@@ -139,8 +140,8 @@ Route::prefix('/careers')->group(function () {
 
 //Route::get('/blogs-article', [HomeController::class, 'showArticles'])->name('frontend.blogs.article');
 //Route::get('/news-events', [HomeController::class, 'showNews'])->name('frontend.news.events');
-    //Route::get('/blogs-article/{slug}', [HomeController::class, 'viewArticle'])->name('frontend.blogs.article.view');
-    //Route::get('/news-events/{slug}', [HomeController::class, 'viewNews'])->name('frontend.news.events.view');
+//Route::get('/blogs-article/{slug}', [HomeController::class, 'viewArticle'])->name('frontend.blogs.article.view');
+//Route::get('/news-events/{slug}', [HomeController::class, 'viewNews'])->name('frontend.news.events.view');
 
 // Optional: For individual blog display
 // Route::prefix('programmes')->group(function () {
@@ -286,7 +287,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::delete('/delete/{id}', [UserCoCustomersControllerntroller::class, 'delete'])->name('admin.deletecustomer');  // Delete user
             Route::get('/add', [CustomersController::class, 'add'])->name('admin.addcustomer');  // Add user form
             Route::post('/update/{id}', [CustomersController::class, 'update'])->name('admin.updatecustomer');
-            Route::post('/save', [CustomersController::class, 'save'])->name('admin.savecustomer');Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+            Route::post('/save', [CustomersController::class, 'save'])->name('admin.savecustomer');
+            Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
         });
 
         // Blogs routes
@@ -362,6 +364,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/', [SettingController::class, 'edit'])->name('admin.settings'); // Show settings form
             Route::put('/update/{id}', [SettingController::class, 'update'])->name('admin.updatesettings'); // Update settings
         });
+
+        // CSS File Editor routes
+        Route::prefix('css')->group(function () {
+            Route::get('/css-style-editor', [CssController::class, 'editCssStyle'])->name('admin.cssstyle.edit');
+            Route::post('/css-style-editor', [CssController::class, 'updateCssStyle'])->name('admin.cssstyle.update');
+
+            Route::get('/css-responsive-style-editor', [CssController::class, 'editCssResponsiveStyle'])->name('admin.cssresponsivestyle.edit');
+            Route::post('/css-responsive-style-editor', [CssController::class, 'updateCssResponsiveStyle'])->name('admin.cssresponsivestyle.update');
+        });
+
         // Gallery Home routes
         Route::prefix('gallery-home')->group(function () {
             Route::get('/', [GalleryHomeController::class, 'index'])->name('admin.galleryhome');
@@ -401,7 +413,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 // Cache Clear routes
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
     Artisan::call('route:clear');
@@ -411,7 +423,7 @@ Route::get('/clear-cache', function() {
 });
 
 // Database Migrate route
-Route::get('/artisan-migrate', function() {
+Route::get('/artisan-migrate', function () {
     Artisan::call('migrate');
 
     return "Database migrated successfully!";

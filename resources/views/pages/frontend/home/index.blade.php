@@ -104,7 +104,7 @@
                             <div class="text">
                                 <h4>Help us to protect wildlife around the world.</h4>
                                 <div>{!! $section2['data']['discription'] ?? '' !!}</div>
-                                <div>
+                                <div class="section_area">
                                     {!! $section2['data']['sub_discription'] ?? '' !!}
                                 </div>
                             </div>

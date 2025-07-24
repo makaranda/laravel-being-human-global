@@ -416,6 +416,33 @@
                     </ul>
                 </li>
 
+                <li
+                    class="nav-item {{ request()->routeIs('admin.cssstyle.edit', 'admin.cssresponsivestyle.edit') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-image"></i>
+                        <p>
+                            CSS Editor
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.cssstyle.edit') }}"
+                                class="nav-link {{ request()->routeIs('admin.cssstyle.edit') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Style CSS</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.cssresponsivestyle.edit') }}"
+                                class="nav-link {{ request()->routeIs('admin.cssresponsivestyle.edit') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Responsive CSS</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
 
                 <li class="nav-item logout-btn-item logout_btn">
                     <a href="#" class="nav-link logout-btn">
