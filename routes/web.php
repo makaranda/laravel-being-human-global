@@ -138,6 +138,11 @@ Route::prefix('/careers')->group(function () {
     Route::get('/{slug}', [HomeController::class, 'viewCareer'])->name('frontend.careers.singleview');
 });
 
+// Donation Routes
+Route::prefix('/donation')->group(function () {
+    Route::get('/', [HomeController::class, 'showDonation'])->name('frontend.home.donation');
+    Route::post('/donation-submit', [HomeController::class, 'submitDonation'])->name('frontend.home.submitdonation');
+});
 //Route::get('/blogs-article', [HomeController::class, 'showArticles'])->name('frontend.blogs.article');
 //Route::get('/news-events', [HomeController::class, 'showNews'])->name('frontend.news.events');
 //Route::get('/blogs-article/{slug}', [HomeController::class, 'viewArticle'])->name('frontend.blogs.article.view');

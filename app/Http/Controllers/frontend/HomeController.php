@@ -88,8 +88,14 @@ class HomeController extends Controller
         // if (!empty($admin->role) && $admin->role > 0) {
         //     return redirect()->route('admin.dashboard');
         // } else {
-        return view('pages.frontend.home.index', compact('gallery_home', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6','section7'));
+        return view('pages.frontend.home.index', compact('gallery_home', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7'));
         //}
+    }
+
+    public function showDonation()
+    {
+        $settings = Setting::first();
+        return view('pages.frontend.donation.index', compact('settings'));
     }
 
     public function construction()

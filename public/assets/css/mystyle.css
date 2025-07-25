@@ -142,3 +142,12 @@
     position: relative;
     padding: 100px 0px 100px 0px;
 }
+
+.mobile-menu .navigation li.current {
+    background: #007a6c;
+}
+
+.mobile-menu .close-btn {
+    right: 6px;
+    top: 2px;
+}
