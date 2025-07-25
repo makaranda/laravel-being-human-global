@@ -95,7 +95,8 @@ class HomeController extends Controller
     public function showDonation()
     {
         $settings = Setting::first();
-        return view('pages.frontend.donation.index', compact('settings'));
+        $countries = Country::where('status',1)->get();
+        return view('pages.frontend.donation.index', compact('settings','countries'));
     }
 
     public function construction()
