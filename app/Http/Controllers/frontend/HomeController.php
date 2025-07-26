@@ -57,7 +57,7 @@ class HomeController extends Controller
     {
         VisitorHelper::updateVisitorCount();
 
-        $main_slider = MainSlider::where('status', 1)->get(); // Assuming there's only one main slider
+        $main_slider = MainSlider::where('status', 1)->where('switch', 1)->get(); // Assuming there's only one main slider
         $music_tracks = MusicTrack::where('status', 1)->where('type', 'audio')->orderBy('order', 'asc')->orderBy('created_at', 'desc')->take(7)->get();
         $banner_music_tracks = MusicTrack::where('status', 1)->where('type', 'audio')->where('order', 0)->first();
         $music_beats = MusicTrack::where('status', 1)->where('type', 'beat')->orderBy('order', 'asc')->orderBy('created_at', 'desc')->take(7)->get();

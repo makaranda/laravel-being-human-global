@@ -1,3 +1,6 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="{{ url('public/assets/frontend/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ url('public/assets/frontend/css/aos.min.css') }}">
@@ -38,5 +41,5 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 
 <!-- Custome Codes -->
-<link rel="stylesheet" href="{{ url('public/assets/css/mystyle.css?v='.time().'') }}">
-<link rel="stylesheet" href="{{ url('public/assets/css/myresponsive.css?v='.time().'') }}">
+<link rel="stylesheet" href="{{ url('public/assets/css/mystyle.css?v=' . time() . '') }}">
+<link rel="stylesheet" href="{{ url('public/assets/css/myresponsive.css?v=' . time() . '') }}">

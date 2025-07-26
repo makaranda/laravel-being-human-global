@@ -16,7 +16,7 @@
                                 <h3>{{ $slider->icon }}</h3>
                                 <h2>{{ $slider->heading }}</h2>
                                 <div class="btn-box">
-                                    <a href="{{ $slider->link ?? route('frontend.home.products') }}"
+                                    <a href="{{ $slider->link ?? route('frontend.home.donation') }}"
                                         class="theme-btn btn-one">Discover More</a>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
     <!-- info-section -->
     <section class="info-section">
         <div class="bg-layer"></div>
-        <span class="rotate-text">wild animal zoo</span>
+        {{-- <span class="rotate-text">Being Human Global</span> --}}
         <div class="auto-container">
             <div class="inner-container">
                 <div class="row clearfix">
@@ -53,7 +53,9 @@
                         <div class="single-item">
                             <div class="icon-box"><i class="flaticon-ticket"></i></div>
                             {{-- <h5><a href="{{ route('home.index') }}">Buy Tickets</a></h5> --}}
-                            <p>{!! $section1['data']['discription'] ?? '' !!}</p>
+                            <div class="font-family-1">{!! $section1['data']['discription'] ?? '' !!}</div>
+                            <div class="font-family-1">{!! $section1['data']['sub_discription'] ?? '' !!}</div>
+                            <!-- ❝ ❞ -->
                         </div>
                     </div>
                     {{-- <div class="col-lg-4 col-md-6 col-sm-12 single-column">
@@ -266,12 +268,12 @@
 
 
     <!-- clients-section -->
-    <section class="clients-section">
+    {{-- <section class="clients-section">
         <div class="img-wrap parallax-demo-1">
             <div class="parallax-inner back-img"
                 style="background-image: url({{ asset('public/assets/frontend/images/background/clients-bg.jpg')}});"></div>
         </div>
-        <div class="auto-container">
+        <div class="auto-container"> --}}
             {{-- <div class="five-item-carousel owl-carousel owl-theme owl-nav-none owl-dots-none">
                 <figure class="clients-logo"><a href="{{ route('home.index') }}"><img
                             src="{{ asset('public/assets/frontend/images/clients/clients-1.png')}}"
@@ -289,13 +291,13 @@
                             src="{{ asset('public/assets/frontend/images/clients/clients-5.png')}}"
                             alt="{{ $settings['website_name'] }}"></a></figure>
             </div> --}}
-        </div>
-    </section>
+            {{-- </div>
+    </section> --}}
     <!-- clients-section end -->
 
 
     <!-- adventure-section -->
-    <section class="adventure-section">
+    {{-- <section class="adventure-section">
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-12 col-sm-12 content-column">
@@ -306,13 +308,13 @@
                             </div>
                             <div class="inner-box">
                                 @if (count($section4['data']['list']))
-                                    @foreach ($section4['data']['list'] as $item)
-                                        <div class="single-item">
-                                            <div class="icon-box"><i class="flaticon-tick"></i></div>
-                                            <h4>{{ $item['title'] }}</h4>
-                                            <p>{{ $item['content'] }}</p>
-                                        </div>
-                                    @endforeach
+                                @foreach ($section4['data']['list'] as $item)
+                                <div class="single-item">
+                                    <div class="icon-box"><i class="flaticon-tick"></i></div>
+                                    <h4>{{ $item['title'] }}</h4>
+                                    <p>{{ $item['content'] }}</p>
+                                </div>
+                                @endforeach
                                 @endif
                             </div>
                         </div>
@@ -334,7 +336,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- adventure-section end -->
 
 
@@ -594,7 +596,8 @@
         <div class="auto-container">
             <div class="inner-box clearfix">
                 <div class="pattern-layer"
-                    style="background-image: url({{ asset('public/assets/frontend/images/shape/shape-3.png')}});"></div>
+                    style="background-image: url({{ asset('public/assets/frontend/images/shape/shape-green-03.png')}});">
+                </div>
                 <figure class="image-layer"><img
                         src="{{ asset('public/assets/frontend/images/resource/' . $section7['data']['image'])}}"
                         alt="{{ $settings['website_name'] }}"></figure>
