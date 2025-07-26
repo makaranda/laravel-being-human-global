@@ -32,10 +32,10 @@
                         </div>
                         <div class="widget-content">
                             <ul class="links-list clearfix">
-                                <li><a href="{{ route('home.index') }}">About Us</a></li>
-                                <li><a href="{{ route('home.index') }}">Book Tickets</a></li>
-                                <li><a href="{{ route('home.index') }}">Meet the Animals</a></li>
-                                <li><a href="{{ route('home.index') }}">Our Gallery</a></li>
+                                <li><a href="{{ route('frontend.about') }}">About Us</a></li>
+                                <li><a href="{{ route('frontend.home.donation') }}">Donation</a></li>
+                                <li><a href="{{ route('frontend.home.blogs') }}">Blogs</a></li>
+                                <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -72,7 +72,8 @@
                                 @foreach (['footer-1.jpg', 'footer-2.jpg', 'footer-3.jpg'] as $image)
                                     <li>
                                         <figure class="image">
-                                            <img src="{{ asset('public/assets/frontend/images/resource/' . $image) }}" alt="">
+                                            <img src="{{ asset('public/assets/frontend/images/resource/' . $image) }}"
+                                                alt="">
                                             <a href="{{ asset('public/assets/frontend/images/resource/' . $image) }}"
                                                 class="lightbox-image" data-fancybox="gallery">
                                                 <i class="flaticon-plus-symbol"></i>
