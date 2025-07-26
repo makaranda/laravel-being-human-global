@@ -134,7 +134,7 @@
                 <div class="col-lg-8 col-md-12 col-sm-12 inner-column">
                     <div class="inner-box">
                         <div class="sec-title">
-                            <h2>Why You should choose our Foundation?</h2>
+                            <h2>Animal Conservation In Africa & Asia</h2>
                         </div>
                         <div class="row clearfix">
                             <div class="col-lg-6 col-md-6 col-sm-12 text-column">
@@ -181,86 +181,32 @@
     <section class="gallery-section">
         <div class="auto-container">
             <div class="sec-title centred">
-                <h2>Beautifull Animals <br />in the Sri Lanka</h2>
+                <h2>Beautifull Animals <br />in the World</h2>
             </div>
         </div>
         <div class="outer-container">
             <div class="gallery-carousel owl-carousel owl-theme owl-dots-none owl-nav-none">
-                <div class="gallery-block-one">
-                    <div class="inner-box">
-                        <figure class="image-box"><img
-                                src="{{ asset('public/assets/frontend/images/gallery/gallery-1.jpg')}}"
-                                alt="{{ $settings['website_name'] }}"></figure>
-                        <div class="content-box">
-                            <h3><a href="deer.html">deer</a></h3>
+                @if ($animals_details)
+                    @foreach ($animals_details as $animal)
+                        <div class="gallery-block-one">
+                            <div class="inner-box">
+                                <figure class="image-box"><img
+                                        src="{{ asset('public/assets/frontend/images/animals/' . $animal->feature_image)}}"
+                                        alt="{{ $settings['website_name'] }}"></figure>
+                                <div class="content-box">
+                                    <h3><a href="#">{{ $animal->title }}</a></h3>
+                                </div>
+                                <div class="overlay-content">
+                                    <h3><a href="#">{{ $animal->title }}</a></h3>
+                                    <div>{!! $animal->description !!}</div>
+                                    <div class="link"><a href="#"><i class="flaticon-right-arrow"></i></a></div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="overlay-content">
-                            <h3><a href="deer.html">deer</a></h3>
-                            <p>There are many type of <br />variations pass not available</p>
-                            <div class="link"><a href="deer.html"><i class="flaticon-right-arrow"></i></a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-block-one">
-                    <div class="inner-box">
-                        <figure class="image-box"><img
-                                src="{{ asset('public/assets/frontend/images/gallery/gallery-2.jpg')}}"
-                                alt="{{ $settings['website_name'] }}"></figure>
-                        <div class="content-box">
-                            <h3><a href="wolf.html">Fox</a></h3>
-                        </div>
-                        <div class="overlay-content">
-                            <h3><a href="wolf.html">Fox</a></h3>
-                            <p>There are many type of <br />variations pass not available</p>
-                            <div class="link"><a href="wolf.html"><i class="flaticon-right-arrow"></i></a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-block-one">
-                    <div class="inner-box">
-                        <figure class="image-box"><img
-                                src="{{ asset('public/assets/frontend/images/gallery/gallery-3.jpg')}}"
-                                alt="{{ $settings['website_name'] }}"></figure>
-                        <div class="content-box">
-                            <h3><a href="elephant.html">elephant</a></h3>
-                        </div>
-                        <div class="overlay-content">
-                            <h3><a href="elephant.html">elephant</a></h3>
-                            <p>There are many type of <br />variations pass not available</p>
-                            <div class="link"><a href="elephant.html"><i class="flaticon-right-arrow"></i></a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-block-one">
-                    <div class="inner-box">
-                        <figure class="image-box"><img
-                                src="{{ asset('public/assets/frontend/images/gallery/gallery-4.jpg')}}"
-                                alt="{{ $settings['website_name'] }}"></figure>
-                        <div class="content-box">
-                            <h3><a href="girrafe.html">leopard</a></h3>
-                        </div>
-                        <div class="overlay-content">
-                            <h3><a href="girrafe.html">leopard</a></h3>
-                            <p>There are many type of <br />variations pass not available</p>
-                            <div class="link"><a href="girrafe.html"><i class="flaticon-right-arrow"></i></a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-block-one">
-                    <div class="inner-box">
-                        <figure class="image-box"><img
-                                src="{{ asset('public/assets/frontend/images/gallery/gallery-5.jpg')}}"
-                                alt="{{ $settings['website_name'] }}"></figure>
-                        <div class="content-box">
-                            <h3><a href="monkey.html">monkey</a></h3>
-                        </div>
-                        <div class="overlay-content">
-                            <h3><a href="monkey.html">monkey</a></h3>
-                            <p>There are many type of <br />variations pass not available</p>
-                            <div class="link"><a href="monkey.html"><i class="flaticon-right-arrow"></i></a></div>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
+
+
             </div>
         </div>
     </section>
@@ -344,7 +290,7 @@
     <section class="testimonial-section centred sec-pad">
         <div class="auto-container">
             <div class="sec-title centred">
-                <h2>What they’re <br />saying?</h2>
+                <h2>Testimonials</h2>
             </div>
             <div class="three-item-carousel owl-carousel owl-theme owl-dots-none owl-nav-none">
                 <div class="testimonil-block-one">
@@ -602,10 +548,11 @@
                         src="{{ asset('public/assets/frontend/images/resource/' . $section7['data']['image'])}}"
                         alt="{{ $settings['website_name'] }}"></figure>
                 <div class="text pull-left">
-                    <h2>The animals in <br />Sri Lanka</h2>
+                    <h2>The animals in <br />World</h2>
                 </div>
+                {{-- {{ $section7['data']['attribute']['link'] }} --}}
                 <div class="btn-box pull-right">
-                    <a href="{{ $section7['data']['attribute']['link'] }}" class="theme-btn btn-one">discover more</a>
+                    <a href="{{ route('frontend.about') }}" class="theme-btn btn-one">discover more</a>
                 </div>
             </div>
         </div>

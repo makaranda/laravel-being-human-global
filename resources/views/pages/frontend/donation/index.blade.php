@@ -19,7 +19,7 @@
     </div>
 
 
-    <div class="container mt-4 mb-4" style="background-color:#fff;box-shadow: 0px 0px 10px 2px #00000040;">
+    <div class="container mt-24 mb-24" style="background-color:#fff;box-shadow: 0px 0px 10px 2px #00000040;">
         <div class="row">
             <div id="check_data" class="col-md-12">
             </div>
@@ -154,7 +154,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-12 mt-3">
+                                <div class="col-12 col-md-12 mt-13">
                                     <h3>Billing Information</h3>
                                 </div>
                                 <div class="col-12 col-md-12">
@@ -217,10 +217,11 @@
                                         data-callback="onLoginCaptchaSubmit"
                                         style="display: flex; align-items: center; justify-content: center;"></div>
                                 </div>
-                                <div class="col-12 col-md-12 mt-3">
+                                <div class="col-12 col-md-12 mt-13">
                                     <div class="form-group">
                                         <div class="col-md-12 text-center">
-                                            <button id="submit" name="pay_now" class="btn btn-danger donate_now_btn"
+                                            <button id="submit" name="pay_now"
+                                                class="btn btn-danger donate_now_btn w-100 rounded-0 text-uppercase fw-600"
                                                 style="cursor: not-allowed;" disabled>Donate Now</button>
                                         </div>
                                     </div>
@@ -277,9 +278,11 @@
 @push('css')
     <link rel="stylesheet" href="{{ url('public/assets/frontend/css/parsley.css') }}">
     <link rel="stylesheet" href="{{ url('public/assets/frontend/css/jquery-confirm.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <style>
         .main_payment_type.active {
-            background-color: #311be4 !important;
+            background-color: #663309 !important;
         }
 
         .main_payment_type {
@@ -307,20 +310,20 @@
 
         .amount_button_label {
             background-color: #ffffffa6;
-            color: #3f00e3;
+            color: #005047;
             justify-content: center;
             text-align: center;
-            border: 1px solid #3f00e3;
+            border: 1px solid #005047;
         }
 
         .amount_button_label:hover {
-            background-color: #3f00e3d1 !important;
+            background-color: #005047 !important;
             cursor: pointer;
             color: #fff;
         }
 
         .amount_button_label.active {
-            background-color: #311be4 !important;
+            background-color: #663309 !important;
             color: #fff;
         }
 
@@ -330,21 +333,21 @@
         }
 
         h3 {
-            color: #2a0097;
+            color: #007a6c;
             text-transform: capitalize;
             text-shadow: 3px -1px 3px #00000052 !important;
         }
 
         .btn-secondary {
-            color: #311be4;
+            color: #005047;
             background-color: #ffffffa6;
-            border-color: #311be4;
+            border-color: #005047;
         }
 
         .btn-secondary:hover {
             color: #fff;
-            background-color: #3f00e3d1;
-            border-color: #3f00e3d1;
+            background-color: #005047;
+            border-color: #005047;
         }
 
         #toTop {
@@ -357,7 +360,7 @@
             z-index: 999999;
             width: 50px;
             height: 50px;
-            background-color: #4300e4;
+            background-color: #015047;
             border-radius: 50px;
             box-shadow: 0px 0px 3px 4px #00000052;
         }
@@ -456,7 +459,7 @@
             height: 16px;
             top: 12px;
             left: 15px;
-            background: #6f1ccb;
+            background: #015047;
             border-radius: 50%;
             -webkit-transform: translateX(0);
             transform: translateX(0);
@@ -547,17 +550,41 @@
                 margin-right: 10px;
             }
         }
+
+        .boxed_wrapper {
+            background-color: #e2f6ff;
+        }
+
+        .select2-container .select2-selection {
+            /* padding: 10px; */
+            height: 38px;
+            border: 1px solid #ced4da;
+        }
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            padding-top: 5px;
+            /* padding-bottom: 10px; */
+        }
     </style>
 @endpush
 
 @push('scripts')
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ url('public/assets/frontend/js/jquery.redirect.js') }}"></script>
     <script src="{{ url('public/assets/frontend/js/parsley.js') }}"></script>
     <script src="{{ url('public/assets/frontend/js/jquery-confirm.js') }}"></script>
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $('#info_title').select2({
+            selectOnClose: true
+        });
+        $('#billing_info_country').select2({
+            selectOnClose: true
+        });
+    </script>
     <script>
         // Optimized & modernized donation JavaScript with SweetAlert
         $(window).on('load', () => {

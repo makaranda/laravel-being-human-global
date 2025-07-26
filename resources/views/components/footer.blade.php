@@ -65,23 +65,26 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
                     <div class="footer-widget gallery-widget">
                         <div class="widget-title">
-                            <h5>Gallery</h5>
+                            <h5>Who we Are??</h5>
                         </div>
                         <div class="widget-content">
-                            <ul class="image-list clearfix">
+                            <div>
+                                {!! $settings['footer_content'] !!}
+                            </div>
+                            {{-- <ul class="image-list clearfix">
                                 @foreach (['footer-1.jpg', 'footer-2.jpg', 'footer-3.jpg'] as $image)
-                                    <li>
-                                        <figure class="image">
-                                            <img src="{{ asset('public/assets/frontend/images/resource/' . $image) }}"
-                                                alt="">
-                                            <a href="{{ asset('public/assets/frontend/images/resource/' . $image) }}"
-                                                class="lightbox-image" data-fancybox="gallery">
-                                                <i class="flaticon-plus-symbol"></i>
-                                            </a>
-                                        </figure>
-                                    </li>
+                                <li>
+                                    <figure class="image">
+                                        <img src="{{ asset('public/assets/frontend/images/resource/' . $image) }}"
+                                            alt="">
+                                        <a href="{{ asset('public/assets/frontend/images/resource/' . $image) }}"
+                                            class="lightbox-image" data-fancybox="gallery">
+                                            <i class="flaticon-plus-symbol"></i>
+                                        </a>
+                                    </figure>
+                                </li>
                                 @endforeach
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                 </div>
