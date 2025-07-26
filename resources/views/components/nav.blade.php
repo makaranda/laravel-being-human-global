@@ -100,6 +100,26 @@
                         n
                     </span>
                 </div>
+                <div class="txt-loading">
+                    <span data-text-preloader="G" class="letters-loading">
+                        G
+                    </span>
+                    <span data-text-preloader="l" class="letters-loading">
+                        l
+                    </span>
+                    <span data-text-preloader="o" class="letters-loading">
+                        o
+                    </span>
+                    <span data-text-preloader="b" class="letters-loading">
+                        b
+                    </span>
+                    <span data-text-preloader="a" class="letters-loading">
+                        a
+                    </span>
+                    <span data-text-preloader="l" class="letters-loading">
+                        l
+                    </span>
+                </div>
             </div>
         </div>
     </div>
@@ -131,11 +151,11 @@
                     @if($settings['social_instagram'])
                     <li><a href="{{ $settings['social_instagram'] }}"><i class="fab fa-instagram"></i></a></li>@endif
                 </ul>
-                <ul class="other-links clearfix">
+                {{-- <ul class="other-links clearfix">
                     <li><a href="{{ route('frontend.userlogin') }}">Membership</a></li>
                     <li><a href="{{ route('frontend.home.events') }}">Events</a></li>
                     <li><a href="{{ url('zoo-map') }}">Zoo Map</a></li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
     </div>
@@ -251,7 +271,7 @@
                     <span>Have Questions?</span>
                     <h6><a href="tel:{{ $settings['contact_number'] }}">{{ $settings['contact_number'] }}</a></h6>
                 </div>
-                <div class="search-box-outer">
+                {{-- <div class="search-box-outer">
                     <div class="dropdown">
                         <button class="search-box-btn" type="button" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"><i class="flaticon-magnifying-glass"></i></button>
@@ -267,7 +287,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

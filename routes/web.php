@@ -15,6 +15,7 @@ use App\Http\Controllers\admin\CustomersController;
 use App\Http\Controllers\admin\MusicTracksController;
 use App\Http\Controllers\admin\MainSliderController;
 use App\Http\Controllers\admin\PagesController;
+use App\Http\Controllers\admin\AnimalsController;
 use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\ProductGalleryController;
@@ -257,6 +258,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/edit/{id}', [PagesController::class, 'edit'])->name('admin.editpage');
             Route::post('/update/{id}', [PagesController::class, 'update'])->name('admin.updatepage');
             Route::delete('/delete/{id}', [PagesController::class, 'delete'])->name('admin.deletepage');
+            Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+        });
+
+        // Animals routes
+        Route::prefix('animals')->group(function () {
+            Route::get('/', [AnimalsController::class, 'index'])->name('admin.animals');
+            Route::get('/create', [AnimalsController::class, 'create'])->name('admin.createanimal');
+            Route::post('/store', [AnimalsController::class, 'store'])->name('admin.storeanimal');
+            Route::get('/edit/{id}', [AnimalsController::class, 'edit'])->name('admin.editanimal');
+            Route::post('/update/{id}', [AnimalsController::class, 'update'])->name('admin.updateanimal');
+            Route::delete('/delete/{id}', [AnimalsController::class, 'delete'])->name('admin.deleteanimal');
             Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
         });
 

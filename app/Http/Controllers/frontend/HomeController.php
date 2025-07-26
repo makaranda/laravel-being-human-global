@@ -95,8 +95,8 @@ class HomeController extends Controller
     public function showDonation()
     {
         $settings = Setting::first();
-        $countries = Country::where('status',1)->get();
-        return view('pages.frontend.donation.index', compact('settings','countries'));
+        $countries = Country::where('status', 1)->get();
+        return view('pages.frontend.donation.index', compact('settings', 'countries'));
     }
 
     public function construction()
@@ -117,8 +117,8 @@ class HomeController extends Controller
     {
         VisitorHelper::updateVisitorCount();
         $about_info = Page::where('slug', 'Like', 'about-us')->first();
-
-        return view('pages.frontend.about.index', compact('about_info')); // Make sure this view exists
+        $settings = Setting::first();
+        return view('pages.frontend.about.index', compact('about_info', 'settings')); // Make sure this view exists
     }
 
     public function enroll()
@@ -346,6 +346,14 @@ class HomeController extends Controller
         }
 
         return back()->with('success', 'Your message has been sent successfully.');
+    }
+
+    public function showAnimals($slug)
+    {
+        $animal_page = Page::where('type', 'animal')->where('slug', 'like', '%' . $slug . '%')->first();
+        $settings = Setting::first();
+
+        return view('pages.frontend.animals.index', compact('careers', 'settings', 'career_page'));
     }
 
     public function showCareers()

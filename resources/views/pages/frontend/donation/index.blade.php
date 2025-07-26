@@ -38,7 +38,7 @@
                                     <img src="{{ url('public/assets/frontend/images/banner/donation_banner_img.jpg') }}"
                                         class="img-fluid" style="" />
                                 </div>
-                                <div class="col-12 col-md-12 text-center mt-3">
+                                <div class="col-12 col-md-12 text-center mt-15">
                                     <h3>YOUR DONATION DOUBLED!</h3>
                                 </div>
                                 <div class="col-12 col-md-12 text-justify pt-2 pb-2">
@@ -92,6 +92,19 @@
                                     </div>
                                 </div>
 
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-md-12 mt-3 text-justify">
+                                    <p class="text-gray">Protect Wildlife, Preserve the Future!
+                                        Your donation helps us safeguard endangered species and restore vital ecosystems. By
+                                        contributing to our conservation fund, you support on-the-ground efforts like
+                                        habitat restoration, anti-poaching initiatives, and community-led conservation
+                                        programs that ensure a thriving planet for generations to come. Be a voice for the
+                                        voiceless — donate today and make a lasting impact.</p>
+                                    <p class="text-gray">Your privacy matters. [Wildlife Organization Name] is committed to
+                                        protecting your personal information. For details, please read our <a
+                                            href="">Privacy Policy</a>.Charitable Registration Number: 12345678910</p>
+                                </div>
                             </div>
 
                         </div>
@@ -211,17 +224,6 @@
                                                 style="cursor: not-allowed;" disabled>Donate Now</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12 col-md-12 mt-3 text-justify">
-                                    <p class="text-gray">Protect Wildlife, Preserve the Future!
-                                        Your donation helps us safeguard endangered species and restore vital ecosystems. By
-                                        contributing to our conservation fund, you support on-the-ground efforts like
-                                        habitat restoration, anti-poaching initiatives, and community-led conservation
-                                        programs that ensure a thriving planet for generations to come. Be a voice for the
-                                        voiceless — donate today and make a lasting impact.</p>
-                                    <p class="text-gray">Your privacy matters. [Wildlife Organization Name] is committed to
-                                        protecting your personal information. For details, please read our <a
-                                            href="">Privacy Policy</a>.Charitable Registration Number: 12345678910</p>
                                 </div>
                             </div>
                         </div>
@@ -369,7 +371,7 @@
             -ms-border-radius: 4px;
             /* border-radius: 4px; */
             border-radius: 50px !important;
-            padding: 8px 15px;
+            padding: 2px 15px;
         }
 
         .d-none {

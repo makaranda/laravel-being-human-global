@@ -52,21 +52,21 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 single-column">
                         <div class="single-item">
                             <div class="icon-box"><i class="flaticon-ticket"></i></div>
-                            {{-- <h5><a href="index.html">Buy Tickets</a></h5> --}}
+                            {{-- <h5><a href="{{ route('home.index') }}">Buy Tickets</a></h5> --}}
                             <p>{!! $section1['data']['discription'] ?? '' !!}</p>
                         </div>
                     </div>
                     {{-- <div class="col-lg-4 col-md-6 col-sm-12 single-column">
                         <div class="single-item">
                             <div class="icon-box"><i class="flaticon-calendar"></i></div>
-                            <h5><a href="index.html">new events</a></h5>
+                            <h5><a href="{{ route('home.index') }}">new events</a></h5>
                             <p>Lorem ium dolor sit ameted pisicing elit sed do ut.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12 single-column">
                         <div class="single-item">
                             <div class="icon-box"><i class="flaticon-map"></i></div>
-                            <h5><a href="index.html">zoo map</a></h5>
+                            <h5><a href="{{ route('home.index') }}">zoo map</a></h5>
                             <p>Lorem ium dolor sit ameted pisicing elit sed do ut.</p>
                         </div>
                     </div> --}}
@@ -88,7 +88,7 @@
                                 style="background-image: url({{ asset('public/assets/frontend/images/shape/shape-1.png')}});">
                             </div>
                             <figure class="image"><img
-                                    src="{{ asset('public/assets/frontend/images/resource/sri-lankan-lephard.jpg')}}"
+                                    src="{{ asset('public/assets/frontend/images/resource/570x570-banner-img.jpg')}}"
                                     alt="{{ $settings['website_name'] }}"></figure>
                             <div class="icon-box"><img src="{{ asset('public/assets/frontend/images/icons/icon-1.png')}}"
                                     alt="{{ $settings['website_name'] }}"></div>
@@ -164,7 +164,8 @@
                             <h3>Quick Donation</h3>
                             <h5>One time Payment</h5>
                             <h2>${{ $section3['data']['attribute']['price'] ?? '' }}</h2>
-                            <a href="{{ $section3['data']['attribute']['link'] ?? '' }}" class="theme-btn">Donate Now</a>
+                            {{-- {{ $section3['data']['attribute']['link'] ?? '' }} --}}
+                            <a href="{{ route('frontend.home.donation') }}" class="theme-btn">Donate Now</a>
                         </div>
                     </div>
                 </div>
@@ -178,7 +179,7 @@
     <section class="gallery-section">
         <div class="auto-container">
             <div class="sec-title centred">
-                <h2>amazing Animals <br />in the World</h2>
+                <h2>Beautifull Animals <br />in the Sri Lanka</h2>
             </div>
         </div>
         <div class="outer-container">
@@ -272,19 +273,19 @@
         </div>
         <div class="auto-container">
             {{-- <div class="five-item-carousel owl-carousel owl-theme owl-nav-none owl-dots-none">
-                <figure class="clients-logo"><a href="index.html"><img
+                <figure class="clients-logo"><a href="{{ route('home.index') }}"><img
                             src="{{ asset('public/assets/frontend/images/clients/clients-1.png')}}"
                             alt="{{ $settings['website_name'] }}"></a></figure>
-                <figure class="clients-logo"><a href="index.html"><img
+                <figure class="clients-logo"><a href="{{ route('home.index') }}"><img
                             src="{{ asset('public/assets/frontend/images/clients/clients-2.png')}}"
                             alt="{{ $settings['website_name'] }}"></a></figure>
-                <figure class="clients-logo"><a href="index.html"><img
+                <figure class="clients-logo"><a href="{{ route('home.index') }}"><img
                             src="{{ asset('public/assets/frontend/images/clients/clients-3.png')}}"
                             alt="{{ $settings['website_name'] }}"></a></figure>
-                <figure class="clients-logo"><a href="index.html"><img
+                <figure class="clients-logo"><a href="{{ route('home.index') }}"><img
                             src="{{ asset('public/assets/frontend/images/clients/clients-4.png')}}"
                             alt="{{ $settings['website_name'] }}"></a></figure>
-                <figure class="clients-logo"><a href="index.html"><img
+                <figure class="clients-logo"><a href="{{ route('home.index') }}"><img
                             src="{{ asset('public/assets/frontend/images/clients/clients-5.png')}}"
                             alt="{{ $settings['website_name'] }}"></a></figure>
             </div> --}}
@@ -439,7 +440,7 @@
                                         <li><i class="far fa-clock"></i>2:00 am</li>
                                         <li><i class="far fa-map"></i>60 broklyn street</li>
                                     </ul>
-                                    <h3><a href="index.html">zebra and girrafe on the street</a></h3>
+                                    <h3><a href="{{ route('home.index') }}">zebra and girrafe on the street</a></h3>
                                     <p>Suspendisse finibus urna mauris, lorem ipsum is simply free.</p>
                                 </div>
                             </div>
@@ -460,7 +461,7 @@
                                         <li><i class="far fa-clock"></i>2:00 am</li>
                                         <li><i class="far fa-map"></i>60 broklyn street</li>
                                     </ul>
-                                    <h3><a href="index.html">how Interaction with Animal can</a></h3>
+                                    <h3><a href="{{ route('home.index') }}">how Interaction with Animal can</a></h3>
                                     <p>Suspendisse finibus urna mauris, lorem ipsum is simply free.</p>
                                 </div>
                             </div>

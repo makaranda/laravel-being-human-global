@@ -147,6 +147,33 @@
                 </li>
 
                 <li
+                    class="nav-item {{ request()->routeIs('admin.animals', 'admin.createanimal', 'admin.editanimal') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-pencil-square"></i>
+                        <p>
+                            Animals
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.animals') }}"
+                                class="nav-link {{ request()->routeIs('admin.animals') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Animal List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.createanimal') }}"
+                                class="nav-link {{ request()->routeIs('admin.createanimal') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Add Animal</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li
                     class="nav-item {{ request()->routeIs('admin.blogs', 'admin.createblog', 'admin.editblog') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bi bi-pencil-square"></i>
