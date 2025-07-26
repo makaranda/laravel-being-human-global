@@ -85,6 +85,10 @@ Route::get('/support', [HomeController::class, 'support'])->name('frontend.suppo
 // Route::get('/music-tracks', [HomeController::class, 'musicTracks'])->name('frontend.musictracks');
 // Route::get('/music-videos', [HomeController::class, 'musicVideos'])->name('frontend.musicvideos');
 
+//CKEDITOR upload image to directory
+// Route::post('/ckeditor/upload', [HomeController::class, 'uploadCKEditor'])->name('ckeditor.upload');
+Route::post('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+
 // Dynamic Page Routes
 Route::get('page/{slug?}', [HomeController::class, 'dynamicPage'])->name('frontend.page')->defaults('slug', 'home');
 
@@ -258,7 +262,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/edit/{id}', [PagesController::class, 'edit'])->name('admin.editpage');
             Route::post('/update/{id}', [PagesController::class, 'update'])->name('admin.updatepage');
             Route::delete('/delete/{id}', [PagesController::class, 'delete'])->name('admin.deletepage');
-            Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+
         });
 
         // Animals routes
@@ -269,7 +273,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/edit/{id}', [AnimalsController::class, 'edit'])->name('admin.editanimal');
             Route::post('/update/{id}', [AnimalsController::class, 'update'])->name('admin.updateanimal');
             Route::delete('/delete/{id}', [AnimalsController::class, 'delete'])->name('admin.deleteanimal');
-            Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+
         });
 
         // Products routes
@@ -280,7 +284,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/edit/{id}', [ProductsController::class, 'edit'])->name('admin.editproduct');
             Route::post('/update/{id}', [ProductsController::class, 'update'])->name('admin.updateproduct');
             Route::delete('/delete/{id}', [ProductsController::class, 'delete'])->name('admin.deleteproduct');
-            Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+
             Route::get('/get-subcategories/{category_id}', [ProductsController::class, 'getSubCategories'])->name('get.subcategories');
         });
 
@@ -293,7 +297,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::post('/update/{id}', [OrdersController::class, 'update'])->name('admin.updateorder');
             Route::delete('/delete/{id}', [OrdersController::class, 'delete'])->name('admin.deleteorder');
             Route::get('/fetch-order-items/{id}', [OrdersController::class, 'fetchOrderItems'])->name('admin.fetchorderitems');
-            Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+
             Route::get('/get-subcategories/{category_id}', [OrdersController::class, 'getSubCategories'])->name('get.subcategories');
         });
 
@@ -305,7 +309,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/add', [CustomersController::class, 'add'])->name('admin.addcustomer');  // Add user form
             Route::post('/update/{id}', [CustomersController::class, 'update'])->name('admin.updatecustomer');
             Route::post('/save', [CustomersController::class, 'save'])->name('admin.savecustomer');
-            Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+
         });
 
         // Blogs routes
@@ -316,7 +320,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/edit/{id}', [BlogsController::class, 'edit'])->name('admin.editblog');
             Route::post('/update/{id}', [BlogsController::class, 'update'])->name('admin.updateblog');
             Route::delete('/delete/{id}', [BlogsController::class, 'delete'])->name('admin.deleteblog');
-            Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+
         });
 
         // Events routes
@@ -335,7 +339,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::post('/items/update/{id}', [GalleryItemController::class, 'update'])->name('admin.updateevent.items');
             Route::delete('/items/delete/{id}', [GalleryItemController::class, 'delete'])->name('admin.deleteevent.items');
 
-            Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+
         });
 
         // Careers routes
@@ -346,7 +350,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/edit/{id}', [CareersController::class, 'edit'])->name('admin.editcareer');
             Route::post('/update/{id}', [CareersController::class, 'update'])->name('admin.updatecareer');
             Route::delete('/delete/{id}', [CareersController::class, 'delete'])->name('admin.deletecareer');
-            Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+
         });
 
         // Contact Us routes
@@ -409,7 +413,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         //     Route::get('/edit/{id}', [ProgrammesController::class, 'edit'])->name('admin.editprogramme');
         //     Route::post('/update/{id}', [ProgrammesController::class, 'update'])->name('admin.updateprogramme');
         //     Route::delete('/delete/{id}', [ProgrammesController::class, 'delete'])->name('admin.deleteprogramme');
-        //     Route::get('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+        //     
         //     Route::post('/update_order/{id}', [ProgrammesController::class, 'updateOrder'])->name('admin.updateorderprogramme');
         // //var ajax_url = "{{ route('admin.updatepageidprogramme', ':id') }}";
 

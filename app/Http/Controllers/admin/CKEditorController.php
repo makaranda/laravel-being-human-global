@@ -8,41 +8,24 @@ use Illuminate\Support\Facades\Storage;
 
 class CKEditorController extends Controller
 {
-   public function upload(Request $request)
-{
-    // if ($request->hasFile('upload')) {
-    //     $file = $request->file('upload');
-    //     $filename = time() . '_' . $file->getClientOriginalName();
-    //     $path = $file->storeAs('public/assets/uploads/', $filename);
+    public function upload(Request $request)
+    {
+        dd($request->all());
+        if ($request->hasFile('upload')) {
+            $uploadPath = 'assets/uploads/pages/';
+            $file = $request->file('upload');
+            $filename = 'ckgallery_' . time() . '.' . $file->getClientOriginalExtension();
 
-    //     $url = Storage::url($path);
+            if ($file->move(public_path($uploadPath), $filename)) {
 
-    //     return response()->json([
-    //         'uploaded' => 1,
-    //         'fileName' => $filename,
-    //         'url' => $url,
-    //     ]);
-    // }
+                $uploadPath = 'public/assets/uploads/pages/';
+                $url = asset($uploadPath . $filename);
+                $CKEditorFuncNum = $request->input('CKEditorFuncNum');
 
-    if ($request->hasFile('upload')) {
-        $uploadPath = 'assets/uploads/';
-        $file = $request->file('upload');
-        $filename = 'ckgallery_' . time() . '.' . $file->getClientOriginalExtension();
-
-        if ($file->move(public_path($uploadPath), $filename)) {
-            $url = asset($uploadPath . $filename); // public URL for CKEditor
-
-            return response()->json([
-                'uploaded' => 1,
-                'fileName' => $filename,
-                'url' => $url
-            ]);
+                return response("<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', 'Image uploaded successfully');</script>");
+            }
         }
-    }
 
-    return response()->json([
-        'uploaded' => 0,
-        'error' => ['message' => 'Image upload failed.']
-    ]);
-}
+        return response("<script>window.parent.CKEDITOR.tools.callFunction(1, '', 'Image upload failed.');</script>");
+    }
 }

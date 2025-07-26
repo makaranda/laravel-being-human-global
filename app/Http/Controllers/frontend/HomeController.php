@@ -89,7 +89,7 @@ class HomeController extends Controller
         //     return redirect()->route('admin.dashboard');
         // } else {
         $animals_details = Page::where('status', 1)->where('type', 'animal')->get();
-        return view('pages.frontend.home.index', compact('gallery_home', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7','animals_details'));
+        return view('pages.frontend.home.index', compact('gallery_home', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7', 'animals_details'));
         //}
     }
 
@@ -471,6 +471,18 @@ class HomeController extends Controller
             'feature_image' => url('public/assets/uploads/products/' . $product->feature_image),
             'qty' => $product->qty,
         ]);
+    }
+
+    public function uploadCKEditor(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/uploads/pages'), $filename);
+            $url = asset('public/assets/uploads/pages/' . $filename);
+
+            return response()->json(['url' => $url]);
+        }
     }
 
 
