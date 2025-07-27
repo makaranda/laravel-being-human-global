@@ -3,12 +3,12 @@
 @section('content')
 
   <div class="container mt-5">
-    <form action="{{ route('admin.storepage') }}" id="formSubmit" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.storetestimonial') }}" id="formSubmit" method="POST" enctype="multipart/form-data">
     @csrf <!-- CSRF token for security -->
     <div class="row">
       <div class="col-md-8">
       <div class="card">
-        <div class="card-header">Page Content</div>
+        <div class="card-header">Testimonial Content</div>
         <div class="card-body">
         <div class="row justify-content-center">
           <div class="col-12 col-md-12">
@@ -32,30 +32,6 @@
           <textarea rows="4" class="form-control mt-3" placeholder="Description" name="description"
             id="description">{{ old('description') }}</textarea>
           @error('description')
-        <div class="text-danger">{{ $message }}</div>
-      @enderror
-          </div>
-        </div>
-        </div>
-      </div>
-      <div class="card mt-3">
-        <div class="card-header">SEO Content</div>
-        <div class="card-body">
-        <div class="row justify-content-center">
-          <div class="col-12 col-md-12 mt-3">
-          <label class="fw-bold">SEO Keywords <span class="text-danger">{10-15 highly relevant
-            keywords}</span></label>
-          <textarea rows="4" class="form-control mt-3" placeholder="SEO Keywords" name="seo_keywords"
-            id="seo_keywords">{{ old('seo_keywords') }}</textarea>
-          @error('seo_keywords')
-        <div class="text-danger">{{ $message }}</div>
-      @enderror
-          </div>
-          <div class="col-12 col-md-12 mt-3">
-          <label class="fw-bold">SEO Description <span class="text-danger">{150-160 characters}</span></label>
-          <textarea rows="4" class="form-control mt-3" placeholder="SEO Description" name="seo_description"
-            id="seo_description">{{ old('seo_description') }}</textarea>
-          @error('seo_description')
         <div class="text-danger">{{ $message }}</div>
       @enderror
           </div>
@@ -87,16 +63,13 @@
         <div class="card-body">
         <div class="row justify-content-center">
           <div class="col-12 col-md-12 mt-3">
-          <label class="fw-bold">Parent</label>
-          <select class="form-select mt-3" placeholder="Select Parent" name="parent" id="parent">
-            @if($pages)
-          @foreach ($pages as $page)
-        <option value="{{ $page->id }}" {{ old('parent') == $page->id ? 'selected' : '' }}>{{ $page->title }}
-        </option>
+          <label class="fw-bold">Type</label>
+          <select class="form-select mt-3" placeholder="Select Type" name="type" id="type">
+            @foreach($user_types = ['donator', 'volunteer', 'customer', 'user'] as $type)
+        <option value="{{ $type }}">{{ ucfirst($type) }}</option>
         @endforeach
-        @endif
           </select>
-          @error('parent')
+          @error('type')
         <div class="text-danger">{{ $message }}</div>
       @enderror
           </div>

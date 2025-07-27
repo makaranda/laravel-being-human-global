@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <form action="{{ route('admin.updateanimal', $page->id) }}" id="formSubmit" method="POST"
+        <form action="{{ route('admin.updatetestimonial', $page->id) }}" id="formSubmit" method="POST"
             enctype="multipart/form-data">
             @csrf <!-- CSRF token for security -->
             @method('POST') <!-- Change from POST to PUT for updating -->
@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">Animal Content</div>
+                        <div class="card-header">Testimonial Content</div>
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-12 col-md-12">
@@ -45,34 +45,7 @@
                         </div>
                     </div>
 
-                    <div class="card mt-3">
-                        <div class="card-header">SEO Content</div>
-                        <div class="card-body">
-                            <div class="row justify-content-center">
-                                <div class="col-12 col-md-12 mt-3">
-                                    <label class="fw-bold">SEO Keywords <span class="text-danger">{10-15 highly relevant
-                                            keywords}</span></label>
-                                    <textarea rows="4" class="form-control mt-3" placeholder="SEO Keywords"
-                                        name="seo_keywords"
-                                        id="seo_keywords">{{ old('seo_keywords', $page->seo_keywords) }}</textarea>
-                                    @error('seo_keywords')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
 
-                                <div class="col-12 col-md-12 mt-3">
-                                    <label class="fw-bold">SEO Description <span class="text-danger">{150-160
-                                            characters}</span></label>
-                                    <textarea rows="4" class="form-control mt-3" placeholder="SEO Description"
-                                        name="seo_description"
-                                        id="seo_description">{{ old('seo_description', $page->seo_description) }}</textarea>
-                                    @error('seo_description')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="col-md-4">
@@ -101,14 +74,15 @@
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-12 col-md-12 mt-3">
-                                    <label class="fw-bold">Parent</label>
-                                    <select class="form-select mt-3" placeholder="Select Parent" name="parent" id="parent">
-                                        <option value="">None</option>
-                                        @foreach ($pages as $parent)
-                                            <option value="{{ $parent->id }}" {{ old('parent', $page->parent_id) == $parent->id ? 'selected' : '' }}>{{ $parent->title }}</option>
+                                    <label class="fw-bold">Type</label>
+                                    <select class="form-select mt-3" placeholder="Select Type" name="type" id="type">
+                                        @foreach($user_types = ['donator', 'volunteer', 'customer', 'user'] as $type)
+                                            <option value="{{ $type }}" {{ old('type', $page->type) == $type ? 'selected' : '' }}>
+                                                {{ ucfirst($type) }}
+                                            </option>
                                         @endforeach
                                     </select>
-                                    @error('parent')
+                                    @error('type')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -132,7 +106,7 @@
                                 <div class="col-12 col-md-12 mt-3">
                                     <!-- Display image if it exists -->
                                     @if($page->feature_image)
-                                        <img src="{{ asset('public/assets/frontend/images/animals/' . $page->feature_image) }}"
+                                        <img src="{{ asset('public/assets/uploads/testimonials/' . $page->feature_image) }}"
                                             class="img-fluid" id="image_show" />
                                         <p class="btn mb-0" id="img_description">Click the image to edit or update</p>
                                         <button type="button" class="btn btn-link text-danger" name="remove_image"
@@ -153,36 +127,6 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="card mt-3">
-                        <div class="card-header">Banner Image</div>
-                        <div class="card-body">
-                            <div class="row justify-content-center">
-                                <div class="col-12 col-md-12 mt-3">
-                                    @if($page->banner_image)
-                                        <img src="{{ asset('public/assets/frontend/img/banner/' . $page->banner_image) }}"
-                                            class="img-fluid" id="image_show3" />
-                                        <p class="btn mb-0" id="img_description3">Click the image to edit or update</p>
-                                        <button type="button" class="btn btn-link text-danger" name="remove_image3"
-                                            id="remove_image3">Remove Banner image</button>
-                                    @else
-                                        <p>No Banner image uploaded yet.</p>
-                                    @endif
-                                </div>
-                                <div class="col-12 col-md-12 mt-0">
-                                    <input type="file" name="file_input3" id="file_input3" accept="image/*" class="d-none">
-                                    <button type="button" class="btn btn-link" name="banner_image" id="banner_image">Set
-                                        Banner image</button>
-                                    @error('banner_image')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
         </form>
@@ -200,9 +144,63 @@
 
 @push('scripts')
     <script>
-        CKEDITOR.replace('sub_description');
-        CKEDITOR.replace('description');
+        // CKEDITOR.replace('description');
+        CKEDITOR.on('instanceReady', function () {
+            for (var name in CKEDITOR.instances) {
+                CKEDITOR.instances[name].on('fileUploadRequest', function (evt) {
+                    var xhr = evt.data.fileLoader.xhr;
+                    var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                    xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                });
+            }
+        });
 
+        // Activate editors
+        CKEDITOR.replace('description', {
+            filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?&_token={{ csrf_token() }}",
+            filebrowserUploadMethod: 'form',
+            extraPlugins: 'font',
+            contentsCss: [
+                'https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap',
+                '{{ asset("public/assets/css/ckeditor_custom.css") }}'
+            ],
+            font_names:
+                'Playwrite AU QLD/Playwrite AU QLD, cursive;' +
+                'Playwrite IN/Playwrite IN, cursive;' +
+                'Arial/Arial, Helvetica, sans-serif;' +
+                'Times New Roman/Times New Roman, Times, serif;' +
+                'Verdana/Verdana, Geneva, sans-serif;' +
+                'Georgia/Georgia, serif;' +
+                'Courier New/Courier New, Courier, monospace;' +
+                'Tahoma/Tahoma, Geneva, sans-serif;' +
+                'Comic Sans MS/Comic Sans MS, cursive;' +
+                'Poppins/Poppins, sans-serif;' +
+                'Roboto/Roboto, sans-serif;' +
+                'Open Sans/Open Sans, sans-serif;'
+        });
+
+        CKEDITOR.replace('sub_description', {
+            filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?&_token={{ csrf_token() }}",
+            filebrowserUploadMethod: 'form',
+            extraPlugins: 'font',
+            contentsCss: [
+                'https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap',
+                '{{ asset("public/assets/css/ckeditor_custom.css") }}'
+            ],
+            font_names:
+                'Playwrite AU QLD/Playwrite AU QLD, cursive;' +
+                'Playwrite IN/Playwrite IN, cursive;' +
+                'Arial/Arial, Helvetica, sans-serif;' +
+                'Times New Roman/Times New Roman, Times, serif;' +
+                'Verdana/Verdana, Geneva, sans-serif;' +
+                'Georgia/Georgia, serif;' +
+                'Courier New/Courier New, Courier, monospace;' +
+                'Tahoma/Tahoma, Geneva, sans-serif;' +
+                'Comic Sans MS/Comic Sans MS, cursive;' +
+                'Poppins/Poppins, sans-serif;' +
+                'Roboto/Roboto, sans-serif;' +
+                'Open Sans/Open Sans, sans-serif;'
+        });
 
         $(document).ready(function () {
             // Click on "Set Featured Image"

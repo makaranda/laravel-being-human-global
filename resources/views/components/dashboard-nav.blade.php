@@ -174,6 +174,33 @@
                 </li>
 
                 <li
+                    class="nav-item {{ request()->routeIs('admin.testimonials', 'admin.createtestimonial', 'admin.edittestimonial') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-pencil-square"></i>
+                        <p>
+                            Testimonials
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.testimonials') }}"
+                                class="nav-link {{ request()->routeIs('admin.testimonials') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Testimonial List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.createtestimonial') }}"
+                                class="nav-link {{ request()->routeIs('admin.createtestimonial') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Add Testimonial</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li
                     class="nav-item {{ request()->routeIs('admin.blogs', 'admin.createblog', 'admin.editblog') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bi bi-pencil-square"></i>

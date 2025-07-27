@@ -33,6 +33,7 @@ use App\Models\ProgramSubCategoryItem;
 use App\Models\Partner;
 use App\Models\Blog;
 use App\Models\Country;
+use App\Models\Testimonial;
 use App\Models\Link;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -89,7 +90,8 @@ class HomeController extends Controller
         //     return redirect()->route('admin.dashboard');
         // } else {
         $animals_details = Page::where('status', 1)->where('type', 'animal')->get();
-        return view('pages.frontend.home.index', compact('gallery_home', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7', 'animals_details'));
+        $testimonials = Testimonial::where('status',1)->get();
+        return view('pages.frontend.home.index', compact('gallery_home','testimonials', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7', 'animals_details'));
         //}
     }
 

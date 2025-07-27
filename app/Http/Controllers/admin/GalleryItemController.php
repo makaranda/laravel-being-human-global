@@ -16,14 +16,14 @@ class GalleryItemController extends Controller
 {
     public function index()
     {
-        $defaultPages = ['home','page', 'music-tracks', 'music-videos', 'home-section-video'];
+        $defaultPages = ['home', 'page', 'music-tracks', 'music-videos', 'home-section-video'];
         //$pages = GalleryItem::where('status', 1)->get();
         $pages = DB::table('gallery_items')
-                    ->join('galleries', 'gallery_items.gallery_id', '=', 'galleries.id')
-                    ->leftJoin('users', 'gallery_items.author_id', '=', 'users.id') // assuming authors are in users table
-                    ->select('gallery_items.*', 'galleries.title as gallery_title','galleries.year as gallery_year', 'users.name as author_name')
-                    ->where('gallery_items.status', 1)
-                    ->get();
+            ->join('galleries', 'gallery_items.gallery_id', '=', 'galleries.id')
+            ->leftJoin('users', 'gallery_items.author_id', '=', 'users.id') // assuming authors are in users table
+            ->select('gallery_items.*', 'galleries.title as gallery_title', 'galleries.year as gallery_year', 'users.name as author_name')
+            ->where('gallery_items.status', 1)
+            ->get();
 
         return view('pages.dashboard.gallery.gallery_items', compact('pages'));
 
@@ -33,7 +33,7 @@ class GalleryItemController extends Controller
     // Show create form
     public function create()
     {
-        $pages = Gallery::where('status',1)->get();
+        $pages = Gallery::where('status', 1)->get();
         return view('pages.dashboard.gallery.create_item', compact('pages'));
     }
 
@@ -52,13 +52,13 @@ class GalleryItemController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $key => $image) {
-                $imageName = time().'_'.uniqid().'.'.$image->getClientOriginalExtension();
+                $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('assets/uploads/gallery-items/'), $imageName);
 
                 DB::table('gallery_items')->insert([
                     'gallery_id' => $gallery_id,
                     'feature_image' => $imageName,
-                    'order' => $key+1 ?? 0,
+                    'order' => $key + 1 ?? 0,
                     'status' => 1,
                     'author_id' => $author_id,
                     'created_at' => now(),
@@ -67,7 +67,7 @@ class GalleryItemController extends Controller
             }
         }
 
-            return response()->json(['status' => 'success']);
+        return response()->json(['status' => 'success']);
     }
 
     // private function addDynamicRoute($slug)
@@ -82,7 +82,7 @@ class GalleryItemController extends Controller
 
         $page = Gallery::findOrFail($id);
         $pages = Gallery::all();
-        return view('pages.dashboard.gallery.edit', compact('page','pages'));
+        return view('pages.dashboard.gallery.edit', compact('page', 'pages'));
     }
 
     // Update page
@@ -123,24 +123,24 @@ class GalleryItemController extends Controller
         $gallery->order = $request->order;
         $gallery->year = $request->year;
         $gallery->author_id = auth()->user()->id;
-        $gallery->route_name = 'frontend.'.$newSlug.'';
+        $gallery->route_name = 'frontend.' . $newSlug . '';
         $gallery->status = $request->has('switch_publish') && $request->switch_publish == 'on' ? 1 : 0;
 
         // Handle file upload for feature image if provided
         //dd($request->file_input);
         if ($request->hasFile('file_input')) {
-                $filePath = 'public/assets/uploads/gallery/';
-                if ($gallery->feature_image) {
-                    $existingImagePath = $filePath . $gallery->feature_image;
-                    if (file_exists($existingImagePath)) {
-                        unlink($existingImagePath); // Delete the old image
-                    }
+            $filePath = 'public/assets/uploads/gallery/';
+            if ($gallery->feature_image) {
+                $existingImagePath = $filePath . $gallery->feature_image;
+                if (file_exists($existingImagePath)) {
+                    unlink($existingImagePath); // Delete the old image
                 }
-                $filePath = 'assets/uploads/gallery/';
-                $file_input = $request->file('file_input');
-                $filename = $newSlug . '_' . time() . '.' . $file_input->getClientOriginalExtension();
+            }
+            $filePath = 'assets/uploads/gallery/';
+            $file_input = $request->file('file_input');
+            $filename = $newSlug . '_' . time() . '.' . $file_input->getClientOriginalExtension();
 
-                //dd($request->file_input);
+            //dd($request->file_input);
             // Ensure the file is uploaded
             if ($file_input->move(public_path($filePath), $filename)) {
                 $gallery->feature_image = $filename;
@@ -164,7 +164,7 @@ class GalleryItemController extends Controller
             $file_input2 = $request->file('file_input2');
             $filename2 = 'banner_image_' . time() . '.' . $file_input2->getClientOriginalExtension();
 
-                //dd($request->file_input);
+            //dd($request->file_input);
             // Ensure the file is uploaded
             if ($file_input2->move(public_path($filePath2), $filename2)) {
                 $gallery->banner_image = $filename2;
@@ -186,11 +186,11 @@ class GalleryItemController extends Controller
     {
         // Find the page by ID or fail if not found
         $gallery = Gallery::findOrFail($id);
-        if (!$page) {
+        if (!$gallery) {
             return redirect()->route('admin.events')->with('error', 'Page not found.');
         }
 
-        $defaultPages = ['home', 'about-us', 'page', 'gallery', 'music-tracks', 'music-videos','home-section-video'];
+        $defaultPages = ['home', 'about-us', 'page', 'gallery', 'music-tracks', 'music-videos', 'home-section-video'];
 
         // Check if the page is a default page
         if (in_array($gallery->slug, $defaultPages)) {

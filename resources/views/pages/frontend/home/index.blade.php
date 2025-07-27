@@ -293,63 +293,32 @@
                 <h2>Testimonials</h2>
             </div>
             <div class="three-item-carousel owl-carousel owl-theme owl-dots-none owl-nav-none">
-                <div class="testimonil-block-one">
-                    <div class="inner-box">
-                        <div class="author-thumb">
-                            <figure class="thumb-box"><img
-                                    src="{{ asset('public/assets/frontend/images/resource/testimonial-1.jpg')}}"
-                                    alt="{{ $settings['website_name'] }}">
-                            </figure>
-                            <div class="quote"><i class="flaticon-quote"></i></div>
+                @if ($testimonials)
+                    @foreach ($testimonials as $testimonial)
+                        <div class="testimonil-block-one">
+                            <div class="inner-box">
+                                <div class="author-thumb">
+                                    @php
+                                        $testimonial_img = $testimonial->feature_image ?? 'user_icon.png'
+                                    @endphp
+                                    <figure class="thumb-box"><img
+                                            src="{{ asset('public/assets/uploads/testimonials/' . $testimonial_img)}}"
+                                            alt="{{ $settings['website_name'] }}">
+                                    </figure>
+                                    <div class="quote"><i class="flaticon-quote"></i></div>
+                                </div>
+                                <div class="text">
+                                    <div>{!! $testimonial->description !!}</div>
+                                </div>
+                                {{-- {{ $testimonial->author->name }} --}}
+                                <div class="author-info">
+                                    <h5>{{ $testimonial->title }}</h5>
+                                    <span class="designation">{{ $testimonial->type }}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="text">
-                            <p>I was impresed by the company services, lorem is simply free text used by copytyping no
-                                refreshing. Neque porro est qui dolorem</p>
-                        </div>
-                        <div class="author-info">
-                            <h5>Christine Rose</h5>
-                            <span class="designation">Customer</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonil-block-one">
-                    <div class="inner-box">
-                        <div class="author-thumb">
-                            <figure class="thumb-box"><img
-                                    src="{{ asset('public/assets/frontend/images/resource/testimonial-2.jpg')}}"
-                                    alt="{{ $settings['website_name'] }}">
-                            </figure>
-                            <div class="quote"><i class="flaticon-quote"></i></div>
-                        </div>
-                        <div class="text">
-                            <p>I was impresed by the company services, lorem is simply free text used by copytyping no
-                                refreshing. Neque porro est qui dolorem</p>
-                        </div>
-                        <div class="author-info">
-                            <h5>Mike hardson</h5>
-                            <span class="designation">Customer</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonil-block-one">
-                    <div class="inner-box">
-                        <div class="author-thumb">
-                            <figure class="thumb-box"><img
-                                    src="{{ asset('public/assets/frontend/images/resource/testimonial-3.jpg')}}"
-                                    alt="{{ $settings['website_name'] }}">
-                            </figure>
-                            <div class="quote"><i class="flaticon-quote"></i></div>
-                        </div>
-                        <div class="text">
-                            <p>I was impresed by the company services, lorem is simply free text used by copytyping no
-                                refreshing. Neque porro est qui dolorem</p>
-                        </div>
-                        <div class="author-info">
-                            <h5>sarah albert</h5>
-                            <span class="designation">Customer</span>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </section>

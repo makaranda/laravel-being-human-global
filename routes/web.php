@@ -25,6 +25,7 @@ use App\Http\Controllers\admin\StudyAbroadController;
 use App\Http\Controllers\admin\UniversitiesController;
 use App\Http\Controllers\admin\AccordingsController;
 use App\Http\Controllers\admin\BlogsController;
+use App\Http\Controllers\admin\TestimonialController;
 use App\Http\Controllers\admin\CareersController;
 use App\Http\Controllers\admin\GalleryController;
 use App\Http\Controllers\admin\GalleryItemController;
@@ -273,6 +274,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/edit/{id}', [AnimalsController::class, 'edit'])->name('admin.editanimal');
             Route::post('/update/{id}', [AnimalsController::class, 'update'])->name('admin.updateanimal');
             Route::delete('/delete/{id}', [AnimalsController::class, 'delete'])->name('admin.deleteanimal');
+
+        });
+
+        // Testimonials routes
+        Route::prefix('testimonials')->group(function () {
+            Route::get('/', [TestimonialController::class, 'index'])->name('admin.testimonials');
+            Route::get('/create', [TestimonialController::class, 'create'])->name('admin.createtestimonial');
+            Route::post('/store', [TestimonialController::class, 'store'])->name('admin.storetestimonial');
+            Route::get('/edit/{id}', [TestimonialController::class, 'edit'])->name('admin.edittestimonial');
+            Route::post('/update/{id}', [TestimonialController::class, 'update'])->name('admin.updatetestimonial');
+            Route::delete('/delete/{id}', [TestimonialController::class, 'delete'])->name('admin.deletetestimonial');
 
         });
 

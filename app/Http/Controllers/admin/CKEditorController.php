@@ -8,24 +8,46 @@ use Illuminate\Support\Facades\Storage;
 
 class CKEditorController extends Controller
 {
+
     public function upload(Request $request)
     {
-        dd($request->all());
         if ($request->hasFile('upload')) {
-            $uploadPath = 'assets/uploads/pages/';
             $file = $request->file('upload');
-            $filename = 'ckgallery_' . time() . '.' . $file->getClientOriginalExtension();
+            $filename = 'ck_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('assets/uploads/pages/'), $filename);
 
-            if ($file->move(public_path($uploadPath), $filename)) {
+            $url = asset('public/assets/uploads/pages/' . $filename); // Full image URL
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
 
-                $uploadPath = 'public/assets/uploads/pages/';
-                $url = asset($uploadPath . $filename);
-                $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-
-                return response("<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', 'Image uploaded successfully');</script>");
-            }
+            return response()->make(
+                "<script>
+                window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url');
+                window.parent.Swal.fire({
+                    position: 'bottom-end',
+                    icon: 'success',
+                    title: 'Your image has been uploaded!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>",
+                200,
+                ['Content-Type' => 'text/html; charset=utf-8']
+            );
         }
 
-        return response("<script>window.parent.CKEDITOR.tools.callFunction(1, '', 'Image upload failed.');</script>");
+        $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+        return response()->make(
+            "<script>
+            window.parent.Swal.fire({
+                position: 'bottom-end',
+                icon: 'error',
+                title: 'Image upload failed!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>",
+            200,
+            ['Content-Type' => 'text/html; charset=utf-8']
+        );
     }
 }
