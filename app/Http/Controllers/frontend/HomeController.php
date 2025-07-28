@@ -74,24 +74,27 @@ class HomeController extends Controller
         $page = Page::where('status', 1)
             ->where('slug', 'like', '%home%')
             ->first();
-        $sections = $page->attributes;
+        //$sections = $page->attributes;
         //$sections = json_decode($page->attributes, true);
+        $sections = $page ? $page->attributes : [];
         $section1 = collect($sections)->firstWhere('name', 'section1');
+        // $section1 = collect($sections)->firstWhere('name', 'section1');
         $section2 = collect($sections)->firstWhere('name', 'section2');
         $section3 = collect($sections)->firstWhere('name', 'section3');
         $section4 = collect($sections)->firstWhere('name', 'section4');
         $section5 = collect($sections)->firstWhere('name', 'section5');
         $section6 = collect($sections)->firstWhere('name', 'section6');
         $section7 = collect($sections)->firstWhere('name', 'section7');
-        //dd($sections);
+        $section8 = collect($sections)->firstWhere('name', 'section8');
+        //dd($section1);
         //$admin = Auth::guard('admin')->user();
         //dd($admin);
         // if (!empty($admin->role) && $admin->role > 0) {
         //     return redirect()->route('admin.dashboard');
         // } else {
         $animals_details = Page::where('status', 1)->where('type', 'animal')->get();
-        $testimonials = Testimonial::where('status',1)->get();
-        return view('pages.frontend.home.index', compact('gallery_home','testimonials', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7', 'animals_details'));
+        $testimonials = Testimonial::where('status', 1)->get();
+        return view('pages.frontend.home.index', compact('gallery_home', 'testimonials', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7', 'section8', 'animals_details'));
         //}
     }
 

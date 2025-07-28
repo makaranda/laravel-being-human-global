@@ -90,14 +90,14 @@
                             <div class="mb-3">
                                 <label class="fw-bold">Description</label>
                                 <textarea class="form-control" rows="4" id="description_{{ $secName }}"
-                                    name="description_{{ $secName }}">{{ old("description_" . $secName, $data['discription'] ?? '') }}</textarea>
+                                    name="description_{{ $secName }}">{{ old("description_" . $secName, $data['description'] ?? '') }}</textarea>
                             </div>
                         @endif
                         @if(!in_array($secName, ['section1', 'section4', 'section5', 'section6', 'section7']))
                             <div class="mb-3">
                                 <label class="fw-bold">Sub Description</label>
                                 <textarea class="form-control" rows="4" id="sub_description_{{ $secName }}"
-                                    name="sub_description_{{ $secName }}">{{ old("sections.$secName.sub_discription", $data['sub_discription'] ?? '') }}</textarea>
+                                    name="sub_description_{{ $secName }}">{{ old("sections.$secName.sub_description", $data['sub_description'] ?? '') }}</textarea>
                             </div>
                         @endif
 
@@ -235,7 +235,7 @@
                 });
 
             @endforeach
-                                                                                                                                            });
+                                                                                                                                                });
 
     </script>
     </>

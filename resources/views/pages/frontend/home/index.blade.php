@@ -53,8 +53,8 @@
                         <div class="single-item">
                             <div class="icon-box"><i class="flaticon-ticket"></i></div>
                             {{-- <h5><a href="{{ route('home.index') }}">Buy Tickets</a></h5> --}}
-                            <div class="font-family-1">{!! $section1['data']['discription'] ?? '' !!}</div>
-                            <div class="font-family-1">{!! $section1['data']['sub_discription'] ?? '' !!}</div>
+                            <div class="font-family-1">{!! $section1['data']['description'] ?? '' !!}</div>
+                            <div class="font-family-1">{!! $section1['data']['sub_description'] ?? '' !!}</div>
                             <!-- ❝ ❞ -->
                         </div>
                     </div>
@@ -105,9 +105,9 @@
                             </div>
                             <div class="text">
                                 <h4>Help us to protect wildlife around the world.</h4>
-                                <div>{!! $section2['data']['discription'] ?? '' !!}</div>
+                                <div>{!! $section2['data']['description'] ?? '' !!}</div>
                                 <div class="section_area">
-                                    {!! $section2['data']['sub_discription'] ?? '' !!}
+                                    {!! $section2['data']['sub_description'] ?? '' !!}
                                 </div>
                             </div>
                             <div class="btn-box">
@@ -139,7 +139,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-6 col-md-6 col-sm-12 text-column">
                                 <div class="text">
-                                    <div>{!! $section3['data']['sub_discription'] ?? '' !!}</div>
+                                    <div>{!! $section3['data']['sub_description'] ?? '' !!}</div>
                                     {{-- <figure class="signature"><img
                                             src="{{ asset('public/assets/frontend/images/icons/signature-1.png')}}"
                                             alt="{{ $settings['website_name'] }}">
@@ -147,7 +147,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 text-column section_area">
-                                {!! $section3['data']['discription'] ?? '' !!}
+                                {!! $section3['data']['description'] ?? '' !!}
                             </div>
                         </div>
                     </div>
@@ -175,6 +175,36 @@
         </div>
     </section>
     <!-- chooseus-section end -->
+
+
+    <!-- events-section -->
+    <section class="events-section sec-pad">
+        <div class="bg-layer"></div>
+        <div class="bg-image"
+            style="background-image: url({{ asset('public/assets/frontend/images/resource/' . $section8['data']['image'])}});">
+        </div>
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-12 col-sm-12 title-column">
+                    <div class="sec-title light">
+                        <h2>{{ $section8['data']['topic'] ?? '' }}</h2>
+                        <a href="#" class="theme-btn btn-one">Our Work</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 inner-column">
+                    <div class="inner-content">
+                        <div class="events-block-one">
+                            <div class="inner-box pl-0">
+                                <div>{!! $section8['data']['description'] ?? '' !!}</div>
+                                <div class="pt-10">{!! $section8['data']['sub_description'] ?? '' !!}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- events-section end -->
 
 
     <!-- gallery-section -->
@@ -516,12 +546,14 @@
                 <figure class="image-layer"><img
                         src="{{ asset('public/assets/frontend/images/resource/' . $section7['data']['image'])}}"
                         alt="{{ $settings['website_name'] }}"></figure>
-                <div class="text pull-left">
-                    <h2>The animals in <br />World</h2>
+                <div class="text pull-left font-family-1">
+                    <h2>{{ $section7['data']['topic'] }}</h2>
+                    <h6>{!! $section7['data']['topic'] !!}
+                    </h6>
                 </div>
                 {{-- {{ $section7['data']['attribute']['link'] }} --}}
                 <div class="btn-box pull-right">
-                    <a href="{{ route('frontend.about') }}" class="theme-btn btn-one">discover more</a>
+                    <a href="{{ route('frontend.about') }}" class="theme-btn btn-one">Photo gallery</a>
                 </div>
             </div>
         </div>
