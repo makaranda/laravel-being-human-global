@@ -182,11 +182,12 @@
                                 <a href="{{ route('home.index') }}">Home</a>
                             </li>
 
-                            <li class="dropdown {{ request()->routeIs('frontend.about') ? 'current' : '' }}">
+                            <li
+                                class="dropdown {{ request()->routeIs('frontend.about', 'frontend.services') ? 'current' : '' }}">
                                 <a href="{{ route('frontend.about') }}">About</a>
                                 <ul>
                                     <li><a href="{{ route('frontend.about') }}">About Us</a></li>
-                                    <li><a href="{{ route('frontend.about') }}">Our Team</a></li>
+                                    <li><a href="{{ route('frontend.services') }}">Services</a></li>
                                 </ul>
                             </li>
                             <li><a href="{{ route('frontend.home.events') }}">Events</a></li>

@@ -14,10 +14,10 @@
             <div class="content-box">
                 <ul class="bread-crumb clearfix">
                     <li><a href="{{ route('frontend.home') }}">Home</a></li>
-                    <li>About us</li>
+                    <li>Services</li>
                 </ul>
                 <div class="title">
-                    <h1>About us</h1>
+                    <h1>Services</h1>
                 </div>
             </div>
         </div>
@@ -30,17 +30,20 @@
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="col-12 col-md-12 font-family-1 page-main-title">
-                    <h3>Being Human</h3>
+                    <h3>Voice for the Wild</h3>
                 </div>
                 <div class="col-12 col-md-12">
                     <div class="about_info pl-0">
-                        <div class="pt-0 mb-0 about_sub_description page-sub-title">{!! $about_info['sub_description'] !!}
+                        <div class="pt-0 mb-0 about_sub_description page-sub-title">{!! $page_info['sub_description'] !!}
                         </div>
                     </div>
                 </div>
+                <div class="col-12 col-md-12 font-family-1 page-main-title">
+                    <h3>Wildlife Conservation </h3>
+                </div>
                 <div class="col-xl-12 col-md-12">
                     <div class="about_info">
-                        <div class="pt-0 mb-0 about_description page-sub-title">{!! $about_info['description'] !!}</div>
+                        <div class="pt-0 mb-0 about_description page-sub-title">{!! $page_info['description'] !!}</div>
                     </div>
                 </div>
             </div>
@@ -92,7 +95,7 @@
         }
 
         .breadcam_bg_2 {
-            background-image: url('{{ asset('public/assets/frontend/img/banner/' . $about_info['banner_image']) }}') !important;
+            background-image: url('{{ asset('public/assets/frontend/img/banner/' . $page_info['banner_image']) }}') !important;
             background-size: cover;
             background-position: center;
         }
@@ -108,57 +111,57 @@
 
         .about_description {
             /* p {
-                        border: 2px solid #e6b127;
-                        padding: 24px 20px;
-                        display: inline-block;
-                        height: 100%;
-                        vertical-align: top;
-                    } */
+                                            border: 2px solid #e6b127;
+                                            padding: 24px 20px;
+                                            display: inline-block;
+                                            height: 100%;
+                                            vertical-align: top;
+                                        } */
         }
 
         @media (max-width: 2040px) {
             /* .about_description {
-                    p {
-                        width: 49%;
-                        height: 260px;
-                    }
-                } */
+                                        p {
+                                            width: 49%;
+                                            height: 260px;
+                                        }
+                                    } */
         }
 
         @media (max-width: 1440px) {
             /* .about_description {
-                    p {
-                        width: 49%;
-                        height: 350px;
-                    }
-                } */
+                                        p {
+                                            width: 49%;
+                                            height: 350px;
+                                        }
+                                    } */
         }
 
         @media (max-width: 720px) {
             /* .about_description {
-                    p {
-                        width: 100%;
-                        height: auto;
-                    }
-                } */
+                                        p {
+                                            width: 100%;
+                                            height: auto;
+                                        }
+                                    } */
         }
 
         @media (max-width: 540px) {
             /* .about_description {
-                    p {
-                        width: 100%;
-                        height: auto;
-                    }
-                } */
+                                        p {
+                                            width: 100%;
+                                            height: auto;
+                                        }
+                                    } */
         }
 
         @media (max-width: 200px) {
             /* .about_description {
-                    p {
-                        width: 100%;
-                        height: auto;
-                    }
-                } */
+                                        p {
+                                            width: 100%;
+                                            height: auto;
+                                        }
+                                    } */
         }
     </style>
 @endpush

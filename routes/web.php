@@ -78,6 +78,7 @@ Route::get('/enroll', [HomeController::class, 'enroll'])->name('frontend.enroll.
 Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('frontend.contact');
 Route::post('/contact-submit', [HomeController::class, 'contactSubmit'])->name('frontend.contactsubmit');
 Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('frontend.about');
+Route::get('/services', [HomeController::class, 'servicesPage'])->name('frontend.services');
 Route::get('/gallery', [HomeController::class, 'gallery'])->name('frontend.gallery');
 Route::get('/privacy-and-policy', [HomeController::class, 'privacyPolicy'])->name('frontend.privacypolicy');
 Route::get('/terms-and-conditions', [HomeController::class, 'termsAndConditions'])->name('frontend.termsandconditions');

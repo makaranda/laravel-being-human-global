@@ -127,6 +127,14 @@ class HomeController extends Controller
         return view('pages.frontend.about.index', compact('about_info', 'settings')); // Make sure this view exists
     }
 
+    public function servicesPage()
+    {
+        VisitorHelper::updateVisitorCount();
+        $page_info = Page::where('slug', 'Like', 'services')->first();
+        $settings = Setting::first();
+        return view('pages.frontend.services.index', compact('page_info', 'settings')); // Make sure this view exists
+    }
+
     public function enroll()
     {
         VisitorHelper::updateVisitorCount();
