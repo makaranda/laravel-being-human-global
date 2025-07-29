@@ -280,7 +280,7 @@ class HomeController extends Controller
 
         // Fetch the page from the database
         $page = Page::where('slug', $slug)->first();
-
+        $settings = Setting::first();
         // Check if the page exists
         if (!$page) {
             // Handle the case where the page is not found
@@ -288,7 +288,7 @@ class HomeController extends Controller
         }
 
         // Return the page view with the page data
-        return view('pages.frontend.dynamic.index', compact('page'));
+        return view('pages.frontend.dynamic.index', compact('page', 'settings'));
     }
 
     public function contactSubmit(Request $request)
@@ -862,6 +862,18 @@ class HomeController extends Controller
         $page_blog = Page::where('slug', 'Like', 'blogs')->first();
         $blog_type = 'Blogs & Article';
         return view('pages.frontend.blogs.index', compact('blogs', 'blog_type', 'page_blog'));
+    }
+
+    public function showOurWorks()
+    {
+        $page_info = Page::where('status', 1)
+            ->where('slug', 'our-works')
+            ->first();
+
+        $page_blogs = Page::where('type', 'project')->latest()->get();
+        $settings = Setting::first();
+        return view('pages.frontend.ourwork.index', compact('page_info', 'page_blogs', 'settings'));
+
     }
 
     public function showNews()
