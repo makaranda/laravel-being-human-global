@@ -86,6 +86,8 @@ class HomeController extends Controller
         $section6 = collect($sections)->firstWhere('name', 'section6');
         $section7 = collect($sections)->firstWhere('name', 'section7');
         $section8 = collect($sections)->firstWhere('name', 'section8');
+        $page_projects = Page::where('type', 'project')->latest()->get();
+        $page_blogs = Blog::where('blog_type', 'blogs-article')->latest()->get();
         //dd($section1);
         //$admin = Auth::guard('admin')->user();
         //dd($admin);
@@ -94,7 +96,7 @@ class HomeController extends Controller
         // } else {
         $animals_details = Page::where('status', 1)->where('type', 'animal')->get();
         $testimonials = Testimonial::where('status', 1)->get();
-        return view('pages.frontend.home.index', compact('gallery_home', 'testimonials', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7', 'section8', 'animals_details'));
+        return view('pages.frontend.home.index', compact('page_blogs', 'page_projects', 'gallery_home', 'testimonials', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7', 'section8', 'animals_details'));
         //}
     }
 
@@ -858,10 +860,10 @@ class HomeController extends Controller
             ->where('blog_type', 'blogs-article')
             ->latest()
             ->get();
-
+        $settings = Setting::first();
         $page_blog = Page::where('slug', 'Like', 'blogs')->first();
         $blog_type = 'Blogs & Article';
-        return view('pages.frontend.blogs.index', compact('blogs', 'blog_type', 'page_blog'));
+        return view('pages.frontend.blogs.index', compact('settings', 'blogs', 'blog_type', 'page_blog'));
     }
 
     public function showOurWorks()

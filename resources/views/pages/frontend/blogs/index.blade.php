@@ -3,70 +3,82 @@
 @section('content')
 
 
-<!-- Hero area Start-->
-<div class="hero-area section-bg2">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="slider-area">
-                    <div class="slider-height2 slider-bg4 d-flex align-items-center justify-content-center">
-                        <div class="hero-caption hero-caption2">
-                            <h2>Blogs</h2>
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a href="{{ route('frontend.home') }}">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Blogs</a></li>
-                                </ol>
-                            </nav>
-                        </div>
+
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="img-wrap parallax-demo-1">
+            <div class="parallax-inner back-img"
+                style="background-image: url({{ url('public/assets/frontend/images/background/' . $settings['page_banner']) }});">
+            </div>
+        </div>
+        <div class="auto-container">
+            <div class="content-box">
+                <ul class="bread-crumb clearfix">
+                    <li><a href="{{ route('frontend.home') }}">Home</a></li>
+                    <li>Blogs</li>
+                </ul>
+                <div class="title">
+                    <h1>Blogs</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Page Title -->
+
+
+<!-- Blog Area Start-->
+
+<section class="sidebar-page-container">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 content-side">
+
+                    <div class="blog-classic-content row">
+                        @if($blogs && count($blogs))
+                            @foreach ($blogs as $item)
+                                <div class="col-12 col-md-6 news-block-one wow fadeInUp animated" data-wow-delay="00ms"
+                                    data-wow-duration="1500ms">
+                                    <div class="inner-box">
+                                        <div class="image-box">
+                                            <figure class="image">
+                                                <a href="{{ route('frontend.blogs.article.view', $item->slug) }}">
+                                                    <img src="{{ $item->feature_image ? url('public/assets/uploads/blogs/' . $item->feature_image) : url('public/assets/images/default-blog.jpg') }}"
+                                                        alt="{{ $item->title }}">
+                                                </a>
+                                            </figure>
+                                            @if($item->created_at)
+                                                <div class="post-date">
+                                                    <h6>{{ $item->created_at->format('d') }}<span>{{ strtolower($item->created_at->format('M')) }}</span></h6>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="lower-content">
+                                            <ul class="post-info clearfix">
+                                                <li><i class="far fa-user-circle"></i> <a href="#">{{ $item->author->name ?? 'Unknown' }}</a></li>
+                                                {{-- Optional: <li><i class="far fa-clock"></i> {{ $item->created_at->diffForHumans() }}</li> --}}
+                                            </ul>
+                                            <h2>
+                                                <a href="{{ route('frontend.blogs.article.view', $item->slug) }}">
+                                                    {{ $item->title }}
+                                                </a>
+                                            </h2>
+                                            <div>{!! Str::limit(strip_tags($item->description), 150) !!}</div>
+                                            <div class="btn-box">
+                                                <a href="{{ route('frontend.blogs.article.view', $item->slug) }}" class="theme-btn">View More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!--  Hero area End -->
+    </section>
 
-<!-- Blog Area Start-->
-<section class="blog_area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 mb-5 mb-lg-0">
-                <div class="blog_left_sidebar row">
-                    @if (!empty($blogs) && $blogs->count())
-                        @foreach ($blogs as $blog)
-                            <article class="blog_item col-12 col-md-6 mb-4">
-                                <div class="blog_item_img">
-                                    <img
-                                        class="card-img rounded-0"
-                                        src="{{ $blog->feature_image ? url('public/assets/uploads/blogs/' . $blog->feature_image) : url('public/assets/images/default-blog.jpg') }}"
-                                        alt="{{ $blog->title }}"
-                                    >
-                                    <a href="#" class="blog_item_date">
-                                        <h3>{{ \Carbon\Carbon::parse($blog->created_at)->format('d') }}</h3>
-                                        <p>{{ \Carbon\Carbon::parse($blog->created_at)->format('M') }}</p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" href="{{ route('frontend.blogs.article.view', $blog->slug) }}">
-                                        <h2 class="blog-head" style="color: #2d2d2d;">{{ $blog->title }}</h2>
-                                    </a>
-                                    <p>{{ Str::limit(strip_tags($blog->description), 150, '...') }}</p>
-                                    <ul class="blog-info-link">
-                                        {{-- <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li> --}}
-                                    </ul>
-                                </div>
-                            </article>
-                        @endforeach
-                    @else
-                        <p>No blog posts available.</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <!-- Blog Area End-->
 
 

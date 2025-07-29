@@ -188,7 +188,7 @@
                 <div class="col-lg-6 col-md-12 col-sm-12 title-column">
                     <div class="sec-title light">
                         <h2>{{ $section8['data']['topic'] ?? '' }}</h2>
-                        <a href="#" class="theme-btn btn-one">Our Work</a>
+                        <a href="{{ route('frontend.home.ourworks') }}" class="theme-btn btn-one">Our Work</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12 inner-column">
@@ -366,52 +366,49 @@
                 <div class="col-lg-6 col-md-12 col-sm-12 title-column">
                     <div class="sec-title light">
                         <h2>{{ $section5['data']['topic'] }}</h2>
-                        <a href="{{ $section5['data']['attribute']['link'] }}" class="theme-btn btn-one">view all</a>
+                        <a href="{{ route('frontend.home.ourworks') }}" class="theme-btn btn-one">view all</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12 inner-column">
                     <div class="inner-content">
-                        <div class="events-block-one">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <figure class="image"><img
-                                            src="{{ asset('public/assets/frontend/images/resource/events-1.jpg')}}"
-                                            alt="{{ $settings['website_name'] }}">
-                                    </figure>
-                                    <div class="post-date">
-                                        <h6>16<span>dec</span></h6>
+                        <div class="row">
+                            @if($page_projects && count($page_projects))
+                                @foreach ($page_projects as $item)
+                                    <div class="col-12 col-md-12">
+                                        <div class="events-block-one">
+                                            <div class="inner-box">
+                                                <div class="image-box">
+                                                    <figure class="image">
+                                                        <img src="{{ asset('public/assets/uploads/projects/' . $item->feature_image) }}"
+                                                            alt="{{ $item->title }}" />
+                                                    </figure>
+                                                    @if($item->created_at)
+                                                        <div class="post-date">
+                                                            <h6>{{ $item->created_at->format('d') }}<span>{{ strtolower($item->created_at->format('M')) }}</span>
+                                                            </h6>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <div class="inner">
+                                                    <ul class="info clearfix">
+                                                        <li><i class="far fa-user-circle"></i>
+                                                            {{ $item->author->name ?? 'Unknown' }}</li>
+                                                        {{-- Optional: Add time or location if you have --}}
+                                                        {{-- <li><i class="far fa-clock"></i>2:00 am</li> --}}
+                                                        {{-- <li><i class="far fa-map"></i>Location here</li> --}}
+                                                    </ul>
+                                                    <h3>
+                                                        <a href="{{ route('frontend.home.ourworks.article.view', $item->slug) }}">
+                                                            {{ $item->title }}
+                                                        </a>
+                                                    </h3>
+                                                    <p>{!! Str::limit(strip_tags($item->description), 150) !!}</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="inner">
-                                    <ul class="info clearfix">
-                                        <li><i class="far fa-clock"></i>2:00 am</li>
-                                        <li><i class="far fa-map"></i>60 broklyn street</li>
-                                    </ul>
-                                    <h3><a href="{{ route('home.index') }}">zebra and girrafe on the street</a></h3>
-                                    <p>Suspendisse finibus urna mauris, lorem ipsum is simply free.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="events-block-one">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <figure class="image"><img
-                                            src="{{ asset('public/assets/frontend/images/resource/events-2.jpg')}}"
-                                            alt="{{ $settings['website_name'] }}">
-                                    </figure>
-                                    <div class="post-date">
-                                        <h6>05<span>dec</span></h6>
-                                    </div>
-                                </div>
-                                <div class="inner">
-                                    <ul class="info clearfix">
-                                        <li><i class="far fa-clock"></i>2:00 am</li>
-                                        <li><i class="far fa-map"></i>60 broklyn street</li>
-                                    </ul>
-                                    <h3><a href="{{ route('home.index') }}">how Interaction with Animal can</a></h3>
-                                    <p>Suspendisse finibus urna mauris, lorem ipsum is simply free.</p>
-                                </div>
-                            </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -460,75 +457,41 @@
                 <h2>Latest news & <br />Articles</h2>
             </div>
             <div class="row clearfix">
-                <div class="col-lg-4 col-md-6 col-sm-12 news-block">
-                    <div class="news-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="blog-details.html"><img
-                                            src="{{ asset('public/assets/frontend/images/news/news-1.jpg')}}"
-                                            alt="{{ $settings['website_name'] }}"></a>
-                                </figure>
-                                <div class="post-date">
-                                    <h6>16<span>dec</span></h6>
+                @if($page_blogs && count($page_blogs))
+                    @foreach ($page_blogs as $blog_item)
+                        <div class="col-lg-4 col-md-6 col-sm-12 news-block">
+                            <div class="news-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                <div class="inner-box">
+                                    <div class="image-box">
+                                        <figure class="image">
+                                            <img src="{{ asset('public/assets/uploads/blogs/' . $blog_item->feature_image) }}"
+                                                alt="{{ $blog_item->title }}" />
+                                        </figure>
+                                        @if($blog_item->created_at)
+                                            <div class="post-date">
+                                                <h6>{{ $blog_item->created_at->format('d') }}<span>{{ strtolower($blog_item->created_at->format('M')) }}</span>
+                                                </h6>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="lower-content">
+                                        <ul class="post-info clearfix">
+                                            <li><i class="far fa-user-circle"></i><a
+                                                    href="#">{{ $blog_item->author->name ?? 'Unknown' }}</a></li>
+                                            {{-- <li><i class="far fa-comments"></i><a href="blog-details.html">2 Comments</a></li>
+                                            --}}
+                                        </ul>
+                                        <h3><a href="{{ route('frontend.blogs.article.view', $blog_item->slug) }}">how
+                                                Interaction with Animal can Release</a></h3>
+                                        <div class="link"><a href="{{ route('frontend.blogs.article.view', $blog_item->slug) }}"><i
+                                                    class="flaticon-right-arrow"></i></a></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="lower-content">
-                                <ul class="post-info clearfix">
-                                    <li><i class="far fa-user-circle"></i><a href="blog-details.html">Admin</a></li>
-                                    <li><i class="far fa-comments"></i><a href="blog-details.html">2 Comments</a></li>
-                                </ul>
-                                <h3><a href="blog-details.html">how Interaction with Animal can Release</a></h3>
-                                <div class="link"><a href="blog-details.html"><i class="flaticon-right-arrow"></i></a></div>
-                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 news-block">
-                    <div class="news-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="blog-details.html"><img
-                                            src="{{ asset('public/assets/frontend/images/news/news-2.jpg')}}"
-                                            alt="{{ $settings['website_name'] }}"></a>
-                                </figure>
-                                <div class="post-date">
-                                    <h6>15<span>dec</span></h6>
-                                </div>
-                            </div>
-                            <div class="lower-content">
-                                <ul class="post-info clearfix">
-                                    <li><i class="far fa-user-circle"></i><a href="blog-details.html">Admin</a></li>
-                                    <li><i class="far fa-comments"></i><a href="blog-details.html">3 Comments</a></li>
-                                </ul>
-                                <h3><a href="blog-details.html">Donec eget condimentum sapien</a></h3>
-                                <div class="link"><a href="blog-details.html"><i class="flaticon-right-arrow"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 news-block">
-                    <div class="news-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="blog-details.html"><img
-                                            src="{{ asset('public/assets/frontend/images/news/news-3.jpg')}}"
-                                            alt="{{ $settings['website_name'] }}"></a>
-                                </figure>
-                                <div class="post-date">
-                                    <h6>14<span>dec</span></h6>
-                                </div>
-                            </div>
-                            <div class="lower-content">
-                                <ul class="post-info clearfix">
-                                    <li><i class="far fa-user-circle"></i><a href="blog-details.html">Admin</a></li>
-                                    <li><i class="far fa-comments"></i><a href="blog-details.html">0 Comments</a></li>
-                                </ul>
-                                <h3><a href="blog-details.html">Etiam vel porttitor mi convallis</a></h3>
-                                <div class="link"><a href="blog-details.html"><i class="flaticon-right-arrow"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
+
             </div>
         </div>
     </section>
@@ -569,6 +532,13 @@
     <style>
         .plyr__controls {
             display: none !important;
+        }
+
+        .events-block-one .inner-box .image-box .image img {
+            width: 100%;
+            transition: all 500ms ease;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 @endpush

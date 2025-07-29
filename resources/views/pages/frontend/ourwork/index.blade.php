@@ -57,42 +57,42 @@
 
                     <div class="blog-classic-content row">
                         @if($page_blogs && count($page_blogs))
-    @foreach ($page_blogs as $item)
-        <div class="col-12 col-md-6 news-block-one wow fadeInUp animated" data-wow-delay="00ms"
-            data-wow-duration="1500ms">
-            <div class="inner-box">
-                <div class="image-box">
-                    <figure class="image">
-                        <a href="{{ route('frontend.home.ourworks.article.view', $item->slug) }}">
-                            <img src="{{ asset('public/assets/uploads/projects/' . $item->feature_image) }}"
-                                 alt="{{ $item->title }}">
-                        </a>
-                    </figure>
-                    @if($item->created_at)
-                        <div class="post-date">
-                            <h6>{{ $item->created_at->format('d') }}<span>{{ strtolower($item->created_at->format('M')) }}</span></h6>
-                        </div>
-                    @endif
-                </div>
-                <div class="lower-content">
-                    <ul class="post-info clearfix">
-                        <li><i class="far fa-user-circle"></i> <a href="#">{{ $item->author->name ?? 'Unknown' }}</a></li>
-                        {{-- Optional: <li><i class="far fa-clock"></i> {{ $item->created_at->diffForHumans() }}</li> --}}
-                    </ul>
-                    <h2>
-                        <a href="{{ route('frontend.home.ourworks.article.view', $item->slug) }}">
-                            {{ $item->title }}
-                        </a>
-                    </h2>
-                    <div>{!! Str::limit(strip_tags($item->description), 150) !!}</div>
-                    <div class="btn-box">
-                        <a href="{{ route('frontend.home.ourworks.article.view', $item->slug) }}" class="theme-btn">View More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
-@endif
+                            @foreach ($page_blogs as $item)
+                                <div class="col-12 col-md-6 news-block-one wow fadeInUp animated" data-wow-delay="00ms"
+                                    data-wow-duration="1500ms">
+                                    <div class="inner-box">
+                                        <div class="image-box">
+                                            <figure class="image">
+                                                <a href="{{ route('frontend.home.ourworks.article.view', $item->slug) }}">
+                                                    <img src="{{ asset('public/assets/uploads/projects/' . $item->feature_image) }}"
+                                                        alt="{{ $item->title }}">
+                                                </a>
+                                            </figure>
+                                            @if($item->created_at)
+                                                <div class="post-date">
+                                                    <h6>{{ $item->created_at->format('d') }}<span>{{ strtolower($item->created_at->format('M')) }}</span></h6>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="lower-content">
+                                            <ul class="post-info clearfix">
+                                                <li><i class="far fa-user-circle"></i> <a href="#">{{ $item->author->name ?? 'Unknown' }}</a></li>
+                                                {{-- Optional: <li><i class="far fa-clock"></i> {{ $item->created_at->diffForHumans() }}</li> --}}
+                                            </ul>
+                                            <h2>
+                                                <a href="{{ route('frontend.home.ourworks.article.view', $item->slug) }}">
+                                                    {{ $item->title }}
+                                                </a>
+                                            </h2>
+                                            <div>{!! Str::limit(strip_tags($item->description), 150) !!}</div>
+                                            <div class="btn-box">
+                                                <a href="{{ route('frontend.home.ourworks.article.view', $item->slug) }}" class="theme-btn">View More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
 
                     </div>
                 </div>
