@@ -52,11 +52,13 @@ use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use Stripe\PaymentIntent;
 use App\Helpers\SmsHelper;
+use App\Models\Donation;
 
 class DonationController extends Controller
 {
     public function createStripeSession(Request $request)
     {
+        session(['donation_form_data' => $request->all()]);
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $amount = (int) $request->amount * 100; // convert to cents
@@ -77,13 +79,64 @@ class DonationController extends Controller
                     ]
                 ],
                 'mode' => 'payment',
-                'success_url' => url('/payment-success'),
-                'cancel_url' => url('/payment-cancel'),
+                'success_url' => route('payment.success'),  // see next step
+                'cancel_url' => route('payment.cancel'),
             ]);
 
             return response()->json(['id' => $session->id]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+    public function success(Request $request)
+    {
+        // Retrieve saved form data from session
+        $formData = session('donation_form_data');
+
+        if (!$formData) {
+            return view('pages.frontend.messages.index', [
+                'message_title' => 'Session Expired',
+                'message' => 'Your session has expired. Please try again.',
+                'code' => '419'
+            ]);
+        }
+
+        // Here, save $formData to your database, e.g. Donation model:
+        Donation::create([
+            'payment_type' => $formData['payment_type'] ?? 'one_time',
+            'amount' => $formData['amount'],
+            'cover_fee' => isset($formData['confirm_donation']),
+            'title' => $formData['info_title'] ?? null,
+            'first_name' => $formData['info_first_name'],
+            'last_name' => $formData['info_last_name'],
+            'email' => $formData['info_email'],
+            'mobile' => $formData['info_mobile'] ?? null,
+            'on_behalf' => isset($formData['my_gift']),
+            'country' => $formData['billing_info_country'] ?? null,
+            'address1' => $formData['billing_info_address1'],
+            'address2' => $formData['billing_info_address2'] ?? null,
+            'city' => $formData['billing_info_city'],
+            'province' => $formData['billing_info_province'],
+            'postal_code' => $formData['billing_info_postal_code'],
+        ]);
+
+        // Clear session data
+        session()->forget('donation_form_data');
+
+        return view('pages.frontend.messages.index', [
+            'message_title' => 'Payment Successful',
+            'message' => 'Thank you! Your payment was successfully processed.',
+            'code' => '200'
+        ]);
+    }
+
+    public function cancel()
+    {
+        return view('pages.frontend.messages.index', [
+            'message_title' => 'Payment Cancelled',
+            'message' => 'Your payment process was cancelled. Please try again or contact support.',
+            'code' => '400'
+        ]);
     }
 }

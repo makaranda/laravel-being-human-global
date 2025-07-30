@@ -18,6 +18,7 @@ use App\Http\Controllers\admin\MainSliderController;
 use App\Http\Controllers\admin\PagesController;
 use App\Http\Controllers\admin\AnimalsController;
 use App\Http\Controllers\admin\OrdersController;
+use App\Http\Controllers\admin\DonateController;
 use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\ProductGalleryController;
 use App\Http\Controllers\admin\ProgrammesController;
@@ -157,6 +158,8 @@ Route::prefix('/donation')->group(function () {
     Route::get('/', [HomeController::class, 'showDonation'])->name('frontend.home.donation');
     Route::get('/create-stripe-session', [DonationController::class, 'createStripeSession'])->name('stripe.session');
     Route::post('/donation-submit', [HomeController::class, 'submitDonation'])->name('frontend.home.submitdonation');
+    Route::get('/payment-success', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('/payment-cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 });
 //Route::get('/blogs-article', [HomeController::class, 'showArticles'])->name('frontend.blogs.article');
 //Route::get('/news-events', [HomeController::class, 'showNews'])->name('frontend.news.events');
@@ -328,15 +331,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
         // Donations routes
         Route::prefix('donations')->group(function () {
-            Route::get('/', [OrdersController::class, 'index'])->name('admin.donations');
-            Route::get('/create', [OrdersController::class, 'create'])->name('admin.createdonation');
-            Route::post('/store', [OrdersController::class, 'store'])->name('admin.storedonation');
-            Route::get('/edit/{id}', [OrdersController::class, 'edit'])->name('admin.editdonation');
-            Route::post('/update/{id}', [OrdersController::class, 'update'])->name('admin.updatedonation');
-            Route::delete('/delete/{id}', [OrdersController::class, 'delete'])->name('admin.deletedonation');
-            Route::get('/fetch-order-items/{id}', [OrdersController::class, 'fetchOrderItems'])->name('admin.fetchorderitems');
+            Route::get('/', [DonateController::class, 'index'])->name('admin.donations');
+            Route::get('/create', [DonateController::class, 'create'])->name('admin.createdonation');
+            Route::post('/store', [DonateController::class, 'store'])->name('admin.storedonation');
+            Route::get('/edit/{id}', [DonateController::class, 'edit'])->name('admin.editdonation');
+            Route::post('/update/{id}', [DonateController::class, 'update'])->name('admin.updatedonation');
+            Route::delete('/delete/{id}', [DonateController::class, 'delete'])->name('admin.deletedonation');
+            Route::get('/fetch-order-items/{id}', [DonateController::class, 'fetchOrderItems'])->name('admin.fetchorderitems');
 
-            Route::get('/get-subcategories/{category_id}', [OrdersController::class, 'getSubCategories'])->name('get.subcategories');
+            Route::get('/get-subcategories/{category_id}', [DonateController::class, 'getSubCategories'])->name('get.subcategories');
         });
 
         // Blogs routes
