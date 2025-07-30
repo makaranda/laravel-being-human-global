@@ -152,11 +152,25 @@
     </div>
 </div>
 
-<!-- Google Translate Element -->
-<div id="google_translate_element" style="display:none;"></div>
+
 <!-- Google Translate Init -->
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,si',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+</script>
+
+<!-- Load Google Translate Script -->
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <script>
     function translateTo(lang) {
+        console.log('My Language : ', lang);
         const interval = setInterval(() => {
             const iframe = document.querySelector('iframe.goog-te-menu-frame');
             if (!iframe) return;
@@ -165,31 +179,18 @@
             const items = innerDoc.querySelectorAll('.goog-te-menu2-item span.text');
 
             items.forEach(item => {
-                if (item.innerText.toLowerCase().includes(lang.toLowerCase())) {
+                const itemLang = item.innerText.trim().toLowerCase();
+                if (itemLang.includes(lang.toLowerCase())) {
                     item.click();
                     clearInterval(interval);
                 }
             });
-        }, 500);
+        }, 300);
 
+        // Failsafe: clear after 5s
         setTimeout(() => clearInterval(interval), 5000);
     }
 </script>
-
-<script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: "en",
-            includedLanguages: "en,si",
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-            autoDisplay: false
-        }, "google_translate_element");
-    }
-</script>
-
-<!-- Load Google Translate JS -->
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 <script>
     const player = new Plyr('#video-source');

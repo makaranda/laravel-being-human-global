@@ -191,6 +191,7 @@
                             </li> --}}
                             <li><a href="{{ route('frontend.about') }}">About Us</a></li>
                             <li><a href="{{ route('frontend.service') }}">Services</a></li>
+                            <li><a href="{{ route('frontend.home.ourworks') }}">Our Works</a></li>
 
                             {{-- <li class="dropdown {{ request()->routeIs('frontend.about') ? 'current' : '' }}">
                                 <a href="#">Get Involved</a>

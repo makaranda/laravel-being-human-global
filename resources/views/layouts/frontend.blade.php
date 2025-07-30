@@ -85,6 +85,8 @@
 
 <body class="website-body">
     <div class="boxed_wrapper">
+        <!-- Google Translate Element -->
+        <div id="google_translate_element" style="display:none;"></div>
         @include('components.nav')
 
         @yield('content')
