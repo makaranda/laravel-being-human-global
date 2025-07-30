@@ -6,7 +6,7 @@
     <section class="page-title">
         <div class="img-wrap parallax-demo-1">
             <div class="parallax-inner back-img"
-                style="background-image: url({{ url('public/assets/frontend/images/background/' . ($settings['page_banner'] ?? 'default-banner.jpg')) }});">
+                style="background-image: url({{ url('public/assets/frontend/images/background/' . ($settings_banner ?? 'default-banner.jpg')) }});">
             </div>
         </div>
         <div class="auto-container">
@@ -28,7 +28,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <img src="{{ asset('public/assets/images/error.svg') }}" alt="Error" class="error-image mb-4" />
+                    <img src="{{ asset('public/assets/images/' . $message_icon ?? 'error.svg') }}" alt="Error"
+                        class="error-image mb-4" />
                     <h1 class="error-code display-2">{{ $code ?? 'Oops!' }}</h1>
                     <h3 class="error-message mb-3">{{ $message ?? 'Something went wrong.' }}</h3>
                     <p class="mb-4">The page you're looking for may have been moved, deleted, or is temporarily unavailable.

@@ -59,6 +59,8 @@ class DonationController extends Controller
     public function createStripeSession(Request $request)
     {
         session(['donation_form_data' => $request->all()]);
+        //dd($request->all());
+        //dd(session('donation_form_data'));
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $amount = (int) $request->amount * 100; // convert to cents
@@ -91,6 +93,8 @@ class DonationController extends Controller
 
     public function success(Request $request)
     {
+        $settings = Setting::first();
+        $settings_banner = $settings->page_banner;
         // Retrieve saved form data from session
         $formData = session('donation_form_data');
 
@@ -103,6 +107,7 @@ class DonationController extends Controller
         }
 
         // Here, save $formData to your database, e.g. Donation model:
+        //dd($formData);
         Donation::create([
             'payment_type' => $formData['payment_type'] ?? 'one_time',
             'amount' => $formData['amount'],
@@ -119,6 +124,8 @@ class DonationController extends Controller
             'city' => $formData['billing_info_city'],
             'province' => $formData['billing_info_province'],
             'postal_code' => $formData['billing_info_postal_code'],
+            'status' => 1,
+            'confirmation' => 1,
         ]);
 
         // Clear session data
@@ -127,15 +134,51 @@ class DonationController extends Controller
         return view('pages.frontend.messages.index', [
             'message_title' => 'Payment Successful',
             'message' => 'Thank you! Your payment was successfully processed.',
+            'message_icon' => 'success-svgrepo-com.svg',
+            'settings_banner' => $settings_banner,
             'code' => '200'
         ]);
     }
 
     public function cancel()
     {
+        $settings = Setting::first();
+        $settings_banner = $settings->page_banner;
+        $formData = session('donation_form_data');
+
+        if (!$formData) {
+            return view('pages.frontend.messages.index', [
+                'message_title' => 'Session Expired and Payment Cancelled',
+                'message' => 'Your payment process was cancelled and session has expired. Please try again.',
+                'code' => '419'
+            ]);
+        }
+
+        Donation::create([
+            'payment_type' => $formData['payment_type'] ?? 'one_time',
+            'amount' => $formData['amount'],
+            'cover_fee' => isset($formData['confirm_donation']),
+            'title' => $formData['info_title'] ?? null,
+            'first_name' => $formData['info_first_name'],
+            'last_name' => $formData['info_last_name'],
+            'email' => $formData['info_email'],
+            'mobile' => $formData['info_mobile'] ?? null,
+            'on_behalf' => isset($formData['my_gift']),
+            'country' => $formData['billing_info_country'] ?? null,
+            'address1' => $formData['billing_info_address1'],
+            'address2' => $formData['billing_info_address2'] ?? null,
+            'city' => $formData['billing_info_city'],
+            'province' => $formData['billing_info_province'],
+            'postal_code' => $formData['billing_info_postal_code'],
+            'status' => 0,
+            'confirmation' => 0,
+        ]);
+
         return view('pages.frontend.messages.index', [
             'message_title' => 'Payment Cancelled',
             'message' => 'Your payment process was cancelled. Please try again or contact support.',
+            'message_icon' => 'error-svgrepo-com.svg',
+            'settings_banner' => $settings_banner,
             'code' => '400'
         ]);
     }

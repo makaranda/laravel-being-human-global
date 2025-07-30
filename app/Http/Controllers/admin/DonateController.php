@@ -41,4 +41,20 @@ class DonateController extends Controller
         //dd($products);
         return view('pages.dashboard.donations.index', compact('donations'));
     }
+
+    public function delete($id)
+    {
+        // Find the page by ID or fail if not found
+        $page = Donation::findOrFail($id);
+        if (!$page) {
+            return redirect()->route('admin.donations')->with('error', 'Donation not found.');
+        }
+        // Update the page status to 0 (inactive) instead of deleting it
+        $page->status = 0;
+        $page->save();
+
+        // Redirect with success message
+        return redirect()->route('admin.donations')->with('success', 'Donation status updated to inactive');
+
+    }
 }

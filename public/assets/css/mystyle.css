@@ -248,6 +248,20 @@
     font-style: normal;
 }
 
+.font-family-2>* {
+    font-family: "Playwrite AU QLD", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.font-family-3>* {
+    font-family: "Playwrite AU QLD", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
 .theme-btn.btn-one {
     /* background: #462304; */
     background: #00342e;
@@ -417,6 +431,16 @@ p {
 
 #newsletterForm .error {
     color: red;
+}
+
+
+p {
+    font-family: 'Source Sans 3', Helvetica, Arial, 'Nimbus Sans L', sans-serif;
+    /* font-family: 'Rubik', sans-serif; */
+    /* color: #3e3e3e; */
+    color: #322c2a;
+    font-size: 18px;
+    line-height: 1.2;
 }
 
 /* end theme style */

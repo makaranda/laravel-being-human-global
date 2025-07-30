@@ -8,6 +8,7 @@
 
 
     <div id="js-preloader" class="js-preloader">
+        <h4 class="preloader_text d-none">Waiting</h4>
         <div class="preloader-inner">
             <span class="dot"></span>
             <div class="dots">
@@ -255,7 +256,7 @@
         </form>
 
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center pt-25 pb-25">
             <div class="col-12 col-md-12 text-center">
                 <p class="text-gray">&copy; Copyright {{ now()->year }} by
                     <a href="{{ route('home.index') }}">{{ $settings['website_name'] ?? 'YourWebsite' }}
@@ -334,7 +335,21 @@
         h3 {
             color: #007a6c;
             text-transform: capitalize;
-            text-shadow: 3px -1px 3px #00000052 !important;
+            text-shadow: 1px 0px 5px #00000052 !important;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+            position: relative;
+            font-family: "Raleway", sans-serif;
+            font-weight: 900;
+            margin: 0px;
+            transition: all 500ms ease;
         }
 
         .btn-secondary {
@@ -481,7 +496,7 @@
             width: 16px;
             height: 16px;
             margin-left: 16px;
-            background: #934bf1;
+            background: #89603c;
             border-radius: 50%;
         }
 
@@ -563,6 +578,16 @@
         .select2-container .select2-selection--single .select2-selection__rendered {
             padding-top: 5px;
             /* padding-bottom: 10px; */
+        }
+
+        .preloader_text {
+            font-family: "Raleway", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-size: 36px;
+            font-style: normal;
+            color: #015047;
+            text-shadow: 1px 1px 2px #000000d1;
         }
     </style>
 @endpush
@@ -688,15 +713,23 @@
 
                         // Fetch donation amount
                         const amount = $('#amount').val();
+                        let formData = $('#paypal_data_form').serializeArray(); // Replace with your actual form ID
+
+                        // Add extra fields to the serialized data
+                        formData.push({ name: 'amount', value: amount });
+                        formData.push({ name: 'g-recaptcha-response', value: token });
+                        formData.push({ name: '_token', value: "{{ csrf_token() }}" });
 
                         // Proceed with AJAX
                         $.ajax({
                             url: "{{ route('stripe.session') }}",
                             method: "GET",
-                            data: {
-                                amount: amount,
-                                'g-recaptcha-response': token,
-                                _token: "{{ csrf_token() }}"
+                            //data: {amount: amount,'g-recaptcha-response': token, _token: "{{ csrf_token() }}"},
+                            data: formData,
+                            beforeSend: function () {
+                                $('.preloader_text').removeClass('d-none');
+                                $('#js-preloader').removeClass('loaded');
+                                $('#js-preloader').css({ opacity: '1' });
                             },
                             success: function (session) {
                                 stripe.redirectToCheckout({ sessionId: session.id });

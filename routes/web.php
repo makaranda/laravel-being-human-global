@@ -158,8 +158,8 @@ Route::prefix('/donation')->group(function () {
     Route::get('/', [HomeController::class, 'showDonation'])->name('frontend.home.donation');
     Route::get('/create-stripe-session', [DonationController::class, 'createStripeSession'])->name('stripe.session');
     Route::post('/donation-submit', [HomeController::class, 'submitDonation'])->name('frontend.home.submitdonation');
-    Route::get('/payment-success', [PaymentController::class, 'success'])->name('payment.success');
-    Route::get('/payment-cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+    Route::get('/payment-success', [DonationController::class, 'success'])->name('payment.success');
+    Route::get('/payment-cancel', [DonationController::class, 'cancel'])->name('payment.cancel');
 });
 //Route::get('/blogs-article', [HomeController::class, 'showArticles'])->name('frontend.blogs.article');
 //Route::get('/news-events', [HomeController::class, 'showNews'])->name('frontend.news.events');

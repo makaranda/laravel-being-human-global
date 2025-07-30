@@ -345,7 +345,7 @@
     <section class="news-section centred">
         <div class="auto-container">
             <div class="sec-title centred">
-                <h2>Latest news & <br />Articles</h2>
+                <h2>Latest news & Articles</h2>
             </div>
             <div class="row clearfix">
                 @if($page_blogs && count($page_blogs))
@@ -372,8 +372,9 @@
                                             {{-- <li><i class="far fa-comments"></i><a href="blog-details.html">2 Comments</a></li>
                                             --}}
                                         </ul>
-                                        <h3><a href="{{ route('frontend.blogs.article.view', $blog_item->slug) }}">how
-                                                Interaction with Animal can Release</a></h3>
+                                        <h3><a
+                                                href="{{ route('frontend.blogs.article.view', $blog_item->slug) }}">{{ $blog_item->title }}</a>
+                                        </h3>
                                         <div class="link"><a href="{{ route('frontend.blogs.article.view', $blog_item->slug) }}"><i
                                                     class="flaticon-right-arrow"></i></a></div>
                                     </div>
