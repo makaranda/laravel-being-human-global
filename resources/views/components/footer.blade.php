@@ -219,6 +219,8 @@
     </div>
 </div>
 
+
+
 @push('css')
 
     <style>
@@ -230,6 +232,7 @@
 @endpush
 
 @push('scripts')
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ url('public/assets/frontend/js/jquery.redirect.js') }}"></script>
     <script src="{{ url('public/assets/frontend/js/parsley.js') }}"></script>
@@ -238,7 +241,10 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
     <script>
+
         // $(document).ready(function () {
         //     $('#newsletterForm').parsley();
         //     $('#newsletterForm').on('submit', function (e) {

@@ -212,14 +212,17 @@
                                             fee for my donation.</label>
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-12 mt-2">
+                                    <div class="g-recaptcha" data-sitekey="6LcZqjspAAAAAJ5540uBly6UuzR1H9yPQj6ajAMy"
+                                        data-callback="onLoginCaptchaSubmit"
+                                        style="display: flex; align-items: center; justify-content: center;"></div>
+                                </div>
                                 <div class="col-12 col-md-12 mt-13">
                                     <div class="form-group">
                                         <div class="col-md-12 text-center">
-                                            <button id="stripeDonateBtn"
+                                            <button id="submit" name="pay_now"
                                                 class="btn btn-danger donate_now_btn w-100 rounded-0 text-uppercase fw-600"
-                                                style="cursor: cursor;">
-                                                Donate Now
-                                            </button>
+                                                style="cursor: not-allowed;" disabled>Donate Now</button>
                                         </div>
                                     </div>
                                 </div>
@@ -273,8 +276,6 @@
 @endsection
 
 @push('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
     <link rel="stylesheet" href="{{ url('public/assets/frontend/css/parsley.css') }}">
     <link rel="stylesheet" href="{{ url('public/assets/frontend/css/jquery-confirm.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -568,8 +569,6 @@
 @endpush
 
 @push('scripts')
-    <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
-    <script src="https://js.stripe.com/v3/"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ url('public/assets/frontend/js/jquery.redirect.js') }}"></script>
     <script src="{{ url('public/assets/frontend/js/parsley.js') }}"></script>
@@ -578,7 +577,6 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $('#info_title').select2({
             selectOnClose: true
@@ -594,21 +592,21 @@
             setTimeout(() => $('#js-preloader').css({ opacity: '0' }), 2000);
         });
 
-        // function onLoginCaptchaSubmit(token) {
-        //     if (token) {
-        //         const submitButton = document.getElementById("submit");
-        //         submitButton.disabled = false;
-        //         submitButton.style.cursor = "pointer";
-        //         return true;
-        //     } else {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Captcha Error',
-        //             text: 'Recaptcha failed. Please refresh the page.',
-        //         });
-        //         return false;
-        //     }
-        // }
+        function onLoginCaptchaSubmit(token) {
+            if (token) {
+                const submitButton = document.getElementById("submit");
+                submitButton.disabled = false;
+                submitButton.style.cursor = "pointer";
+                return true;
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Captcha Error',
+                    text: 'Recaptcha failed. Please refresh the page.',
+                });
+                return false;
+            }
+        }
 
         $(function () {
             const $toTop = $('#toTop');
@@ -659,15 +657,24 @@
                 $otherAmount.val('');
             });
 
-            const stripe = Stripe("{{ env('STRIPE_PUBLISHABLE_KEY') }}");
-
             $('#paypal_data_form').parsley();
 
             $('#paypal_data_form').on('submit', function (e) {
                 e.preventDefault();
-                console.log('Donation Amount : ', $('#amount').val());
+
+                const rcres = grecaptcha.getResponse();
+                if (!rcres.length) {
+                    grecaptcha.reset();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Recaptcha Required',
+                        text: 'Please complete the Recaptcha.',
+                    });
+                    return;
+                }
 
                 if (!$('#paypal_data_form').parsley().isValid()) {
+                    grecaptcha.reset();
                     Swal.fire({
                         icon: 'error',
                         title: 'Form Error',
@@ -676,40 +683,41 @@
                     return;
                 }
 
-                // reCAPTCHA v3
-                grecaptcha.ready(function () {
-                    grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', { action: 'submit' }).then(function (token) {
-                        // Add token to form
-                        $('<input>').attr({
-                            type: 'hidden',
-                            name: 'g-recaptcha-response',
-                            value: token
-                        }).appendTo('#paypal_data_form');
+                $.ajax({
+                    url: "action/form_submit.php",
+                    method: "POST",
+                    dataType: "json",
+                    data: $('#paypal_data_form').serialize(),
+                    success(data) {
+                        grecaptcha.reset();
 
-                        // Fetch donation amount
-                        const amount = $('#amount').val();
+                        if (data.recatcha_msg === 'success') {
+                            $.redirect("https://www.sandbox.PayPal.com/cgi-bin/webscr", {
+                                amount: data.amount,
+                                business: data.business,
+                                item_name: data.item_name,
+                                item_number: data.item_number,
+                                no_shipping: data.no_shipping,
+                                currency_code: data.currency_code,
+                                notify_url: data.notify_url,
+                                cancel_return: data.cancel_return,
+                                cmd: data.cmd,
+                                return_value: data.return
+                            }, "POST", "_self");
+                        } else {
+                            const messages = {
+                                'failed': 'Recaptcha failed. Please refresh the page.',
+                                'required': 'Recaptcha is required. Please check the box.',
+                                '': 'Something went wrong. Please try again.'
+                            };
 
-                        // Proceed with AJAX
-                        $.ajax({
-                            url: "{{ route('stripe.session') }}",
-                            method: "GET",
-                            data: {
-                                amount: amount,
-                                'g-recaptcha-response': token,
-                                _token: "{{ csrf_token() }}"
-                            },
-                            success: function (session) {
-                                stripe.redirectToCheckout({ sessionId: session.id });
-                            },
-                            error: function (err) {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Stripe Error',
-                                    text: 'Unable to create payment session.',
-                                });
-                            }
-                        });
-                    });
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Attention...!!!',
+                                text: messages[data.recatcha_msg] || messages[''],
+                            });
+                        }
+                    }
                 });
             });
         });

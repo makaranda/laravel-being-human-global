@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use App\Models\Setting;
 
 class Handler extends ExceptionHandler
 {
@@ -32,8 +33,9 @@ class Handler extends ExceptionHandler
         if ($this->isHttpException($exception)) {
             $code = $exception->getStatusCode();
             $message = $exception->getMessage() ?: 'An unexpected error occurred';
+            $settings = Setting::first();
 
-            return response()->view('pages/frontend/errors/error', compact('code', 'message'), $code);
+            return response()->view('pages/frontend/errors/error', compact('code', 'message', 'settings'), $code);
         }
 
         return parent::render($request, $exception);

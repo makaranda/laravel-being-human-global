@@ -26,7 +26,8 @@
 <script src="{{ url('public/assets/frontend/js/jquery.nice-select.min.js') }}"></script>
 <script src="{{ url('public/assets/frontend/js/jquery.counterup.min.js') }}"></script>
 <script src="{{ url('public/assets/frontend/js/waypoints.min.js') }}"></script>
-{{-- <script src="{{ url('public/assets/frontend/js/price_rangs.js') }}"></script> --}}
+{{--
+<script src="{{ url('public/assets/frontend/js/price_rangs.js') }}"></script> --}}
 
 
 <!-- jQuery plugins -->
@@ -48,12 +49,14 @@
 <!-- Bootstrap 5.3 JS (Include before closing </body>) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-{{-- <script src="{{ url('public/assets/frontend/js/main.js') }}"></script> --}}
+{{--
+<script src="{{ url('public/assets/frontend/js/main.js') }}"></script> --}}
 
 
 
 <!-- Success Modal -->
-<div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+<div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -70,7 +73,8 @@
             <div class="modal-footer">
                 <div class="course-data-bottom item-flex-center width-100">
                     <div class="btn-1 w-100">
-                        <a data-bs-dismiss="modal" class="float-end" aria-label="Close" href="javascript:void(0)">Close</a>
+                        <a data-bs-dismiss="modal" class="float-end" aria-label="Close"
+                            href="javascript:void(0)">Close</a>
                     </div>
                 </div>
             </div>
@@ -79,7 +83,8 @@
 </div>
 
 <!-- Warning Modal -->
-<div class="modal fade" id="warningModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+<div class="modal fade" id="warningModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="warningModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -96,7 +101,8 @@
             <div class="modal-footer">
                 <div class="course-data-bottom item-flex-center width-100">
                     <div class="btn-1 w-100">
-                        <a data-bs-dismiss="modal" class="float-end" aria-label="Close" href="javascript:void(0)">Close</a>
+                        <a data-bs-dismiss="modal" class="float-end" aria-label="Close"
+                            href="javascript:void(0)">Close</a>
                     </div>
                 </div>
             </div>
@@ -105,7 +111,8 @@
 </div>
 
 <!-- Error Modal -->
-<div class="modal fade" id="errorModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+<div class="modal fade" id="errorModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="errorModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -122,7 +129,8 @@
             <div class="modal-footer">
                 <div class="course-data-bottom item-flex-center width-100">
                     <div class="btn-1 w-100">
-                        <a data-bs-dismiss="modal" class="float-end" aria-label="Close" href="javascript:void(0)">Close</a>
+                        <a data-bs-dismiss="modal" class="float-end" aria-label="Close"
+                            href="javascript:void(0)">Close</a>
                     </div>
                 </div>
             </div>
@@ -131,7 +139,8 @@
 </div>
 
 <!-- Error Modal -->
-<div class="modal fade" id="waitingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="waitingModalLabel" aria-hidden="true">
+<div class="modal fade" id="waitingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="waitingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="waitingLoader">
             <div class="waitingLoader-container">
@@ -143,9 +152,47 @@
     </div>
 </div>
 
+<!-- Google Translate Element -->
+<div id="google_translate_element" style="display:none;"></div>
+<!-- Google Translate Init -->
+<script>
+    function translateTo(lang) {
+        const interval = setInterval(() => {
+            const iframe = document.querySelector('iframe.goog-te-menu-frame');
+            if (!iframe) return;
+
+            const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+            const items = innerDoc.querySelectorAll('.goog-te-menu2-item span.text');
+
+            items.forEach(item => {
+                if (item.innerText.toLowerCase().includes(lang.toLowerCase())) {
+                    item.click();
+                    clearInterval(interval);
+                }
+            });
+        }, 500);
+
+        setTimeout(() => clearInterval(interval), 5000);
+    }
+</script>
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: "en",
+            includedLanguages: "en,si",
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, "google_translate_element");
+    }
+</script>
+
+<!-- Load Google Translate JS -->
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 <script>
-  const player = new Plyr('#video-source');
+    const player = new Plyr('#video-source');
 </script>
 
 <script>
@@ -163,18 +210,18 @@
         myModal.show();
     }
 
-    $('#logout_btn').on('click', function() {
+    $('#logout_btn').on('click', function () {
         AlertModelDetails('Logout', 'Are you sure you want to logout this Admin?', 'Cancel', 'Logout', 0, '{{ route('admin.logout') }}', 'GET');
     });
 
-    $('#customer_logout_btn').on('click', function() {
+    $('#customer_logout_btn').on('click', function () {
         AlertModelDetails('Logout', 'Are you sure you want to logout this Customer?', 'Cancel', 'Logout', 0, '{{ route('frontend.userlogout') }}', 'GET');
     });
 
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.section_area ul').addClass('list-style-one clearfix');
 
         $('#forget_password_form').on('click', function (e) {
@@ -247,9 +294,9 @@
                             $('#alertModel').modal('show');
                         }
                     })
-                    .catch((err) => {
-                        console.error('Swal preConfirm error:', err);
-                    });
+                        .catch((err) => {
+                            console.error('Swal preConfirm error:', err);
+                        });
                 }
             });
         });
@@ -263,7 +310,7 @@
 
             let otp = $('#otp').val() ?? '';
             let user_id = $('#otp_user_id').val() ?? '';
-            console.log('lOGOUT : ',otp, user_id);
+            console.log('lOGOUT : ', otp, user_id);
             $.ajax({
                 url: url,
                 method: method,

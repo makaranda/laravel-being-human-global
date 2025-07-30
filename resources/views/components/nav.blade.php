@@ -151,11 +151,10 @@
                     @if($settings['social_instagram'])
                     <li><a href="{{ $settings['social_instagram'] }}"><i class="fab fa-instagram"></i></a></li>@endif
                 </ul>
-                {{-- <ul class="other-links clearfix">
-                    <li><a href="{{ route('frontend.userlogin') }}">Membership</a></li>
-                    <li><a href="{{ route('frontend.home.events') }}">Events</a></li>
-                    <li><a href="{{ url('zoo-map') }}">Zoo Map</a></li>
-                </ul> --}}
+                <ul class="other-links clearfix">
+                    <li><a href="#" onclick="translateTo('en')">English</a></li>
+                    <li><a href="#" onclick="translateTo('si')">සිංහල</a></li>
+                </ul>
             </div>
         </div>
     </div>

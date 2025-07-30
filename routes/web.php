@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 /** Frontend Controllers */
 use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\frontend\DonationController;
 use App\Http\Controllers\frontend\PaymentController;
 use App\Http\Controllers\frontend\CustomerDashboardController;
 
@@ -154,6 +155,7 @@ Route::prefix('/careers')->group(function () {
 // Donation Routes
 Route::prefix('/donation')->group(function () {
     Route::get('/', [HomeController::class, 'showDonation'])->name('frontend.home.donation');
+    Route::get('/create-stripe-session', [DonationController::class, 'createStripeSession'])->name('stripe.session');
     Route::post('/donation-submit', [HomeController::class, 'submitDonation'])->name('frontend.home.submitdonation');
 });
 //Route::get('/blogs-article', [HomeController::class, 'showArticles'])->name('frontend.blogs.article');
@@ -181,6 +183,10 @@ Route::post('/submit-payment', [PaymentController::class, 'processPayment'])->na
 Route::post('/receipt', [PaymentController::class, 'handleReceipt'])->name('payment.receipt');
 
 
+Route::get('/switch-language/{lang}', function ($lang) {
+    session(['locale' => $lang]);
+    return redirect()->back();
+})->name('switchLang');
 // Route::get('/home', function () {
 // Route::get('page/{slug}', function() {
 //     return "Page slug is " . request()->slug;

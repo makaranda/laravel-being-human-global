@@ -91,7 +91,7 @@
                                 style="background-image: url({{ asset('public/assets/frontend/images/shape/shape-1.png')}});">
                             </div>
                             <figure class="image"><img
-                                    src="{{ asset('public/assets/frontend/images/resource/570x570-banner-img.jpg')}}"
+                                    src="{{ asset('public/assets/frontend/images/resource/' . $section2['data']['image'] ?? '570x570-banner-img-01.jpg')}}"
                                     alt="{{ $settings['website_name'] }}"></figure>
                             <div class="icon-box"><img src="{{ asset('public/assets/frontend/images/icons/icon-1.png')}}"
                                     alt="{{ $settings['website_name'] }}"></div>
@@ -182,7 +182,7 @@
     <section class="events-section sec-pad">
         <div class="bg-layer"></div>
         <div class="bg-image"
-            style="background-image: url({{ asset('public/assets/frontend/images/resource/' . $section8['data']['image'])}});">
+            style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url({{ asset('public/assets/frontend/images/resource/' . $section8['data']['image'])}});">
         </div>
         <div class="auto-container">
             <div class="row clearfix">
@@ -250,7 +250,7 @@
     <section class="events-section sec-pad mt-100">
         <div class="bg-layer"></div>
         <div class="bg-image"
-            style="background-image: url({{ asset('public/assets/frontend/images/resource/' . $section5['data']['image'])}});">
+            style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url({{ asset('public/assets/frontend/images/resource/' . $section5['data']['image'])}});">
         </div>
         <div class="auto-container">
             <div class="row clearfix">
