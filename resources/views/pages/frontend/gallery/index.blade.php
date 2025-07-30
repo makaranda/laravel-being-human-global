@@ -233,7 +233,7 @@
                 text-align: left;
                 font-size: 18px;
                 .programme_cat_title {
-                    width: 95%;
+                    width: 93%;
                     text-align: left;
                     font-size: 18px;
                     position: absolute;
@@ -248,7 +248,8 @@
                 }
                 .programme_cat_img {
                     width: 100%;
-                    height: auto;
+                    /* height: auto; */
+                    height: 260px;
                     transition: all 0.3s ease;
                 }
             }
