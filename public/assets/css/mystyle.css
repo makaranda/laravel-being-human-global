@@ -134,7 +134,31 @@
     .navigation {
         li {
             padding: 38px 0px 38px 0px;
+
+            a {
+                position: relative;
+                display: block;
+                text-align: center;
+                font-size: 16px;
+                line-height: 30px;
+                opacity: 1;
+                font-family: 'Rubik', sans-serif;
+                color: #71747a;
+                z-index: 1;
+                -webkit-transition: all 500ms ease;
+                -moz-transition: all 500ms ease;
+                -ms-transition: all 500ms ease;
+                -o-transition: all 500ms ease;
+                transition: all 500ms ease;
+                text-transform: capitalize;
+            }
         }
+
+        .dropdown {
+            &::after {}
+        }
+
+
     }
 }
 
@@ -262,6 +286,15 @@
     }
 }
 
+.theme-btn.btn-one.btn3 {
+    background: #f7bf39 !important;
+    color: #00342e !important;
+
+    &:hover {
+        color: #fff !important;
+    }
+}
+
 .banner-carousel .content-box {
     position: relative;
     display: block;
@@ -335,6 +368,55 @@ p {
 
 .fw-900 {
     font-weight: 900;
+}
+
+
+.page-main-title>h1,
+.page-main-title>h2,
+.page-main-title>h3,
+.page-main-title>h4,
+.page-main-title>h5,
+.page-main-title>h6 {
+    color: #8a5f3c;
+    font-weight: 800;
+    padding-bottom: 15px;
+    font-size: 50px;
+}
+
+.page-sub-title>h1,
+.page-sub-title>h2,
+.page-sub-title>h3,
+.page-sub-title>h4,
+.page-sub-title>h5,
+.page-sub-title>h6 {
+    color: #8a5f3c;
+    font-weight: 800;
+    padding-bottom: 24px;
+    padding-top: 24px;
+    padding-left: 20px;
+    font-size: 40px;
+    border-left: 6px solid #8a5f3c;
+    margin: 15px 0px 15px 20px;
+}
+
+.blog_details>h1,
+.blog_details>h2,
+.blog_details>h3,
+.blog_details>h4,
+.blog_details>h5,
+.blog_details>h6 {
+    color: #8a5f3c !important;
+    font-weight: 800;
+    padding-bottom: 24px;
+    padding-top: 24px;
+    padding-left: 20px;
+    font-size: 40px;
+    border-left: 6px solid #8a5f3c;
+    margin: 15px 0px 15px 20px;
+}
+
+#newsletterForm .error {
+    color: red;
 }
 
 /* end theme style */

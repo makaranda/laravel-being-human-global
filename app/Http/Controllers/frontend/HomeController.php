@@ -118,7 +118,8 @@ class HomeController extends Controller
         VisitorHelper::updateVisitorCount();
 
         $page_contact = Page::where('slug', 'Like', 'contact-us')->first();
-        return view('pages.frontend.contact.index', compact('page_contact')); // Make sure this view exists
+        $settings = Setting::first();
+        return view('pages.frontend.contact.index', compact('page_contact','settings')); // Make sure this view exists
     }
 
     public function aboutUs()

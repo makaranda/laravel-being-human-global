@@ -57,34 +57,6 @@
 
 @push('css')
     <style>
-        .page-main-title>h1,
-        .page-main-title>h2,
-        .page-main-title>h3,
-        .page-main-title>h4,
-        .page-main-title>h5,
-        .page-main-title>h6 {
-            color: #8a5f3c;
-            font-weight: 800;
-            padding-bottom: 15px;
-            font-size: 50px;
-        }
-
-        .page-sub-title>h1,
-        .page-sub-title>h2,
-        .page-sub-title>h3,
-        .page-sub-title>h4,
-        .page-sub-title>h5,
-        .page-sub-title>h6 {
-            color: #8a5f3c;
-            font-weight: 800;
-            padding-bottom: 24px;
-            padding-top: 24px;
-            padding-left: 20px;
-            font-size: 40px;
-            border-left: 6px solid #8a5f3c;
-            margin: 15px 0px 15px 20px;
-        }
-
         img.img-fluid.login-logo {
             width: 120px !important;
         }
@@ -111,57 +83,57 @@
 
         .about_description {
             /* p {
-                                            border: 2px solid #e6b127;
-                                            padding: 24px 20px;
-                                            display: inline-block;
-                                            height: 100%;
-                                            vertical-align: top;
-                                        } */
+                                                border: 2px solid #e6b127;
+                                                padding: 24px 20px;
+                                                display: inline-block;
+                                                height: 100%;
+                                                vertical-align: top;
+                                            } */
         }
 
         @media (max-width: 2040px) {
             /* .about_description {
-                                        p {
-                                            width: 49%;
-                                            height: 260px;
-                                        }
-                                    } */
+                                            p {
+                                                width: 49%;
+                                                height: 260px;
+                                            }
+                                        } */
         }
 
         @media (max-width: 1440px) {
             /* .about_description {
-                                        p {
-                                            width: 49%;
-                                            height: 350px;
-                                        }
-                                    } */
+                                            p {
+                                                width: 49%;
+                                                height: 350px;
+                                            }
+                                        } */
         }
 
         @media (max-width: 720px) {
             /* .about_description {
-                                        p {
-                                            width: 100%;
-                                            height: auto;
-                                        }
-                                    } */
+                                            p {
+                                                width: 100%;
+                                                height: auto;
+                                            }
+                                        } */
         }
 
         @media (max-width: 540px) {
             /* .about_description {
-                                        p {
-                                            width: 100%;
-                                            height: auto;
-                                        }
-                                    } */
+                                            p {
+                                                width: 100%;
+                                                height: auto;
+                                            }
+                                        } */
         }
 
         @media (max-width: 200px) {
             /* .about_description {
-                                        p {
-                                            width: 100%;
-                                            height: auto;
-                                        }
-                                    } */
+                                            p {
+                                                width: 100%;
+                                                height: auto;
+                                            }
+                                        } */
         }
     </style>
 @endpush

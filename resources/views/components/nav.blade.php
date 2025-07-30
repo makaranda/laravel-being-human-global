@@ -182,25 +182,26 @@
                                 <a href="{{ route('home.index') }}">Home</a>
                             </li>
 
-                            <li
+                            {{-- <li
                                 class="dropdown {{ request()->routeIs('frontend.about', 'frontend.service') ? 'current' : '' }}">
                                 <a href="{{ route('frontend.about') }}">About</a>
                                 <ul>
                                     <li><a href="{{ route('frontend.about') }}">About Us</a></li>
                                     <li><a href="{{ route('frontend.service') }}">Services</a></li>
                                 </ul>
-                            </li>
-                            <li><a href="{{ route('frontend.home.ourworks') }}">Our Works</a></li>
+                            </li> --}}
+                            <li><a href="{{ route('frontend.about') }}">About Us</a></li>
+                            <li><a href="{{ route('frontend.service') }}">Services</a></li>
 
-                            <li class="dropdown {{ request()->routeIs('frontend.about') ? 'current' : '' }}">
+                            {{-- <li class="dropdown {{ request()->routeIs('frontend.about') ? 'current' : '' }}">
                                 <a href="#">Get Involved</a>
                                 <ul>
                                     <li><a href="{{ route('frontend.about') }}">Volunteer</a></li>
                                     <li><a href="{{ route('frontend.about') }}">Donators</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                             <li class="dropdown {{ request()->routeIs('frontend.home.blogs') ? 'current' : '' }}">
-                                <a href="#">Media</a>
+                                <a href="#">Media <span class="fas fa-angle-down"></span></a>
                                 <ul>
                                     <li><a href="{{ route('frontend.home.blogs') }}">Blog & News</a></li>
                                     <li><a href="{{ route('frontend.home.gallery') }}">Photos Gallery</a></li>

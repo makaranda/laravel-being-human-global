@@ -22,6 +22,13 @@
                             <li><a href="{{ $settings['social_instagram'] }}"><i class="fab fa-instagram"></i></a></li>
                         </ul>
                     </div>
+                    <div class="widget-title mt-10 mb-10">
+                        <h5>Signup Newsletter</h5>
+                    </div>
+                    <div class="btn-box">
+                        <a href="#" class="theme-btn btn-one btn3" data-bs-toggle="modal"
+                            data-bs-target="#newsletterModal">Signup Newsletter</a>
+                    </div>
                 </div>
 
                 <!-- Links -->
@@ -215,7 +222,9 @@
 @push('css')
 
     <style>
-
+        #newsletterForm .error {
+            color: red;
+        }
     </style>
 
 @endpush
@@ -230,32 +239,47 @@
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+        // $(document).ready(function () {
+        //     $('#newsletterForm').parsley();
+        //     $('#newsletterForm').on('submit', function (e) {
+        //         e.preventDefault();
+        //         const rcres = grecaptcha.getResponse();
+        //         if (!rcres.length) {
+        //             grecaptcha.reset();
+        //             Swal.fire({
+        //                 icon: 'error',
+        //                 title: 'Recaptcha Required',
+        //                 text: 'Please complete the Recaptcha.',
+        //             });
+        //             return;
+        //         }
+
+        //         if (!$('#paypal_data_form').parsley().isValid()) {
+        //             grecaptcha.reset();
+        //             Swal.fire({
+        //                 icon: 'error',
+        //                 title: 'Form Error',
+        //                 text: 'There are errors in the form. Please correct them.',
+        //             });
+        //             return;
+        //         }
+
+        //         console.log('Newsletter Submit');
+        //     });
+        // });
+
         $(document).ready(function () {
-            $('#newsletterForm').parsley();
-            $('#newsletterForm').on('submit', function (e) {
-                e.preventDefault();
-                const rcres = grecaptcha.getResponse();
-                if (!rcres.length) {
-                    grecaptcha.reset();
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Recaptcha Required',
-                        text: 'Please complete the Recaptcha.',
-                    });
-                    return;
+            $('#newsletterForm').validate({
+                rules: {
+                    formFName: { required: true, minlength: 3 },
+                    formLName: { required: true, minlength: 4 },
+                    formEmailAddress: { required: true, email: true }
+                },
+                messages: {
+                    formFName: { required: "Your First name is required", minlength: "Name must be at least 3 characters long" },
+                    formLName: { required: "Your Last name is required", minlength: "Name must be at least 4 characters long" },
+                    formEmailAddress: { required: "Please provide an email address" }
                 }
-
-                if (!$('#paypal_data_form').parsley().isValid()) {
-                    grecaptcha.reset();
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Form Error',
-                        text: 'There are errors in the form. Please correct them.',
-                    });
-                    return;
-                }
-
-                console.log('Newsletter Submit');
             });
         });
     </script>
