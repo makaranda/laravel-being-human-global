@@ -15,7 +15,7 @@
             <div class="content-box">
                 <ul class="bread-crumb clearfix">
                     <li><a href="{{ route('frontend.home') }}">Home</a></li>
-                    <li><a href="{{ route('frontend.blogs') }}">Blogs</a></li>
+                    <li><a href="{{ route('frontend.home.ourworks') }}">Our Works</a></li>
                     <li>{{ $blog['title'] }}</li>
                 </ul>
                 <div class="title">
@@ -34,7 +34,7 @@
                 <div class="col-lg-12 posts-list">
                     <div class="single-post">
                         <div class="feature-img">
-                            <img src="{{ url('public/assets/uploads/blogs/' . $blog->feature_image) }}"
+                            <img src="{{ url('public/assets/uploads/projects/' . $blog->feature_image) }}"
                                 alt="{{ $blog->title }}" class="border shadow-lg img-fluid" />
                         </div>
                         <div class="blog_details">

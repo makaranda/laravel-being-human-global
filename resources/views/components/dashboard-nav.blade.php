@@ -254,7 +254,7 @@
                     </ul>
                 </li>
 
-                <li
+                {{-- <li
                     class="nav-item {{ request()->routeIs('admin.products', 'admin.createproduct', 'admin.editproduct', 'admin.products.items', 'admin.createproduct.items', 'admin.editproduct.items') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bi bi-pencil-square"></i>
@@ -279,9 +279,9 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
-                <li
+                {{-- <li
                     class="nav-item {{ request()->routeIs('admin.orders', 'admin.createorder', 'admin.editorder') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bi bi-pencil-square"></i>
@@ -303,6 +303,25 @@
                                 class="nav-link {{ request()->routeIs('admin.createorder') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Add Order</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li> --}}
+                <li
+                    class="nav-item {{ request()->routeIs('admin.donations', 'admin.createdonation', 'admin.editdonation') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-pencil-square"></i>
+                        <p>
+                            Donations
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.donations') }}"
+                                class="nav-link {{ request()->routeIs('admin.donations', 'admin.createdonation', 'admin.editdonation') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Donation List</p>
                             </a>
                         </li>
                     </ul>

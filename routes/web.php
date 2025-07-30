@@ -140,9 +140,9 @@ Route::prefix('/blogs')->group(function () {
 });
 
 // Events Routes
-Route::prefix('/events')->group(function () {
-    Route::get('/', [HomeController::class, 'showEvents'])->name('frontend.home.events');
-    Route::get('/{slug}', [HomeController::class, 'viewEvent'])->name('frontend.events.singleview');
+Route::prefix('/gallery')->group(function () {
+    Route::get('/', [HomeController::class, 'showEvents'])->name('frontend.home.gallery');
+    Route::get('/{slug}', [HomeController::class, 'viewEvent'])->name('frontend.gallery.singleview');
 });
 
 // Events Routes
@@ -315,6 +315,19 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/edit/{id}', [OrdersController::class, 'edit'])->name('admin.editorder');
             Route::post('/update/{id}', [OrdersController::class, 'update'])->name('admin.updateorder');
             Route::delete('/delete/{id}', [OrdersController::class, 'delete'])->name('admin.deleteorder');
+            Route::get('/fetch-order-items/{id}', [OrdersController::class, 'fetchOrderItems'])->name('admin.fetchorderitems');
+
+            Route::get('/get-subcategories/{category_id}', [OrdersController::class, 'getSubCategories'])->name('get.subcategories');
+        });
+
+        // Donations routes
+        Route::prefix('donations')->group(function () {
+            Route::get('/', [OrdersController::class, 'index'])->name('admin.donations');
+            Route::get('/create', [OrdersController::class, 'create'])->name('admin.createdonation');
+            Route::post('/store', [OrdersController::class, 'store'])->name('admin.storedonation');
+            Route::get('/edit/{id}', [OrdersController::class, 'edit'])->name('admin.editdonation');
+            Route::post('/update/{id}', [OrdersController::class, 'update'])->name('admin.updatedonation');
+            Route::delete('/delete/{id}', [OrdersController::class, 'delete'])->name('admin.deletedonation');
             Route::get('/fetch-order-items/{id}', [OrdersController::class, 'fetchOrderItems'])->name('admin.fetchorderitems');
 
             Route::get('/get-subcategories/{category_id}', [OrdersController::class, 'getSubCategories'])->name('get.subcategories');

@@ -105,6 +105,14 @@
 
 @push('css')
     <style>
+                .news-block-one .inner-box .lower-content .theme-btn {
+            font-size: 10px;
+            background: #faf7f3;
+            padding: 6.5px 35px;
+            color: #151c2c !important;
+            border: 1px solid;
+            margin-top: 10px;
+        }
         .page-main-title>h1,
         .page-main-title>h2,
         .page-main-title>h3,

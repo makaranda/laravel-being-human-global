@@ -244,10 +244,120 @@
     <!-- gallery-section end -->
 
 
+    <!-- clients-section -->
+    {{-- <section class="clients-section">
+        <div class="img-wrap parallax-demo-1">
+            <div class="parallax-inner back-img"
+                style="background-image: url({{ asset('public/assets/frontend/images/background/clients-bg.jpg')}});"></div>
+        </div>
+        <div class="auto-container"> --}}
+            {{-- <div class="five-item-carousel owl-carousel owl-theme owl-nav-none owl-dots-none">
+                <figure class="clients-logo"><a href="{{ route('home.index') }}"><img
+                            src="{{ asset('public/assets/frontend/images/clients/clients-1.png')}}"
+                            alt="{{ $settings['website_name'] }}"></a></figure>
+                <figure class="clients-logo"><a href="{{ route('home.index') }}"><img
+                            src="{{ asset('public/assets/frontend/images/clients/clients-2.png')}}"
+                            alt="{{ $settings['website_name'] }}"></a></figure>
+                <figure class="clients-logo"><a href="{{ route('home.index') }}"><img
+                            src="{{ asset('public/assets/frontend/images/clients/clients-3.png')}}"
+                            alt="{{ $settings['website_name'] }}"></a></figure>
+                <figure class="clients-logo"><a href="{{ route('home.index') }}"><img
+                            src="{{ asset('public/assets/frontend/images/clients/clients-4.png')}}"
+                            alt="{{ $settings['website_name'] }}"></a></figure>
+                <figure class="clients-logo"><a href="{{ route('home.index') }}"><img
+                            src="{{ asset('public/assets/frontend/images/clients/clients-5.png')}}"
+                            alt="{{ $settings['website_name'] }}"></a></figure>
+            </div> --}}
+            {{-- </div>
+    </section> --}}
+    <!-- clients-section end -->
+
+
+    <!-- adventure-section -->
+    {{-- <section class="adventure-section">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                    <div class="content_block_two">
+                        <div class="content-box">
+                            <div class="sec-title">
+                                <h2>Your adventure begins here</h2>
+                            </div>
+                            <div class="inner-box">
+                                @if (count($section4['data']['list']))
+                                @foreach ($section4['data']['list'] as $item)
+                                <div class="single-item">
+                                    <div class="icon-box"><i class="flaticon-tick"></i></div>
+                                    <h4>{{ $item['title'] }}</h4>
+                                    <p>{{ $item['content'] }}</p>
+                                </div>
+                                @endforeach
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                    <div class="image_block_two">
+                        <div class="image-box">
+                            <div class="video-btn">
+                                <a href="{{ $section4['data']['attribute']['link'] }}" class="lightbox-image"
+                                    data-caption=""><i class="fas fa-play"></i></a>
+                            </div>
+                            <figure class="image"><img
+                                    src="{{ asset('public/assets/frontend/images/resource/' . $section4['data']['image'])}}"
+                                    alt="{{ $settings['website_name'] }}">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> --}}
+    <!-- adventure-section end -->
+
+
+    <!-- testimonial-section -->
+    <section class="testimonial-section centred sec-pad">
+        <div class="auto-container">
+            <div class="sec-title centred">
+                <h2>Testimonials</h2>
+            </div>
+            <div class="three-item-carousel owl-carousel owl-theme owl-dots-none owl-nav-none">
+                @if ($testimonials)
+                    @foreach ($testimonials as $testimonial)
+                        <div class="testimonil-block-one">
+                            <div class="inner-box">
+                                <div class="author-thumb">
+                                    @php
+                                        $testimonial_img = $testimonial->feature_image ?? 'user_icon.png'
+                                    @endphp
+                                    <figure class="thumb-box"><img
+                                            src="{{ asset('public/assets/uploads/testimonials/' . $testimonial_img)}}"
+                                            alt="{{ $settings['website_name'] }}">
+                                    </figure>
+                                    <div class="quote"><i class="flaticon-quote"></i></div>
+                                </div>
+                                <div class="text">
+                                    <div>{!! $testimonial->description !!}</div>
+                                </div>
+                                {{-- {{ $testimonial->author->name }} --}}
+                                <div class="author-info">
+                                    <h5>{{ $testimonial->title }}</h5>
+                                    <span class="designation">{{ $testimonial->type }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    </section>
+    <!-- testimonial-section end -->
 
 
     <!-- events-section -->
-    <section class="events-section sec-pad mt-100">
+    <section class="events-section sec-pad">
         <div class="bg-layer"></div>
         <div class="bg-image"
             style="background-image: url({{ asset('public/assets/frontend/images/resource/' . $section5['data']['image'])}});">

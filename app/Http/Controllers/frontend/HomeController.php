@@ -892,6 +892,36 @@ class HomeController extends Controller
         return view('pages.frontend.blogs.index', compact('blogs', 'blog_type', 'page_blog'));
     }
 
+    public function viewOurworksArticle($slug)
+    {
+        $blog = Page::with('author') // Eager load author
+            ->where('slug', $slug)
+            ->where('status', 1)
+            ->where('type', 'project')
+            ->firstOrFail();
+
+        $page_blog = Page::where('slug', 'like', $slug)->first();
+        $recent_blogs = Page::where('slug', '!=', $slug)->where('status', 1)->where('type', 'project')->latest()->take(5)->get();
+
+        // Get Previous Blog
+        $prev_blog = Page::where('id', '<', $blog->id)
+            ->where('status', 1)
+            ->where('type', 'project')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        // Get Next Blog
+        $next_blog = Page::where('id', '>', $blog->id)
+            ->where('status', 1)
+            ->where('type', 'project')
+            ->orderBy('id', 'asc')
+            ->first();
+        $settings = Setting::first();
+        //dd($blog->id);
+
+        return view('pages.frontend.ourwork.single', compact('blog', 'settings', 'page_blog', 'recent_blogs', 'prev_blog', 'next_blog'));
+    }
+
     public function viewArticle($slug)
     {
         $blog = Blog::with('author') // Eager load author
@@ -916,10 +946,10 @@ class HomeController extends Controller
             ->where('blog_type', 'blogs-article')
             ->orderBy('id', 'asc')
             ->first();
-
+        $settings = Setting::first();
         //dd($blog->id);
 
-        return view('pages.frontend.blogs.single', compact('blog', 'page_blog', 'recent_blogs', 'prev_blog', 'next_blog'));
+        return view('pages.frontend.blogs.single', compact('blog', 'settings', 'page_blog', 'recent_blogs', 'prev_blog', 'next_blog'));
     }
 
     public function viewNews($slug)

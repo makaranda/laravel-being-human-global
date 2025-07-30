@@ -77,7 +77,7 @@
 
     @yield('content')
 
-    @include('libraries.frontend.scripts')
+    @include('libraries.donation.scripts')
 
     @stack('scripts')
   </div>

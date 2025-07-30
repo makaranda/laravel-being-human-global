@@ -3,27 +3,34 @@
 @section('content')
 
 
-   <!-- bradcam_area  -->
-   <div class="bradcam_area breadcam_bg_2">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="bradcam_text text-center">
-                        <h3>Events</h3>
-                    </div>
-                </div>
+
+<!-- Page Title -->
+<section class="page-title">
+    <div class="img-wrap parallax-demo-1">
+        <div class="parallax-inner back-img"
+            style="background-image: url({{ url('public/assets/frontend/images/background/' . $settings['page_banner']) }});">
+        </div>
+    </div>
+    <div class="auto-container">
+        <div class="content-box">
+            <ul class="bread-crumb clearfix">
+                <li><a href="{{ route('frontend.home') }}">Home</a></li>
+                <li>Gallery</li>
+            </ul>
+            <div class="title">
+                <h1>Gallery</h1>
             </div>
         </div>
     </div>
-<!--/ bradcam_area  -->
+</section>
+<!-- End Page Title -->
+
 
  <!-- ================ contact section start ================= -->
- <section class="contact-section section_padding">
-    <div class="container">
+ <section class="contact-section section_padding mt-100">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-12">
-          <h2 class="contact-title">Events</h2>
-        </div>
+
         <div class="col-lg-12">
             <div class="row justify-content-center">
               <div class="col-12 col-md-12 col-lg-12">
@@ -82,7 +89,7 @@
                                             <div class="col-6 col-sm-4 col-md-3">
                                                 <div class="row">
                                                     <div class="col-12 col-md-12 programme_cat">
-                                                        <a href="{{ route('frontend.events.singleview', $gallery->slug) }}" class="programme_cat_btn">
+                                                        <a href="{{ route('frontend.gallery.singleview', $gallery->slug) }}" class="programme_cat_btn">
                                                             <h4 class="programme_cat_title">
                                                                 {{ $gallery->title }}
                                                             </h4>

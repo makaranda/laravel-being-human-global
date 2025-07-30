@@ -98,6 +98,14 @@
             background-size: cover;
             background-position: center;
         }
+        .news-block-one .inner-box .lower-content .theme-btn {
+            font-size: 10px;
+            background: #faf7f3;
+            padding: 6.5px 35px;
+            color: #151c2c !important;
+            border: 1px solid;
+            margin-top: 10px;
+        }
         .programme_section{
             .programme_section_sub{
                 p{

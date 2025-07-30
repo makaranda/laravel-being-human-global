@@ -203,15 +203,15 @@
                                 <a href="#">Media</a>
                                 <ul>
                                     <li><a href="{{ route('frontend.home.blogs') }}">Blog & News</a></li>
-                                    <li><a href="{{ route('frontend.about') }}">Photos & Videos
-                                        </a></li>
+                                    <li><a href="{{ route('frontend.home.gallery') }}">Photos Gallery</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown {{ request()->routeIs('frontend.contact') ? 'current' : '' }}">
                                 <a href="#">Contact</a>
                                 <ul>
                                     <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
-                                    <li><a href="{{ route('frontend.contact') }}">Newsletter Signup
+                                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#newsletterModal">Newsletter
+                                            Signup
                                         </a></li>
                                 </ul>
                             </li>
