@@ -3,7 +3,7 @@
 @section('content')
 
   <div class="container mt-5">
-    <form action="{{ route('admin.storeblog') }}" id="formSubmit" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.storepage') }}" id="formSubmit" method="POST" enctype="multipart/form-data">
     @csrf <!-- CSRF token for security -->
     <div class="row">
       <div class="col-md-8">
@@ -86,16 +86,20 @@
         <div class="card-header">Page Attributes</div>
         <div class="card-body">
         <div class="row justify-content-center">
-          <!--<div class="col-12 col-md-12 mt-3">
-                <label class="fw-bold">Blog Type</label>
-                <select class="form-select mt-3" name="blog_type" id="blog_type">
-                <option value="blogs-article">Blogs & Article</option>
-                <option value="news-events">News & Events</option>
-                </select>
-                @error('blog_type')
-                <div class="text-danger">{{ $message }}</div>
-                @enderror
-               </div>-->
+          <div class="col-12 col-md-12 mt-3">
+          <label class="fw-bold">Parent</label>
+          <select class="form-select mt-3" placeholder="Select Parent" name="parent" id="parent">
+            @if($pages)
+          @foreach ($pages as $page)
+        <option value="{{ $page->id }}" {{ old('parent') == $page->id ? 'selected' : '' }}>{{ $page->title }}
+        </option>
+        @endforeach
+        @endif
+          </select>
+          @error('parent')
+        <div class="text-danger">{{ $message }}</div>
+      @enderror
+          </div>
           <div class="col-12 col-md-12 mt-3">
           <label class="fw-bold">Order</label>
           <input type="number" class="form-control mt-3" max="100" min="0" placeholder="Order"
@@ -201,6 +205,7 @@
       'Roboto/Roboto, sans-serif;' +
       'Open Sans/Open Sans, sans-serif;'
     });
+
 
     $(document).ready(function () {
     // Click on "Set Featured Image"

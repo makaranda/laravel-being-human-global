@@ -37,12 +37,14 @@
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+  <div id="overlay" class="d-flex">
+    <div class="loader"></div>
+  </div>
+
   <div class="app-wrapper">
     @include('components.dashboard-nav')
     <main class="app-main">
-      <div id="overlay" style="display: block;">
-        <div class="loader"></div>
-      </div>
+
       @yield('content')
     </main>
     @include('components.dashboard-footer')

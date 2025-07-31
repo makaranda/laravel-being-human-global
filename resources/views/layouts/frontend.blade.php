@@ -81,6 +81,19 @@
             background-attachment: fixed;
         }
     </style>
+    @if(Auth::check())
+        @if(Auth::user()->role === 'admin')
+            <style>
+                .header-style-one {
+                    position: absolute;
+                    top: 60px;
+                    right: 0px;
+                    background: #fff;
+                    width: 100%;
+                }
+            </style>
+        @endif
+    @endif
 </head>
 
 <body class="website-body">

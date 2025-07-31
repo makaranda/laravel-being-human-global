@@ -146,6 +146,33 @@
                     </ul>
                 </li>
 
+
+                <li
+                    class="nav-item {{ request()->routeIs('admin.projects', 'admin.createproject', 'admin.editproject') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-pencil-square"></i>
+                        <p>
+                            Projects
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.projects') }}"
+                                class="nav-link {{ request()->routeIs('admin.projects') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Projects List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.createproject') }}"
+                                class="nav-link {{ request()->routeIs('admin.createproject') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Add Project Page</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li
                     class="nav-item {{ request()->routeIs('admin.animals', 'admin.createanimal', 'admin.editanimal') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link">
@@ -173,7 +200,7 @@
                     </ul>
                 </li>
 
-                <li
+                {{-- <li
                     class="nav-item {{ request()->routeIs('admin.testimonials', 'admin.createtestimonial', 'admin.edittestimonial') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bi bi-pencil-square"></i>
@@ -198,7 +225,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
                 <li
                     class="nav-item {{ request()->routeIs('admin.blogs', 'admin.createblog', 'admin.editblog') ? 'menu-open' : '' }}">
@@ -222,6 +249,33 @@
                                 class="nav-link {{ request()->routeIs('admin.createblog') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Add Blog</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li
+                    class="nav-item {{ request()->routeIs('admin.news', 'admin.createnews', 'admin.editnews') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-pencil-square"></i>
+                        <p>
+                            News
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.news') }}"
+                                class="nav-link {{ request()->routeIs('admin.news') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>News List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.createnews') }}"
+                                class="nav-link {{ request()->routeIs('admin.createnews') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Add News</p>
                             </a>
                         </li>
                     </ul>
@@ -381,7 +435,7 @@
                     </ul>
                 </li>
 
-                <li
+                {{-- <li
                     class="nav-item {{ request()->routeIs('admin.customers', 'admin.addcustomer', 'admin.editcustomer') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bi bi-person-fill"></i>
@@ -406,9 +460,36 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
                 <li
+                    class="nav-item {{ request()->routeIs('admin.donators', 'admin.adddonator', 'admin.editdonator') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-person-fill"></i>
+                        <p>
+                            Donators
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.donators') }}"
+                                class="nav-link {{ request()->routeIs('admin.donators') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Donator List</p>
+                            </a>
+                        </li>
+                        {{-- <li class="nav-item">
+                            <a href="{{ route('admin.addcustomer') }}"
+                                class="nav-link {{ request()->routeIs('admin.addcustomer') ? 'active' : '' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Add Customer</p>
+                            </a>
+                        </li> --}}
+                    </ul>
+                </li>
+
+                {{-- <li
                     class="nav-item {{ request()->routeIs('admin.homesecvideo', 'admin.homesecaccording', 'admin.homesecpartners', 'admin.createhomesecaccording', 'admin.edithomesecaccording', 'admin.createhomesecpartners', 'admin.edithomesecpartners', 'admin.edithomesecvideo') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-home"></i>
@@ -417,7 +498,7 @@
                             <i class="nav-arrow bi bi-chevron-right"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="nav nav-treeview"> --}}
                         {{-- <li class="nav-item">
                             <a href="{{ route('admin.homesecvideo',34) }}"
                                 class="nav-link {{ request()->routeIs('admin.homesecvideo','admin.edithomesecvideo') ? 'active' : '' }}">
@@ -432,7 +513,7 @@
                                 <p>Home Section According</p>
                             </a>
                         </li> --}}
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('admin.homesecpartners') }}"
                                 class="nav-link {{ request()->routeIs('admin.homesecpartners', 'admin.createhomesecpartners', 'admin.edithomesecpartners') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-circle"></i>
@@ -440,7 +521,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
                 <li
                     class="nav-item {{ request()->routeIs('admin.contacts', 'admin.editcontact', 'admin.viewcontact') ? 'menu-open' : '' }}">

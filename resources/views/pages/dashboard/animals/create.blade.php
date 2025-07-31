@@ -150,16 +150,60 @@
   <script>
     // CKEDITOR.replace('description');
     CKEDITOR.on('instanceReady', function () {
-    CKEDITOR.instances.description.on('fileUploadRequest', function (evt) {
+    for (var name in CKEDITOR.instances) {
+      CKEDITOR.instances[name].on('fileUploadRequest', function (evt) {
       var xhr = evt.data.fileLoader.xhr;
       var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
       xhr.setRequestHeader('X-CSRF-TOKEN', token);
+      });
+    }
     });
-    });
-    CKEDITOR.replace('sub_description');
+
+    // Activate editors
     CKEDITOR.replace('description', {
-    filebrowserUploadUrl: "{{ route('ckeditor.upload') }}",
-    filebrowserUploadMethod: 'form'
+    filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?&_token={{ csrf_token() }}",
+    filebrowserUploadMethod: 'form',
+    extraPlugins: 'font',
+    contentsCss: [
+      'https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap',
+      '{{ asset("public/assets/css/ckeditor_custom.css") }}'
+    ],
+    font_names:
+      'Playwrite AU QLD/Playwrite AU QLD, cursive;' +
+      'Playwrite IN/Playwrite IN, cursive;' +
+      'Arial/Arial, Helvetica, sans-serif;' +
+      'Times New Roman/Times New Roman, Times, serif;' +
+      'Verdana/Verdana, Geneva, sans-serif;' +
+      'Georgia/Georgia, serif;' +
+      'Courier New/Courier New, Courier, monospace;' +
+      'Tahoma/Tahoma, Geneva, sans-serif;' +
+      'Comic Sans MS/Comic Sans MS, cursive;' +
+      'Poppins/Poppins, sans-serif;' +
+      'Roboto/Roboto, sans-serif;' +
+      'Open Sans/Open Sans, sans-serif;'
+    });
+
+    CKEDITOR.replace('sub_description', {
+    filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?&_token={{ csrf_token() }}",
+    filebrowserUploadMethod: 'form',
+    extraPlugins: 'font',
+    contentsCss: [
+      'https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap',
+      '{{ asset("public/assets/css/ckeditor_custom.css") }}'
+    ],
+    font_names:
+      'Playwrite AU QLD/Playwrite AU QLD, cursive;' +
+      'Playwrite IN/Playwrite IN, cursive;' +
+      'Arial/Arial, Helvetica, sans-serif;' +
+      'Times New Roman/Times New Roman, Times, serif;' +
+      'Verdana/Verdana, Geneva, sans-serif;' +
+      'Georgia/Georgia, serif;' +
+      'Courier New/Courier New, Courier, monospace;' +
+      'Tahoma/Tahoma, Geneva, sans-serif;' +
+      'Comic Sans MS/Comic Sans MS, cursive;' +
+      'Poppins/Poppins, sans-serif;' +
+      'Roboto/Roboto, sans-serif;' +
+      'Open Sans/Open Sans, sans-serif;'
     });
 
     $(document).ready(function () {

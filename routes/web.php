@@ -13,9 +13,11 @@ use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\CustomersController;
+use App\Http\Controllers\admin\DonatorsController;
 use App\Http\Controllers\admin\MusicTracksController;
 use App\Http\Controllers\admin\MainSliderController;
 use App\Http\Controllers\admin\PagesController;
+use App\Http\Controllers\admin\ProjectsController;
 use App\Http\Controllers\admin\AnimalsController;
 use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\admin\DonateController;
@@ -27,6 +29,7 @@ use App\Http\Controllers\admin\StudyAbroadController;
 use App\Http\Controllers\admin\UniversitiesController;
 use App\Http\Controllers\admin\AccordingsController;
 use App\Http\Controllers\admin\BlogsController;
+use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\TestimonialController;
 use App\Http\Controllers\admin\CareersController;
 use App\Http\Controllers\admin\GalleryController;
@@ -205,8 +208,10 @@ Route::middleware(['auth', 'customer'])->group(function () {
 // Admin Dashboard
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/chart/donations', [DashboardController::class, 'donationChartData'])->name('admin.chart.donations');
 
     Route::prefix('dashboard')->group(function () {
+
         // User routes
         Route::prefix('users')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('admin.users');  // Show users list
@@ -282,6 +287,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
         });
 
+        // Projects routes
+        Route::prefix('projects')->group(function () {
+            Route::get('/', [ProjectsController::class, 'index'])->name('admin.projects');
+            Route::get('/create', [ProjectsController::class, 'create'])->name('admin.createproject');
+            Route::post('/store', [ProjectsController::class, 'store'])->name('admin.storeproject');
+            Route::get('/edit/{id}', [ProjectsController::class, 'edit'])->name('admin.editproject');
+            Route::post('/update/{id}', [ProjectsController::class, 'update'])->name('admin.updateproject');
+            Route::delete('/delete/{id}', [ProjectsController::class, 'delete'])->name('admin.deleteproject');
+
+        });
+
         // Animals routes
         Route::prefix('animals')->group(function () {
             Route::get('/', [AnimalsController::class, 'index'])->name('admin.animals');
@@ -338,6 +354,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::post('/update/{id}', [DonateController::class, 'update'])->name('admin.updatedonation');
             Route::delete('/delete/{id}', [DonateController::class, 'delete'])->name('admin.deletedonation');
             Route::get('/fetch-order-items/{id}', [DonateController::class, 'fetchOrderItems'])->name('admin.fetchorderitems');
+            Route::post('/report/download', [DonateController::class, 'export'])->name('report.download');
 
             Route::get('/get-subcategories/{category_id}', [DonateController::class, 'getSubCategories'])->name('get.subcategories');
         });
@@ -346,10 +363,22 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::prefix('customers')->group(function () {
             Route::get('/', [CustomersController::class, 'index'])->name('admin.customers');  // Show users list
             Route::get('/edit/{id}', [CustomersController::class, 'edit'])->name('admin.editcustomer');  // Edit user
-            Route::delete('/delete/{id}', [UserCoCustomersControllerntroller::class, 'delete'])->name('admin.deletecustomer');  // Delete user
+            Route::delete('/delete/{id}', [CustomersController::class, 'delete'])->name('admin.deletecustomer');  // Delete user
             Route::get('/add', [CustomersController::class, 'add'])->name('admin.addcustomer');  // Add user form
             Route::post('/update/{id}', [CustomersController::class, 'update'])->name('admin.updatecustomer');
             Route::post('/save', [CustomersController::class, 'save'])->name('admin.savecustomer');
+
+        });
+
+
+        // Donator routes
+        Route::prefix('donators')->group(function () {
+            Route::get('/', [DonatorsController::class, 'index'])->name('admin.donators');  // Show users list
+            Route::get('/edit/{id}', [DonatorsController::class, 'edit'])->name('admin.editdonator');  // Edit user
+            Route::delete('/delete/{id}', [DonatorsController::class, 'delete'])->name('admin.deletedonator');  // Delete user
+            Route::get('/add', [DonatorsController::class, 'add'])->name('admin.adddonator');  // Add user form
+            Route::post('/update/{id}', [DonatorsController::class, 'update'])->name('admin.updatedonator');
+            Route::post('/save', [DonatorsController::class, 'save'])->name('admin.savedonator');
 
         });
 
@@ -361,6 +390,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/edit/{id}', [BlogsController::class, 'edit'])->name('admin.editblog');
             Route::post('/update/{id}', [BlogsController::class, 'update'])->name('admin.updateblog');
             Route::delete('/delete/{id}', [BlogsController::class, 'delete'])->name('admin.deleteblog');
+
+        });
+
+        // News routes
+        Route::prefix('news')->group(function () {
+            Route::get('/', [NewsController::class, 'index'])->name('admin.news');
+            Route::get('/create', [NewsController::class, 'create'])->name('admin.createnews');
+            Route::post('/store', [NewsController::class, 'store'])->name('admin.storenews');
+            Route::get('/edit/{id}', [NewsController::class, 'edit'])->name('admin.editnews');
+            Route::post('/update/{id}', [NewsController::class, 'update'])->name('admin.updatenews');
+            Route::delete('/delete/{id}', [NewsController::class, 'delete'])->name('admin.deletenews');
 
         });
 

@@ -33,8 +33,8 @@
       <!--begin::Small Box Widget 1-->
       <div class="small-box text-bg-primary">
         <div class="inner">
-        <h3>{{ $order_counts ?? 0 }}</h3>
-        <p>New Donation</p>
+        <h3>$ {{ $donation_amount ?? 0 }}</h3>
+        <p>Donation Amount</p>
         </div>
         <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true">
@@ -53,8 +53,8 @@
       <!--begin::Small Box Widget 2-->
       <div class="small-box text-bg-success">
         <div class="inner">
-        <h3>{{ $cancel_order_counts ?? 0 }}<!--<sup class="fs-5">%</sup>--></h3>
-        <p>Cancel Donation</p>
+        <h3>{{ $cancel_donation_counts ?? 0 }}<!--<sup class="fs-5">%</sup>--></h3>
+        <p>Cancel Donators</p>
         </div>
         <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true">
@@ -73,7 +73,7 @@
       <!--begin::Small Box Widget 3-->
       <div class="small-box text-bg-warning">
         <div class="inner">
-        <h3>{{ $user_counts ?? 0 }}</h3>
+        <h3>{{ $donator_counts ?? 0 }}</h3>
         <p>Donators</p>
         </div>
         <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +119,7 @@
       <div class="col-lg-12 connectedSortable">
       <div class="card mb-4">
         <div class="card-header">
-        <h3 class="card-title">Sales Value</h3>
+        <h3 class="card-title">Donations Graph</h3>
         </div>
         <div class="card-body">
         <div id="revenue-chart"></div>
@@ -149,58 +149,36 @@
     // IT'S ALL JUST JUNK FOR DEMO
     // ++++++++++++++++++++++++++++++++++++++++++
 
-    const sales_chart_options = {
-    series: [
-      {
-      name: 'Digital Goods',
-      data: [28, 48, 40, 19, 86, 27, 90, 80],
+    fetch("{{ route('admin.chart.donations') }}")
+    .then(response => response.json())
+    .then(data => {
+      const sales_chart_options = {
+      series: [{
+        name: 'Total Donations',
+        data: data.totals
+      }],
+      chart: {
+        height: 300,
+        type: 'area',
+        toolbar: { show: false },
       },
-      {
-      name: 'Electronics',
-      data: [65, 59, 80, 81, 56, 55, 40, 50],
+      legend: { show: false },
+      colors: ['#0d6efd'],
+      dataLabels: { enabled: false },
+      stroke: { curve: 'smooth' },
+      xaxis: {
+        type: 'datetime',
+        categories: data.months,
       },
-    ],
-    chart: {
-      height: 300,
-      type: 'area',
-      toolbar: {
-      show: false,
+      tooltip: {
+        x: {
+        format: 'MMMM yyyy',
+        },
       },
-    },
-    legend: {
-      show: false,
-    },
-    colors: ['#0d6efd', '#20c997'],
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      curve: 'smooth',
-    },
-    xaxis: {
-      type: 'datetime',
-      categories: [
-      '2023-01-01',
-      '2023-02-01',
-      '2023-03-01',
-      '2023-04-01',
-      '2023-05-01',
-      '2023-06-01',
-      '2023-07-01',
-      '2023-08-01',
-      ],
-    },
-    tooltip: {
-      x: {
-      format: 'MMMM yyyy',
-      },
-    },
-    };
+      };
 
-    const sales_chart = new ApexCharts(
-    document.querySelector('#revenue-chart'),
-    sales_chart_options,
-    );
-    sales_chart.render();
+      const sales_chart = new ApexCharts(document.querySelector('#revenue-chart'), sales_chart_options);
+      sales_chart.render();
+    });
   </script>
 @endpush

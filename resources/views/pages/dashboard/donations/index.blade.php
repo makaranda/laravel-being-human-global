@@ -33,8 +33,10 @@
                                     class="btn btn-light border">Apply</button>
                             </div>
                             <div class="col text-end">
-                                {{-- <a href="{{ route('admin.createdonation') }}" id="add_blog" name="add_blog"
-                                    class="btn btn-gray border float-right">Add Product</a> --}}
+                                <a href="#" id="view_export" name="view_export" class="btn btn-primary border float-right"
+                                    data-bs-toggle="modal" data-bs-target="#getReportModal"><i class="fa fa-download"></i>
+                                    Get
+                                    Export</a>
                             </div>
                         </div>
                     </div>
