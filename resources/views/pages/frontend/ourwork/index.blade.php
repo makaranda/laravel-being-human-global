@@ -50,7 +50,7 @@
     <!-- End Page Content -->
 
     <!-- sidebar-page-container -->
-    <section class="sidebar-page-container">
+    <section class="sidebar-page-container pt-0">
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 content-side">
@@ -76,7 +76,7 @@
                                         </div>
                                         <div class="lower-content">
                                             <ul class="post-info clearfix">
-                                                <li><i class="far fa-user-circle"></i> <a href="#">{{ $item->author->name ?? 'Unknown' }}</a></li>
+                                                {{-- <li><i class="far fa-user-circle"></i> <a href="#">{{ $item->author->name ?? 'Unknown' }}</a></li> --}}
                                                 {{-- Optional: <li><i class="far fa-clock"></i> {{ $item->created_at->diffForHumans() }}</li> --}}
                                             </ul>
                                             <h2>
@@ -113,7 +113,7 @@
             border: 1px solid;
             margin-top: 10px;
         }
-        .page-main-title>h1,
+        /* .page-main-title>h1,
         .page-main-title>h2,
         .page-main-title>h3,
         .page-main-title>h4,
@@ -139,7 +139,7 @@
             font-size: 40px;
             border-left: 6px solid #8a5f3c;
             margin: 15px 0px 15px 20px;
-        }
+        } */
 
         img.img-fluid.login-logo {
             width: 120px !important;

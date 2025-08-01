@@ -42,7 +42,10 @@
                                 <li><a href="{{ route('frontend.about') }}">About Us</a></li>
                                 <li><a href="{{ route('frontend.home.donation') }}">Donation</a></li>
                                 <li><a href="{{ route('frontend.home.blogs') }}">Blogs</a></li>
+                                <li><a href="{{ route('frontend.home.ourworks') }}">Our Works</a></li>
                                 <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
+                                <li><a href="{{ route('frontend.privacypolicy') }}">Privacy Policy</a></li>
+                                <li><a href="{{ route('frontend.termsandconditions') }}">Terms & Conditions</a></li>
                             </ul>
                         </div>
                     </div>
@@ -183,14 +186,14 @@
                                     <div class="mb-3">
                                         <label for="formFName" class="form-label">First Name</label>
                                         <input type="text" class="form-control" name="formFName" id="formFName"
-                                            placeholder="John">
+                                            placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="mb-3">
                                         <label for="formLName" class="form-label">Last Name</label>
                                         <input type="text" class="form-control" name="formLName" id="formLName"
-                                            placeholder="Smith">
+                                            placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +202,7 @@
                                     <div class="mb-3">
                                         <label for="formEmailAddress" class="form-label">Email Address</label>
                                         <input type="text" class="form-control" name="formEmailAddress"
-                                            id="formEmailAddress" placeholder="johnsmith@gmail.com">
+                                            id="formEmailAddress" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12">

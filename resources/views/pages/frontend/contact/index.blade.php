@@ -76,6 +76,7 @@
                     <div class="form-inner">
                         <form method="post" action="{{ route('frontend.contactsubmit') }}" class="default-form contact_form"
                             id="contactUsForm" novalidate="novalidate">
+                            @csrf
                             <div class="row clearfix">
                                 <div class="col-lg-6 col-md-6 col-sm-12 form-group">
                                     <input type="text" name="name" placeholder="Full name" required="" aria-required="true"
@@ -141,7 +142,8 @@
 
 @push('scripts')
 
-    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site') }}"></script>
+    {{--
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site') }}"></script> --}}
     <script>
         grecaptcha.ready(function () {
             grecaptcha.execute("{{ config('services.recaptcha.site') }}", { action: 'submit' }).then(function (token) {

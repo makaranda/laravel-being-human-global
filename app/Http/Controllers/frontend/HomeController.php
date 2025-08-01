@@ -123,6 +123,20 @@ class HomeController extends Controller
         return view('pages.frontend.contact.index', compact('page_contact', 'settings')); // Make sure this view exists
     }
 
+    public function privacyPolicy()
+    {
+        VisitorHelper::updateVisitorCount();
+        $about_info = Page::where('slug', 'Like', 'privacy-and-policy')->first();
+        $settings = Setting::first();
+        return view('pages.frontend.privacypolicy.index', compact('about_info', 'settings')); // Make sure this view exists
+    }
+    public function termsAndConditions()
+    {
+        VisitorHelper::updateVisitorCount();
+        $about_info = Page::where('slug', 'Like', 'terms-and-conditions')->first();
+        $settings = Setting::first();
+        return view('pages.frontend.termsconditions.index', compact('about_info', 'settings')); // Make sure this view exists
+    }
     public function aboutUs()
     {
         VisitorHelper::updateVisitorCount();
@@ -394,11 +408,11 @@ class HomeController extends Controller
     {
         $request->validate([
             'g-recaptcha-response' => 'required',
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'formFName' => 'required|string|max:255',
+            'formLName' => 'required|string|max:255',
+            'formEmailAddress' => 'required|email|max:255',
         ]);
-
+        //formFName formLName formEmailAddress
         // Verify reCAPTCHA v3
         $recaptchaSecret = config('services.recaptcha.secret');
         $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptchaSecret}&response={$request->input('g-recaptcha-response')}");
@@ -412,16 +426,16 @@ class HomeController extends Controller
 
         // Store Contact Form Data
         $newsletterData = NewsLetter::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
+            'formFName' => $request->formFName,
+            'formLName' => $request->formLName,
+            'email' => $request->formEmailAddress,
             'status' => 1,
             'ip_address' => $request->ip(),
             'mac_address' => substr(exec('getmac'), 0, 17),
             'device' => $request->header('User-Agent'),
         ]);
 
-        $full_name = $request->first_name . ' ' . $request->last_name;
+        $full_name = $request->formFName . ' ' . $request->formLName;
 
         // Send Email to Owner using PHPMailer
         try {
@@ -438,7 +452,7 @@ class HomeController extends Controller
             $mail->Port = 587; // Or 465 for SSL
 
             // Set the sender and recipient details
-            $mail->setFrom($request->email, $full_name); // The sender's email and name
+            $mail->setFrom($request->formEmailAddress, $full_name); // The sender's email and name
             $mail->addAddress(env('MAIL_OWNER')); // Set the recipient email (Owner's email)
             //$mail->addAddress('makarandapathirana@gmail.com'); // Set the recipient email (Owner's email)
 
@@ -464,7 +478,7 @@ class HomeController extends Controller
             $mailUser->Port = 587;
 
             $mailUser->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME', 'Support Team'));
-            $mailUser->addAddress($request->email, $full_name);
+            $mailUser->addAddress($request->formEmailAddress, $full_name);
 
             $mailUser->isHTML(true);
             $mailUser->Subject = 'Thank you for contacting us to newsletter!';

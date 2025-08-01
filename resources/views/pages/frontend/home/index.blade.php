@@ -282,8 +282,8 @@
                                                 </div>
                                                 <div class="inner">
                                                     <ul class="info clearfix">
-                                                        <li><i class="far fa-user-circle"></i>
-                                                            {{ $item->author->name ?? 'Unknown' }}</li>
+                                                        {{-- <li><i class="far fa-user-circle"></i>
+                                                            {{ $item->author->name ?? 'Unknown' }}</li> --}}
                                                         {{-- Optional: Add time or location if you have --}}
                                                         {{-- <li><i class="far fa-clock"></i>2:00 am</li> --}}
                                                         {{-- <li><i class="far fa-map"></i>Location here</li> --}}
@@ -310,7 +310,7 @@
 
 
     <!-- funfact-section -->
-    <section class="funfact-section">
+    <section class="funfact-section mt-100">
         <div class="img-wrap parallax-demo-1">
             <div class="parallax-inner back-img"
                 style="background-image: url({{ asset('public/assets/frontend/images/background/funfact-bg.jpg')}});"></div>
@@ -318,7 +318,10 @@
         <div class="auto-container">
             <div class="row clearfix">
                 @if (count($section6['data']['counts']))
-                    @foreach ($section6['data']['counts'] as $countItem)
+                    @php
+                        $captions = ['Protecting the kings of the wild — from predators to the precious, every life matters.', 'Guardians of the deep — preserving our oceans, rivers, and the silent swimmers within.', 'Wings of hope — safeguarding the skies, one feathered friend at a time.', '110 hearts united — fueling our mission to defend life, land, and legacy.']
+                    @endphp
+                    @foreach ($section6['data']['counts'] as $key => $countItem)
                         <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
                             <div class="counter-block-one wow slideInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                                 <div class="inner-box">
@@ -329,7 +332,8 @@
                                         <span class="count-text" data-speed="1500"
                                             data-stop="{{ $countItem['count'] }}">0</span><span>+</span>
                                     </div>
-                                    <p>{{ $countItem['title'] }}</p>
+                                    <p class="count_title">{{ $countItem['title'] }}</p>
+                                    <p class="count_caption">{{ $captions[$key] }}</p>
                                 </div>
                             </div>
                         </div>
@@ -367,8 +371,8 @@
                                     </div>
                                     <div class="lower-content">
                                         <ul class="post-info clearfix">
-                                            <li><i class="far fa-user-circle"></i><a
-                                                    href="#">{{ $blog_item->author->name ?? 'Unknown' }}</a></li>
+                                            {{-- <li><i class="far fa-user-circle"></i><a href="#">{{ $blog_item->author->name ??
+                                                    'Unknown' }}</a></li> --}}
                                             {{-- <li><i class="far fa-comments"></i><a href="blog-details.html">2 Comments</a></li>
                                             --}}
                                         </ul>

@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="lower-content">
                                             <ul class="post-info clearfix">
-                                                <li><i class="far fa-user-circle"></i> <a href="#">{{ $item->author->name ?? 'Unknown' }}</a></li>
+                                                {{-- <li><i class="far fa-user-circle"></i> <a href="#">{{ $item->author->name ?? 'Unknown' }}</a></li> --}}
                                                 {{-- Optional: <li><i class="far fa-clock"></i> {{ $item->created_at->diffForHumans() }}</li> --}}
                                             </ul>
                                             <h2>

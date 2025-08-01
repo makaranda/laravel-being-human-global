@@ -104,7 +104,8 @@
                                         voiceless — donate today and make a lasting impact.</p>
                                     <p class="text-gray">Your privacy matters. [Wildlife Organization Name] is committed to
                                         protecting your personal information. For details, please read our <a
-                                            href="">Privacy Policy</a>.Charitable Registration Number: 12345678910</p>
+                                            href="{{ route('frontend.privacypolicy') }}">Privacy Policy</a>.Charitable
+                                        Registration Number: 0000000</p>
                                 </div>
                             </div>
 

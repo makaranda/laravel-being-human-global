@@ -158,19 +158,20 @@
     $(document).ready(function () {
         $('#newsletterForm').validate({
             rules: {
-                first_name: { required: true, minlength: 3 },
-                last_name: { required: true, minlength: 4 },
-                email: { required: true, email: true }
+                formFName: { required: true, minlength: 3 },
+                formLName: { required: true, minlength: 4 },
+                formEmailAddress: { required: true, email: true }
             },
             messages: {
-                first_name: { required: "Your First name is required", minlength: "At least 3 characters" },
-                last_name: { required: "Your Last name is required", minlength: "At least 4 characters" },
-                email: { required: "Please enter a valid email address" }
+                formFName: { required: "Your First name is required", minlength: "At least 3 characters" },
+                formLName: { required: "Your Last name is required", minlength: "At least 4 characters" },
+                formEmailAddress: { required: "Please enter a valid email address" }
             },
             submitHandler: function (form) {
                 grecaptcha.ready(function () {
                     grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', { action: 'newsletter' }).then(function (token) {
                         $('#g-recaptcha-response').val(token);
+
 
                         let formData = $(form).serialize();
 
@@ -179,12 +180,17 @@
                             url: "{{ route('frontend.newslettersubmit') }}",
                             data: formData,
                             beforeSend: function () {
+                                $('#overlay').removeClass('d-none');
+                                $('#overlay').addClass('d-flex');
                                 $('#newsletterSubmitBtn').prop('disabled', true).text('Submitting...');
                                 $('#newsletterSuccess').html('');
                             },
                             success: function (response) {
                                 $('#newsletterSuccess').html('<div class="alert alert-success">Thank you for subscribing!</div>');
                                 $('#newsletterForm')[0].reset();
+
+                                $('#overlay').addClass('d-none');
+                                $('#overlay').removeClass('d-flex');
                             },
                             error: function (xhr) {
                                 let errors = xhr.responseJSON?.errors;
@@ -199,9 +205,13 @@
                                 }
 
                                 $('#newsletterSuccess').html('<div class="alert alert-danger">' + message + '</div>');
+                                $('#overlay').addClass('d-none');
+                                $('#overlay').removeClass('d-flex');
                             },
                             complete: function () {
                                 $('#newsletterSubmitBtn').prop('disabled', false).text('Subscribe');
+                                $('#overlay').addClass('d-none');
+                                $('#overlay').removeClass('d-flex');
                             }
                         });
                     });
@@ -251,6 +261,8 @@
     }
 </script>
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
+
 <script>
     const player = new Plyr('#video-source');
 </script>
