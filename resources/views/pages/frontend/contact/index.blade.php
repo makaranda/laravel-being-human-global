@@ -33,12 +33,12 @@
   <!--  Contact Area start  -->
 
   <!-- ================ contact section start ================= -->
-  <section class="contact-section section_padding pb-0">
+  <section class="contact-section section_padding pb-0 mt-30">
     <div class="container">
 
     <div class="row">
       <div class="col-12">
-      <h2 class="contact-title">Get in Touch</h2>
+      {{-- <h2 class="contact-title">Get in Touch</h2> --}}
       @if(session('success'))
       <div class="alert alert-success alert-dismissible fade show w-100 p-3" role="alert">
       {{ session('success') }}
@@ -47,7 +47,7 @@
       </div>
     @endif
       </div>
-      <div class="col-lg-8">
+      <div class="col-lg-8 contact_left_side">
       <form class="form-contact contact_form" action="{{ route('frontend.contactsubmit') }}" method="post"
         id="contactUsForm" novalidate="novalidate">
         @csrf
@@ -108,7 +108,7 @@
         </div>
       </form>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-4 contact_right_side">
       <div class="media contact-info">
         <span class="contact-info__icon"><i class="fas fa-home"></i></span>
         <div class="media-body">
@@ -134,23 +134,12 @@
       <div class="media contact-info">
         <div class="footer__links-content">
         <div class="mobile-575-center">
-          <ul class="social">
-          <li class="social__item">
-            <a href="{{ $settings['social_facebook'] }}" target="_blank" class="social__link"><i
-              class="fab fa-facebook-f"></i></a>
+          <ul class="social-icons">
+          <li><a href="{{ $settings['social_twitter'] }}"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="{{ $settings['social_facebook'] }}"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="{{ $settings['social_youtube'] }}"><i class="fab fa-youtube"></i></a>
           </li>
-          <li class="social__item">
-            <a href="{{ $settings['social_instagram'] }}" target="_blank" class="social__link"><i
-              class="fab fa-instagram"></i></a>
-          </li>
-          <li class="social__item">
-            <a href="{{ $settings['social_youtube'] }}" target="_blank" class="social__link"><i
-              class="fab fa-youtube"></i></a>
-          </li>
-          <li class="social__item">
-            <a href="{{ $settings['social_linkedin'] }}" class="social__link" target="_blank"><i
-              class="fab fa-linkedin"></i></a>
-          </li>
+          <li><a href="{{ $settings['social_instagram'] }}"><i class="fab fa-instagram"></i></a></li>
           </ul>
         </div>
         </div>
@@ -159,7 +148,7 @@
     </div>
     </div>
 
-    <div class="container-fluid mt-20">
+    <div class="container-fluid mt-30">
 
     <div class="d-none d-sm-block mb-0 pb-0">
       <div id="map" style="">
@@ -175,6 +164,68 @@
 @push('css')
   <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/contacts/contact-5/assets/css/contact-5.css" />
   <style>
+    .social-icons {
+    li {
+      a {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      background: #0e131f;
+      font-size: 15px;
+      text-align: center;
+      color: #fff;
+
+      &:hover {
+        background: #303d5a;
+      }
+      }
+
+      position: relative;
+      display: inline-block;
+      float: left;
+      margin-right: 10px;
+    }
+    }
+
+    .contact_right_side {
+    background-color: #d7f2ff;
+    padding: 20px;
+    box-shadow: 0px 0px 16px 0px #000000a1;
+
+    .media.contact-info {
+      &:not(:first-of-type) {
+      padding-top: 35px;
+      }
+
+      .contact-info__icon {
+      padding: 10px;
+
+      i {
+        color: #8a5f3c;
+        font-size: 25px;
+      }
+      }
+
+      .media-body {
+      h3 {
+        font-family: 'Source Sans 3';
+        color: #0a3244;
+        font-size: 25px;
+      }
+
+      p {
+        font-family: 'Source Sans 3';
+      }
+      }
+    }
+    }
+
+    .form-control {
+    padding: 22px 10px;
+    }
+
     #contactUsForm label {
     width: 100%;
     text-align: left;

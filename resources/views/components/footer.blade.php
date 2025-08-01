@@ -17,7 +17,7 @@
                         <ul class="footer-social clearfix">
                             <li><a href="{{ $settings['social_twitter'] }}"><i class="fab fa-twitter"></i></a></li>
                             <li><a href="{{ $settings['social_facebook'] }}"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="{{ $settings['social_pinterest'] }}"><i class="fab fa-pinterest-p"></i></a>
+                            <li><a href="{{ $settings['social_youtube'] }}"><i class="fab fa-youtube"></i></a>
                             </li>
                             <li><a href="{{ $settings['social_instagram'] }}"><i class="fab fa-instagram"></i></a></li>
                         </ul>
@@ -241,11 +241,18 @@
 
 <div id="cookieConsent" class="cookie-consent-banner"
     style="display: none; position: fixed; bottom: 0; width: 100%; background-color: #4cb0df; color: #fff; padding: 15px; text-align: center; z-index: 9999;">
-    <span>We use cookies to ensure you get the best experience on our website. <a
+    <span class="d-none d-sm-inline-block">We use cookies to ensure you get the best experience on our website. <a
             href="{{ route('frontend.privacypolicy') }}" style="color: #000000; text-decoration: underline;">Learn
-            more</a></span>
+            more</a> </span>
+    <p class="d-block d-sm-none mb-10" style="color:#fff;font-size:15px;">We use cookies to ensure you get the best
+        experience
+        on our website. <a href="{{ route('frontend.privacypolicy') }}"
+            style="color: #000000; text-decoration: underline;">Learn
+            more</a> </p>
     <button id="acceptCookie"
         style="margin-left: 20px; background-color: #8a5f3c; border: none; color: white; padding: 8px 16px; cursor: pointer;border:1px solid #fff;">Accept</button>
+    <button id="notCookie"
+        style="margin-left: 4px; background-color: #003832; border: none; color: white; padding: 8px 16px; cursor: pointer;border:1px solid #fff;width: 86px;">No</button>
 </div>
 
 
@@ -320,13 +327,19 @@
     </script>
     <script>
         $(document).ready(function () {
-            // Check if cookie is already accepted
+            // Show banner if no consent recorded
             if (!localStorage.getItem('cookieConsent')) {
                 $('#cookieConsent').fadeIn();
             }
 
+            // Accept cookie
             $('#acceptCookie').on('click', function () {
                 localStorage.setItem('cookieConsent', true);
+                $('#cookieConsent').fadeOut();
+            });
+
+            // Decline cookie (just hide banner, don't set anything)
+            $('#notCookie').on('click', function () {
                 $('#cookieConsent').fadeOut();
             });
         });
