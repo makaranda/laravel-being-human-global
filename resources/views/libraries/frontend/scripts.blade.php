@@ -152,13 +152,7 @@
     </div>
 </div>
 
-<script>
-    grecaptcha.ready(function () {
-        grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', { action: 'newsletter' }).then(function (token) {
-            document.getElementById('g-recaptcha-response').value = token;
-        });
-    });
-</script>
+
 
 <script>
     $(document).ready(function () {
