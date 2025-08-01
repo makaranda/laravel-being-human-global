@@ -66,17 +66,15 @@
                 <tr>
                   <td bgcolor="#ffffff" align="left"
                     style="padding:0px 30px 20px 30px;color:#666666;font-family:sans-serif;font-size:16px;font-weight:400;line-height:25px">
-                    <p style="margin:0;color:#161414"><strong
-                        style="text-transform:capitalize;font-family:sans-serif">Contact Person Details</strong>
-                      <br> Email - <a href="mailto:{{ $data['email'] }}" target="_blank">{{ $data['email'] }}</a>
-                      <br> Phone - <a href="tel:{{ $data['phone'] }}" target="_blank">{{ $data['phone'] }}</a>
-                      <br> Subject - {{ $data['subject'] }}
-                      <br> IP Address - {{ $data['ip_address'] }}
-                      <br> MAC Address - {{ $data['mac_address'] }}
-                      <br> Device - {{ $data['device'] }}
-                      <br> Message -
+                    <p style="margin:50px 0 50px;color:#161414;font-family:sans-serif;font-size:16px;line-height:28px">
+                      Dear <strong>{{ $data['name'] }}</strong>,<br><br>
+                      Thank you for reaching out to us! Your voice matters, and we're grateful for your interest in our
+                      mission.<br><br>
+                      Whether you’re here to make a difference, ask a question, or simply connect — we’re
+                      listening.<br><br>
+                      One of our team members will get back to you shortly. In the meantime, stay inspired and never
+                      stop believing in the power of purpose.
                     </p>
-                    <p>{{ $data['message'] }}</p>
                   </td>
                 </tr>
 
@@ -115,8 +113,10 @@
                     <p style="margin:0">You received this email because you just
                       messaged us. If it looks weird, check it out in
                       your browser..</p>
-                    <p style="margin:0;color:#b37b16">Together, we uphold the Word of God with unwavering integrity —
-                      inspiring families who give generously to protect wildlife and preserve creation.</p>
+                    <p style="margin:0;color:#b37b16">
+                      Together, we uphold the Word of God with unwavering integrity — inspiring families who give
+                      generously to protect wildlife and preserve creation.
+                    </p>>
                   </td>
                 </tr>
 

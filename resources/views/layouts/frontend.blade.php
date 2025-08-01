@@ -97,6 +97,9 @@
 </head>
 
 <body class="website-body">
+    <div id="overlay" class="d-none">
+        <div class="loader"></div>
+    </div>
     <div class="boxed_wrapper">
         <!-- Google Translate Element -->
         <div id="google_translate_element" style="display:none;"></div>

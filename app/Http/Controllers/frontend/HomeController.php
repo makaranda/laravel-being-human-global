@@ -37,6 +37,7 @@ use App\Models\Testimonial;
 use App\Models\Link;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\NewsLetter;
 use App\Models\ShippingCharge;
 //use App\Observers\VisitorCountObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -119,7 +120,7 @@ class HomeController extends Controller
 
         $page_contact = Page::where('slug', 'Like', 'contact-us')->first();
         $settings = Setting::first();
-        return view('pages.frontend.contact.index', compact('page_contact','settings')); // Make sure this view exists
+        return view('pages.frontend.contact.index', compact('page_contact', 'settings')); // Make sure this view exists
     }
 
     public function aboutUs()
@@ -323,6 +324,7 @@ class HomeController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'subject' => $request->subject,
+            'status' => 1,
             'ip_address' => $request->ip(),
             'mac_address' => substr(exec('getmac'), 0, 17),
             'device' => $request->header('User-Agent'),
@@ -334,7 +336,8 @@ class HomeController extends Controller
 
             // Set up the SMTP connection (adjust SMTP details accordingly)
             $mail->isSMTP();
-            $mail->Host = 'mail.kingvikingrecords.com'; // For example, use your SMTP host here
+            $mail->Host = env('MAIL_HOST');
+            //$mail->Host = 'mail.emailhost.com'; // For example, use your SMTP host here
             $mail->SMTPAuth = true;
             $mail->Username = env('MAIL_USERNAME'); // Set your SMTP username from .env file
             $mail->Password = env('MAIL_PASSWORD'); // Set your SMTP password from .env file
@@ -343,19 +346,41 @@ class HomeController extends Controller
 
             // Set the sender and recipient details
             $mail->setFrom($request->email, $request->name); // The sender's email and name
-            //$mail->addAddress(env('MAIL_OWNER')); // Set the recipient email (Owner's email)
-            $mail->addAddress('makarandapathirana@gmail.com'); // Set the recipient email (Owner's email)
+            $mail->addAddress(env('MAIL_OWNER')); // Set the recipient email (Owner's email)
+            //$mail->addAddress('makarandapathirana@gmail.com'); // Set the recipient email (Owner's email)
 
             // Set email subject and body content
             $mail->isHTML(true);
             $mail->Subject = 'New Contact Form Message: ' . $request->subject;
             $mail->Body = view('templates.email.contact_message', [
                 'data' => $contactData,
-                'setting' => $setting,
+                'settings' => $setting,
             ])->render(); // Passing the data to the view
 
             // Send the email
             $mail->send();
+
+            // ==== EMAIL TO USER (Thank You) ====
+            $mailUser = new PHPMailer(true);
+            $mailUser->isSMTP();
+            $mailUser->Host = env('MAIL_HOST');
+            $mailUser->SMTPAuth = true;
+            $mailUser->Username = env('MAIL_USERNAME');
+            $mailUser->Password = env('MAIL_PASSWORD');
+            $mailUser->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mailUser->Port = 587;
+
+            $mailUser->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME', 'Support Team'));
+            $mailUser->addAddress($request->email, $request->name);
+
+            $mailUser->isHTML(true);
+            $mailUser->Subject = 'Thank you for contacting us!';
+            $mailUser->Body = view('templates.email.contact_message_user', [
+                'data' => $contactData,
+                'settings' => $setting,
+            ])->render();
+
+            $mailUser->send();
 
         } catch (Exception $e) {
             // If something goes wrong with the email, log the error
@@ -363,6 +388,99 @@ class HomeController extends Controller
         }
 
         return back()->with('success', 'Your message has been sent successfully.');
+    }
+
+    public function newsletterSubmit(Request $request)
+    {
+        $request->validate([
+            'g-recaptcha-response' => 'required',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        // Verify reCAPTCHA v3
+        $recaptchaSecret = config('services.recaptcha.secret');
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptchaSecret}&response={$request->input('g-recaptcha-response')}");
+        $recaptchaData = json_decode($response);
+
+        if (!$recaptchaData->success || $recaptchaData->score < 0.5) {
+            return back()->withErrors(['g-recaptcha-response' => 'reCAPTCHA verification failed.']);
+        }
+
+        $setting = Setting::first();
+
+        // Store Contact Form Data
+        $newsletterData = NewsLetter::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'status' => 1,
+            'ip_address' => $request->ip(),
+            'mac_address' => substr(exec('getmac'), 0, 17),
+            'device' => $request->header('User-Agent'),
+        ]);
+
+        $full_name = $request->first_name . ' ' . $request->last_name;
+
+        // Send Email to Owner using PHPMailer
+        try {
+            $mail = new PHPMailer(true);
+
+            // Set up the SMTP connection (adjust SMTP details accordingly)
+            $mail->isSMTP();
+            $mail->Host = env('MAIL_HOST');
+            //$mail->Host = 'mail.emailhost.com'; // For example, use your SMTP host here
+            $mail->SMTPAuth = true;
+            $mail->Username = env('MAIL_USERNAME'); // Set your SMTP username from .env file
+            $mail->Password = env('MAIL_PASSWORD'); // Set your SMTP password from .env file
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587; // Or 465 for SSL
+
+            // Set the sender and recipient details
+            $mail->setFrom($request->email, $full_name); // The sender's email and name
+            $mail->addAddress(env('MAIL_OWNER')); // Set the recipient email (Owner's email)
+            //$mail->addAddress('makarandapathirana@gmail.com'); // Set the recipient email (Owner's email)
+
+            // Set email subject and body content
+            $mail->isHTML(true);
+            $mail->Subject = 'New Newsletter from : ' . $full_name;
+            $mail->Body = view('templates.email.newsletter_message', [
+                'data' => $newsletterData,
+                'settings' => $setting,
+            ])->render(); // Passing the data to the view
+
+            // Send the email
+            $mail->send();
+
+            // ==== EMAIL TO USER (Thank You) ====
+            $mailUser = new PHPMailer(true);
+            $mailUser->isSMTP();
+            $mailUser->Host = env('MAIL_HOST');
+            $mailUser->SMTPAuth = true;
+            $mailUser->Username = env('MAIL_USERNAME');
+            $mailUser->Password = env('MAIL_PASSWORD');
+            $mailUser->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mailUser->Port = 587;
+
+            $mailUser->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME', 'Support Team'));
+            $mailUser->addAddress($request->email, $full_name);
+
+            $mailUser->isHTML(true);
+            $mailUser->Subject = 'Thank you for contacting us to newsletter!';
+            $mailUser->Body = view('templates.email.newsletter_message_user', [
+                'data' => $newsletterData,
+                'settings' => $setting,
+            ])->render();
+
+            $mailUser->send();
+
+        } catch (Exception $e) {
+            // If something goes wrong with the email, log the error
+            Log::error('Email could not be sent. Mailer Error: ' . $mail->ErrorInfo);
+        }
+
+        return back()->with('success', 'Your Newsletter message has been sent successfully.');
     }
 
     public function showAnimals($slug)

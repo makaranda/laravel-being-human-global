@@ -152,6 +152,70 @@
     </div>
 </div>
 
+<script>
+    grecaptcha.ready(function () {
+        grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', { action: 'newsletter' }).then(function (token) {
+            document.getElementById('g-recaptcha-response').value = token;
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#newsletterForm').validate({
+            rules: {
+                first_name: { required: true, minlength: 3 },
+                last_name: { required: true, minlength: 4 },
+                email: { required: true, email: true }
+            },
+            messages: {
+                first_name: { required: "Your First name is required", minlength: "At least 3 characters" },
+                last_name: { required: "Your Last name is required", minlength: "At least 4 characters" },
+                email: { required: "Please enter a valid email address" }
+            },
+            submitHandler: function (form) {
+                grecaptcha.ready(function () {
+                    grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', { action: 'newsletter' }).then(function (token) {
+                        $('#g-recaptcha-response').val(token);
+
+                        let formData = $(form).serialize();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('frontend.newslettersubmit') }}",
+                            data: formData,
+                            beforeSend: function () {
+                                $('#newsletterSubmitBtn').prop('disabled', true).text('Submitting...');
+                                $('#newsletterSuccess').html('');
+                            },
+                            success: function (response) {
+                                $('#newsletterSuccess').html('<div class="alert alert-success">Thank you for subscribing!</div>');
+                                $('#newsletterForm')[0].reset();
+                            },
+                            error: function (xhr) {
+                                let errors = xhr.responseJSON?.errors;
+                                let message = "Something went wrong. Please try again.";
+
+                                if (errors) {
+                                    message = "<ul>";
+                                    $.each(errors, function (key, val) {
+                                        message += "<li>" + val[0] + "</li>";
+                                    });
+                                    message += "</ul>";
+                                }
+
+                                $('#newsletterSuccess').html('<div class="alert alert-danger">' + message + '</div>');
+                            },
+                            complete: function () {
+                                $('#newsletterSubmitBtn').prop('disabled', false).text('Subscribe');
+                            }
+                        });
+                    });
+                });
+            }
+        });
+    });
+</script>
 
 <!-- Google Translate Init -->
 <script type="text/javascript">
@@ -167,6 +231,7 @@
 
 <!-- Load Google Translate Script -->
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
 <script>
     function translateTo(lang) {

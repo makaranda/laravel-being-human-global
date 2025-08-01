@@ -174,6 +174,9 @@
                 <form method="POST" id="newsletterForm">
                     @csrf
                     <div class="row">
+                        <div class="col-12 col-md-12">
+                            <div id="newsletterSuccess"></div>
+                        </div>
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-12 col-md-6">
@@ -198,6 +201,9 @@
                                         <input type="text" class="form-control" name="formEmailAddress"
                                             id="formEmailAddress" placeholder="johnsmith@gmail.com">
                                     </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
                                 </div>
                             </div>
                         </div>
@@ -274,20 +280,20 @@
         //     });
         // });
 
-        $(document).ready(function () {
-            $('#newsletterForm').validate({
-                rules: {
-                    formFName: { required: true, minlength: 3 },
-                    formLName: { required: true, minlength: 4 },
-                    formEmailAddress: { required: true, email: true }
-                },
-                messages: {
-                    formFName: { required: "Your First name is required", minlength: "Name must be at least 3 characters long" },
-                    formLName: { required: "Your Last name is required", minlength: "Name must be at least 4 characters long" },
-                    formEmailAddress: { required: "Please provide an email address" }
-                }
-            });
-        });
+        // $(document).ready(function () {
+        //     $('#newsletterForm').validate({
+        //         rules: {
+        //             formFName: { required: true, minlength: 3 },
+        //             formLName: { required: true, minlength: 4 },
+        //             formEmailAddress: { required: true, email: true }
+        //         },
+        //         messages: {
+        //             formFName: { required: "Your First name is required", minlength: "Name must be at least 3 characters long" },
+        //             formLName: { required: "Your Last name is required", minlength: "Name must be at least 4 characters long" },
+        //             formEmailAddress: { required: "Please provide an email address" }
+        //         }
+        //     });
+        // });
     </script>
 
 @endpush

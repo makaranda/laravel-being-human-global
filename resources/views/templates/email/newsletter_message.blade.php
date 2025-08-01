@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Contact Message</title>
+  <title>New Newsletter Message</title>
 </head>
 
 <body>
@@ -68,15 +68,13 @@
                     style="padding:0px 30px 20px 30px;color:#666666;font-family:sans-serif;font-size:16px;font-weight:400;line-height:25px">
                     <p style="margin:0;color:#161414"><strong
                         style="text-transform:capitalize;font-family:sans-serif">Contact Person Details</strong>
+                      <br> Name : {{ $data['first_name'] . ' ' . $data['last_name'] }}
                       <br> Email - <a href="mailto:{{ $data['email'] }}" target="_blank">{{ $data['email'] }}</a>
-                      <br> Phone - <a href="tel:{{ $data['phone'] }}" target="_blank">{{ $data['phone'] }}</a>
-                      <br> Subject - {{ $data['subject'] }}
+                      <br> Subject - NewsLetter
                       <br> IP Address - {{ $data['ip_address'] }}
                       <br> MAC Address - {{ $data['mac_address'] }}
                       <br> Device - {{ $data['device'] }}
-                      <br> Message -
                     </p>
-                    <p>{{ $data['message'] }}</p>
                   </td>
                 </tr>
 

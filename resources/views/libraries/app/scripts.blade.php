@@ -32,7 +32,7 @@
 
 
 <script src="{{ url('public/assets/app/js/adminlte.js') }}"></script>
-
+<script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
 <script>
   $(window).on('load', function () {
     $('#overlay').removeClass('d-flex');

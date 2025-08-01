@@ -82,6 +82,7 @@ Route::get('/pay-online', [HomeController::class, 'payOnline'])->name('frontend.
 Route::get('/enroll', [HomeController::class, 'enroll'])->name('frontend.enroll.now');
 Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('frontend.contact');
 Route::post('/contact-submit', [HomeController::class, 'contactSubmit'])->name('frontend.contactsubmit');
+Route::post('/newsletter-submit', [HomeController::class, 'newsletterSubmit'])->name('frontend.newslettersubmit');
 Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('frontend.about');
 Route::get('/services', [HomeController::class, 'servicesPage'])->name('frontend.service');
 Route::get('/gallery', [HomeController::class, 'gallery'])->name('frontend.gallery');
