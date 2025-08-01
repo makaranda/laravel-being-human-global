@@ -35,7 +35,7 @@
 
 
     <!-- google-map-section -->
-    <section class="google-map-section">
+    <section class="google-map-section pt-0">
         <div class="container-fluid">
             <div class="map-inner">
                 <div class="map-canvas">
@@ -97,6 +97,17 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                     <textarea name="message" placeholder="Write a message" class="border"></textarea>
                                 </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="confirm_contact"
+                                            name="confirm_contact" required>
+                                        <label class="form-check-label" for="confirm_contact">
+                                            I agree to the <a href="{{ route('frontend.privacypolicy') }}"
+                                                target="_blank">Privacy Policy</a> and consent to be contacted regarding my
+                                            inquiry.
+                                        </label>
+                                    </div>
+                                </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn mr-0">
                                     <button class="theme-btn btn-one" type="submit"
                                         name="submit-form"><span>Submit</span></button>
@@ -121,6 +132,10 @@
             width: 100%;
             text-align: left;
             color: red;
+        }
+
+        .form-check-label {
+            color: #000 !important;
         }
 
         img.img-fluid.login-logo {

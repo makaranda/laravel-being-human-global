@@ -19,6 +19,7 @@
                                     <a href="{{ $slider->link ?? route('frontend.home.donation') }}"
                                         class="theme-btn btn-one">Donation</a>
                                     <a href="{{route('frontend.about') }}" class="theme-btn btn-one btn2">discover more</a>
+
                                 </div>
                             </div>
                         </div>
@@ -26,19 +27,82 @@
                 @endforeach
             </div>
         @elseif($settings['switch_slider'] == 0)
-            @foreach ($main_slider as $slider)
-                @if($slider->switch == 0)
-                    <div class="item-flex-center vid-thumbnail relative p-0">
-                        <a href="{{ asset('public/assets/frontend/img/video/' . $slider->banner) }}" data-fslightbox>
-                            <video width="100%" autoplay muted playsinline loop class="item-flex-center width-100" id="video-source"
-                                src="{{ asset('public/assets/frontend/img/video/' . $slider->banner) }}">
-                            </video>
-                        </a>
-                    </div>
-                @endif
-            @endforeach
+            {{-- @foreach ($main_slider as $slider)
+            @if($slider->switch == 0)
+            <div class="item-flex-center vid-thumbnail relative p-0">
+                <a href="{{ asset('public/assets/frontend/img/video/' . $slider->banner) }}" data-fslightbox>
+                    <video width="100%" autoplay muted playsinline loop class="item-flex-center width-100" id="video-source"
+                        src="{{ asset('public/assets/frontend/img/video/' . $slider->banner) }}">
+                    </video>
+                </a>
+            </div>
+            @endif
+            @endforeach --}}
         @endif
     </section>
+
+    <!-- banner-section -->
+    {{-- <section class="banner-section">
+        <div class="banner-carousel owl-theme owl-carousel owl-dots-none">
+            <div class="slide-item">
+                <div class="image-layer"
+                    style="background-image:url({{ asset('public/assets/frontend/img/sliders/slider-banner-img1.jpg') }})">
+                </div>
+                <div class="auto-container">
+                    <div class="content-box">
+                        <h3>Explore Our Animals</h3>
+                        <h2>New Wildlife Experience of Joy</h2>
+                        <div class="btn-box">
+                            <a href="index.html" class="theme-btn btn-one">Discover More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="image-layer"
+                    style="background-image:url({{ asset('public/assets/frontend/img/sliders/slider-banner-img2.jpg') }})">
+                </div>
+                <div class="auto-container">
+                    <div class="content-box">
+                        <h3>Explore Our Animals</h3>
+                        <h2>New Wildlife Experience of Joy</h2>
+                        <div class="btn-box">
+                            <a href="index.html" class="theme-btn btn-one">Discover More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="image-layer"
+                    style="background-image:url({{ asset('public/assets/frontend/img/sliders/slider-banner-img3.jpg') }})">
+                </div>
+                <div class="auto-container">
+                    <div class="content-box">
+                        <h3>Explore Our Animals</h3>
+                        <h2>New Wildlife Experience of Joy</h2>
+                        <div class="btn-box">
+                            <a href="index.html" class="theme-btn btn-one">Discover More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="image-layer"
+                    style="background-image:url({{ asset('public/assets/frontend/img/sliders/slider-banner-img7.jpg') }})">
+                </div>
+                <div class="auto-container">
+                    <div class="content-box">
+                        <h3>Explore Our Animals</h3>
+                        <h2>New Wildlife Experience of Joy</h2>
+                        <div class="btn-box">
+                            <a href="index.html" class="theme-btn btn-one">Discover More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> --}}
+    <!-- banner-section end -->
 
     <!-- banner-section end -->
 

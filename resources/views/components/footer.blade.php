@@ -208,6 +208,17 @@
                                 <div class="col-12 col-md-12">
                                     <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
                                 </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="confirm_newsletter"
+                                            name="confirm_newsletter" required>
+                                        <label class="form-check-label" for="confirm_newsletter">
+                                            I agree to the <a href="{{ route('frontend.privacypolicy') }}"
+                                                target="_blank">Privacy Policy</a> and wish to subscribe to the
+                                            newsletter.
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12 mt-20">
@@ -226,6 +237,15 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="cookieConsent" class="cookie-consent-banner"
+    style="display: none; position: fixed; bottom: 0; width: 100%; background-color: #4cb0df; color: #fff; padding: 15px; text-align: center; z-index: 9999;">
+    <span>We use cookies to ensure you get the best experience on our website. <a
+            href="{{ route('frontend.privacypolicy') }}" style="color: #000000; text-decoration: underline;">Learn
+            more</a></span>
+    <button id="acceptCookie"
+        style="margin-left: 20px; background-color: #8a5f3c; border: none; color: white; padding: 8px 16px; cursor: pointer;border:1px solid #fff;">Accept</button>
 </div>
 
 
@@ -297,6 +317,19 @@
         //         }
         //     });
         // });
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Check if cookie is already accepted
+            if (!localStorage.getItem('cookieConsent')) {
+                $('#cookieConsent').fadeIn();
+            }
+
+            $('#acceptCookie').on('click', function () {
+                localStorage.setItem('cookieConsent', true);
+                $('#cookieConsent').fadeOut();
+            });
+        });
     </script>
 
 @endpush

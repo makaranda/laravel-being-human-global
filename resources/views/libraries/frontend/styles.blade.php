@@ -15,7 +15,8 @@
 
 <link rel="stylesheet" href="{{ url('public/assets/frontend/fontawesome/css/all.min.css') }}">
 
-<link rel="stylesheet" href="{{ url('public/assets/frontend/css/owl.carousel.min.css') }}">
+{{--
+<link rel="stylesheet" href="{{ url('public/assets/frontend/css/owl.carousel.min.css') }}"> --}}
 <link rel="stylesheet" href="{{ url('public/assets/frontend/css/lightcase.min.css') }}">
 <link rel="stylesheet" href="{{ url('public/assets/frontend/css/swiper-bundle.min.css') }}">
 

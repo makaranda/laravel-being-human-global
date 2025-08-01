@@ -206,14 +206,14 @@
                                         preserving nature’s legacy.
                                     </p>
                                 </div>
-                                <div class="col-12 col-md-12">
+                                {{-- <div class="col-12 col-md-12">
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="confirm_donation"
                                             name="confirm_donation">
                                         <label class="form-check-label" for="confirm_donation">Yes, I want to cover the 4%
                                             fee for my donation.</label>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-12 col-md-12 mt-13">
                                     <div class="form-group">
                                         <div class="col-md-12 text-center">
