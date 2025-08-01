@@ -43,7 +43,7 @@
                                     <h3>YOUR DONATION DOUBLED!</h3>
                                 </div>
                                 <div class="col-12 col-md-12 text-justify pt-2 pb-2">
-                                    <p></p>
+
                                 </div>
                                 <div class="col-12 col-md-12 text-justify pt-2 pb-2">
                                     <label class="font-weight-bold">I would like to make a:</label> <br>
@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12 text-justify pt-2 pb-2">
-                                    <div class="row justify-content-center">
+                                    <div class="row justify-content-center pt-4">
                                         <div class="col-4 col-sm-4 col-md-3 col-lg-3">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input amount_button_radio" type="radio"
@@ -96,13 +96,13 @@
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-12 col-md-12 mt-3 text-justify">
-                                    <p class="text-gray">Protect Wildlife, Preserve the Future!
+                                    <p class="text-dark">Protect Wildlife, Preserve the Future!
                                         Your donation helps us safeguard endangered species and restore vital ecosystems. By
                                         contributing to our conservation fund, you support on-the-ground efforts like
                                         habitat restoration, anti-poaching initiatives, and community-led conservation
                                         programs that ensure a thriving planet for generations to come. Be a voice for the
                                         voiceless — donate today and make a lasting impact.</p>
-                                    <p class="text-gray">Your privacy matters. [Wildlife Organization Name] is committed to
+                                    <p class="text-dark">Your privacy matters. [Wildlife Organization Name] is committed to
                                         protecting your personal information. For details, please read our <a
                                             href="{{ route('frontend.privacypolicy') }}">Privacy Policy</a>.Charitable
                                         Registration Number: 0000000</p>
@@ -199,7 +199,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-12 mt-3">
-                                    <p class="font-weight-bold">Did you know that by covering the processing fee, you help
+                                    <p class="">Did you know that by covering the processing fee, you help
                                         {{ $settings['website_name'] }} direct more funds to critical conservation efforts?
                                         Your generosity goes even further — helping protect endangered species, restore
                                         habitats, and support frontline wildlife initiatives. Every cent counts in
@@ -309,6 +309,10 @@
             width: 1px;
         }
 
+        #other_amount {
+            height: 53px;
+        }
+
         .amount_button_label {
             background-color: #ffffffa6;
             color: #005047;
@@ -345,12 +349,17 @@
         h4,
         h5,
         h6,
+        {
+        position: relative;
+        font-family: "Raleway", sans-serif;
+        font-weight: 900;
+        margin: 0px;
+        transition: all 500ms ease;
+        }
+
         p {
-            position: relative;
-            font-family: "Raleway", sans-serif;
-            font-weight: 900;
-            margin: 0px;
-            transition: all 500ms ease;
+            font-family: "Source Sans 3", sans-serif !important;
+            padding: 12px 0;
         }
 
         .btn-secondary {
@@ -505,6 +514,9 @@
             color: #999898;
         }
 
+        .text-dark {
+            color: #070e14 !important;
+        }
 
         @media (min-width: 300px) {
             .amount_button_label {

@@ -1,40 +1,30 @@
 @extends('layouts.frontend')
 
 @section('content')
-
-  <!-- Page Title -->
-  <section class="page-title">
-    <div class="img-wrap parallax-demo-1">
-    <div class="parallax-inner back-img"
-      style="background-image: url({{ url('public/assets/frontend/images/background/' . $settings['page_banner']) }});">
-    </div>
-    </div>
-    <div class="auto-container">
-    <div class="content-box">
-      <ul class="bread-crumb clearfix">
-      <li><a href="{{ route('frontend.home') }}">Home</a></li>
-      <li>Contact us</li>
-      </ul>
-      <div class="title">
-      <h1>Contact us</h1>
+  <!-- bradcam_area  -->
+  <div class="bradcam_area breadcam_bg_2">
+    <div class="container">
+    <div class="row">
+      <div class="col-xl-12">
+      <div class="bradcam_text text-center">
+        <h3>Contact Us</h3>
+      </div>
       </div>
     </div>
     </div>
-  </section>
-  <!-- End Page Title -->
-
-
-  @php
-    $num = $settings['contact_number'];
-    $num2 = $settings['contact_number2'];
-    $contact_number = '+(' . substr($num, 0, 2) . ') ' . substr($num, 2, 3) . ' ' . substr($num, 5, 3) . ' ' . substr($num, 8);
-    $contact_number2 = '+(' . substr($num2, 0, 2) . ') ' . substr($num2, 2, 3) . ' ' . substr($num2, 5, 3) . ' ' . substr($num2, 8);
-  @endphp
-  <!--  Contact Area start  -->
+  </div>
+  <!--/ bradcam_area  -->
 
   <!-- ================ contact section start ================= -->
-  <section class="contact-section section_padding pb-0">
+  <section class="contact-section section_padding">
     <div class="container">
+
+    <div class="d-none d-sm-block mb-5 pb-4">
+      <div id="map" style="">
+      <iframe src="{{ $settings['google_map'] }}" width="100%" height="450" style="border:0;" allowfullscreen=""
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-12">
@@ -49,7 +39,7 @@
       </div>
       <div class="col-lg-8">
       <form class="form-contact contact_form" action="{{ route('frontend.contactsubmit') }}" method="post"
-        id="contactUsForm" novalidate="novalidate">
+        id="contactForm" novalidate="novalidate">
         @csrf
         <div class="row">
 
@@ -89,22 +79,15 @@
           <span class="focus-input2 d-none" data-placeholder="Message"></span>
           </div>
         </div>
-
-        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-          <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="confirm_contact" name="confirm_contact" required>
-          <label class="form-check-label" for="confirm_contact">
-            I agree to the <a href="{{ route('frontend.privacypolicy') }}" target="_blank">Privacy Policy</a> and
-            consent to be contacted regarding my
-            inquiry.
-          </label>
-          </div>
+        <div class="col-sm-12">
+          <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+          @error('g-recaptcha-response')
+        <p class="text-danger">{{ $message }}</p>
+      @enderror
         </div>
-
-        <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn mr-0">
-          <button class="button button-contactForm btn_4 boxed-btn theme-btn btn-one" type="submit"
-          name="submit-form"><span>Send Message</span></button>
         </div>
+        <div class="form-group-1 mt-10">
+        <button type="submit" class="button button-contactForm btn_4 boxed-btn">Send Message</button>
         </div>
       </form>
       </div>
@@ -112,7 +95,7 @@
       <div class="media contact-info">
         <span class="contact-info__icon"><i class="fas fa-home"></i></span>
         <div class="media-body">
-        <h3 class="website_name">{{ $settings['website_name'] }}</h3>
+        <h3 class="website_name">Imperial Wisdom Graduate Campus</h3>
         <p>{{ $settings['address'] }}</p>
         </div>
       </div>
@@ -158,16 +141,6 @@
       </div>
     </div>
     </div>
-
-    <div class="container-fluid mt-20">
-
-    <div class="d-none d-sm-block mb-0 pb-0">
-      <div id="map" style="">
-      <iframe src="{{ $settings['google_map'] }}" width="100%" height="450" style="border:0;" allowfullscreen=""
-        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-    </div>
-    </div>
   </section>
   <!-- ================ contact section end ================= -->
 @endsection
@@ -175,16 +148,6 @@
 @push('css')
   <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/contacts/contact-5/assets/css/contact-5.css" />
   <style>
-    #contactUsForm label {
-    width: 100%;
-    text-align: left;
-    color: red;
-    }
-
-    .form-check-label {
-    color: #000 !important;
-    }
-
     img.img-fluid.login-logo {
     width: 120px !important;
     }
@@ -193,19 +156,12 @@
     color: rgb(81 72 17);
     text-transform: uppercase;
     }
-
-    .breadcam_bg_2 {
-    background-image: url('{{ asset('public/assets/frontend/img/banner/' . $page_contact['banner_image']) }}') !important;
-    background-size: cover;
-    background-position: center;
-    }
   </style>
 @endpush
 
 @push('scripts')
 
-  {{--
-  <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site') }}"></script> --}}
+  <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site') }}"></script>
   <script>
     grecaptcha.ready(function () {
     grecaptcha.execute("{{ config('services.recaptcha.site') }}", { action: 'submit' }).then(function (token) {
@@ -225,7 +181,7 @@
     })
 
     $(document).ready(function () {
-    $('#contactUsForm').validate({
+    $('#contactForm').validate({
       rules: {
       name: { required: true, minlength: 2 },
       subject: { required: true, minlength: 4 },

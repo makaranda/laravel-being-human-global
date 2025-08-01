@@ -129,7 +129,7 @@
 <header class="main-header header-style-one">
     <div class="header-top">
         <div class="top-inner">
-            <div class="top-left">
+            <div class="top-left d-none d-sm-flex">
                 <ul class="info clearfix">
                     <li><i class="flaticon-pin"></i>{{ $settings['address'] ?? 'No Address Found' }}</li>
                     <li>
