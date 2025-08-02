@@ -112,6 +112,7 @@
       <div class="media contact-info">
         <span class="contact-info__icon"><i class="fas fa-home"></i></span>
         <div class="media-body">
+        <h2>Address</h2>
         <h3 class="website_name">{{ $settings['website_name'] }}</h3>
         <p>{{ $settings['address'] }}</p>
         </div>
@@ -119,6 +120,7 @@
       <div class="media contact-info">
         <span class="contact-info__icon"><i class="fas fa-phone"></i></span>
         <div class="media-body">
+        <h2>Phone</h2>
         <h3>{{ $settings['contact_number'] }}</h3>
         <h3>{{ $settings['contact_number2'] }}</h3>
         <p>Mon to Fri 9am to 6pm</p>
@@ -127,6 +129,7 @@
       <div class="media contact-info">
         <span class="contact-info__icon"><i class="fas fa-envelope"></i></span>
         <div class="media-body">
+        <h2>Email</h2>
         <h3>{{ $settings['email_address'] }}</h3>
         <p>Send us your query anytime!</p>
         </div>
@@ -190,9 +193,9 @@
     }
 
     .contact_right_side {
-    background-color: #d7f2ff;
+    /* background-color: #d7f2ff; */
     padding: 20px;
-    box-shadow: 0px 0px 16px 0px #000000a1;
+    /* box-shadow: 0px 0px 16px 0px #000000a1; */
 
     .media.contact-info {
       &:not(:first-of-type) {
@@ -209,10 +212,16 @@
       }
 
       .media-body {
+      h2 {
+        font-family: 'Source Sans 3';
+        color: #4a2d15;
+        font-size: 26px;
+      }
+
       h3 {
         font-family: 'Source Sans 3';
         color: #0a3244;
-        font-size: 25px;
+        font-size: 18px;
       }
 
       p {

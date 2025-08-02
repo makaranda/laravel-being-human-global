@@ -81,7 +81,7 @@ class DonationController extends Controller
                     ]
                 ],
                 'mode' => 'payment',
-                'success_url' => route('payment.success'),  // see next step
+                'success_url' => route('payment.success') . '?session_id={CHECKOUT_SESSION_ID}',  // see next step
                 'cancel_url' => route('payment.cancel'),
             ]);
 
@@ -97,20 +97,31 @@ class DonationController extends Controller
         $settings_banner = $settings->page_banner;
         // Retrieve saved form data from session
         $formData = session('donation_form_data');
-
+        $sessionId = $request->get('session_id');
         if (!$formData) {
             return view('pages.frontend.messages.index', [
                 'message_title' => 'Session Expired',
                 'message' => 'Your session has expired. Please try again.',
                 'code' => '419'
             ]);
+        } elseif (!$sessionId) {
+            return view('pages.frontend.messages.index', [
+                'message_title' => 'Stripe Payment is not valid',
+                'message' => 'Your Stripe Payment is not valid. Please try again.',
+                'code' => '419'
+            ]);
         }
+
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $session = \Stripe\Checkout\Session::retrieve($sessionId);
+        $paymentIntentId = $session->payment_intent;
 
         // Here, save $formData to your database, e.g. Donation model:
         //dd($formData);
         Donation::create([
             'payment_type' => $formData['payment_type'] ?? 'one_time',
             'amount' => $formData['amount'],
+            'session_id' => $paymentIntentId,
             'cover_fee' => isset($formData['confirm_donation']),
             'title' => $formData['info_title'] ?? null,
             'first_name' => $formData['info_first_name'],
@@ -135,6 +146,8 @@ class DonationController extends Controller
             'message_title' => 'Payment Successful',
             'message' => 'Thank you! Your payment was successfully processed.',
             'message_icon' => 'success-svgrepo-com.svg',
+            'form_data' => $formData,
+            'payment_id' => $paymentIntentId,
             'settings_banner' => $settings_banner,
             'code' => '200'
         ]);
@@ -157,6 +170,7 @@ class DonationController extends Controller
         Donation::create([
             'payment_type' => $formData['payment_type'] ?? 'one_time',
             'amount' => $formData['amount'],
+            'session_id' => '',
             'cover_fee' => isset($formData['confirm_donation']),
             'title' => $formData['info_title'] ?? null,
             'first_name' => $formData['info_first_name'],
@@ -178,6 +192,8 @@ class DonationController extends Controller
             'message_title' => 'Payment Cancelled',
             'message' => 'Your payment process was cancelled. Please try again or contact support.',
             'message_icon' => 'error-svgrepo-com.svg',
+            'form_data' => $formData,
+            'payment_id' => '',
             'settings_banner' => $settings_banner,
             'code' => '400'
         ]);

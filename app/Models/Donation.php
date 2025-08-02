@@ -10,6 +10,7 @@ class Donation extends Model
     use HasFactory;
     protected $table = 'donations';
     protected $fillable = [
+        'session_id',
         'payment_type',
         'amount',
         'cover_fee',
