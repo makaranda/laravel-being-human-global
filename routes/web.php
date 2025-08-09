@@ -531,3 +531,5 @@ Route::get('/artisan-migrate', function () {
 
     return "Database migrated successfully!";
 });
+
+
