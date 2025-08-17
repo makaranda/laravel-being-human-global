@@ -208,7 +208,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown {{ request()->routeIs('frontend.contact') ? 'current' : '' }}">
-                                <a href="#">Contact</a>
+                                <a href="#">Contact <span class="fas fa-angle-down"></span></a>
                                 <ul>
                                     <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
                                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#newsletterModal">Newsletter

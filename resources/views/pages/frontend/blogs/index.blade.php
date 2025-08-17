@@ -43,7 +43,7 @@
                                         <div class="image-box">
                                             <figure class="image">
                                                 <a href="{{ route('frontend.blogs.article.view', $item->slug) }}">
-                                                    <img src="{{ $item->feature_image ? url('public/assets/uploads/blogs/' . $item->feature_image) : url('public/assets/images/default-blog.jpg') }}"
+                                                    <img src="{{ $item->feature_image ? url('public/assets/uploads/blogs/' . $item->feature_image) : url('public/assets/uploads/blogs/project_sample.jpg') }}"
                                                         alt="{{ $item->title }}">
                                                 </a>
                                             </figure>
