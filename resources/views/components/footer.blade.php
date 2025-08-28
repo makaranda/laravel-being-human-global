@@ -8,19 +8,29 @@
                 <!-- Logo & Social -->
                 <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
                     <div class="footer-widget logo-widget">
-                        <figure class="footer-logo bg-white">
+                        <figure class="footer-logo bg-dark">
                             <a href="{{ route('home.index') }}">
                                 <img src="{{ asset('public/assets/frontend/img/' . $settings['footer_logo']) }}"
                                     alt="{{ $settings['website_name'] }}">
                             </a>
                         </figure>
                         <ul class="footer-social clearfix">
-                            <li><a href="{{ $settings['social_twitter'] }}"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="{{ $settings['social_twitter'] }}"><!--<i class="fab fa-twitter"></i>--><svg
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                        style="
+    fill: #fff;
+    width: 25px;
+"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                        <path
+                                            d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z">
+                                        </path>
+                                    </svg></a></li>
                             <li><a href="{{ $settings['social_facebook'] }}"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="{{ $settings['social_youtube'] }}"><i class="fab fa-youtube"></i></a>
                             </li>
                             <li><a href="{{ $settings['social_instagram'] }}"><i class="fab fa-instagram"></i></a></li>
                         </ul>
+
                     </div>
                     <div class="widget-title mt-10 mb-10">
                         <h5>Signup Newsletter</h5>
@@ -40,11 +50,14 @@
                         <div class="widget-content">
                             <ul class="links-list clearfix">
                                 <li><a href="{{ route('frontend.about') }}">About Us</a></li>
-                                <li><a href="{{ route('frontend.home.donation') }}">Donation</a></li>
+                                {{-- <li><a href="{{ route('frontend.home.donation') }}">Donation</a></li> --}}
                                 <li><a href="{{ route('frontend.home.blogs') }}">Blogs</a></li>
                                 <li><a href="{{ route('frontend.home.ourworks') }}">Our Works</a></li>
                                 <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
+
                                 <li><a href="{{ route('frontend.privacypolicy') }}">Privacy Policy</a></li>
+                                <li><a href="{{ route('frontend.ethicspolicy') }}">Ethics Policy</a></li>
+                                <li><a href="{{ route('frontend.cookiespolicy') }}">Cookies Policy</a></li>
                                 <li><a href="{{ route('frontend.termsandconditions') }}">Terms & Conditions</a></li>
                             </ul>
                         </div>
@@ -60,7 +73,7 @@
                         <div class="widget-content">
                             <ul class="info clearfix">
                                 <li><i class="flaticon-telephone"></i><a
-                                        href="tel:{{ $settings['contact_number'] }}">{{ $settings['contact_number'] }}</a>
+                                        href="tel:+{{ $settings['contact_number'] }}">+{{ $settings['contact_number'] }}</a>
                                 </li>
                                 <li><i class="flaticon-email"></i><a
                                         href="mailto:{{ $settings['email_address'] }}">{{ $settings['email_address'] }}</a>
@@ -68,6 +81,10 @@
                                 <li><i class="flaticon-pin"></i>{{ $settings['address'] }}</li>
                             </ul>
                         </div>
+
+                        {{-- <div class="mt-20 mb-6">
+                            <h6 class="footer-org-name">Organization No. 935622077</h6>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -78,7 +95,7 @@
                             <h5>Who we Are??</h5>
                         </div>
                         <div class="widget-content">
-                            <div>
+                            <div class="text-left">
                                 {!! $settings['footer_content'] !!}
                             </div>
                             {{-- <ul class="image-list clearfix">
@@ -98,9 +115,16 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="col-12 col-md-12">
+                    <div class="mt-20 mb-6 text-right">
+                        <h6 class="footer-org-name">Organization No. 935622077</h6>
+                    </div>
+                </div>
             </div> <!-- .row -->
         </div> <!-- .auto-container -->
+        {{-- <div class="mt-20 mb-6 text-right">
+            <h6 class="footer-org-name">Organization No. 935622077</h6>
+        </div> --}}
     </div>
 
     <!-- Footer Bottom -->
@@ -163,6 +187,66 @@
     </div>
 </div>
 </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="donationModalLabel">Donation Form</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Progress -->
+                {{-- <div class="progress mb-4" style="height: 20px;">
+                    <div class="progress-bar" role="progressbar" style="width: 33%">Step 1 of 3</div>
+                </div> --}}
+                <form method="POST" id="donationForm">
+                    @csrf
+                    <div class="step step-1">
+                        <div class="row">
+                            <div class="col-12 col-md-6 text-center mt-2 mb-2">
+                                <a href="{{ route('frontend.home.donation', 'financial-services') }}"
+                                    class="theme-btn btn-one btn3">Financial Services</a>
+                            </div>
+                            <div class="col-12 col-md-6 text-center mt-2 mb-2">
+                                <button type="button" class="theme-btn btn-one next-btn">Other Services</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step step-2 d-none">
+                        <div class="row">
+                            <div class="col-12 col-md-6 text-center mt-16 mb-16">
+                                <a href="{{ route('frontend.home.donation', 'medical-equipments') }}"
+                                    class="theme-btn btn-one">Medical Equipments</a>
+                            </div>
+                            <div class="col-12 col-md-6 text-center mt-16 mb-16">
+                                <a href="{{ route('frontend.home.donation', 'volunteer-services') }}"
+                                    class="theme-btn btn-one btn3">Volunteer Services</a>
+                            </div>
+                            <div class="col-12 col-md-6 text-center mt-2 mb-16">
+                                <a href="{{ route('frontend.home.donation', 'medicine') }}"
+                                    class="theme-btn btn-one btn3">Medicine</a>
+                            </div>
+                            <div class="col-12 col-md-6 text-center mt-2 mb-16">
+                                <a href="{{ route('frontend.home.donation', 'others') }}"
+                                    class="theme-btn btn-one ">Others</a>
+                            </div>
+                        </div>
+                        <div class="row border-top mt-16">
+                            <div class="col-12 col-md-12 text-center mt-16 mb-2">
+                                <button type="button" class="theme-btn btn-one btn4 prev-btn">Previous</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal -->

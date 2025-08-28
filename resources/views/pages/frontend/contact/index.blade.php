@@ -29,7 +29,7 @@
     $num2 = $settings['contact_number2'];
     $contact_number = '+(' . substr($num, 0, 2) . ') ' . substr($num, 2, 3) . ' ' . substr($num, 5, 3) . ' ' . substr($num, 8);
     $contact_number2 = '+(' . substr($num2, 0, 2) . ') ' . substr($num2, 2, 3) . ' ' . substr($num2, 5, 3) . ' ' . substr($num2, 8);
-  @endphp
+    @endphp
   <!--  Contact Area start  -->
 
   <!-- ================ contact section start ================= -->
@@ -121,8 +121,8 @@
         <span class="contact-info__icon"><i class="fas fa-phone"></i></span>
         <div class="media-body">
         <h2>Phone</h2>
-        <h3>{{ $settings['contact_number'] }}</h3>
-        <h3>{{ $settings['contact_number2'] }}</h3>
+        <h3>+{{ $settings['contact_number'] }}</h3>
+        <h3>+{{ $settings['contact_number2'] }}</h3>
         <p>Mon to Fri 9am to 6pm</p>
         </div>
       </div>
@@ -134,17 +134,31 @@
         <p>Send us your query anytime!</p>
         </div>
       </div>
+      <div class="mt-20 mb-6">
+        <h6 class="org-name">Organization No. 935622077</h6>
+      </div>
       <div class="media contact-info">
         <div class="footer__links-content">
         <div class="mobile-575-center">
           <ul class="social-icons">
-          <li><a href="{{ $settings['social_twitter'] }}"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="{{ $settings['social_twitter'] }}"><!--<i class="fab fa-twitter"></i>--><svg
+              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+              style="
+    fill: #fff;
+    width: 25px;
+    "><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+              <path
+              d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z">
+              </path>
+            </svg></a></li>
           <li><a href="{{ $settings['social_facebook'] }}"><i class="fab fa-facebook-f"></i></a></li>
           <li><a href="{{ $settings['social_youtube'] }}"><i class="fab fa-youtube"></i></a>
           </li>
           <li><a href="{{ $settings['social_instagram'] }}"><i class="fab fa-instagram"></i></a></li>
           </ul>
         </div>
+
+
         </div>
       </div>
       </div>
@@ -167,6 +181,13 @@
 @push('css')
   <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/contacts/contact-5/assets/css/contact-5.css" />
   <style>
+    .org-name {
+    font-family: 'Source Sans 3';
+    color: #05403a;
+    font-size: 20px;
+    font-weight: 900;
+    }
+
     .social-icons {
     li {
       a {

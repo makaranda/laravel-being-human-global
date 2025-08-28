@@ -41,9 +41,7 @@
                             <h2 style="color: #2d2d2d;">{{ $blog->title }}</h2>
                             <p class="excert">{!! $blog->description !!}</p>
                             @if (!empty($blog->sub_description))
-                                <div class="quote-wrapper">
-                                    <div class="quotes">{!! $blog->sub_description !!}</div>
-                                </div>
+                                <p class="quotes excert">{!! $blog->sub_description !!}</p>
                             @endif
                         </div>
                     </div>
@@ -70,7 +68,15 @@
                                 <li>
                                     <a href="https://twitter.com/intent/tweet?url={{ $url }}&text={{ $title }}"
                                         target="_blank">
-                                        <i class="fab fa-twitter"></i>
+                                        {{-- <i class="fab fa-twitter"></i> --}}
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="
+            fill: #fff;
+            width: 25px;
+        ">
+                                            <path
+                                                d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z">
+                                            </path>
+                                        </svg>
                                     </a>
                                 </li>
                                 <li>

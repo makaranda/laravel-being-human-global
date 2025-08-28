@@ -241,8 +241,13 @@
     }
 }
 
+.info-section .single-item p {
+    font-size: 20px;
+    line-height: 32px;
+}
+
 .font-family-1>* {
-    font-family: "Playwrite AU QLD", cursive;
+    font-family: 'Source Sans 3';
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
@@ -305,6 +310,16 @@
 .theme-btn.btn-one.btn3 {
     background: #f7bf39 !important;
     color: #00342e !important;
+
+    &:hover {
+        color: #fff !important;
+    }
+}
+
+
+.theme-btn.btn-one.btn4 {
+    background: #9b0202 !important;
+    color: #fff !important;
 
     &:hover {
         color: #fff !important;
@@ -431,6 +446,40 @@ p {
     margin: 15px 0px 15px 20px;
 }
 
+.blog_details {
+  table {
+        width: 100%;
+        border-collapse: collapse;
+    tbody{
+
+        tr:first-child {
+        background-color: #004c44;
+        color: #fff; 
+        border: 1px solid #004c44;
+            td{
+                padding: 8px;
+            }
+        }
+
+        tr:nth-child(odd):not(:first-child) {
+        background-color: #cffdf8;
+        border: 1px solid #004c44;
+            td{
+                padding: 8px;
+            }
+        }
+
+        tr:nth-child(even):not(:first-child) {
+        background-color: #fff;
+        border: 1px solid #004c44;
+            td{
+                padding: 8px;
+            }
+        }
+    }
+  }
+}
+
 .about_description {
     p {
         padding: 12px 0px;
@@ -538,8 +587,8 @@ p {
 
 
 p {
-    font-family: 'Source Sans 3', Helvetica, Arial, 'Nimbus Sans L', sans-serif;
-    /* font-family: 'Rubik', sans-serif; */
+    /* font-family: 'Source Sans 3', Helvetica, Arial, 'Nimbus Sans L', sans-serif; */
+    font-family: 'Rubik', sans-serif;
     /* color: #3e3e3e; */
     color: #322c2a;
     font-size: 18px;
@@ -637,4 +686,59 @@ p {
     height: 380px;
 }
 
+.events-block-one .inner-box {
+    position: relative;
+    display: block;
+    padding-left: 245px;
+    padding-bottom: 60px;
+    margin-bottom: 54px;
+    border-bottom: 0px solid #e6e1db;
+}
+
+.events-block-one:first-child .inner-box {
+    padding-bottom: 24px;
+}
+
+.events-block-one:last-child .inner-box {
+    margin-bottom: 0px;
+    border-bottom: none;
+    padding-bottom: 24px;
+}
+
+.news-block-one .inner-box .image-box .image img {
+    width: 100%;
+    transition: all 500ms ease;
+    object-fit: cover;
+    height: 380px;
+}
+
+.sec-title h2:before {
+    background: transparent;
+}
+
+.footer-org-name {
+    font-family: 'Source Sans 3';
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.list-style-one li {
+    font-size: 16px;
+}
+
+ol { 
+    margin-top: 15px;
+    li {
+        list-style: lower-roman;
+        font-family: 'Rubik', sans-serif;
+        font-size: 18px;
+        padding-left: 10px;
+        position: relative;
+        left: -12px;
+        &::marker{
+            padding-right: 10px;
+        }
+    }
+}
 /* end theme style */

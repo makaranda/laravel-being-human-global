@@ -88,7 +88,10 @@ class HomeController extends Controller
         $section7 = collect($sections)->firstWhere('name', 'section7');
         $section8 = collect($sections)->firstWhere('name', 'section8');
         $page_projects = Page::where('type', 'project')->latest()->get();
-        $page_blogs = Blog::where('blog_type', 'blogs-article')->latest()->get();
+        $page_blogs = Blog::where('blog_type', 'blogs-article')
+                            // ->latest()
+                            ->orderBy('order','asc')
+                            ->get();
         //dd($section1);
         //$admin = Auth::guard('admin')->user();
         //dd($admin);
@@ -101,11 +104,12 @@ class HomeController extends Controller
         //}
     }
 
-    public function showDonation()
+    public function showDonation($donation_type = null)
     {
+        $donation_title = Str::title(str_replace('-', ' ', $donation_type));
         $settings = Setting::first();
         $countries = Country::where('status', 1)->get();
-        return view('pages.frontend.donation.index', compact('settings', 'countries'));
+        return view('pages.frontend.donation.index', compact('settings','donation_title', 'donation_type','countries'));
     }
 
     public function construction()
@@ -129,6 +133,22 @@ class HomeController extends Controller
         $about_info = Page::where('slug', 'Like', 'privacy-and-policy')->first();
         $settings = Setting::first();
         return view('pages.frontend.privacypolicy.index', compact('about_info', 'settings')); // Make sure this view exists
+    }
+
+    public function ethicsPolicy()
+    {
+        VisitorHelper::updateVisitorCount();
+        $about_info = Page::where('slug', 'Like', 'ethics-policy')->first();
+        $settings = Setting::first();
+        return view('pages.frontend.ethicspolicy.index', compact('about_info', 'settings')); // Make sure this view exists
+    }
+
+    public function cookiesPolicy()
+    {
+        VisitorHelper::updateVisitorCount();
+        $about_info = Page::where('slug', 'Like', 'cookies-policy')->first();
+        $settings = Setting::first();
+        return view('pages.frontend.cookiespolicy.index', compact('about_info', 'settings')); // Make sure this view exists
     }
     public function termsAndConditions()
     {
@@ -991,7 +1011,8 @@ class HomeController extends Controller
     {
         $blogs = Blog::where('status', 1)
             ->where('blog_type', 'blogs-article')
-            ->latest()
+            // ->latest()
+            ->orderBy('order','asc')
             ->get();
         $settings = Setting::first();
         $page_blog = Page::where('slug', 'Like', 'blogs')->first();
@@ -1015,7 +1036,8 @@ class HomeController extends Controller
     {
         $blogs = Blog::where('status', 1)
             ->where('blog_type', 'news-events')
-            ->latest()
+            // ->latest()
+            ->orderBy('order','asc')
             ->get();
 
         $page_blog = Page::where('slug', 'Like', 'blogs')->first();

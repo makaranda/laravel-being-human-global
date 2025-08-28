@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="{{ url('public/assets/frontend/css/lightcase.min.css') }}">
 <link rel="stylesheet" href="{{ url('public/assets/frontend/css/swiper-bundle.min.css') }}">
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
 <!-- theme style -->
 
 <link rel="stylesheet" href="{{ url('public/assets/frontend/css/font-awesome-all.css') }}">

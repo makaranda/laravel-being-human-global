@@ -153,8 +153,45 @@
 </div>
 
 
-
 <script>
+    $(document).ready(function () {
+        let currentStep = 1;
+        const totalSteps = 2;
+
+        function showStep(step) {
+            $(".step").addClass("d-none");
+            $(".step-" + step).removeClass("d-none");
+            let percent = (step / totalSteps) * 100;
+            $(".progress-bar")
+                .css("width", percent + "%")
+                .text("Step " + step + " of " + totalSteps);
+        }
+
+        $(".next-btn").click(function () {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        });
+
+        $(".prev-btn").click(function () {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        $("#multiStepForm").on("submit", function (e) {
+            e.preventDefault();
+            alert("Form submitted successfully!");
+        });
+
+        showStep(currentStep);
+    });
+</script>
+<script>
+    console.log('jQuery:', $.fn.jquery);
+    console.log('Validate:', typeof $.fn.validate);
     $(document).ready(function () {
         $('#newsletterForm').validate({
             rules: {

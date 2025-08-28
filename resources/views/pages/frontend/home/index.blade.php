@@ -16,8 +16,10 @@
                                 <h3>{{ $slider->icon }}</h3>
                                 <h2>{{ $slider->heading }}</h2>
                                 <div class="btn-box">
-                                    <a href="{{ $slider->link ?? route('frontend.home.donation') }}"
-                                        class="theme-btn btn-one">Donation</a>
+                                    {{-- <a href="{{ $slider->link ?? route('frontend.home.donation') }}"
+                                        class="theme-btn btn-one">Donation</a> --}}
+                                    <a href="#" class="theme-btn btn-one" data-bs-toggle="modal"
+                                        data-bs-target="#donationModal">Donation</a>
                                     <a href="{{route('frontend.about') }}" class="theme-btn btn-one btn2">discover more</a>
 
                                 </div>
@@ -232,7 +234,9 @@
                             <h5>One time Payment</h5>
                             <h2>${{ $section3['data']['attribute']['price'] ?? '' }}</h2>
                             {{-- {{ $section3['data']['attribute']['link'] ?? '' }} --}}
-                            <a href="{{ route('frontend.home.donation') }}" class="theme-btn">Donate Now</a>
+                            {{-- <a href="{{ route('frontend.home.donation') }}" class="theme-btn">Donate Now</a> --}}
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#donationModal" class="theme-btn">Donate
+                                Now</a>
                         </div>
                     </div>
                 </div>
@@ -326,15 +330,15 @@
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12 inner-column">
                     <div class="inner-content">
-                        <div class="row">
+                        {{-- <div class="row"> --}}
                             @if($page_projects && count($page_projects))
                                 @foreach ($page_projects as $item)
-                                    <div class="col-12 col-md-12">
+                                    {{-- <div class="col-12 col-md-12"> --}}
                                         <div class="events-block-one">
                                             <div class="inner-box">
                                                 <div class="image-box">
                                                     <figure class="image">
-                                                        <img src="{{ asset('public/assets/uploads/projects/' . $item->feature_image) }}"
+                                                        <img src="{{ asset('public/assets/uploads/projects/' . $item->feature_image ?? 'page_sample_image.jpg') }}"
                                                             alt="{{ $item->title }}" />
                                                     </figure>
                                                     @if($item->created_at)
@@ -357,14 +361,16 @@
                                                             {{ $item->title }}
                                                         </a>
                                                     </h3>
-                                                    <p>{!! Str::limit(strip_tags($item->description), 150) !!}</p>
+                                                    <p>{!! Str::limit(strip_tags($item->description), 120) !!}</p>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        {{--
+                                    </div> --}}
                                 @endforeach
                             @endif
-                        </div>
+                            {{--
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -418,13 +424,17 @@
             <div class="row clearfix">
                 @if($page_blogs && count($page_blogs))
                     @foreach ($page_blogs as $blog_item)
+                        @php
+                            $blog_image = $blog_item->feature_image
+                                ? asset('public/assets/uploads/blogs/' . $blog_item->feature_image)
+                                : asset('public/assets/uploads/blogs/page_sample_image.jpg');
+                        @endphp
                         <div class="col-lg-4 col-md-6 col-sm-12 news-block">
                             <div class="news-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                                 <div class="inner-box">
                                     <div class="image-box">
                                         <figure class="image">
-                                            <img src="{{ asset('public/assets/uploads/blogs/' . $blog_item->feature_image) }}"
-                                                alt="{{ $blog_item->title }}" />
+                                            <img src="{{ $blog_image }}" alt="{{ $blog_item->title }}" />
                                         </figure>
                                         @if($blog_item->created_at)
                                             <div class="post-date">
@@ -490,6 +500,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <style>
+        .info-section {
+            .single-item {
+                .icon-box {
+                    position: relative;
+                    left: 0px;
+                    top: 3px;
+                    font-size: 65px;
+                    line-height: 60px;
+                }
+
+                .font-family-1 {
+                    p {
+                        text-align: justify;
+                    }
+                }
+            }
+        }
+
         .plyr__controls {
             display: none !important;
         }

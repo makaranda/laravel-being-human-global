@@ -22,6 +22,7 @@
 
     <div class="container mt-24 mb-24" style="background-color:#fff;box-shadow: 0px 0px 10px 2px #00000040;">
         <div class="row">
+
             <div id="check_data" class="col-md-12">
             </div>
             <div class="col-md-12">
@@ -33,6 +34,10 @@
                                     class="img-fluid" style="width:300px;" /></a>
                         </div>
 
+                        <div class="col-12 col-md-12 text-center mt-15 mb-15">
+                            <h3 class="text-uppercase">{{ ($donation_title != '') ? 'Donation for ' . $donation_title : '' }}
+                            </h3>
+                        </div>
                         <div class="col-12 col-md-6 mb-3">
                             <div class="row justify-content-center">
                                 <div class="col-12 col-md-12 text-center">
@@ -102,10 +107,10 @@
                                         habitat restoration, anti-poaching initiatives, and community-led conservation
                                         programs that ensure a thriving planet for generations to come. Be a voice for the
                                         voiceless — donate today and make a lasting impact.</p>
-                                    <p class="text-dark">Your privacy matters. [Wildlife Organization Name] is committed to
+                                    <p class="text-dark">Your privacy matters. Being Human Global is committed to
                                         protecting your personal information. For details, please read our <a
-                                            href="{{ route('frontend.privacypolicy') }}">Privacy Policy</a>.Charitable
-                                        Registration Number: 0000000</p>
+                                            href="{{ route('frontend.privacypolicy') }}">Privacy Policy</a>.Organization No.
+                                        935622077</p>
                                 </div>
                             </div>
 
@@ -222,6 +227,13 @@
                                                 style="cursor: cursor;">
                                                 Donate Now
                                             </button>
+                                        </div>
+                                        <div class="col-md-12 text-center mt-16">
+                                            <a href="{{ route('home.index') }}"
+                                                class="btn btn-primary donate_now_btn w-100 rounded-0 text-uppercase fw-600"
+                                                style="cursor: cursor;">
+                                                Back to Home
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

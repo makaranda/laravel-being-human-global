@@ -67,7 +67,7 @@
         <!--begin::Brand Link-->
         <a href="{{ route('admin.dashboard') }}" class="brand-link">
             <!--begin::Brand Image-->
-            <div><img src="{{ url('public/assets/frontend/img/' . $settings['footer_logo']) }}"
+            <div><img src="{{ url('public/assets/frontend/img/' . $settings['main_logo']) }}"
                     alt="{{ $settings['website_name'] }}" class="brand-image opacity-75 shadow" /></div>
         </a>
         <!--end::Brand Link-->

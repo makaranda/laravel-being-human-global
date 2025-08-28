@@ -87,6 +87,8 @@ Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('frontend.abou
 Route::get('/services', [HomeController::class, 'servicesPage'])->name('frontend.service');
 Route::get('/gallery', [HomeController::class, 'gallery'])->name('frontend.gallery');
 Route::get('/privacy-and-policy', [HomeController::class, 'privacyPolicy'])->name('frontend.privacypolicy');
+Route::get('/ethics-policy', [HomeController::class, 'ethicsPolicy'])->name('frontend.ethicspolicy');
+Route::get('/cookies-policy', [HomeController::class, 'cookiesPolicy'])->name('frontend.cookiespolicy');
 Route::get('/terms-and-conditions', [HomeController::class, 'termsAndConditions'])->name('frontend.termsandconditions');
 Route::get('/faq', [HomeController::class, 'faq'])->name('frontend.faq');
 Route::get('/support', [HomeController::class, 'support'])->name('frontend.support');
@@ -159,7 +161,7 @@ Route::prefix('/careers')->group(function () {
 
 // Donation Routes
 Route::prefix('/donation')->group(function () {
-    Route::get('/', [HomeController::class, 'showDonation'])->name('frontend.home.donation');
+    Route::get('/{donation_type}', [HomeController::class, 'showDonation'])->name('frontend.home.donation');
     Route::get('/create-stripe-session', [DonationController::class, 'createStripeSession'])->name('stripe.session');
     Route::post('/donation-submit', [HomeController::class, 'submitDonation'])->name('frontend.home.submitdonation');
     Route::get('/payment-success', [DonationController::class, 'success'])->name('payment.success');
