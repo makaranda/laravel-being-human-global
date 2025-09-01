@@ -84,6 +84,7 @@ Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('frontend.
 Route::post('/contact-submit', [HomeController::class, 'contactSubmit'])->name('frontend.contactsubmit');
 Route::post('/newsletter-submit', [HomeController::class, 'newsletterSubmit'])->name('frontend.newslettersubmit');
 Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('frontend.about');
+Route::get('/join-us', [HomeController::class, 'joinUs'])->name('frontend.joinus');
 Route::get('/services', [HomeController::class, 'servicesPage'])->name('frontend.service');
 Route::get('/gallery', [HomeController::class, 'gallery'])->name('frontend.gallery');
 Route::get('/privacy-and-policy', [HomeController::class, 'privacyPolicy'])->name('frontend.privacypolicy');

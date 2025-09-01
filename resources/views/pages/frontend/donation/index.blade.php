@@ -34,10 +34,11 @@
                                     class="img-fluid" style="width:300px;" /></a>
                         </div>
 
-                        <div class="col-12 col-md-12 text-center mt-15 mb-15">
-                            <h3 class="text-uppercase">{{ ($donation_title != '') ? 'Donation for ' . $donation_title : '' }}
+                        {{-- <div class="col-12 col-md-12 text-center mt-15 mb-15">
+                            <h3 class="text-uppercase">{{ ($donation_title != '') ? 'Donation for ' . $donation_title : ''
+                                }}
                             </h3>
-                        </div>
+                        </div> --}}
                         <div class="col-12 col-md-6 mb-3">
                             <div class="row justify-content-center">
                                 <div class="col-12 col-md-12 text-center">
@@ -101,12 +102,12 @@
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-12 col-md-12 mt-3 text-justify">
-                                    <p class="text-dark">Protect Wildlife, Preserve the Future!
-                                        Your donation helps us safeguard endangered species and restore vital ecosystems. By
-                                        contributing to our conservation fund, you support on-the-ground efforts like
-                                        habitat restoration, anti-poaching initiatives, and community-led conservation
-                                        programs that ensure a thriving planet for generations to come. Be a voice for the
-                                        voiceless — donate today and make a lasting impact.</p>
+                                    <p class="text-dark">Protect Wildlife, Preserve the Future! Your donation helps us
+                                        safeguard endangered species and restore vital ecosystems. By contributing to our
+                                        conservation fund, you support on-the-ground efforts like habitat restoration,
+                                        anti-poaching initiatives, and community-led conservation programs that ensure a
+                                        thriving planet for generations to come. Be a voice for the voiceless donate today
+                                        and make a lasting impact.</p>
                                     <p class="text-dark">Your privacy matters. Being Human Global is committed to
                                         protecting your personal information. For details, please read our <a
                                             href="{{ route('frontend.privacypolicy') }}">Privacy Policy</a>.Organization No.

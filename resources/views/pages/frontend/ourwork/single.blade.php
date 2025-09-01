@@ -58,33 +58,59 @@
                             <ul class="social-icons">
                                 @php
                                     $url = urlencode(route('frontend.blogs.article.view', $blog->slug));
-                                    $title = urlencode($blog->title); // optional, if you want to include the title
+                                    $title = urlencode($blog->title);
                                 @endphp
-                                <li>
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ $url }}" target="_blank">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                </li>
+
+                                {{-- Twitter Share --}}
                                 <li>
                                     <a href="https://twitter.com/intent/tweet?url={{ $url }}&text={{ $title }}"
                                         target="_blank">
-                                        {{-- <i class="fab fa-twitter"></i> --}}
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="
-            fill: #fff;
-            width: 25px;
-        ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                            style="fill:#fff; width:25px;">
                                             <path
                                                 d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z">
                                             </path>
                                         </svg>
                                     </a>
                                 </li>
+
+                                {{-- Facebook Share --}}
+                                <li>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ $url }}" target="_blank">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </li>
+
+                                {{-- LinkedIn Share --}}
                                 <li>
                                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ $url }}&title={{ $title }}"
                                         target="_blank">
-                                        <i class="fab fa-linkedin-in"></i>
+                                        <i class="fab fa-linkedin"></i>
                                     </a>
                                 </li>
+
+                                {{-- YouTube (just profile link, since YouTube doesn’t support share like this) --}}
+                                {{-- <li>
+                                    <a href="{{ $settings['social_youtube'] }}" target="_blank">
+                                        <i class="fab fa-youtube"></i>
+                                    </a>
+                                </li> --}}
+
+                                {{-- Instagram (profile link only) --}}
+                                {{-- <li>
+                                    <a href="{{ $settings['social_instagram'] }}" target="_blank">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li> --}}
+
+                                {{-- TikTok (profile link only) --}}
+                                {{-- <li>
+                                    <a href="{{ $settings['social_tiktok'] }}" target="_blank">
+                                        <i class="fab fa-tiktok"></i>
+                                    </a>
+                                </li> --}}
+
+                                {{-- WhatsApp Share --}}
                                 <li>
                                     <a href="https://api.whatsapp.com/send?text={{ $title }}%20{{ $url }}" target="_blank">
                                         <i class="fab fa-whatsapp"></i>

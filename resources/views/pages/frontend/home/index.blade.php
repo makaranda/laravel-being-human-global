@@ -117,7 +117,7 @@
             <div class="inner-container">
                 <div class="row clearfix">
                     <div class="col-lg-12 col-md-12 col-sm-12 single-column">
-                        <div class="single-item">
+                        <div class="single-item section_one">
                             <div class="icon-box"><i class="flaticon-ticket"></i></div>
                             {{-- <h5><a href="{{ route('home.index') }}">Buy Tickets</a></h5> --}}
                             <div class="font-family-1">{!! $section1['data']['description'] ?? '' !!}</div>
@@ -171,7 +171,7 @@
                                 <h2>{{ $section2['data']['topic'] ?? '' }}</h2>
                             </div>
                             <div class="text">
-                                <h4>Help us to protect wildlife around the world.</h4>
+                                <h4>Help us to protect wildlife, restore nature around the world.</h4>
                                 <div>{!! $section2['data']['description'] ?? '' !!}</div>
                                 <div class="section_area">
                                     {!! $section2['data']['sub_description'] ?? '' !!}
@@ -392,22 +392,39 @@
                         $captions = ['Protecting the kings of the wild — from predators to the precious, every life matters.', 'Guardians of the deep — preserving our oceans, rivers, and the silent swimmers within.', 'Wings of hope — safeguarding the skies, one feathered friend at a time.', '110 hearts united — fueling our mission to defend life, land, and legacy.']
                     @endphp
                     @foreach ($section6['data']['counts'] as $key => $countItem)
-                        <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
-                            <div class="counter-block-one wow slideInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                <div class="inner-box">
-                                    <div class="icon-box">
-                                        <i class="fa-solid fa-tree-city"></i>
+                        @if($key != 3)
+                            <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
+                                <div class="counter-block-one wow slideInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                    <div class="inner-box">
+                                        <div class="icon-box">
+                                            <i class="fa-solid fa-tree-city"></i>
+                                        </div>
+                                        <div class="count-outer count-box">
+                                            <span class="count-text" data-speed="1500"
+                                                data-stop="{{ $countItem['count'] }}">0</span><span>+</span>
+                                        </div>
+                                        <p class="count_title">{{ $countItem['title'] }}</p>
+                                        <p class="count_caption">{{ $captions[$key] }}</p>
                                     </div>
-                                    <div class="count-outer count-box">
-                                        <span class="count-text" data-speed="1500"
-                                            data-stop="{{ $countItem['count'] }}">0</span><span>+</span>
-                                    </div>
-                                    <p class="count_title">{{ $countItem['title'] }}</p>
-                                    <p class="count_caption">{{ $captions[$key] }}</p>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     @endforeach
+                    <div class="col-lg-3 col-md-6 col-sm-12 counter-block">
+                        <div class="counter-block-one wow slideInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="inner-box">
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-tree-city"></i>
+                                </div>
+                                <div class="count-outer count-box">
+                                    <span class="count-text" data-speed="1500"
+                                        data-stop="{{ $donation_counts }}">0</span><span>+</span>
+                                </div>
+                                <p class="count_title">Donators</p>
+                                <p class="count_caption">{{ $captions[3] }}</p>
+                            </div>
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>

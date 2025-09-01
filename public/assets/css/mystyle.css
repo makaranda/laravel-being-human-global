@@ -340,6 +340,7 @@ p {
     color: #3e3e3e;
     margin: 0px;
     transition: all 500ms ease;
+    font-weight: 500;
 }
 
 
@@ -741,4 +742,93 @@ ol {
         }
     }
 }
+
+    .about-being-human {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 30px;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    .about-being-human .title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: #7a4f27;
+        /* brown from logo */
+        margin-bottom: 30px;
+    }
+
+    .about-being-human .title span {
+        font-size: 18px;
+        color: #4a9bb1;
+        /* sky blue */
+        display: block;
+        margin-top: 5px;
+    }
+
+    .topic_name {
+        margin-bottom: 25px;
+        padding: 15px;
+        border-left: 5px solid #00897b;
+        /* teal accent */
+        background: #f9f9f9;
+        border-radius: 8px;
+    }
+
+    .topic_name h4 {
+        font-size: 20px;
+        color: #00897b;
+        margin-bottom: 8px;
+    }
+
+    .topic_name h4 span {
+        font-weight: bold;
+        color: #7a4f27;
+        /* brown for first letter */
+    }
+
+    .topic_name p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+    }
+    .footer_content{
+        p{
+            color: rgba(255, 255, 255, 0.50);
+            font-size: 16px;
+            font-family: 'Rubik', sans-serif;
+            line-height: 1.8;
+            a{
+                font-size: 15px;
+            }
+        }
+        
+    }
+
+    .info-section .single-item.section_one:before {
+        width: 0px;
+    }
+
+    .list-style-one li {
+        font-weight: 500;
+    }
+
+    .fa{
+        font-family: 'FontAwesome' !important;
+    }
+    .fa, .fab {
+        font-size: 18px;
+    }
+    
+    .skiptranslate {
+        display: none !important;
+        position: absolute;
+        z-index: -10;
+        height: 0px;
+    }
+    .website-body {
+        top: 0px !important;
+    }
 /* end theme style */

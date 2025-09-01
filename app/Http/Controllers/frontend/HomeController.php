@@ -27,6 +27,7 @@ use App\Models\SubCategory;
 use App\Models\Size;
 use App\Models\Color;
 use App\Models\District;
+use App\Models\Donation;
 use App\Models\ProgramCategory;
 use App\Models\ProgramSubCategory;
 use App\Models\ProgramSubCategoryItem;
@@ -71,7 +72,7 @@ class HomeController extends Controller
         $home_sec_video = Page::where('status', 1)->where('id', 34)->first();
         $random_products = Product::where('status', 1)->inRandomOrder()->take(6)->get();
         $random_blogs = Blog::where('status', 1)->inRandomOrder()->take(3)->get();
-
+        $donation_counts = Donation::where('status', 1)->count() ?? 0;
         $page = Page::where('status', 1)
             ->where('slug', 'like', '%home%')
             ->first();
@@ -100,7 +101,7 @@ class HomeController extends Controller
         // } else {
         $animals_details = Page::where('status', 1)->where('type', 'animal')->get();
         $testimonials = Testimonial::where('status', 1)->get();
-        return view('pages.frontend.home.index', compact('page_blogs', 'page_projects', 'gallery_home', 'testimonials', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7', 'section8', 'animals_details'));
+        return view('pages.frontend.home.index', compact('page_blogs','donation_counts', 'page_projects', 'gallery_home', 'testimonials', 'home_sec_video', 'music_tracks', 'banner_music_tracks', 'video_tracks', 'music_beats', 'about_info', 'main_slider', 'according_home', 'partners_home', 'random_products', 'random_blogs', 'section1', 'section2', 'section3', 'section4', 'section5', 'section6', 'section7', 'section8', 'animals_details'));
         //}
     }
 
@@ -109,7 +110,13 @@ class HomeController extends Controller
         $donation_title = Str::title(str_replace('-', ' ', $donation_type));
         $settings = Setting::first();
         $countries = Country::where('status', 1)->get();
-        return view('pages.frontend.donation.index', compact('settings','donation_title', 'donation_type','countries'));
+        //dd($donation_type);
+        if(isset($donation_type) && $donation_type == 'financial-contribution'){
+            return view('pages.frontend.donation.index', compact('settings','donation_title', 'donation_type','countries'));
+        }else{
+            return view('pages.frontend.donation2.index', compact('settings','donation_title', 'donation_type','countries'));
+        }
+        
     }
 
     public function construction()
@@ -156,6 +163,15 @@ class HomeController extends Controller
         $about_info = Page::where('slug', 'Like', 'terms-and-conditions')->first();
         $settings = Setting::first();
         return view('pages.frontend.termsconditions.index', compact('about_info', 'settings')); // Make sure this view exists
+    }
+
+    public function joinUs(){
+        VisitorHelper::updateVisitorCount();
+        $about_info = Page::where('slug', 'Like', 'join-us')->first();
+        $sections = $about_info->attributes['sections'] ?? [];
+        //dd($sections);
+        $settings = Setting::first();
+        return view('pages.frontend.joinus.index', compact('about_info','sections', 'settings')); // Make sure this view exists
     }
     public function aboutUs()
     {

@@ -26,9 +26,10 @@
                                         </path>
                                     </svg></a></li>
                             <li><a href="{{ $settings['social_facebook'] }}"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="{{ $settings['social_youtube'] }}"><i class="fab fa-youtube"></i></a>
-                            </li>
+                            <li><a href="{{ $settings['social_linkedin'] }}"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href="{{ $settings['social_youtube'] }}"><i class="fab fa-youtube"></i></a></li>
                             <li><a href="{{ $settings['social_instagram'] }}"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="{{ $settings['social_tiktok'] }}"><i class="fab fa-tiktok"></i></a></li>
                         </ul>
 
                     </div>
@@ -95,7 +96,7 @@
                             <h5>Who we Are??</h5>
                         </div>
                         <div class="widget-content">
-                            <div class="text-left">
+                            <div class="text-left footer_content">
                                 {!! $settings['footer_content'] !!}
                             </div>
                             {{-- <ul class="image-list clearfix">
@@ -208,11 +209,14 @@
                     <div class="step step-1">
                         <div class="row">
                             <div class="col-12 col-md-6 text-center mt-2 mb-2">
-                                <a href="{{ route('frontend.home.donation', 'financial-services') }}"
-                                    class="theme-btn btn-one btn3">Financial Services</a>
+                                <a href="{{ route('frontend.home.donation', 'financial-contribution') }}"
+                                    class="theme-btn btn-one btn3">Financial Contribution</a>
                             </div>
                             <div class="col-12 col-md-6 text-center mt-2 mb-2">
-                                <button type="button" class="theme-btn btn-one next-btn">Other Services</button>
+                                <a href="{{ route('frontend.home.donation', 'other-contribution') }}"
+                                    class="theme-btn btn-one">Other Contributions</a>
+                                {{-- <button type="button" class="theme-btn btn-one next-btn">Other
+                                    Contributions</button> --}}
                             </div>
                         </div>
                     </div>

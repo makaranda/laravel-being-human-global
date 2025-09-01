@@ -145,9 +145,9 @@
                     @if($settings['social_twitter'])
                         <li><a href="{{ $settings['social_twitter'] }}"><!--<i class="fab fa-twitter"></i>--><svg
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="
-                                        fill: #7fa197;
-                                        width: 18px;
-                                        ">
+                                                                            fill: #7fa197;
+                                                                            width: 18px;
+                                                                            ">
                                     <path
                                         d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z">
                                     </path>
@@ -155,14 +155,21 @@
                     </a></li>@endif
                     @if($settings['social_facebook'])
                     <li><a href="{{ $settings['social_facebook'] }}"><i class="fab fa-facebook-f"></i></a></li>@endif
+                    @if($settings['social_linkedin'])
+                    <li><a href="{{ $settings['social_linkedin'] }}"><i class="fab fa-linkedin"></i></a></li>@endif
+                    @if($settings['social_youtube'])
+                    <li><a href="{{ $settings['social_youtube'] }}"><i class="fab fa-youtube"></i></a></li>@endif
                     @if($settings['social_pinterest'])
                     <li><a href="{{ $settings['social_pinterest'] }}"><i class="fab fa-pinterest-p"></i></a></li>@endif
                     @if($settings['social_instagram'])
                     <li><a href="{{ $settings['social_instagram'] }}"><i class="fab fa-instagram"></i></a></li>@endif
+                    @if($settings['social_tiktok'])
+                    <li><a href="{{ $settings['social_tiktok'] }}"><i class="fab fa-tiktok"></i></a></li>@endif
                 </ul>
                 <ul class="other-links clearfix">
-                    <li><a href="#" onclick="translateTo('en')">English</a></li>
-                    <li><a href="#" onclick="translateTo('si')">සිංහල</a></li>
+                    <li id="translate_english" class="d-block"><a href="#">English</a></li>
+                    <li id="translate_lang" class="d-none"><a href="#"></a></li>
+                    {{-- <li><a href="#" onclick="translateTo('si')">සිංහල</a></li> --}}
                 </ul>
             </div>
         </div>
@@ -234,7 +241,7 @@
                 <div class="support-box">
                     <div class="icon"><i class="flaticon-phone-ringing"></i></div>
                     <span>Have Questions?</span>
-                    <h6><a href="tel:{{ $settings['contact_number'] }}">{{ $settings['contact_number'] }}</a></h6>
+                    <h6><a href="tel:{{ $settings['contact_number'] }}">+{{ $settings['contact_number'] }}</a></h6>
                 </div>
 
                 {{-- <div class="search-box-outer">
@@ -281,7 +288,7 @@
                 <div class="support-box">
                     <div class="icon"><i class="flaticon-phone-ringing"></i></div>
                     <span>Have Questions?</span>
-                    <h6><a href="tel:{{ $settings['contact_number'] }}">{{ $settings['contact_number'] }}</a></h6>
+                    <h6><a href="tel:{{ $settings['contact_number'] }}">+{{ $settings['contact_number'] }}</a></h6>
                 </div>
                 {{-- <div class="search-box-outer">
                     <div class="dropdown">
@@ -341,9 +348,9 @@
                 @if($settings['social_twitter'])
                     <li><a href="{{ $settings['social_twitter'] }}"><!--<span class="fab fa-twitter"></span>--><svg
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="
-                                        fill: #7fa197;
-                                        width: 18px;
-                                        ">
+                                                                            fill: #7fa197;
+                                                                            width: 18px;
+                                                                            ">
                                 <path
                                     d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z">
                                 </path>
