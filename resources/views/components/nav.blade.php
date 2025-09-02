@@ -144,10 +144,11 @@
                 <ul class="social-links clearfix">
                     @if($settings['social_twitter'])
                         <li><a href="{{ $settings['social_twitter'] }}"><!--<i class="fab fa-twitter"></i>--><svg
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="
-                                                                            fill: #7fa197;
-                                                                            width: 18px;
-                                                                            ">
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                    style="
+                                                                                                                                                    fill: #7fa197;
+                                                                                                                                                    width: 18px;
+                                                                                                                                                    ">
                                     <path
                                         d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z">
                                     </path>
@@ -205,9 +206,14 @@
                                     <li><a href="{{ route('frontend.service') }}">Services</a></li>
                                 </ul>
                             </li> --}}
-                            <li><a href="{{ route('frontend.about') }}">About Us</a></li>
-                            <li><a href="{{ route('frontend.service') }}">Services</a></li>
-                            <li><a href="{{ route('frontend.home.ourworks') }}">Our Works</a></li>
+                            <li class="{{ request()->routeIs('frontend.about') ? 'current' : '' }}"><a
+                                    href="{{ route('frontend.about') }}">About Us</a></li>
+                            <li class="{{ request()->routeIs('frontend.service') ? 'current' : '' }}"><a
+                                    href="{{ route('frontend.service') }}">Services</a></li>
+                            <li class="{{ request()->routeIs('frontend.home.ourworks') ? 'current' : '' }}"><a
+                                    href="{{ route('frontend.home.ourworks') }}">Our Works</a></li>
+                            <li class="{{ request()->routeIs('frontend.joinus') ? 'current' : '' }}"><a
+                                    href="{{ route('frontend.joinus') }}">Join Us</a></li>
 
                             {{-- <li class="dropdown {{ request()->routeIs('frontend.about') ? 'current' : '' }}">
                                 <a href="#">Get Involved</a>
@@ -216,15 +222,18 @@
                                     <li><a href="{{ route('frontend.about') }}">Donators</a></li>
                                 </ul>
                             </li> --}}
-                            <li class="dropdown {{ request()->routeIs('frontend.home.blogs') ? 'current' : '' }}">
-                                <a href="#">Media <span class="fas fa-angle-down"></span></a>
+                            <li
+                                class="dropdown {{ request()->routeIs('frontend.home.blogs') ? 'current' : '' }} {{ request()->routeIs('frontend.home.blogs', 'frontend.home.gallery') ? 'current' : '' }}">
+                                <a href="#">Media <span
+                                        class="fas fa-angle-down d-none d-sm-none d-md-none d-lg-inline-block"></span></a>
                                 <ul>
                                     <li><a href="{{ route('frontend.home.blogs') }}">Blog & News</a></li>
                                     <li><a href="{{ route('frontend.home.gallery') }}">Photos Gallery</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown {{ request()->routeIs('frontend.contact') ? 'current' : '' }}">
-                                <a href="#">Contact <span class="fas fa-angle-down"></span></a>
+                                <a href="#">Contact <span
+                                        class="fas fa-angle-down d-none d-sm-none d-md-none d-lg-inline-block"></span></a>
                                 <ul>
                                     <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
                                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#newsletterModal">Newsletter
@@ -232,6 +241,9 @@
                                         </a></li>
                                 </ul>
                             </li>
+
+                            <li class="d-block d-sm-none d-md-none d-lg-none donate-mobile-btn"><a href="#"
+                                    data-bs-toggle="modal" data-bs-target="#donationModal">Donate</a></li>
                         </ul>
                     </div>
                 </nav>
@@ -338,7 +350,7 @@
             <h4>Contact Info</h4>
             <ul>
                 <li>{{ $settings['address'] ?? 'No Address Found' }}</li>
-                <li><a href="tel:{{ $settings['contact_number'] }}">{{ $settings['contact_number'] }}</a></li>
+                <li><a href="tel:+{{ $settings['contact_number'] }}">+{{ $settings['contact_number'] }}</a></li>
                 <li><a href="mailto:{{ $settings['email_address'] }}">{{ $settings['email_address'] }}</a></li>
             </ul>
         </div>
@@ -347,10 +359,11 @@
             <ul class="clearfix">
                 @if($settings['social_twitter'])
                     <li><a href="{{ $settings['social_twitter'] }}"><!--<span class="fab fa-twitter"></span>--><svg
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="
-                                                                            fill: #7fa197;
-                                                                            width: 18px;
-                                                                            ">
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
+                                style="
+                                                                                                                                                    fill: #7fa197;
+                                                                                                                                                    width: 18px;
+                                                                                                                                                    ">
                                 <path
                                     d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z">
                                 </path>
@@ -358,13 +371,15 @@
                 @if($settings['social_facebook'])
                     <li><a href="{{ $settings['social_facebook'] }}"><span class="fab fa-facebook-square"></span></a></li>
                 @endif
-                @if($settings['social_pinterest'])
-                    <li><a href="{{ $settings['social_pinterest'] }}"><span class="fab fa-pinterest-p"></span></a></li>
+                @if($settings['social_linkedin'])
+                    <li><a href="{{ $settings['social_linkedin'] }}"><i class="fab fa-linkedin"></i></a></li>
                 @endif
-                @if($settings['social_instagram'])
-                <li><a href="{{ $settings['social_instagram'] }}"><span class="fab fa-instagram"></span></a></li>@endif
                 @if($settings['social_youtube'])
                 <li><a href="{{ $settings['social_youtube'] }}"><span class="fab fa-youtube"></span></a></li>@endif
+                @if($settings['social_instagram'])
+                <li><a href="{{ $settings['social_instagram'] }}"><span class="fab fa-instagram"></span></a></li>@endif
+                @if($settings['social_tiktok'])
+                <li><a href="{{ $settings['social_tiktok'] }}"><span class="fab fa-tiktok"></span></a></li>@endif
             </ul>
         </div>
     </nav>

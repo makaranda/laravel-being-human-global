@@ -67,7 +67,7 @@
 }
 
 .modal {
-    z-index: 9999 !important;
+    z-index: 999999 !important;
 }
 
 .modal-backdrop {
@@ -221,6 +221,22 @@
         position: relative;
         padding: 114px 0px 110px 0px;
         background-color: #00342e;
+        .footer-widget{
+            .widget-content{
+                .links-list{
+                    li{
+                        a{
+
+                        }
+                    }
+                    .current{
+                        a{
+                            color: #f7bf39;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .footer-bottom {
@@ -247,7 +263,8 @@
 }
 
 .font-family-1>* {
-    font-family: 'Source Sans 3';
+    /* font-family: 'Source Sans 3'; */
+    font-family: 'Rubik', sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
@@ -593,7 +610,8 @@ p {
     /* color: #3e3e3e; */
     color: #322c2a;
     font-size: 18px;
-    line-height: 1.2;
+    line-height: 1.5;
+    text-align: justify;
 }
 
 
@@ -800,6 +818,7 @@ ol {
             font-size: 16px;
             font-family: 'Rubik', sans-serif;
             line-height: 1.8;
+            text-align: justify;
             a{
                 font-size: 15px;
             }
@@ -830,5 +849,51 @@ ol {
     }
     .website-body {
         top: 0px !important;
+    }
+    .post-date {
+        display: none;
+    }
+    .about_info p {
+        text-align: justify;
+    }
+
+    .page_info_content{
+        .content_block_three{
+            .content-box{
+                p{
+                    font-family: 'Rubik', sans-serif;
+                    color: #322c2a;
+                    font-size: 18px !important;
+                    line-height: 1.5 !important;
+                    text-align: justify;
+                }
+                h1,h2,h3,h4,h5{
+                    font-family: 'Rubik', sans-serif;
+                }
+                .inner{
+                    padding-left: 0px;
+                    h5{
+                    font-size: 18px !important;
+                    line-height: 1.5 !important;
+                    text-align: justify;
+                    }
+                }
+                .text{
+                    h4{
+                        color: #322c2a !important;
+                        font-size: 18px !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .donate-mobile-btn {
+        color: #0000;
+        background-color: #f7bf39 !important;
+    }
+
+    .main-menu .navigation > li.current > a, .main-menu .navigation > li:hover > a {
+        color: #018d7d;
     }
 /* end theme style */

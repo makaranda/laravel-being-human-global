@@ -43,6 +43,35 @@
     .breadcam_bg_2 {
         margin-top: 156px;
     }
+    .page-title {
+        padding: 287px 0px 115px 0px;
+    }
+
+    .banner-carousel .content-box {
+        margin-top: 0px;
+        h2{
+            font-size: 65px;
+            line-height: 76px;
+        }
+        h3{
+
+        }
+        .btn-box{
+            a{
+                padding: 16.5px 54px;
+            }
+        }
+    }  
+    .events-block-one .inner-box {
+        padding-left: 245px;
+    }
+     
+    .footer-org-name {
+        text-align: right;
+    }
+   .info-section .single-item {
+        padding-left: 83px;
+    } 
 }
 
 @media (max-width: 1440px) {
@@ -90,6 +119,35 @@
     .breadcam_bg_2 {
         margin-top: 156px;
     }
+    .page-title {
+        padding: 287px 0px 115px 0px;
+    }
+
+    .banner-carousel .content-box {
+        margin-top: 0px;
+        h2{
+            font-size: 65px;
+            line-height: 76px;
+        }
+        h3{
+
+        }
+        .btn-box{
+            a{
+                padding: 16.5px 54px;
+            }
+        }
+    }   
+    .events-block-one .inner-box {
+        padding-left: 245px;
+    }
+     
+    .footer-org-name {
+        text-align: right;
+    }
+   .info-section .single-item {
+        padding-left: 83px;
+    } 
 }
 
 @media (max-width: 1024px) {
@@ -133,6 +191,35 @@
     .breadcam_bg_2 {
         margin-top: 156px;
     }
+    .page-title {
+        padding: 260px 0px 115px;
+    }
+
+    .banner-carousel .content-box {
+        margin-top: 0px;
+        h2{
+            font-size: 55px;
+            line-height: 2;
+        }
+        h3{
+
+        }
+        .btn-box{
+            a{
+                padding: 16.5px 54px;
+            }
+        }
+    }   
+    .events-block-one .inner-box {
+        padding-left: 220px;
+    }
+     
+    .footer-org-name {
+        text-align: right;
+    }
+   .info-section .single-item {
+        padding-left: 83px;
+    } 
 }
 @media (max-width: 768px) {
     .main-logo {
@@ -175,6 +262,35 @@
     .breadcam_bg_2 {
         margin-top: 156px;
     }
+    .page-title {
+        padding: 155px 0px 100px
+    }
+
+    .banner-carousel .content-box {
+        margin-top: 140px;
+        h2{
+            font-size: 46px;
+            line-height: 2;
+        }
+        h3{
+
+        }
+        .btn-box{
+            a{
+                padding: 10px 15px;
+            }
+        }
+    }    
+    .events-block-one .inner-box {
+        padding-left: 220px;
+    } 
+     
+    .footer-org-name {
+        text-align: right;
+    }
+   .info-section .single-item {
+        padding-left: 83px;
+    } 
 }
 @media (max-width: 576px) {
     .main-logo {
@@ -214,6 +330,34 @@
     .breadcam_bg_2 {
         margin-top: 156px;
     }
+    .page-title {
+        padding: 155px 0px 100px;
+    }
+
+    .banner-carousel .content-box {
+        margin-top: 60px;
+        h2{
+            font-size: 30px;
+            line-height: 2;
+        }
+        h3{
+
+        }
+        .btn-box{
+            a{
+                padding: 10px 15px;
+            }
+        }
+    }     
+    .events-block-one .inner-box {
+        padding-left: 0px;
+    }  
+    .footer-org-name {
+        text-align: left;
+    }
+    .info-section .single-item {
+        padding-left: 30px;
+    } 
 }
 @media (max-width: 480px) {
     .main-logo {
@@ -238,6 +382,34 @@
     }
     .breadcam_bg_2 {
         margin-top: 70px;
+    }
+    .page-title {
+        padding: 155px 0px 100px;
+    }
+
+    .banner-carousel .content-box {
+        margin-top: 60px;
+        h2{
+            font-size: 24px;
+            line-height: 2;
+        }
+        h3{
+
+        }
+        .btn-box{
+            a{
+                padding: 10px 15px;
+            }
+        }
+    }   
+    .events-block-one .inner-box {
+        padding-left: 0px;
+    }  
+    .footer-org-name {
+        text-align: left;
+    } 
+    .info-section .single-item {
+        padding-left: 30px;
     }
 }
 @media (max-width: 320px) {
@@ -265,5 +437,33 @@
     }
     .breadcam_bg_2 {
         margin-top: 70px;
+    }
+    .page-title {
+        padding: 155px 0px 100px;
+    }
+
+    .banner-carousel .content-box {
+        margin-top: 60px;
+        h2{
+            font-size: 24px;
+            line-height: 2;
+        }
+        h3{
+
+        }
+        .btn-box{
+            a{
+                padding: 10px 15px;
+            }
+        }
+    }   
+    .events-block-one .inner-box {
+        padding-left: 0px;
+    } 
+    .footer-org-name {
+        text-align: left;
+    }
+    .info-section .single-item {
+        padding-left: 30px;
     }
 }

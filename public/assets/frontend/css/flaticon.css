@@ -102,3 +102,95 @@ i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
 .flaticon-clock-1:before {
     content: "\f11c";
 }
+
+.flaticon-lion:before {
+    content: "\f11d";
+}
+.flaticon-rhino:before {
+    content: "\f11e";
+}
+.flaticon-giraffe:before {
+    content: "\f11f";
+}
+.flaticon-deer:before {
+    content: "\f120";
+}
+.flaticon-dog:before {
+    content: "\f121";
+}
+.flaticon-cat:before {
+    content: "\f122";
+}
+.flaticon-horse:before {
+    content: "\f123";
+}
+.flaticon-fish:before {
+    content: "\f124";
+}
+.flaticon-turtle:before {
+    content: "\f125";
+}
+.flaticon-crocodile:before {
+    content: "\f126";
+}
+.flaticon-snake:before {
+    content: "\f127";
+}
+.flaticon-frog:before {
+    content: "\f128";
+}
+.flaticon-butterfly:before {
+    content: "\f129";
+}
+.flaticon-flower:before {
+    content: "\f12a";
+}
+.flaticon-tree:before {
+    content: "\f12b";
+}
+.flaticon-mountain:before {
+    content: "\f12c";
+}
+.flaticon-river:before {
+    content: "\f12d";
+}
+.flaticon-globe:before {
+    content: "\f12e";
+}
+.flaticon-leaf:before {
+    content: "\f12f";
+}
+.flaticon-recycle:before {
+    content: "\f130";
+}
+.flaticon-heart:before {
+    content: "\f131";
+}
+.flaticon-home:before {
+    content: "\f132";
+}
+.flaticon-user:before {
+    content: "\f133";
+}
+.flaticon-group:before {
+    content: "\f134";
+}
+.flaticon-handshake:before {
+    content: "\f135";
+}
+.flaticon-donation:before {
+    content: "\f136";
+}
+.flaticon-education:before {
+    content: "\f137";
+}
+.flaticon-hospital:before {
+    content: "\f138";
+}
+.flaticon-food:before {
+    content: "\f139";
+}
+.flaticon-water:before {
+    content: "\f13a";
+}
+

@@ -190,7 +190,7 @@
 
 
     <!-- chooseus-section -->
-    <section class="chooseus-section sec-pad">
+    <section class="chooseus-section sec-pad xs-pt-0 md-pt-70 pt-70">
         <div class="img-wrap parallax-demo-1">
             <div class="parallax-inner back-img"
                 style="background-image: url({{ asset('public/assets/frontend/images/background/chooseus-bg.jpg')}});">
@@ -247,7 +247,7 @@
 
 
     <!-- events-section -->
-    <section class="events-section sec-pad">
+    <section class="events-section sec-pad xs-pt-0 md-pt-70 pt-70">
         <div class="bg-layer"></div>
         <div class="bg-image"
             style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url({{ asset('public/assets/frontend/images/resource/' . $section8['data']['image'])}});">
@@ -277,7 +277,7 @@
 
 
     <!-- gallery-section -->
-    <section class="gallery-section">
+    <section class="gallery-section xs-pt-0 md-pt-70 pt-70">
         <div class="auto-container">
             <div class="sec-title centred">
                 <h2>Beautifull Animals <br />in the World</h2>
@@ -315,7 +315,7 @@
 
 
     <!-- events-section -->
-    <section class="events-section sec-pad mt-100">
+    <section class="events-section sec-pad xs-pt-0 md-pt-70 pt-70 xs-mt-70 md-mt-100 mt-100">
         <div class="bg-layer"></div>
         <div class="bg-image"
             style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url({{ asset('public/assets/frontend/images/resource/' . $section5['data']['image'])}});">
@@ -380,7 +380,7 @@
 
 
     <!-- funfact-section -->
-    <section class="funfact-section mt-100">
+    <section class="funfact-section xs-mt-30 md-mt-100 mt-100">
         <div class="img-wrap parallax-demo-1">
             <div class="parallax-inner back-img"
                 style="background-image: url({{ asset('public/assets/frontend/images/background/funfact-bg.jpg')}});"></div>
@@ -517,6 +517,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <style>
+        .content_block_one .content-box .text h4 {
+            color: #007a6d;
+        }
+
         .info-section {
             .single-item {
                 .icon-box {
