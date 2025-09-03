@@ -136,7 +136,7 @@ Route::get('/search', [HomeController::class, 'cartProducts'])->name('frontend.s
 Route::get('/tickets', [HomeController::class, 'cartProducts'])->name('frontend.ticket');
 
 // Our Works Routes
-Route::prefix('/our-works')->group(function () {
+Route::prefix('/our-work')->group(function () {
     Route::get('/', [HomeController::class, 'showOurWorks'])->name('frontend.home.ourworks');
     Route::get('/{slug}', [HomeController::class, 'viewOurworksArticle'])->name('frontend.home.ourworks.article.view');
 });
@@ -162,9 +162,12 @@ Route::prefix('/careers')->group(function () {
 
 // Donation Routes
 Route::prefix('/donation')->group(function () {
-    Route::get('/{donation_type}', [HomeController::class, 'showDonation'])->name('frontend.home.donation');
+    Route::get('/type/{donation_type}', [HomeController::class, 'showDonation'])->name('frontend.home.donation');
     Route::get('/create-stripe-session', [DonationController::class, 'createStripeSession'])->name('stripe.session');
     Route::post('/donation-submit', [HomeController::class, 'submitDonation'])->name('frontend.home.submitdonation');
+    Route::post('/other-donation-submit', [DonationController::class, 'submitOtherDonation'])->name('frontend.home.submitotherdonation');
+    Route::get('/other-donation-success', [DonationController::class, 'othersuccess'])->name('donation.othersuccess');
+    Route::get('/other-donation-cancel', [DonationController::class, 'othercancel'])->name('donation.othererror');
     Route::get('/payment-success', [DonationController::class, 'success'])->name('payment.success');
     Route::get('/payment-cancel', [DonationController::class, 'cancel'])->name('payment.cancel');
 });

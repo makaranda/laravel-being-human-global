@@ -26,7 +26,8 @@
             <div id="check_data" class="col-md-12">
             </div>
             <div class="col-md-12">
-                <form class="form-horizontal" id="data_form" method="POST" action="">
+                <form class="form-horizontal" id="data_form" method="POST">
+                    <input type="hidden" name="category" id="category" value="other" />
                     <div class="row justify-content-center">
                         <div class="col-12 col-md-12 text-center pt-4 pb-4">
                             <a href="{{ route('home.index') }}"><img
@@ -50,7 +51,7 @@
                                 </div>
                                 <div class="col-12 col-md-12 text-justify pt-2 pb-2">
                                     <label>Donation Type</label>
-                                    <select class="form-control" id="donation_type" name="donation_type">
+                                    <select class="form-control" id="donation_type" name="donation_type" required>
                                         <option value="">Please Select</option>
                                         <option value="Medical Equipments">Medical Equipments</option>
                                         <option value="Volunteer Services">Volunteer Services</option>
@@ -96,17 +97,10 @@
                                     <h3>Your Information</h3>
                                 </div>
                                 <div class="col-12 col-md-12">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="my_gift" name="my_gift">
-                                        <label class="form-check-label" for="my_gift">My gift is on behalf of a business or
-                                            organization</label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-12">
                                     <div class="row justify-content-center">
                                         <div class="col-12 col-md-6 mt-2">
                                             <label>Title</label>
-                                            <select class="form-control" id="info_title" name="info_title">
+                                            <select class="form-control" id="info_title" name="info_title" required>
                                                 <option value="">Please Select</option>
                                                 <option value="Dr">Dr</option>
                                                 <option value="Miss">Miss</option>
@@ -127,7 +121,8 @@
                                         </div>
                                         <div class="col-12 col-md-6 mt-2">
                                             <label>Mobile Phone</label>
-                                            <input type="number" class="form-control" id="info_mobile" name="info_mobile">
+                                            <input type="number" class="form-control" id="info_mobile" name="info_mobile"
+                                                required>
                                         </div>
                                         <div class="col-12 col-md-12 mt-2">
                                             <label>Email Address <span class="required_field">*</span></label>
@@ -144,7 +139,7 @@
                                         <div class="col-12 col-md-12 mt-2">
                                             <label>Country</label>
                                             <select class="form-control" id="billing_info_country"
-                                                name="billing_info_country">
+                                                name="billing_info_country" required>
                                                 @foreach ($countries as $key => $country)
                                                     <option value="{{ $country->name }}">{{ $country->name }}</option>
                                                 @endforeach
@@ -222,7 +217,7 @@
 
                     <!-- Text input-->
                     <input id="amount" name="amount" type="hidden" placeholder="amount to pay" class="form-control input-md"
-                        value="75" required="">
+                        value="0" required="">
                     <input type='hidden' name='business' value='sb-kl8nc27246699@business.example.com'>
                     <input type='hidden' name='item_name' value='donation'>
                     <input type='hidden' name='item_number' value='1753350723'>
@@ -690,20 +685,11 @@
 
             const stripe = Stripe("{{ env('STRIPE_PUBLISHABLE_KEY') }}");
 
-            $('#paypal_data_form').parsley();
+            $('#data_form').parsley();
 
-            $('#paypal_data_form').on('submit', function (e) {
+            $('#data_form').on('submit', function (e) {
                 e.preventDefault();
-                console.log('Donation Amount : ', $('#amount').val());
-
-                if (!$('#paypal_data_form').parsley().isValid()) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Form Error',
-                        text: 'There are errors in the form. Please correct them.',
-                    });
-                    return;
-                }
+                console.log('Other Donation Submit');
 
                 // reCAPTCHA v3
                 grecaptcha.ready(function () {
@@ -713,11 +699,11 @@
                             type: 'hidden',
                             name: 'g-recaptcha-response',
                             value: token
-                        }).appendTo('#paypal_data_form');
+                        }).appendTo('#data_form');
 
                         // Fetch donation amount
                         const amount = $('#amount').val();
-                        let formData = $('#paypal_data_form').serializeArray(); // Replace with your actual form ID
+                        let formData = $('#data_form').serializeArray(); // Replace with your actual form ID
 
                         // Add extra fields to the serialized data
                         formData.push({ name: 'amount', value: amount });
@@ -726,8 +712,9 @@
 
                         // Proceed with AJAX
                         $.ajax({
-                            url: "{{ route('stripe.session') }}",
-                            method: "GET",
+                            url: "{{ route('frontend.home.submitotherdonation') }}",
+                            method: "POST",
+                            //dataType: 'json',
                             //data: {amount: amount,'g-recaptcha-response': token, _token: "{{ csrf_token() }}"},
                             data: formData,
                             beforeSend: function () {
@@ -735,11 +722,42 @@
                                 $('#js-preloader').removeClass('loaded');
                                 $('#js-preloader').css({ opacity: '1' });
                             },
-                            success: function (session) {
-                                stripe.redirectToCheckout({ sessionId: session.id });
+                            success: function (response) {
+                                $('.preloader_text').addClass('d-none');
+                                $('#js-preloader').addClass('loaded');
+                                $('#js-preloader').css({ opacity: '0' });
+                                console.log('Response Message : ', response);
+                                if (response.message === 'success') {
+                                    //setTimeout(() => {
+                                    //window.location.href = response.redirect_success_url;
+                                    $.redirect("" + response.redirect_success_url + "", { session_id: response.session_id }, "GET", "_self");
+                                    //}, 1000);
+                                    // Swal.fire({
+                                    //     position: "bottom-end",
+                                    //     icon: "success",
+                                    //     title: "Thank you! Your donation was successfully submitted.",
+                                    //     showConfirmButton: false,
+                                    //     timer: 4500
+                                    // });
+
+                                } else {
+                                    $.redirect("" + response.redirect_error_url + "", { session_id: response.session_id }, "GET", "_self");
+                                    // Swal.fire({
+                                    //     position: "bottom-end",
+                                    //     icon: "error",
+                                    //     title: "Oops! Something went wrong.",
+                                    //     text: "Please check your information and try again.",
+                                    //     showConfirmButton: true
+                                    // });
+                                }
                             },
                             error: function (err) {
+                                $('.preloader_text').addClass('d-none');
+                                $('#js-preloader').addClass('loaded');
+                                $('#js-preloader').css({ opacity: '0' });
+                                console.log('Other Donation Error : ', err);
                                 Swal.fire({
+                                    position: "bottom-end",
                                     icon: 'error',
                                     title: 'Stripe Error',
                                     text: 'Unable to create payment session.',

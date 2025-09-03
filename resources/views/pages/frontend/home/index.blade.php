@@ -247,7 +247,7 @@
 
 
     <!-- events-section -->
-    <section class="events-section sec-pad xs-pt-0 md-pt-70 pt-70">
+    <section class="events-section sec-pad xs-pt-0 md-pt-70 pt-70 section_08">
         <div class="bg-layer"></div>
         <div class="bg-image"
             style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url({{ asset('public/assets/frontend/images/resource/' . $section8['data']['image'])}});">

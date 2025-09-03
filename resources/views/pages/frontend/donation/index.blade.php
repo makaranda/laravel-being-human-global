@@ -27,6 +27,8 @@
             </div>
             <div class="col-md-12">
                 <form class="form-horizontal" id="paypal_data_form" method="POST" action="">
+                    <input type="hidden" name="category" id="category" value="financial" />
+                    <input type="hidden" name="donation_type" id="donation_type" value="" />
                     <div class="row justify-content-center">
                         <div class="col-12 col-md-12 text-center pt-4 pb-4">
                             <a href="{{ route('home.index') }}"><img

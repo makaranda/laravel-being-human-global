@@ -12,6 +12,8 @@ class Donation extends Model
     protected $fillable = [
         'session_id',
         'payment_type',
+        'donation_category',
+        'donation_subcategory',
         'amount',
         'cover_fee',
         'title',

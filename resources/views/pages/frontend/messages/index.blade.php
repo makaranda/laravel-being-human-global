@@ -40,6 +40,12 @@
                             <p><strong>Payment ID:</strong> {{ $payment_id ?? 'N/A' }}</p>
                             <p><strong>Donation Summary:</strong> {{ $form_data['donation_summary'] ?? 'Donation' }}</p>
                             <p><strong>Email:</strong> {{ $form_data['info_email'] ?? 'N/A' }}</p>
+                            @if ($form_data['category'])
+                                <p><strong>Donation Category:</strong> {{ ucwords($form_data['category']) ?? '' }}</p>
+                            @endif
+                            @if ($form_data['donation_type'])
+                                <p><strong>Donation Type:</strong> {{ ucwords($form_data['donation_type']) ?? '' }}</p>
+                            @endif
                             <p><strong>Name:</strong>
                                 {{ ($form_data['info_first_name'] ?? '') . ' ' . ($form_data['info_last_name'] ?? '') }}</p>
                             <p><strong>Phone:</strong> {{ $form_data['info_mobile'] ?? '-' }}</p>
