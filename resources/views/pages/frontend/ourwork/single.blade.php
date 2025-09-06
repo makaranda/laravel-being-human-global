@@ -39,9 +39,9 @@
                         </div>
                         <div class="blog_details">
                             <h2 style="color: #2d2d2d;">{{ $blog->title }}</h2>
-                            <p class="excert">{!! $blog->description !!}</p>
+                            <div class="about_sub_description page-sub-title">{!! $blog->description !!}</div>
                             @if (!empty($blog->sub_description))
-                                <p class="quotes excert">{!! $blog->sub_description !!}</p>
+                                <div class="about_sub_description page-sub-title">{!! $blog->sub_description !!}</div>
                             @endif
                         </div>
                     </div>

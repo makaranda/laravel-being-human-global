@@ -45,14 +45,16 @@
                             </div>
                             <div class="inner mb-20">
                                 {{-- <div class="icon-box"><i class="flaticon-zoo"></i></div> --}}
-                                <h5>Being Human emerged in Norway in 2025 from a shared dream to "Make a Difference in
-                                    Everyday Life " around the world.</h5>
+                                <h5>Being Human emerged in Norway in 2025 from a shared dream to "<strong>Make a Difference
+                                        in
+                                        Everyday Life</strong>" around the world.</h5>
                             </div>
                             <div class="text mb-20">
                                 <p>Our journey began with a promise made in childhood, a heartfelt commitment to protect and
                                     uplift the lives of animals everywhere. In January 2025, as our founder turned 18, that
                                     promise became a mission to give a "Voice of the Wild and Nature".</p>
-                                <h4>Help us to protect Beaing Human around the world.</h4>
+                                <h4>Stand with us to protect nature, wildlife, people, and the spirit of Being Human
+                                    everywhere.</h4>
                             </div>
                             <div class="btn-box">
                                 <a href="{{ route('frontend.contact') }}" class="theme-btn btn-one">discover more</a>
@@ -60,9 +62,103 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12 col-md-12 col-lg-12">
+                    <div class="content_block_three">
+                        <div class="content-box ml-0">
+                            <div class="font-family-1 mb-20 mt-40">
+                                <p>The founder has been deeply concerned about the nature and declining populations of
+                                    native
+                                    species
+                                    and the devastating impact of human activities on their natural habitats. Since then,
+                                    she
+                                    has worked
+                                    diligently to establish Being Human as a credible and purpose-driven non-profit
+                                    organization,
+                                    committed to the protection and preservation of Nature, wildlife, and stray animals
+                                    across
+                                    vulnerable regions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
+    <section class="about-style-three sec-pad pb-20 pt-40">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-12 col-sm-12 content-column page_info_content">
+                    <div class="content_block_three">
+                        <div class="content-box ml-0">
+                            <div class="sec-title font-family-1 page-sub-title">
+                                <h3 class="text-capitalized">Born from Love, Driven by Purpose.</h3>
+                            </div>
+                            <div class="text mb-20">
+                                <p>We extend our compassion and unwavering commitment to action beyond the wild. Inspired by
+                                    our founder’s deep bond with her beloved four-legged friend, who passed after 13
+                                    beautiful years, she committed her heart to a greater cause: saving stray animals and
+                                    wildlife across Africa and Asia. From medical care and rehabilitation to adoption,
+                                    sterilization, education, job creation, and giving justice to all animals.</p>
+                                <p>Our mission also embraces the restoration of nature itself. We revive abandoned lakes,
+                                    reforest degraded land, and create new water sources to support both wildlife and local
+                                    communities because true compassion means healing the environment they depend on.</p>
+                                <p><strong>Our work is fueled by compassion, guided by purpose, and devoted to making a
+                                        lasting difference for the voiceless.</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                    <figure class="image-box">
+                        <img src="{{ url('public/assets/uploads/pages/stray_animals_dog.jpg') }}" alt="">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- chooseus-section -->
+    <section class="chooseus-section sec-pad xs-pt-0 md-pt-70 pt-70">
+        <div class="img-wrap parallax-demo-1">
+            <div class="parallax-inner back-img"
+                style="background-image: url({{ asset('public/assets/frontend/images/background/chooseus-bg.jpg')}});">
+            </div>
+        </div>
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 inner-column">
+                    <div class="inner-box mr-0">
+                        <div class="sec-title page-sub-title">
+                            <h3>Saving Animals, Preserving Nature, Creating Jobs, Elevating Lives.</h3>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-6 col-md-6 col-sm-12 text-column">
+                                <div class="text">
+                                    <div>
+                                        <p>In collaboration with local government bodies, businesses, and fellow NGOs, we
+                                            have begun laying the groundwork for collective action promoting sustainable
+                                            practices and raising awareness about the critical importance of wildlife
+                                            conservation. Although newly formed, our organization has already initiated key
+                                            projects designed to generate a lasting, positive impact on both the environment
+                                            and local communities. </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 text-column section_area">
+                                <p>By joining our mission, you become a vital force in shaping a safer, compassionate world
+                                    for vulnerable animals, giving them the future they deserve. Because when nature
+                                    thrives, humanity prospers.</p>
+                                <p>Join us in our efforts to create a more sustainable future for our planet and its
+                                    wildlife.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- chooseus-section end -->
     <section class="gallery-page-section pt-20 ">
         <div class="auto-container">
             <div class="row clearfix">
@@ -134,7 +230,7 @@
 
                         <!-- Right Column: Image -->
                         <div class="col-lg-5">
-                            <div class="large-thumbnail mt-25">
+                            <div class="large-thumbnail">
                                 <img src="{{ url('public/assets/frontend/img/about-vision-mission-img2.jpg') }}"
                                     alt="Vision Mission Image" class="img-fluid rounded shadow">
                             </div>
@@ -230,6 +326,13 @@
 
 @push('css')
     <style>
+        .about-style-three .image-box img {
+            width: 100%;
+            /* transition: all 500ms ease;
+                                                                                                                                    border: 14px solid #5e3614;
+                                                                                                                                    border-radius: 12px;*/
+        }
+
         .vision-mission-section {
             margin-top: 60px;
 
@@ -263,7 +366,8 @@
                         font-size: 22px;
                         font-weight: 800;
                         margin-bottom: 10px;
-                        color: #1d3946;
+                        /* color: #1d3946; */
+                        color: #8a5f3c;
                         font-family: 'Rubik', sans-serif;
                     }
 
@@ -283,42 +387,44 @@
                 img {
                     border-radius: 16px;
                     max-width: 100%;
-                    transition: 0.3s ease;
 
+                    /*transition: 0.3s ease;
+                                                                                                                                            border: 14px solid #5e3614;
+                                                                                                                                            */
                     &:hover {
-                        transform: scale(1.03);
+                        /*transform: scale(1.03);*/
                     }
                 }
             }
         }
 
         /* .page-main-title>h1,
-                                                                                                                                                                                                            .page-main-title>h2,
-                                                                                                                                                                                                            .page-main-title>h3,
-                                                                                                                                                                                                            .page-main-title>h4,
-                                                                                                                                                                                                            .page-main-title>h5,
-                                                                                                                                                                                                            .page-main-title>h6 {
-                                                                                                                                                                                                                color: #8a5f3c;
-                                                                                                                                                                                                                font-weight: 800;
-                                                                                                                                                                                                                padding-bottom: 15px;
-                                                                                                                                                                                                                font-size: 50px;
-                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                                                    .page-main-title>h2,
+                                                                                                                                                                                                                                                                                                                                    .page-main-title>h3,
+                                                                                                                                                                                                                                                                                                                                    .page-main-title>h4,
+                                                                                                                                                                                                                                                                                                                                    .page-main-title>h5,
+                                                                                                                                                                                                                                                                                                                                    .page-main-title>h6 {
+                                                                                                                                                                                                                                                                                                                                        color: #8a5f3c;
+                                                                                                                                                                                                                                                                                                                                        font-weight: 800;
+                                                                                                                                                                                                                                                                                                                                        padding-bottom: 15px;
+                                                                                                                                                                                                                                                                                                                                        font-size: 50px;
+                                                                                                                                                                                                                                                                                                                                    }
 
-                                                                                                                                                                                                            .page-sub-title>h1,
-                                                                                                                                                                                                            .page-sub-title>h2,
-                                                                                                                                                                                                            .page-sub-title>h3,
-                                                                                                                                                                                                            .page-sub-title>h4,
-                                                                                                                                                                                                            .page-sub-title>h5,
-                                                                                                                                                                                                            .page-sub-title>h6 {
-                                                                                                                                                                                                                color: #8a5f3c;
-                                                                                                                                                                                                                font-weight: 800;
-                                                                                                                                                                                                                padding-bottom: 24px;
-                                                                                                                                                                                                                padding-top: 24px;
-                                                                                                                                                                                                                padding-left: 20px;
-                                                                                                                                                                                                                font-size: 40px;
-                                                                                                                                                                                                                border-left: 6px solid #8a5f3c;
-                                                                                                                                                                                                                margin: 15px 0px 15px 20px;
-                                                                                                                                                                                                            } */
+                                                                                                                                                                                                                                                                                                                                    .page-sub-title>h1,
+                                                                                                                                                                                                                                                                                                                                    .page-sub-title>h2,
+                                                                                                                                                                                                                                                                                                                                    .page-sub-title>h3,
+                                                                                                                                                                                                                                                                                                                                    .page-sub-title>h4,
+                                                                                                                                                                                                                                                                                                                                    .page-sub-title>h5,
+                                                                                                                                                                                                                                                                                                                                    .page-sub-title>h6 {
+                                                                                                                                                                                                                                                                                                                                        color: #8a5f3c;
+                                                                                                                                                                                                                                                                                                                                        font-weight: 800;
+                                                                                                                                                                                                                                                                                                                                        padding-bottom: 24px;
+                                                                                                                                                                                                                                                                                                                                        padding-top: 24px;
+                                                                                                                                                                                                                                                                                                                                        padding-left: 20px;
+                                                                                                                                                                                                                                                                                                                                        font-size: 40px;
+                                                                                                                                                                                                                                                                                                                                        border-left: 6px solid #8a5f3c;
+                                                                                                                                                                                                                                                                                                                                        margin: 15px 0px 15px 20px;
+                                                                                                                                                                                                                                                                                                                                    } */
 
         img.img-fluid.login-logo {
             width: 120px !important;
@@ -346,57 +452,57 @@
 
         .about_description {
             /* p {
-                                                                                                                                                                                                                            border: 2px solid #e6b127;
-                                                                                                                                                                                                                            padding: 24px 20px;
-                                                                                                                                                                                                                            display: inline-block;
-                                                                                                                                                                                                                            height: 100%;
-                                                                                                                                                                                                                            vertical-align: top;
-                                                                                                                                                                                                                        } */
+                                                                                                                                                                                                                                                                                                                                                    border: 2px solid #e6b127;
+                                                                                                                                                                                                                                                                                                                                                    padding: 24px 20px;
+                                                                                                                                                                                                                                                                                                                                                    display: inline-block;
+                                                                                                                                                                                                                                                                                                                                                    height: 100%;
+                                                                                                                                                                                                                                                                                                                                                    vertical-align: top;
+                                                                                                                                                                                                                                                                                                                                                } */
         }
 
         @media (max-width: 2040px) {
             /* .about_description {
-                                                                                                                                                                                                                        p {
-                                                                                                                                                                                                                            width: 49%;
-                                                                                                                                                                                                                            height: 260px;
-                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                    } */
+                                                                                                                                                                                                                                                                                                                                                p {
+                                                                                                                                                                                                                                                                                                                                                    width: 49%;
+                                                                                                                                                                                                                                                                                                                                                    height: 260px;
+                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                            } */
         }
 
         @media (max-width: 1440px) {
             /* .about_description {
-                                                                                                                                                                                                                        p {
-                                                                                                                                                                                                                            width: 49%;
-                                                                                                                                                                                                                            height: 350px;
-                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                    } */
+                                                                                                                                                                                                                                                                                                                                                p {
+                                                                                                                                                                                                                                                                                                                                                    width: 49%;
+                                                                                                                                                                                                                                                                                                                                                    height: 350px;
+                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                            } */
         }
 
         @media (max-width: 720px) {
             /* .about_description {
-                                                                                                                                                                                                                        p {
-                                                                                                                                                                                                                            width: 100%;
-                                                                                                                                                                                                                            height: auto;
-                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                    } */
+                                                                                                                                                                                                                                                                                                                                                p {
+                                                                                                                                                                                                                                                                                                                                                    width: 100%;
+                                                                                                                                                                                                                                                                                                                                                    height: auto;
+                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                            } */
         }
 
         @media (max-width: 540px) {
             /* .about_description {
-                                                                                                                                                                                                                        p {
-                                                                                                                                                                                                                            width: 100%;
-                                                                                                                                                                                                                            height: auto;
-                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                    } */
+                                                                                                                                                                                                                                                                                                                                                p {
+                                                                                                                                                                                                                                                                                                                                                    width: 100%;
+                                                                                                                                                                                                                                                                                                                                                    height: auto;
+                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                            } */
         }
 
         @media (max-width: 200px) {
             /* .about_description {
-                                                                                                                                                                                                                        p {
-                                                                                                                                                                                                                            width: 100%;
-                                                                                                                                                                                                                            height: auto;
-                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                    } */
+                                                                                                                                                                                                                                                                                                                                                p {
+                                                                                                                                                                                                                                                                                                                                                    width: 100%;
+                                                                                                                                                                                                                                                                                                                                                    height: auto;
+                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                            } */
         }
     </style>
 @endpush

@@ -534,6 +534,11 @@
                 .font-family-1 {
                     p {
                         text-align: justify;
+                        font-size: 18px;
+
+                        strong {
+                            color: #ffeabf;
+                        }
                     }
                 }
             }

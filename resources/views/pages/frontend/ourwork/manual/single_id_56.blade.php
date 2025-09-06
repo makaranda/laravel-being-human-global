@@ -15,7 +15,7 @@
             <div class="content-box">
                 <ul class="bread-crumb clearfix">
                     <li><a href="{{ route('frontend.home') }}">Home</a></li>
-                    <li><a href="{{ route('frontend.blogs') }}">Blogs</a></li>
+                    <li><a href="{{ route('frontend.home.ourworks') }}">Our Works</a></li>
                     <li>{{ $blog['title'] }}</li>
                 </ul>
                 <div class="title">
@@ -31,19 +31,42 @@
         <div class="container">
             <div class="row">
                 <!-- Blog Content -->
+                <div class="col-12 col-md-12 font-family-1 page-main-title">
+                    <h3>{{ $blog->title }}</h3>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 image-column page_transition_img_list">
+                    <figure class="image-box">
+                        <img src="{{ url('public/assets/uploads/projects/' . $blog->feature_image) }}"
+                            alt="{{ $blog->title }}" />
+                    </figure>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 content-column page_info_content">
+                    <div class="content_block_three">
+                        <div class="content-box">
+                            <div class="text mb-20">
+                                <p class="mb-20">Rangers are the Guardians of the Wild, unsung heroes on the frontlines of
+                                    wildlife protection. Our Ranger Support Program empowers and protects those who risk
+                                    their lives daily to defend endangered species and preserve vital ecosystems.</p>
+                                <p class="mb-20">Across remote jungles and open plains, rangers risk their lives daily to
+                                    protect endangered wildlife and fragile ecosystems. They are the silent heroes on the
+                                    frontlines of conservation—our planet's true guardians.</p>
+                                <p class="mb-20">Through our Ranger Support Program, we ensure they're not alone.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-12 posts-list">
                     <div class="single-post">
-                        <div class="feature-img page_transition_img_list">
-                            <img src="{{ url('public/assets/uploads/blogs/' . $blog->feature_image) }}"
-                                alt="{{ $blog->title }}" class="w-100 shadow-lg img-fluid" />
-                        </div>
+                        {{-- <div class="feature-img">
+                            <img src="{{ url('public/assets/uploads/projects/' . $blog->feature_image) }}"
+                                alt="{{ $blog->title }}" class="border shadow-lg img-fluid" />
+                        </div> --}}
                         <div class="blog_details">
-                            <h2 style="color: #2d2d2d;">{{ $blog->title }}</h2>
-                            <p class="excert">{!! $blog->description !!}</p>
+                            {{-- <h2 style="color: #2d2d2d;">{{ $blog->title }}</h2> --}}
+                            <div class="about_sub_description page-sub-title">{!! $blog->description !!}</div>
                             @if (!empty($blog->sub_description))
-                                <div class="quote-wrapper">
-                                    <div class="quotes">{!! $blog->sub_description !!}</div>
-                                </div>
+                                <div class="about_sub_description page-sub-title">{!! $blog->sub_description !!}</div>
                             @endif
                         </div>
                     </div>
@@ -60,31 +83,59 @@
                             <ul class="social-icons">
                                 @php
                                     $url = urlencode(route('frontend.blogs.article.view', $blog->slug));
-                                    $title = urlencode($blog->title); // optional, if you want to include the title
+                                    $title = urlencode($blog->title);
                                 @endphp
+
+                                {{-- Twitter Share --}}
                                 <li>
                                     <a href="https://twitter.com/intent/tweet?url={{ $url }}&text={{ $title }}"
                                         target="_blank">
-                                        {{-- <i class="fab fa-twitter"></i> --}}
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"
-                                            style="fill: #fff;width: 25px;">
+                                            style="fill:#fff; width:25px;">
                                             <path
                                                 d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z">
                                             </path>
                                         </svg>
                                     </a>
                                 </li>
+
+                                {{-- Facebook Share --}}
                                 <li>
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ $url }}" target="_blank">
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
                                 </li>
+
+                                {{-- LinkedIn Share --}}
                                 <li>
                                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ $url }}&title={{ $title }}"
                                         target="_blank">
-                                        <i class="fab fa-linkedin-in"></i>
+                                        <i class="fab fa-linkedin"></i>
                                     </a>
                                 </li>
+
+                                {{-- YouTube (just profile link, since YouTube doesn’t support share like this) --}}
+                                {{-- <li>
+                                    <a href="{{ $settings['social_youtube'] }}" target="_blank">
+                                        <i class="fab fa-youtube"></i>
+                                    </a>
+                                </li> --}}
+
+                                {{-- Instagram (profile link only) --}}
+                                {{-- <li>
+                                    <a href="{{ $settings['social_instagram'] }}" target="_blank">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li> --}}
+
+                                {{-- TikTok (profile link only) --}}
+                                {{-- <li>
+                                    <a href="{{ $settings['social_tiktok'] }}" target="_blank">
+                                        <i class="fab fa-tiktok"></i>
+                                    </a>
+                                </li> --}}
+
+                                {{-- WhatsApp Share --}}
                                 <li>
                                     <a href="https://api.whatsapp.com/send?text={{ $title }}%20{{ $url }}" target="_blank">
                                         <i class="fab fa-whatsapp"></i>

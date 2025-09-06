@@ -1090,7 +1090,15 @@ class HomeController extends Controller
         $settings = Setting::first();
         //dd($blog->id);
 
-        return view('pages.frontend.ourwork.single', compact('blog', 'settings', 'page_blog', 'recent_blogs', 'prev_blog', 'next_blog'));
+        if(isset($blog->id) && $blog->id === 54){
+            return view('pages.frontend.ourwork.manual.single_id_54', compact('blog', 'settings', 'page_blog', 'recent_blogs', 'prev_blog', 'next_blog'));
+        }elseif(isset($blog->id) && $blog->id === 55){
+            return view('pages.frontend.ourwork.manual.single_id_55', compact('blog', 'settings', 'page_blog', 'recent_blogs', 'prev_blog', 'next_blog'));
+        }elseif(isset($blog->id) && $blog->id === 56){
+            return view('pages.frontend.ourwork.manual.single_id_56', compact('blog', 'settings', 'page_blog', 'recent_blogs', 'prev_blog', 'next_blog'));
+        }else{
+            return view('pages.frontend.ourwork.single', compact('blog', 'settings', 'page_blog', 'recent_blogs', 'prev_blog', 'next_blog'));
+        }
     }
 
     public function viewArticle($slug)

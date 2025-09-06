@@ -26,7 +26,7 @@
 
 
     <!-- page Content -->
-    <section class="gallery-page-section">
+    <section class="gallery-page-section pb-40">
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="col-12 col-md-12 font-family-1 page-main-title">

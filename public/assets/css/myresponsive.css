@@ -72,6 +72,14 @@
    .info-section .single-item {
         padding-left: 83px;
     } 
+    .vision-mission-section {
+        .large-thumbnail {
+            img {
+                height: 700px !important; 
+                margin-top: 0px;
+            }
+        }    
+    } 
 }
 
 @media (max-width: 1440px) {
@@ -148,6 +156,14 @@
    .info-section .single-item {
         padding-left: 83px;
     } 
+    .vision-mission-section {
+        .large-thumbnail {
+            img {
+                height: 700px !important; 
+                margin-top: 0px;
+            }
+        }    
+    }
 }
 
 @media (max-width: 1024px) {
@@ -220,6 +236,14 @@
    .info-section .single-item {
         padding-left: 83px;
     } 
+    .vision-mission-section {
+        .large-thumbnail {
+            img {
+                height: 700px !important; 
+                margin-top: 0px;
+            }
+        }    
+    }    
 }
 @media (max-width: 768px) {
     .main-logo {
@@ -291,6 +315,14 @@
    .info-section .single-item {
         padding-left: 83px;
     } 
+    .vision-mission-section {
+        .large-thumbnail {
+            img {
+                height: 700px !important; 
+                margin-top: 0px;
+            }
+        }    
+    }    
 }
 @media (max-width: 576px) {
     .main-logo {
@@ -358,6 +390,14 @@
     .info-section .single-item {
         padding-left: 30px;
     } 
+    .vision-mission-section {
+        .large-thumbnail {
+            img {
+                height: 100% !important; 
+                margin-top: 30px;
+            }
+        }    
+    }    
 }
 @media (max-width: 480px) {
     .main-logo {
@@ -411,6 +451,14 @@
     .info-section .single-item {
         padding-left: 30px;
     }
+    .vision-mission-section {
+        .large-thumbnail {
+            img {
+                height: 100% !important; 
+                margin-top: 30px;
+            }
+        }    
+    } 
 }
 @media (max-width: 320px) {
     .main-logo {
@@ -466,4 +514,12 @@
     .info-section .single-item {
         padding-left: 30px;
     }
+    .vision-mission-section {
+        .large-thumbnail {
+            img {
+                height: 100% !important; 
+                margin-top: 30px;
+            }
+        }    
+    } 
 }
